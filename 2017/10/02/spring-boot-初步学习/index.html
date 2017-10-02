@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="环境配置  Mac 上搭建 java 开发环境 初始化项目  参考链接 从此链接中输入项目名，并选择相应的依赖，点击生成项目，  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。   可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/07/25/hello-world/index.html">
+<meta property="og:title" content="spring boot 初步学习">
+<meta property="og:url" content="http://yoursite.com/2017/10/02/spring-boot-初步学习/index.html">
 <meta property="og:site_name" content="这里有我的脚丫印😄">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="环境配置  Mac 上搭建 java 开发环境 初始化项目  参考链接 从此链接中输入项目名，并选择相应的依赖，点击生成项目，  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。   可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-02T03:10:13.000Z">
+<meta property="og:updated_time" content="2017-10-02T04:44:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="spring boot 初步学习">
+<meta name="twitter:description" content="环境配置  Mac 上搭建 java 开发环境 初始化项目  参考链接 从此链接中输入项目名，并选择相应的依赖，点击生成项目，  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。   可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/25/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/02/spring-boot-初步学习/"/>
 
 
 
 
 
-  <title>Hello World | 这里有我的脚丫印😄</title>
+  <title>spring boot 初步学习 | 这里有我的脚丫印😄</title>
   
 
 
@@ -232,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/spring-boot-初步学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陈云莉">
@@ -249,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">spring boot 初步学习</h1>
         
 
         <div class="post-meta">
@@ -261,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T21:01:04+08:00">
-                2016-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T11:50:03+08:00">
+                2017-10-02
               </time>
             
 
@@ -299,15 +300,19 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>  <a href="http://starzhou.com/blogs/java_environment" target="_blank" rel="external">Mac 上搭建 java 开发环境</a></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>  <a href="http://start.spring.io/" target="_blank" rel="external">参考链接</a> 从此链接中输入项目名，并选择相应的依赖，点击生成项目，<br>  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写<br>  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。</p>
+<p>  可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的视频学习的。<br>  下面是我记录的一些我得到的新的知识点。</p>
+<h2 id="spring-boot项目启动方式："><a href="#spring-boot项目启动方式：" class="headerlink" title="spring boot项目启动方式："></a>spring boot项目启动方式：</h2><ol>
+<li>可以使用 IDEA 的启动按钮启动</li>
+<li>进入项目文件夹下，在命令行启动，输入 <code>mvn spring-boot:run</code></li>
+<li>进入项目文件夹下，输入 <code>mvn install</code>,再继续输入 <code>cd target</code>，进入 target 目录，<br>输入 <code>ll</code>，可以看见一个 <code>SNAPSHOT.jar</code>结尾的文件，我的是 <code>girl-0.0.1-SNAPSHOT.jar</code> ，输入 <code>java -jar target/girl-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod</code> 即可启动。</li>
+</ol>
+<h2 id="spring-data-jpa-与-mybatis"><a href="#spring-data-jpa-与-mybatis" class="headerlink" title="spring data jpa 与 mybatis"></a>spring data jpa 与 mybatis</h2><p>  是对 Hibernate 的封装，几乎不用写 sql，写代码显得十分简洁。和 rails 框架类似，不用写 sql ，<br>  而且它还可以反向生成表结构，rails也差不多，运行命令也可以生成表结构，所以，几乎不用登录数据库。<br>  对于写快一年 <code>ruby on rails</code> 的我来说初学这个还是很欣喜的。<br>  不过项目选择使用 mybatis，可以自由写 sql，也不错哈。<br>  更详细的说明，可以 <a href="http://www.cnblogs.com/ityouknow/p/6037431.html" target="_blank" rel="external">参考链接</a></p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>  使用 brew 安装： brew install mysql<br>  根据提示可看到怎么设置密码，怎么开启和关闭。<br>  两种方式开启（关闭同理）：brew services start mysql 或者 mysql.server start<br>  因为安装后初始没有密码（We’ve installed your MySQL database without a root password）所以输入 mysql_secure_installation 修改密码，会让你输入密码强度，本地输入0最低就好了，这样才能设置 123456 这种简单的密码。如果长度太短（我这里要输入25个字符），可以登录进入修改密码长度。<br>  通过输入 mysql -uroot 登录到 mysql，<br>  输入 set global validate_password_policy=0; 设置密码校验强度为 0，<br>  输入 set global validate_password_length=4; 设置密码长度至少为 4<br>  然后退出 mysql，继续输入 mysql_secure_installation 修改密码，可以设置为 123456 这种密码了。后面还会问一些问题，仔细看看问的什么，选择你需要的输入 y 或者 n 就好了。</p>
+<p>  使用root登录进入数据库：<br>  mysql -u root -p<br>  输入密码</p>
+<p>  create database dbtest; (创建数据库 dbtest)<br>  use dbtest; （启用数据库 dbtest）<br>  （创建表 users 表）<br>  create table users (id integer auto_increment primary key, name varchar(225), salary integer);<br>  show tables; （列出所有表）<br>  desc users;  （列出 users 表结构）</p>
+<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><p>  mvn clean package  （执行测试）<br>  mvn clean package -Dmaven.test.skip=true （跳过单元测试）</p>
 
       
     </div>
@@ -323,6 +328,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
 
       
       
@@ -332,15 +343,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/02/install-java-devlopment-environment/" rel="next" title="install java devlopment environment">
+                <i class="fa fa-chevron-left"></i> install java devlopment environment
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/02/gem wicked_pdf 的使用/" rel="prev" title="gem wicked_pdf 的使用">
-                gem wicked_pdf 的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -463,7 +474,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化项目"><span class="nav-number">2.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-boot项目启动方式："><span class="nav-number">3.</span> <span class="nav-text">spring boot项目启动方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-data-jpa-与-mybatis"><span class="nav-number">4.</span> <span class="nav-text">spring data jpa 与 mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">5.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-number">6.</span> <span class="nav-text">maven</span></a></li></ol></div>
             
 
           </div>

@@ -229,6 +229,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/spring-boot-初步学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/02/spring-boot-初步学习/" itemprop="url">spring boot 初步学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T11:50:03+08:00">
+                2017-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>  <a href="http://starzhou.com/blogs/java_environment" target="_blank" rel="external">Mac 上搭建 java 开发环境</a></p>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><p>  <a href="http://start.spring.io/" target="_blank" rel="external">参考链接</a> 从此链接中输入项目名，并选择相应的依赖，点击生成项目，<br>  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写<br>  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。</p>
+<p>  可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的视频学习的。<br>  下面是我记录的一些我得到的新的知识点。</p>
+<h2 id="spring-boot项目启动方式："><a href="#spring-boot项目启动方式：" class="headerlink" title="spring boot项目启动方式："></a>spring boot项目启动方式：</h2><ol>
+<li>可以使用 IDEA 的启动按钮启动</li>
+<li>进入项目文件夹下，在命令行启动，输入 <code>mvn spring-boot:run</code></li>
+<li>进入项目文件夹下，输入 <code>mvn install</code>,再继续输入 <code>cd target</code>，进入 target 目录，<br>输入 <code>ll</code>，可以看见一个 <code>SNAPSHOT.jar</code>结尾的文件，我的是 <code>girl-0.0.1-SNAPSHOT.jar</code> ，输入 <code>java -jar target/girl-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod</code> 即可启动。</li>
+</ol>
+<h2 id="spring-data-jpa-与-mybatis"><a href="#spring-data-jpa-与-mybatis" class="headerlink" title="spring data jpa 与 mybatis"></a>spring data jpa 与 mybatis</h2><p>  是对 Hibernate 的封装，几乎不用写 sql，写代码显得十分简洁。和 rails 框架类似，不用写 sql ，<br>  而且它还可以反向生成表结构，rails也差不多，运行命令也可以生成表结构，所以，几乎不用登录数据库。<br>  对于写快一年 <code>ruby on rails</code> 的我来说初学这个还是很欣喜的。<br>  不过项目选择使用 mybatis，可以自由写 sql，也不错哈。<br>  更详细的说明，可以 <a href="http://www.cnblogs.com/ityouknow/p/6037431.html" target="_blank" rel="external">参考链接</a></p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>  使用 brew 安装： brew install mysql<br>  根据提示可看到怎么设置密码，怎么开启和关闭。<br>  两种方式开启（关闭同理）：brew services start mysql 或者 mysql.server start<br>  因为安装后初始没有密码（We’ve installed your MySQL database without a root password）所以输入 mysql_secure_installation 修改密码，会让你输入密码强度，本地输入0最低就好了，这样才能设置 123456 这种简单的密码。如果长度太短（我这里要输入25个字符），可以登录进入修改密码长度。<br>  通过输入 mysql -uroot 登录到 mysql，<br>  输入 set global validate_password_policy=0; 设置密码校验强度为 0，<br>  输入 set global validate_password_length=4; 设置密码长度至少为 4<br>  然后退出 mysql，继续输入 mysql_secure_installation 修改密码，可以设置为 123456 这种密码了。后面还会问一些问题，仔细看看问的什么，选择你需要的输入 y 或者 n 就好了。</p>
+<p>  使用root登录进入数据库：<br>  mysql -u root -p<br>  输入密码</p>
+<p>  create database dbtest; (创建数据库 dbtest)<br>  use dbtest; （启用数据库 dbtest）<br>  （创建表 users 表）<br>  create table users (id integer auto_increment primary key, name varchar(225), salary integer);<br>  show tables; （列出所有表）<br>  desc users;  （列出 users 表结构）</p>
+<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><p>  mvn clean package  （执行测试）<br>  mvn clean package -Dmaven.test.skip=true （跳过单元测试）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/install-java-devlopment-environment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -300,7 +432,7 @@
       
         
           
-            <p><a href="http://starzhou.com/blogs/java_environment" target="_blank" rel="external">参考链接</a>在Mac上搭建 java 开发环境。</p>
+            <p><a href="http://starzhou.com/blogs/java_environment" target="_blank" rel="external">Mac 上搭建 java 开发环境</a></p>
 <ol>
 <li>安装 JDK</li>
 <li>安装 maven</li>
@@ -1164,7 +1296,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
