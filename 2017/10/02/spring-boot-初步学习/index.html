@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="这里有我的脚丫印😄">
 <meta property="og:description" content="环境配置  Mac 上搭建 java 开发环境 初始化项目  参考链接 从此链接中输入项目名，并选择相应的依赖，点击生成项目，  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。   可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-02T13:44:37.000Z">
+<meta property="og:updated_time" content="2017-10-02T13:57:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring boot 初步学习">
 <meta name="twitter:description" content="环境配置  Mac 上搭建 java 开发环境 初始化项目  参考链接 从此链接中输入项目名，并选择相应的依赖，点击生成项目，  下载下来，在 IDEA 中打开这个项目，可以看到基本的框架已经生成了。然后就可以开发了。跟两年前写  servlet 和 配置 ssh 相关的 xml 文件相比，这真是十分的简单了。   可以试着写一个小小的 demo，有很多视频教程跟着一步步做就成，我是跟着慕课网上的">
@@ -161,7 +161,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">程序媛</p>
       
   </div>
 
@@ -276,6 +276,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/02/spring-boot-初步学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/02/spring-boot-初步学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -308,7 +319,7 @@
 <li>进入项目文件夹下，在命令行启动，输入 <code>mvn spring-boot:run</code></li>
 <li>进入项目文件夹下，输入 <code>mvn install</code>,再继续输入 <code>cd target</code>，进入 target 目录，<br>输入 <code>ll</code>，可以看见一个 <code>SNAPSHOT.jar</code>结尾的文件，我的是 <code>girl-0.0.1-SNAPSHOT.jar</code> ，输入 <code>java -jar target/girl-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod</code> 即可启动。</li>
 </ol>
-<h2 id="spring-data-jpa-与-mybatis"><a href="#spring-data-jpa-与-mybatis" class="headerlink" title="spring data jpa 与 mybatis"></a>spring data jpa 与 mybatis</h2><p>  是对 Hibernate 的封装，几乎不用写 sql，写代码显得十分简洁。和 rails 框架类似，不用写 sql ，<br>  而且它还可以反向生成表结构，rails也差不多，运行命令也可以生成表结构，所以，几乎不用登录数据库。<br>  对于写快一年 <code>ruby on rails</code> 的我来说初学这个还是很欣喜的。<br>  不过项目选择使用 mybatis，可以自由写 sql，也不错哈。<br>  更详细的说明，可以 <a href="http://www.cnblogs.com/ityouknow/p/6037431.html" target="_blank" rel="external">参考链接</a><br>  参考<a href="https://zhuanlan.zhihu.com/p/25010714?refer=dreawer" target="_blank" rel="external">mybatis 使用注解或xml</a></p>
+<h2 id="spring-data-jpa-与-mybatis"><a href="#spring-data-jpa-与-mybatis" class="headerlink" title="spring data jpa 与 mybatis"></a>spring data jpa 与 mybatis</h2><p>  spring data jpa 是对 Hibernate 的封装，几乎不用写 sql，写代码显得十分简洁。和 rails<br>  框架类似，不用写 sql ，而且它还可以反向生成表结构，所以，几乎不用登录数据库，不用和 sql 直接打交道。<br>  （对于写快一年 <code>ruby on rails</code> 的我来说初学这个还是很欣喜的。）<br>  不过我做的项目团队选择使用 mybatis，可以自由写 sql，也不错哈。<br>  更详细的说明，可以阅读大致了解 <a href="http://xhrong.github.io/2016/11/24/ORM%EF%BC%9AHibernate%E3%80%81Mybatis%E4%B8%8ESpring%20Data%20JPA%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank" rel="external">ORM：Hibernate、Mybatis与Spring Data JPA的区别</a><br>  mybatis 学习参考<a href="https://zhuanlan.zhihu.com/p/25010714?refer=dreawer" target="_blank" rel="external">mybatis 使用注解或xml</a></p>
 <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>  使用 brew 安装： brew install mysql<br>  根据提示可看到怎么设置密码，怎么开启和关闭。<br>  两种方式开启（关闭同理）：brew services start mysql 或者 mysql.server start<br>  因为安装后初始没有密码（We’ve installed your MySQL database without a root password）所以输入 mysql_secure_installation 修改密码，会让你输入密码强度，本地输入0最低就好了，这样才能设置 123456 这种简单的密码。如果长度太短（我这里要输入25个字符），可以登录进入修改密码长度。<br>  通过输入 mysql -uroot 登录到 mysql，<br>  输入 set global validate_password_policy=0; 设置密码校验强度为 0，<br>  输入 set global validate_password_length=4; 设置密码长度至少为 4<br>  然后退出 mysql，继续输入 mysql_secure_installation 修改密码，可以设置为 123456 这种密码了。后面还会问一些问题，仔细看看问的什么，选择你需要的输入 y 或者 n 就好了。</p>
 <p>  使用root登录进入数据库：<br>  mysql -u root -p<br>  输入密码</p>
 <p>  create database dbtest; (创建数据库 dbtest)<br>  use dbtest; （启用数据库 dbtest）<br>  （创建表 users 表）<br>  create table users (id integer auto_increment primary key, name varchar(225), salary integer);<br>  show tables; （列出所有表）<br>  desc users;  （列出 users 表结构）</p>
@@ -380,6 +391,15 @@
 
           
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
 
 
         </div>
@@ -416,7 +436,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">陈云莉</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -623,6 +643,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://disqus_g44tA5aqXq.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/10/02/spring-boot-初步学习/';
+          this.page.identifier = '2017/10/02/spring-boot-初步学习/';
+          this.page.title = 'spring boot 初步学习';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_g44tA5aqXq.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -635,10 +675,6 @@
   
 
 
-
-
-
-  
 
 
 
