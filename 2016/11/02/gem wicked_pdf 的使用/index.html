@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gem wicked_pdf 的使用 › Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="参考 github 网址：https://github.com/mileszs/wicked_pdf注：我的是 gem ‘rails’, ‘~&amp;gt; 4.2’，所以github官网上有些配置不需要配置参考链接: https://reinteractive.com/posts/270-wickedp">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="gem wicked_pdf 的使用"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/about">About</a></li>
+      
+      <li><a href="/archives">Archives</a></li>
+      
+      <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">gem wicked_pdf 的使用</h1>
+  
+
+      
+        <time datetime="2016-11-02T13:01:04.000Z">2016-11-02</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>参考 github 网址：<a href="">https://github.com/mileszs/wicked_pdf</a><br>注：我的是 gem ‘rails’, ‘~&gt; 4.2’，所以github官网上有些配置不需要配置<br>参考链接:<br> <a href="https://reinteractive.com/posts/270-wickedpdf-and-custom-fonts-in-rails" target="_blank" rel="external">https://reinteractive.com/posts/270-wickedpdf-and-custom-fonts-in-rails</a><br> <a href="http://cnedelcu.blogspot.com/2015/04/wkhtmltopdf-chinese-character-support.html" target="_blank" rel="external">http://cnedelcu.blogspot.com/2015/04/wkhtmltopdf-chinese-character-support.html</a><br> <a href="https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html" target="_blank" rel="external">https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html</a></p>
+<p>1.添加 gem 到 Gemfile</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'wkhtmltopdf-binary'</span> <span class="comment">#(wicked_pdf 依赖这个 gem)</span></div><div class="line">gem <span class="string">'wicked_pdf'</span></div><div class="line"><span class="string">``</span><span class="string">`  </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">2.终端执行 `</span>rails generate wicked_pdf<span class="string">`,这会生成一个文件 `</span>config/initializers/wicked_pdf.rb<span class="string">`</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">3.在 controller 中加入 format.pdf, 如果没有什么特殊的样式，pdf 和 html 引入的 js 和 css 都是一致的，因为要加入 wicked_pdf 的 tag，所以我区分了两个 layout</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span>rb</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThingsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    respond_to <span class="keyword">do</span> <span class="params">|format|</span></div><div class="line">      format.html <span class="keyword">do</span></div><div class="line">        load_exam_entry</div><div class="line">        render <span class="string">'show'</span>, <span class="symbol">layout:</span> <span class="string">'exams'</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">      format.pdf <span class="keyword">do</span></div><div class="line">        load_exam_entry</div><div class="line">        render <span class="symbol">pdf:</span> <span class="string">"file_name"</span>,<span class="symbol">layout:</span> <span class="string">'exams_pdf'</span>   <span class="comment"># Excluding ".pdf" extension.</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>4.<code>layout: &#39;exams_pdf&#39;</code> 的配置, 修改的地方就是把 <code>&lt;%= stylesheet_link_tag &#39;exams&#39; %&gt;
+  &lt;%= javascript_include_tag &#39;exams&#39; %&gt;</code> 改成 <code>&lt;%= wicked_pdf_stylesheet_link_tag &#39;exams&#39; %&gt;
+  &lt;%= wicked_pdf_javascript_include_tag &#39;exams&#39; %&gt;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> (@<span class="attr">exam.try</span> <span class="attr">:paper</span>)<span class="attr">.try</span>(<span class="attr">:name</span>) || '考试结束' %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">favicon_link_tag</span>('<span class="attr">favicon.ico</span>') %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">wicked_pdf_stylesheet_link_tag</span> '<span class="attr">exams</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">wicked_pdf_javascript_include_tag</span> '<span class="attr">exams</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span>  <span class="attr">render</span> '<span class="attr">shared</span>/<span class="attr">track</span>/<span class="attr">site_master</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">csrf_meta_tags</span> %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">yield</span> %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>5.以上四步就可以预览 pdf ；</p>
+<p>6.这里加上 <code>dpi: 72</code> 可以加快生成速度，<code>disposition: &#39;attachment&#39;</code> 这个是作为附件下载，而不是网页预览。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">pdf:</span> file_name,<span class="symbol">layout:</span> <span class="string">'exams_pdf'</span>, <span class="symbol">encoding:</span> <span class="string">'UTF-8'</span>, <span class="symbol">dpi:</span> <span class="number">72</span>, <span class="symbol">disposition:</span> <span class="string">'attachment'</span></div></pre></td></tr></table></figure>
+<p>7.由于 <code>wkhtmltopdf</code> 是依赖系统的字体生成 pdf ，所以要在服务器上安装相应字体，不然到 uat 或者生产环境，没有字体的话，中文都会显示成小框框。</p>
+
+      
+    </div>
+      
+      <footer>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/rails/">rails</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Neueste Artikel</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/10/02/install-java-devlopment-environment/">install java devlopment environment</a>
+      </li>
+    
+      <li>
+        <a href="/2017/05/07/写给想学习编程的朋友/">写给想学习编程的朋友</a>
+      </li>
+    
+      <li>
+        <a href="/2017/05/02/gem &#39;delayed_job_active_record&#39;/">gem &#39;delayed_job_active_record&#39;</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/25/最大的差距/">最大的差距</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/21/来小金的第一个年会/">来小金的第一个年会</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag-Cloud</h3>
+  <div class="entry">
+    <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/rails/" style="font-size: 15px;">rails</a> <a href="/tags/thinking/" style="font-size: 20px;">thinking</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+</body>
+</html>
+
