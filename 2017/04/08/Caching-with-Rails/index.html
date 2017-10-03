@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rails," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考链接：https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5dhttps://ruby-china.org/topics/19389https://ruby-china.org/wiki/rails-cachinghttps://www.youtube.com/watch?v=eO8tTPDEB8A&amp;amp;index=4&amp;amp;li">
+<meta name="keywords" content="rails">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caching with Rails">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/Caching-with-Rails/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="参考链接：https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5dhttps://ruby-china.org/topics/19389https://ruby-china.org/wiki/rails-cachinghttps://www.youtube.com/watch?v=eO8tTPDEB8A&amp;amp;index=4&amp;amp;li">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-03T09:36:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Caching with Rails">
+<meta name="twitter:description" content="参考链接：https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5dhttps://ruby-china.org/topics/19389https://ruby-china.org/wiki/rails-cachinghttps://www.youtube.com/watch?v=eO8tTPDEB8A&amp;amp;index=4&amp;amp;li">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/08/Caching-with-Rails/"/>
+
+
+
+
+
+  <title>Caching with Rails | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/Caching-with-Rails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Caching with Rails</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-08T21:00:54+08:00">
+                2017-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/08/Caching-with-Rails/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/08/Caching-with-Rails/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考链接：<br><a href="https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5d" target="_blank" rel="external">https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5d</a><br><a href="https://ruby-china.org/topics/19389" target="_blank" rel="external">https://ruby-china.org/topics/19389</a><br><a href="https://ruby-china.org/wiki/rails-caching" target="_blank" rel="external">https://ruby-china.org/wiki/rails-caching</a><br><a href="https://www.youtube.com/watch?v=eO8tTPDEB8A&amp;index=4&amp;list=WL" target="_blank" rel="external">https://www.youtube.com/watch?v=eO8tTPDEB8A&amp;index=4&amp;list=WL</a> 等一系列 railscast 视频</p>
+<p>这几个链接对 rails cache 说的很详细，看不懂的话可以先多看看视频，然后再去读一遍文章，这样更能理解一些吧。</p>
+<p><strong>下面是我初步的一些理解以及初步所能掌握的部分，以后有待完善。</strong></p>
+<hr>
+<h2 id="缓存的作用："><a href="#缓存的作用：" class="headerlink" title="缓存的作用："></a>缓存的作用：</h2><p>避免频繁查询数据库，在最短的时间内把真正需要的内容返回给客户端。（cache是提高应用性能重要的一个环节。）</p>
+<h2 id="缓存的使用情境："><a href="#缓存的使用情境：" class="headerlink" title="缓存的使用情境："></a>缓存的使用情境：</h2><p><strong>经常被访问到的页面，并且页面内容不经常改变，且对时效性要求不是十分严格</strong>，或者是，在缓存使用过程中要特别注意真正的内容是否被改变，及时捕捉变化并响应最新的内容。<strong>一定要保持缓存和实际记录的一致性。</strong>不一致的缓存会导致很多不必要的问题。</p>
+<p>如果经常改变内容的页面，可以使用 <code>fresh_when</code>, 这样可以对时效性有更好的控制。如果页面没有敏感信息，可以设置 <code>fresh_when @product, public: true</code> ,这会缓存在一个 public cash。（rack_cache）<br>这两者也可以结合使用。</p>
+<h2 id="需要缓存的地方"><a href="#需要缓存的地方" class="headerlink" title="需要缓存的地方:"></a>需要缓存的地方:</h2><p><strong>静态页面<br>无变化的动态页面<br>动态页面片段<br>应用程序数据</strong></p>
+<h2 id="MemCacheStore"><a href="#MemCacheStore" class="headerlink" title="MemCacheStore"></a>MemCacheStore</h2><p>下面这段是 rails guide 中的说明，由于这个使用较多，就单拿出来记录一下</p>
+<blockquote>
+<p><strong>ActiveSupport::Cache::MemCacheStore</strong></p>
+<p>这种存储方式使用 Danga 开发的 memcached 服务器，为程序提供一个中心化的缓存存储。Rails 默认使用附带安装的 dalli gem 实现这种存储方式。这是目前在生产环境中使用最广泛的缓存存储方式，可以提供单个缓存存储，或者共享的缓存集群，性能高，冗余度低。</p>
+<p>初始化时要指定集群中所有 memcached 服务器的地址。如果没有指定地址，默认运行在本地主机的默认端口上，这对大型网站来说不是个好主意。</p>
+<p>在这种缓存存储中使用 write 和 fetch 方法还可指定两个额外的选项，充分利用 memcached 的特有功能。指定 :raw 选项可以直接把没有序列化的数据传给 memcached 服务器。在这种类型的数据上可以使用 memcached 的原生操作，例如 increment 和 decrement。如果不想让 memcached 覆盖已经存在的记录，可以指定 :unless_exist 选项。</p>
+<p>config.cache_store = :mem_cache_store, “cache-1.example.com”, “cache-2.example.com”</p>
+</blockquote>
+<p><code>gem &#39;dalli&#39; # Rails 默认使用附带安装的 dalli gem 实现这种存储方式</code></p>
+<p>MemCacheStore 中常用的方法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Rails.cache.write(<span class="symbol">:foo</span>, <span class="number">1</span>) <span class="comment"># 写入缓存</span></div><div class="line">Rails.cache.read(<span class="symbol">:foo</span>) <span class="comment"># 从缓存中读取</span></div><div class="line">Rails.cache.read_multi(<span class="symbol">:foo</span>, <span class="symbol">:bar</span>) <span class="comment"># 一次读取多个</span></div><div class="line">Rails.cache.fetch(<span class="symbol">:bar</span>) &#123;sleep <span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment"># 进程sleep 1秒，然后写入2</span></div><div class="line">Rails.cache.fetch(<span class="string">'last_post'</span>) &#123; Post.last &#125;</div><div class="line">Rails.cache.fetch(<span class="string">'time'</span>, <span class="symbol">expires_in:</span> <span class="number">5</span>.seconds) &#123; Time.now &#125; <span class="comment"># 缓存现在的时间，5秒后过期</span></div><div class="line">Rails.cache.stats <span class="comment"># 可以读取 rails 缓存的状态，比如占用了多少字节，等</span></div><div class="line">Rails.cache.delete <span class="comment"># 使某个 key 缓存过期</span></div><div class="line">Rails.cache.exist?</div><div class="line">Rails.cache.increment</div><div class="line">Rails.cache.decrement</div><div class="line">Rails.cache.clear <span class="comment"># 清空缓存</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rails/" rel="tag"># rails</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/21/解决方案/" rel="next" title="一些技术问题的解决方案">
+                <i class="fa fa-chevron-left"></i> 一些技术问题的解决方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/gem 'delayed_job_active_record'/" rel="prev" title="gem 'delayed_job_active_record'">
+                gem 'delayed_job_active_record' <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的作用："><span class="nav-number">1.</span> <span class="nav-text">缓存的作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的使用情境："><span class="nav-number">2.</span> <span class="nav-text">缓存的使用情境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需要缓存的地方"><span class="nav-number">3.</span> <span class="nav-text">需要缓存的地方:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MemCacheStore"><span class="nav-number">4.</span> <span class="nav-text">MemCacheStore</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/04/08/Caching-with-Rails/';
+          this.page.identifier = '2017/04/08/Caching-with-Rails/';
+          this.page.title = 'Caching with Rails';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

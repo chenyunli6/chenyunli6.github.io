@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="记录," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="解决方案支持别人的网页嵌入自己的服务https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options  12345before_action :allow_iframedef allow_iframe  response.headers.except! &amp;apos;X-Frame-Options&amp;apos;end 访问修饰符Priv">
+<meta name="keywords" content="记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些技术问题的解决方案">
+<meta property="og:url" content="http://yoursite.com/2017/02/21/解决方案/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="解决方案支持别人的网页嵌入自己的服务https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options  12345before_action :allow_iframedef allow_iframe  response.headers.except! &amp;apos;X-Frame-Options&amp;apos;end 访问修饰符Priv">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1fcq3qczcx3j310601ugmd.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79ly1fd0jhsqo1oj31kw0m87k5.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcly1fdmjl67ghtj30xq0cgdhk.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNbRwly1fectffff1gj313u02sjsm.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwly1fecthdc6etj31720dy0wy.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNbRwly1fecthdiqczj315k0ymaif.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwly1fecvsdo3daj317e0gs0wf.jpg">
+<meta property="og:updated_time" content="2017-10-03T09:42:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些技术问题的解决方案">
+<meta name="twitter:description" content="解决方案支持别人的网页嵌入自己的服务https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options  12345before_action :allow_iframedef allow_iframe  response.headers.except! &amp;apos;X-Frame-Options&amp;apos;end 访问修饰符Priv">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1fcq3qczcx3j310601ugmd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/21/解决方案/"/>
+
+
+
+
+
+  <title>一些技术问题的解决方案 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/21/解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些技术问题的解决方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T01:07:04+08:00">
+                2017-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/21/解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/21/解决方案/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="支持别人的网页嵌入自己的服务"><a href="#支持别人的网页嵌入自己的服务" class="headerlink" title="支持别人的网页嵌入自己的服务"></a>支持别人的网页嵌入自己的服务</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options</a></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fcq3qczcx3j310601ugmd.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">before_action :allow_iframe</div><div class="line"></div><div class="line">def allow_iframe</div><div class="line">  response.headers.except! &apos;X-Frame-Options&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<h2 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h2><p>Private Methods</p>
+<p>So you can only call Private methods from the current context of the object, and you can’t call Private methods with a receiver, even if that receiver is self.</p>
+<p>只能在当前实例里面调用，实例自己调用也是不行的，是这样理解么。 class 里面可以调用，instance.api_value就不行了。 self.api_value 也不行。</p>
+<p>Protected Methods</p>
+<p>However, if you call the method with self it will work:</p>
+<p>So the important thing to note here is, you can call Protected methods inside the context of an object of the same type.</p>
+<h2 id="生成-8-位数字码"><a href="#生成-8-位数字码" class="headerlink" title="生成 8 位数字码"></a>生成 8 位数字码</h2><p>rand.to_s[2..9]</p>
+<h2 id="查看ssh-key"><a href="#查看ssh-key" class="headerlink" title="查看ssh key"></a>查看ssh key</h2><p>➜  goldendata-api git:(master) cd ~/.ssh<br>➜  .ssh cat id_rsa.pub<br>ssh-rsa AAAAB3Nz…….</p>
+<h2 id="登录-uat-的数据库"><a href="#登录-uat-的数据库" class="headerlink" title="登录 uat 的数据库"></a>登录 uat 的数据库</h2><p>登录到远程服务器<br>    ssh 地址<br>进入到 项目的 目录：<br>    cd /var/apps/project/<br>进入到 current 目录：<br>    cd current<br>进入到rails console，做表的操作<br>    RAILS_ENV=uat bundle exec rails c</p>
+<h2 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h2><h3 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h3><p>参考： <a href="http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html" target="_blank" rel="external">http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html</a><br>cookie 的校验<br>params 要是 encode 后的<br>在提交成功的页面的 header 中寻找 cookie 和 params<br>下面的 cookie 和 params 从提交成功的页面 network 里面可以看到。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79ly1fd0jhsqo1oj31kw0m87k5.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">siege -c 50 -r 100 -H &apos;Cookie:entry_token=ijMkkH; ...&apos;  &quot;https://uat.jinshuju.net/f/aqo4ek POST utf8=%E2%9C%93&amp;authenticity_token=%2BTnd349r652JPBzfKMzMv4aGljEMx2LP2tTfN29%2BBgVW2p0W7cfDVEUqHa2uuyMD0zOv%2BCc965yGpbwCBk%2FcIQ%3D%3D...&quot;</div></pre></td></tr></table></figure>
+<p>siege -c50 -t60S -H ‘Content-Type: application/json’ ‘<a href="http://domain.com/path/to/json.php" target="_blank" rel="external">http://domain.com/path/to/json.php</a> POST {“ids”: [“1”,”2”,”3”]}’</p>
+<h3 id="ab-apache-test："><a href="#ab-apache-test：" class="headerlink" title="ab apache test："></a>ab apache test：</h3><p>参考 <a href="http://www.ha97.com/4617.html" target="_blank" rel="external">http://www.ha97.com/4617.html</a></p>
+<p>postdata.txt 里面写 encode 后的参数<br>ab -n 4000 -c 2000 -T ‘application/x-www-form-urlencoded’ -p postdata.txt <a href="https://uat.jinshuju.net/f/x6fXZV" target="_blank" rel="external">https://uat.jinshuju.net/f/x6fXZV</a></p>
+<h2 id="bootstrapvalidator"><a href="#bootstrapvalidator" class="headerlink" title="bootstrapvalidator"></a>bootstrapvalidator</h2><p><a href="http://bootstrapvalidator.votintsev.ru/settings/" target="_blank" rel="external">http://bootstrapvalidator.votintsev.ru/settings/</a></p>
+<h2 id="打开本地-redis"><a href="#打开本地-redis" class="headerlink" title="打开本地 redis"></a>打开本地 redis</h2><p>redis-cli</p>
+<h2 id="同事分享"><a href="#同事分享" class="headerlink" title="同事分享"></a>同事分享</h2><p><a href="https://workflowy.com/s/EuhH.J0gNr5G9LD" target="_blank" rel="external">https://workflowy.com/s/EuhH.J0gNr5G9LD</a></p>
+<h2 id="获取-ssh"><a href="#获取-ssh" class="headerlink" title="获取 ssh"></a>获取 ssh</h2><ol>
+<li>~/.ssh</li>
+<li>cat id_rsa.pub</li>
+</ol>
+<h2 id="header-body-footer"><a href="#header-body-footer" class="headerlink" title="header,body,footer"></a>header,body,footer</h2><h2 id="看测试ing-的-error"><a href="#看测试ing-的-error" class="headerlink" title="看测试ing 的 error"></a>看测试ing 的 error</h2><p>ctrl + t</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p> ps -x | grep elastic</p>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><p>删除远端 branch： git push origin –delete 67_exam_score<br>删除本地 branch： git branch -d 67_exam_score<br>把远端分支拉到本地 <code>git checkout --track origin/daves_branch</code></p>
+<h2 id="snipaste"><a href="#snipaste" class="headerlink" title="snipaste"></a>snipaste</h2><p>截图什么的。</p>
+<h2 id="gemset"><a href="#gemset" class="headerlink" title="gemset"></a>gemset</h2><p>查看当前所有的 gemset 和 当前使用的 gem 管理空间</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcly1fdmjl67ghtj30xq0cgdhk.jpg" alt=""></p>
+<p>rvm gemset list</p>
+<p>.ruby-gemset 里面有我这个 项目使用的 gem 管理的 文件夹。<br>ls -al 可以看到有 .ruby-gemset</p>
+<h2 id="点一遍-所有的页面-按钮"><a href="#点一遍-所有的页面-按钮" class="headerlink" title="点一遍 所有的页面 按钮"></a>点一遍 所有的页面 按钮</h2><h2 id="1-to-01"><a href="#1-to-01" class="headerlink" title="1 to 01"></a>1 to 01</h2><p>sprintf ‘%02d’, 1</p>
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p>ps -x | grep elastic</p>
+<p>杀死进程<br>kill -9 390</p>
+<p>启动 es<br>➜  bin ./elasticsearch -d</p>
+<h2 id="mini-test"><a href="#mini-test" class="headerlink" title="mini test"></a>mini test</h2><p>m test/controllers/entries_controller_test.rb:130</p>
+<p>RUN_COVERAGE=false rake</p>
+<h2 id="自定义-bootstrapValidator-验证器"><a href="#自定义-bootstrapValidator-验证器" class="headerlink" title="自定义 bootstrapValidator 验证器"></a>自定义 bootstrapValidator 验证器</h2><p><a href="http://www.itdadao.com/articles/c15a302743p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a302743p0.html</a></p>
+<h2 id="部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"><a href="#部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想" class="headerlink" title="部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"></a>部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想</h2><p>api 部署被覆盖，所以代码没有生效</p>
+<h2 id="撤销-commit"><a href="#撤销-commit" class="headerlink" title="撤销 commit"></a>撤销 commit</h2><p>git reset –hard c9a9eec9c9b39f7522b9098deada053f1cca0e63<br>HEAD is now at c9a9eec Merge branch ‘master’ into dev</p>
+<p>git push -f origin dev</p>
+<h2 id="git-branch-命名有特殊字符，会-push-不上去"><a href="#git-branch-命名有特殊字符，会-push-不上去" class="headerlink" title="git branch 命名有特殊字符，会 push 不上去"></a>git branch 命名有特殊字符，会 push 不上去</h2><p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fectffff1gj313u02sjsm.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecthdc6etj31720dy0wy.jpg" alt=""></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNbRwly1fecthdiqczj315k0ymaif.jpg" alt=""></p>
+<p>通过 git branch -a 可以查看当然的分支及远端分支<br>git checkout 到去掉特殊字符的分支，然后重新 push ，这个可以把当前分支的commit 也一起commit 到新的分支，不用担心漏掉。</p>
+<h2 id="git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧"><a href="#git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧" class="headerlink" title="git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧"></a>git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧</h2><p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecvsdo3daj317e0gs0wf.jpg" alt=""></p>
+<p>所以 现在解决是通过 git rebase –continue 一个一个的把 Next commands to do (2 remaining commands) 搞到 Last commands done (7 commands done) 这样才能把之前 rebase 停止的部分一个个解决掉，每 continue 一次，检查一下 git status看有没有冲突，有冲突解决一下 。（rebase 的时候，如果有 commit 冲突，就会在那个commit 停止，要把后面的一个个 continue 才能 完成这些操作。）</p>
+<h2 id="在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。"><a href="#在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。" class="headerlink" title="在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。"></a>在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。</h2><p>使用 asset_path(“themes/background/#{template[:name]}.png”) 可以拿到加密后的图片，在js中使用</p>
+<h2 id="gitk-可以调取查看git的窗口"><a href="#gitk-可以调取查看git的窗口" class="headerlink" title="gitk 可以调取查看git的窗口"></a>gitk 可以调取查看git的窗口</h2><h2 id="jquery-unshift"><a href="#jquery-unshift" class="headerlink" title="jquery unshift"></a>jquery unshift</h2><p>matchFields.unshift({id: ‘x_field_1’, text: ‘扩展属性’})<br>这个结果返回的是 插入的 index，而不是 matchFields</p>
+<h2 id="gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard"><a href="#gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard" class="headerlink" title="gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard"></a>gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).on <span class="string">'turbolinks:load'</span>, -&gt;</div><div class="line">  <span class="keyword">return</span> unless $(<span class="string">".app-publish-container"</span>).length</div><div class="line">  ZeroClipboard.destroy()</div><div class="line">  $copyCheckinUrlDom = $(<span class="string">"#copy_checkin_url"</span>)</div><div class="line">  <span class="keyword">new</span> ZeroClipboard $copyCheckinUrlDom</div><div class="line">  $copyCheckinUrlDom.on <span class="string">'click'</span>, -&gt; App.View.showFlashNotification(<span class="string">'复制网址成功'</span>)</div></pre></td></tr></table></figure>
+<h2 id="自定义-jquery-validate"><a href="#自定义-jquery-validate" class="headerlink" title="自定义 jquery-validate"></a>自定义 jquery-validate</h2><p>gd-rt-lottery 中有 callback<br>code-verify 中有 自定义验证器</p>
+<h2 id="rails-异步执行"><a href="#rails-异步执行" class="headerlink" title="rails 异步执行"></a>rails 异步执行</h2><p><a href="http://edgeguides.rubyonrails.org/active_job_basics.html" target="_blank" rel="external">http://edgeguides.rubyonrails.org/active_job_basics.html</a></p>
+<h2 id="Zen-Rails-Security-Checklist"><a href="#Zen-Rails-Security-Checklist" class="headerlink" title="Zen Rails Security Checklist"></a>Zen Rails Security Checklist</h2><p><a href="https://github.com/brunofacca/zen-rails-security-checklist" target="_blank" rel="external">https://github.com/brunofacca/zen-rails-security-checklist</a></p>
+<h2 id="考试0秒问题"><a href="#考试0秒问题" class="headerlink" title="考试0秒问题"></a>考试0秒问题</h2><p>这个bug也是解了很久，但是我没有解决掉。<br>但是通过观察，可以发现，在 safari 中第一次打开浏览器是很容易出现 0 秒的。<br>后来定位到问题是 safari 在写跨域请求的时候，如果你之前没有访问过应用的链接，在往应用链接下写 cookie 的时候是不 work 的，在清除 safari 历史记录之后，百分百重现 0 秒。<br>因此，问题找到。解决方案就是，要在考试提交前，访问一次应用的链接。</p>
+<ol>
+<li>第一种想法是自己偷偷在这个应用 controller 中访问，但是是不可行的，safari 记录的貌似是浏览记录。</li>
+<li>增加了考前必读，让用户先从 应用中进入考试的表单，这样提交的时候就可以跨域写 uid 了。</li>
+</ol>
+<h2 id="性能问题总结"><a href="#性能问题总结" class="headerlink" title="性能问题总结"></a>性能问题总结</h2><p>背景：企业版应用授权反应十分慢。<br>初步疑惑：个人版和企业版代码是一样的，为什么企业版就慢了？<br>先是查看代码，是不是代码本身问题，但是记录日志时间相差都很小，可以确定不是代码问题。<br>后来讨论之后，还是觉得部署环境有问题</p>
+<ol>
+<li>排除了一下代码的可能性。</li>
+<li><p>继续跟进，去找企业版，看api处理速度，企业版api也没问题。</p>
+</li>
+<li><p>给出解决方案：在 uat （因为uat也是很慢的）</p>
+<ol>
+<li>写一个很简单的 controller 去访问 curl，看看是不是最简单的代码都慢，如果最简单的都慢，就可以十分肯定不是代码的问题。</li>
+<li>不是代码的问题就是环境的问题，就得配合豪哥看到底是哪块的问题。</li>
+</ol>
+</li>
+<li><p>配合发起请求，在此这过程中本可以锁定问题，但是因为在一个环节理解错了，没有定位出来。<br> 后来豪哥也是想了好几天才又一次执行错误理解的部分，结果证明确实是这里的问题，（这一块也主要想企业版环境和个人版到底有何不同）。<br> 是因为 css 等要先经过 dns 解析还是什么？去掉这块指向就快了。</p>
+</li>
+</ol>
+<p>总结是：固定一些条件，排除可能性。不要一开始认怂。不是代码的问题也要去跟进问题，毕竟问题总是要解决的，不然留给谁？</p>
+<h2 id="让单词别自动分开"><a href="#让单词别自动分开" class="headerlink" title="让单词别自动分开"></a>让单词别自动分开</h2><p>加上样式<br>word-break:break-all</p>
+<h2 id="中间打点"><a href="#中间打点" class="headerlink" title="中间打点"></a>中间打点</h2><p><a href="http://stackoverflow.com/questions/7023545/truncate-string-with-rails" target="_blank" rel="external">http://stackoverflow.com/questions/7023545/truncate-string-with-rails</a></p>
+<h2 id="es-task"><a href="#es-task" class="headerlink" title="es task"></a>es task</h2><p>rake es:form:reindex[20160801,20170901]<br>rake es:entry:reindex_all<br>rake es:contact:reindex_all</p>
+<p>把这几个跑了之后，才能数据同步到es，es的搜索才能正确执行</p>
+<h2 id="backbone-el"><a href="#backbone-el" class="headerlink" title="backbone el"></a>backbone el</h2><p>backbone 的 view 如果指定了 el，就是特定的el，如果没有指定，默认会给一个空的 div 作为 el</p>
+<p>by default, backbone view’s el is set to an empty div. so, this.el and this.$el are always present.</p>
+<h2 id="可以把-多个空格-格式化成一个空格"><a href="#可以把-多个空格-格式化成一个空格" class="headerlink" title="可以把 多个空格 格式化成一个空格"></a>可以把 多个空格 格式化成一个空格</h2><p>‘aa bb  cc’.squish!</p>
+<h2 id="把所有的-替换成-；"><a href="#把所有的-替换成-；" class="headerlink" title="把所有的 ; 替换成 ；"></a>把所有的 ; 替换成 ；</h2><p>$textFieldDom.val().replace(/;/g, ‘；’)</p>
+<h2 id="rails-获取-ip"><a href="#rails-获取-ip" class="headerlink" title="rails 获取 ip"></a>rails 获取 ip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def request_real_ip</div><div class="line">    return @request_real_ip if instance_variable_defined? :@request_real_ip</div><div class="line">    raw_ip = cname_request? ? request.env[&apos;HTTP_X_REAL_IP&apos;] : (request.env[&apos;HTTP_X_FORWARDED_FOR&apos;] || request.remote_ip)</div><div class="line">    @request_real_ip = raw_ip ? raw_ip.split(&apos;,&apos;).first.strip : nil</div><div class="line">  end</div><div class="line"></div><div class="line">  def cname_request?</div><div class="line">    request.env[&apos;HTTP_X_JSJ_FROM&apos;].present?</div><div class="line">  end</div></pre></td></tr></table></figure>
+<h1 id="如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址"><a href="#如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址" class="headerlink" title="如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址"></a>如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址</h1><h1 id="转换-csv-为-xlsx"><a href="#转换-csv-为-xlsx" class="headerlink" title="转换 csv 为 xlsx"></a>转换 csv 为 xlsx</h1><p><a href="https://convertio.co/csv-xlsx/" target="_blank" rel="external">https://convertio.co/csv-xlsx/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"># 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/25/最大的差距/" rel="next" title="最大的差距">
+                <i class="fa fa-chevron-left"></i> 最大的差距
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/08/Caching-with-Rails/" rel="prev" title="Caching with Rails">
+                Caching with Rails <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">1.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#支持别人的网页嵌入自己的服务"><span class="nav-number">1.1.</span> <span class="nav-text">支持别人的网页嵌入自己的服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问修饰符"><span class="nav-number">1.2.</span> <span class="nav-text">访问修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成-8-位数字码"><span class="nav-number">1.3.</span> <span class="nav-text">生成 8 位数字码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看ssh-key"><span class="nav-number">1.4.</span> <span class="nav-text">查看ssh key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录-uat-的数据库"><span class="nav-number">1.5.</span> <span class="nav-text">登录 uat 的数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压力测试"><span class="nav-number">1.6.</span> <span class="nav-text">压力测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#siege"><span class="nav-number">1.6.1.</span> <span class="nav-text">siege</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ab-apache-test："><span class="nav-number">1.6.2.</span> <span class="nav-text">ab apache test：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootstrapvalidator"><span class="nav-number">1.7.</span> <span class="nav-text">bootstrapvalidator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开本地-redis"><span class="nav-number">1.8.</span> <span class="nav-text">打开本地 redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同事分享"><span class="nav-number">1.9.</span> <span class="nav-text">同事分享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取-ssh"><span class="nav-number">1.10.</span> <span class="nav-text">获取 ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#header-body-footer"><span class="nav-number">1.11.</span> <span class="nav-text">header,body,footer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#看测试ing-的-error"><span class="nav-number">1.12.</span> <span class="nav-text">看测试ing 的 error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">1.13.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-branch"><span class="nav-number">1.14.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#snipaste"><span class="nav-number">1.15.</span> <span class="nav-text">snipaste</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gemset"><span class="nav-number">1.16.</span> <span class="nav-text">gemset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点一遍-所有的页面-按钮"><span class="nav-number">1.17.</span> <span class="nav-text">点一遍 所有的页面 按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-to-01"><span class="nav-number">1.18.</span> <span class="nav-text">1 to 01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程"><span class="nav-number">1.19.</span> <span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mini-test"><span class="nav-number">1.20.</span> <span class="nav-text">mini test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义-bootstrapValidator-验证器"><span class="nav-number">1.21.</span> <span class="nav-text">自定义 bootstrapValidator 验证器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"><span class="nav-number">1.22.</span> <span class="nav-text">部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销-commit"><span class="nav-number">1.23.</span> <span class="nav-text">撤销 commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-branch-命名有特殊字符，会-push-不上去"><span class="nav-number">1.24.</span> <span class="nav-text">git branch 命名有特殊字符，会 push 不上去</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧"><span class="nav-number">1.25.</span> <span class="nav-text">git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。"><span class="nav-number">1.26.</span> <span class="nav-text">在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitk-可以调取查看git的窗口"><span class="nav-number">1.27.</span> <span class="nav-text">gitk 可以调取查看git的窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-unshift"><span class="nav-number">1.28.</span> <span class="nav-text">jquery unshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard"><span class="nav-number">1.29.</span> <span class="nav-text">gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义-jquery-validate"><span class="nav-number">1.30.</span> <span class="nav-text">自定义 jquery-validate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rails-异步执行"><span class="nav-number">1.31.</span> <span class="nav-text">rails 异步执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zen-Rails-Security-Checklist"><span class="nav-number">1.32.</span> <span class="nav-text">Zen Rails Security Checklist</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#考试0秒问题"><span class="nav-number">1.33.</span> <span class="nav-text">考试0秒问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能问题总结"><span class="nav-number">1.34.</span> <span class="nav-text">性能问题总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让单词别自动分开"><span class="nav-number">1.35.</span> <span class="nav-text">让单词别自动分开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间打点"><span class="nav-number">1.36.</span> <span class="nav-text">中间打点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es-task"><span class="nav-number">1.37.</span> <span class="nav-text">es task</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#backbone-el"><span class="nav-number">1.38.</span> <span class="nav-text">backbone el</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可以把-多个空格-格式化成一个空格"><span class="nav-number">1.39.</span> <span class="nav-text">可以把 多个空格 格式化成一个空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把所有的-替换成-；"><span class="nav-number">1.40.</span> <span class="nav-text">把所有的 ; 替换成 ；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rails-获取-ip"><span class="nav-number">1.41.</span> <span class="nav-text">rails 获取 ip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址"><span class="nav-number">2.</span> <span class="nav-text">如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换-csv-为-xlsx"><span class="nav-number">3.</span> <span class="nav-text">转换 csv 为 xlsx</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/02/21/解决方案/';
+          this.page.identifier = '2017/02/21/解决方案/';
+          this.page.title = '一些技术问题的解决方案';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

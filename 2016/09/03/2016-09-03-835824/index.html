@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rials," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="view中好用的小知识尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。不好的做法： 12345&amp;lt;% if current_user %&amp;gt;    &amp;lt;p&amp;gt;&amp;lt;%= current_user.name %&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;% else %&amp;gt;    &amp;lt;p&amp;gt;Not Logined&amp;lt;/p&amp;gt;&amp;lt;% end">
+<meta name="keywords" content="rials">
+<meta property="og:type" content="article">
+<meta property="og:title" content="view中好用的小知识">
+<meta property="og:url" content="http://yoursite.com/2016/09/03/2016-09-03-835824/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="view中好用的小知识尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。不好的做法： 12345&amp;lt;% if current_user %&amp;gt;    &amp;lt;p&amp;gt;&amp;lt;%= current_user.name %&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;% else %&amp;gt;    &amp;lt;p&amp;gt;Not Logined&amp;lt;/p&amp;gt;&amp;lt;% end">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-03T09:10:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="view中好用的小知识">
+<meta name="twitter:description" content="view中好用的小知识尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。不好的做法： 12345&amp;lt;% if current_user %&amp;gt;    &amp;lt;p&amp;gt;&amp;lt;%= current_user.name %&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;% else %&amp;gt;    &amp;lt;p&amp;gt;Not Logined&amp;lt;/p&amp;gt;&amp;lt;% end">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/03/2016-09-03-835824/"/>
+
+
+
+
+
+  <title>view中好用的小知识 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">view中好用的小知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:28:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835824/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835824/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="view中好用的小知识"><a href="#view中好用的小知识" class="headerlink" title="view中好用的小知识"></a>view中好用的小知识</h2><p>尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。<br>不好的做法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> current_user %&gt;</div><div class="line">    &lt;p&gt;&lt;%= current_user.name %&gt;&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">&lt;% else %&gt;</span></div><div class="line"><span class="regexp">    &lt;p&gt;Not Logined&lt;/p</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>比较好的做法是将if else 改写在partial中，并把current_user.name用helper包起来。这样html code可读性大大提升。</p>
+<h3 id="Helper"><a href="#Helper" class="headerlink" title="Helper"></a>Helper</h3><p>Helper使用情景：</p>
+<ul>
+<li>产生的html code 需要与原始码逻辑混合，但不希望view里面太乱</li>
+<li>需要与rails内建的一些方便的helper交叉使用</li>
+</ul>
+<p>helper的好处：</p>
+<ul>
+<li>Don‘t repeat youeself 代码不重复</li>
+<li>Good Encapsulation 好的封装性</li>
+<li>提供view模版良好的组织</li>
+<li>易于修改代码</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">BoardsHelper</span></span></div><div class="line"><span class="comment"># 回傳board的name，避免在view中做太多判斷</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name</span><span class="params">(board)</span></span></div><div class="line">      <span class="keyword">if</span> board.present?</div><div class="line">        board.name</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="string">"unknown"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 常常重複的區段也可以寫進 helper，統一管理</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name_path</span><span class="params">(board)</span></span></div><div class="line">    link_to(board.name, board_path(board))</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view中可以直接取用如下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= render_board_name_path(@board) %&gt;</div></pre></td></tr></table></figure>
+<h3 id="partial"><a href="#partial" class="headerlink" title="partial"></a>partial</h3><p>partial 就是代码中的一小段，通常使用在html中，让view的code更干净，将重复的区块切成独立的partial，比如首页，footer，表单，等，让任何页面都能用这段partial，而不用重复写一摸一样的code。</p>
+<p>partial使用情景</p>
+<ul>
+<li>long template 如果html超过两页</li>
+<li>highly duplicated html内容高度重复</li>
+<li>independent blocks 可独立作为功能的区块</li>
+</ul>
+<p>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">&lt;% @topics.each <span class="keyword">do</span> <span class="params">|topic|</span> %&gt;</div><div class="line">  &lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">  &lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">  &lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;%= render <span class="string">"topic_list"</span> %&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
+<h4 id="collection-partial"><a href="#collection-partial" class="headerlink" title="collection partial"></a>collection partial</h4><p>上例可以改写<br>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">&lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">&lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;ul&gt;&lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"topic_list"</span>, <span class="symbol">:collection</span> =&gt; @topics, <span class="symbol">:as</span> =&gt; <span class="symbol">:topic</span> %&gt;&lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">...</span></div></pre></td></tr></table></figure>
+<h3 id="partial-amp-helper"><a href="#partial-amp-helper" class="headerlink" title="partial&amp;helper"></a>partial&amp;helper</h3><p>partial 复杂处理大段html code或是之后利用ajax render出来的片段</p>
+<p>helper则负责跟逻辑判断有关的东西</p>
+<p>比如：<br>topics_helper.rb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">TopicsHelper</span></span></div><div class="line"><span class="comment"># 需要邏輯判斷的工作留給helper</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">render_published_topic_name_path</span><span class="params">(topic)</span></span></div><div class="line">    link_to(topic.name, topic_path(topic))  <span class="keyword">if</span> topic.is_published?</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>_topic_info.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># partial只需要負責html的部分</span></div><div class="line">&lt;table&gt;</div><div class="line">  &lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">     &lt;td&gt;Topic name&lt;<span class="regexp">/td&gt;</span></div><div class="line"><span class="regexp">    &lt;/tr</span>&gt;</div><div class="line">  &lt;<span class="regexp">/thead&gt;</span></div><div class="line"><span class="regexp">  &lt;tbody&gt;</span></div><div class="line"><span class="regexp">    &lt;tr&gt;</span></div><div class="line"><span class="regexp">      &lt;td&gt;&lt;%= render_published_topic_name_path(topic) %&gt;&lt;/td</span>&gt;</div><div class="line">    &lt;<span class="regexp">/tr&gt;</span></div><div class="line"><span class="regexp">  &lt;/tbody</span>&gt;</div><div class="line">&lt;table&gt;</div></pre></td></tr></table></figure>
+<h3 id="yiled-in-view"><a href="#yiled-in-view" class="headerlink" title="yiled in view"></a>yiled in view</h3><p>yield就是会被替换成样板的地方，基本上所有的html.erb最后都会显示在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">这样的好处是将网站版型固定。只需要在出现内容的地方用yield引进即可。</div><div class="line"></div><div class="line">application.html.erb</div><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  ...</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    # erb檔案就是被引入這裡</div><div class="line">    &lt;%= yield %&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  #可以指定要yield哪個區塊</div><div class="line">  &lt;%= yield(:javascripts) %&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>还可以用content_for让content替换掉<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%= content_for :javascripts do %&gt;</div><div class="line">    #content here</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="Nested-form"><a href="#Nested-form" class="headerlink" title="Nested form"></a>Nested form</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:specs</span>, <span class="symbol">:dependent</span> =&gt; <span class="symbol">:destroy</span></div><div class="line">  accepts_nested_attributes_for <span class="symbol">:specs</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spec</span> &lt; ActiveRecord</span></div><div class="line">  belongs_to <span class="symbol">:product</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>view/admin/products/_form.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%= simple_form_for [<span class="symbol">:admin</span>, @product] <span class="keyword">do</span> <span class="params">|f|</span>  %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:name</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:description</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:price</span> %&gt;</div><div class="line"></div><div class="line">  &lt;!-- nested form從這裡開始 --&gt;</div><div class="line">  &lt;%= f.simple_fields_for <span class="symbol">:specs</span> <span class="keyword">do</span> <span class="params">|spec|</span> %&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:name</span> %&gt; &lt;!-- spec的name欄位 --&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:detail</span> %&gt; &lt;!-- spec的detail欄位 --&gt;</div><div class="line">  &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">  &lt;!-- nested form結束 --&gt;</div><div class="line"></div><div class="line">  &lt;%= f.button <span class="symbol">:submit</span>, <span class="string">"Submit"</span>, <span class="symbol">:disable_with</span> =&gt; <span class="string">"Submiting..."</span> %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rials/" rel="tag"># rials</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/01/2016-09-01-827120/" rel="next" title="Aws">
+                <i class="fa fa-chevron-left"></i> Aws
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/03/2016-09-03-835879/" rel="prev" title="Model中好用的小知识">
+                Model中好用的小知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#view中好用的小知识"><span class="nav-number">1.</span> <span class="nav-text">view中好用的小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Helper"><span class="nav-number">1.1.</span> <span class="nav-text">Helper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#partial"><span class="nav-number">1.2.</span> <span class="nav-text">partial</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#collection-partial"><span class="nav-number">1.2.1.</span> <span class="nav-text">collection partial</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#partial-amp-helper"><span class="nav-number">1.3.</span> <span class="nav-text">partial&helper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yiled-in-view"><span class="nav-number">1.4.</span> <span class="nav-text">yiled in view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-form"><span class="nav-number">1.5.</span> <span class="nav-text">Nested form</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2016/09/03/2016-09-03-835824/';
+          this.page.identifier = '2016/09/03/2016-09-03-835824/';
+          this.page.title = 'view中好用的小知识';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

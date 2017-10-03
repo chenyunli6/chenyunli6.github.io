@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ruby," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="对象 类 变量 常量  4.1 对象在 Ruby 中，表现数据的基本单位称为对象（object）。  数值对象   1、-10、3.1415 等是表示数字的对象，另外还有表示矩阵、复数、素数、公式的对象。  字符串对象   “你好”、”hello” 等表示文字的对象。  数组对象、散列对象   表示多个数据的集合的对象。  正则表达式对象   表示匹配模式的对象。  时间对象   比如 ”201">
+<meta name="keywords" content="ruby">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ch04 对象、变量和常量">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/ch04-对象、变量和常量/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="对象 类 变量 常量  4.1 对象在 Ruby 中，表现数据的基本单位称为对象（object）。  数值对象   1、-10、3.1415 等是表示数字的对象，另外还有表示矩阵、复数、素数、公式的对象。  字符串对象   “你好”、”hello” 等表示文字的对象。  数组对象、散列对象   表示多个数据的集合的对象。  正则表达式对象   表示匹配模式的对象。  时间对象   比如 ”201">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8g1wsprktj30mk0bx75q.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8g31t0hwej30fq09kt9w.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006y8lVagw1f8g39g6j61j30zw0aa40s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3e4m9t6j30pg08kq43.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006y8lVagw1f8g3lcpnimj30si07rdhe.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3oko6axj30zw06wt9z.jpg">
+<meta property="og:updated_time" content="2017-10-03T09:15:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ch04 对象、变量和常量">
+<meta name="twitter:description" content="对象 类 变量 常量  4.1 对象在 Ruby 中，表现数据的基本单位称为对象（object）。  数值对象   1、-10、3.1415 等是表示数字的对象，另外还有表示矩阵、复数、素数、公式的对象。  字符串对象   “你好”、”hello” 等表示文字的对象。  数组对象、散列对象   表示多个数据的集合的对象。  正则表达式对象   表示匹配模式的对象。  时间对象   比如 ”201">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8g1wsprktj30mk0bx75q.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/04/ch04-对象、变量和常量/"/>
+
+
+
+
+
+  <title>ch04 对象、变量和常量 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/04/ch04-对象、变量和常量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ch04 对象、变量和常量</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-04T13:55:32+08:00">
+                2016-10-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/04/ch04-对象、变量和常量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/04/ch04-对象、变量和常量/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>对象</li>
+<li>类</li>
+<li>变量</li>
+<li>常量</li>
+</ul>
+<h2 id="4-1-对象"><a href="#4-1-对象" class="headerlink" title="4.1 对象"></a>4.1 对象</h2><p>在 Ruby 中，表现数据的基本单位称为对象（object）。</p>
+<ul>
+<li><p>数值对象</p>
+<p>  1、-10、3.1415 等是表示数字的对象，另外还有表示矩阵、复数、素数、公式的对象。</p>
+</li>
+<li><p><strong>字符串对象</strong></p>
+<p>  “你好”、”hello” 等表示文字的对象。</p>
+</li>
+<li><p><strong>数组对象、散列对象</strong></p>
+<p>  表示多个数据的集合的对象。</p>
+</li>
+<li><p><strong>正则表达式对象</strong></p>
+<p>  表示匹配模式的对象。</p>
+</li>
+<li><p><strong>时间对象</strong></p>
+<p>  比如 ”2013年5月30日早上9点“ 等表示时间的对象。</p>
+</li>
+<li><p><strong>文件对象</strong></p>
+<p>  一般我们可以理解为表示文件本身的对象，但确切来说，它是对文件进行读写操作的对象。</p>
+</li>
+<li><p><strong>符号对象</strong></p>
+<p>  表示用于识别方法等名称的标签的对象。</p>
+</li>
+</ul>
+<p>除此之外， Ruby 还有<strong>范围对象（Range）</strong>、<strong>异常对象（Exception）</strong>等。</p>
+<h2 id="4-2-类"><a href="#4-2-类" class="headerlink" title="4.2 类"></a>4.2 类</h2><p>Ruby 的类（class）表示的就是对象的种类。</p>
+<p>对象拥有什么特性，这些都是由类来决定的。</p>
+<p>下图是刚刚介绍过的对象及其所属类的对应关系（这些都是 Ruby 默认提供的）：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8g1wsprktj30mk0bx75q.jpg" alt=""></p>
+<p>「 XX 类的对象 」，我们一般会说成 <strong>「 XX 类的实例（Instance） 」</strong>。</p>
+<p>例如，我们会说 「 字符串对象 <code>foo</code> 是 String 类的实例 」。</p>
+<h2 id="4-3-变量"><a href="#4-3-变量" class="headerlink" title="4.3 变量"></a>4.3 变量</h2><p><strong>变量就像是对象的名片。</strong></p>
+<p>Ruby 中有<strong>四种类型</strong>的变量。</p>
+<ul>
+<li><strong>局部变量</strong>（local variable）    </li>
+<li><strong>全局变量</strong>（global variable）</li>
+<li><strong>实例变量</strong>（instance variable）</li>
+<li><strong>类变量</strong>（class variable）</li>
+</ul>
+<p>变量的<strong>命名方式决定了变量的种类</strong>。</p>
+<ul>
+<li><strong>局部变量<br>  以英文字母或者_开头</strong></li>
+<li><strong>全局变量<br>  以$开头</strong></li>
+<li><strong>实例变量<br>  以@开头</strong></li>
+<li><strong>类变量<br>  以@@开头</strong></li>
+</ul>
+<p>除以上四种类型外，还有名为伪变量（还有一种叫预定义变量，书中没有详细介绍）的特殊变量。<br>伪变量是 Ruby 预先定义好的代表某特定值的特殊变量，因此即使我们在程序里给伪变量赋值，它的值也不会改变。Ruby中，nil、true、false、self等都是伪变量。它们表面上虽然看着像变量，但实际的行为又与变量有差别，因此称为伪变量。</p>
+<p><strong>局部变量与全局变量</strong></p>
+<p>局部变量是指 变量在程序中的有效范围（也称<strong>变量的作用域</strong>）是局部的。</p>
+<p>全局变量，不管变量在程序的哪个部分使用，程序就认为它们是同一个变量。</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8g31t0hwej30fq09kt9w.jpg" alt=""></p>
+<p>局部变量作用范围只在自己所在的代码块中。全局变量作用范围在所有程序中。</p>
+<p><strong>一般并不推荐使用全局变量。全局变量在程序的任何地方都可以修改，因此在规模较大的程序中使用时，会增加程序不必要的复杂度，给阅读程序、修改程序造成意想不到的麻烦。</strong></p>
+<p>首次给局部变量赋值的同时，该局部变量就被初始化了。如果引用了未初始化的局部变量，会抛出异常。</p>
+<p>执行示例：</p>
+<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8g39g6j61j30zw0aa40s.jpg" alt=""></p>
+<p>实例变量与类变量，第8章会详细说明。</p>
+<h2 id="4-4-常量"><a href="#4-4-常量" class="headerlink" title="4.4 常量"></a>4.4 常量</h2><p>常量的作用和变量一样，是某个对象的 「 名片 」。<strong>与变量不同的是，对已经赋值的常量再进行赋值时，Ruby 会做出警告。</strong></p>
+<p>执行示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3e4m9t6j30pg08kq43.jpg" alt=""></p>
+<p>常量以大写英文字母开头。<br>例如 Ruby 的运行版本「 RUBY_VERSION 」、运行平台「 RUBY_PLATFORM 」、命令行参数数组「 RARGV 」等，都是 Ruby 预定义好的常量。</p>
+<h2 id="4-5-保留字"><a href="#4-5-保留字" class="headerlink" title="4.5 保留字"></a>4.5 保留字</h2><p>Ruby 关键字一览表：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8g3lcpnimj30si07rdhe.jpg" alt=""></p>
+<p>这些关键字被称为保留字，如果用做变量名，Ruby 会提示我们语法错误。</p>
+<p>执行示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3oko6axj30zw06wt9z.jpg" alt=""></p>
+<h2 id="4-6-多重赋值"><a href="#4-6-多重赋值" class="headerlink" title="4.6 多重赋值"></a>4.6 多重赋值</h2><p>除了「 变量 = 值 」这种给变量赋值的方法，Ruby 中还提供了<strong>只用一个表达式就能给多个变量赋值的简便方法</strong>。</p>
+<h3 id="4-6-1"><a href="#4-6-1" class="headerlink" title="4.6.1"></a>4.6.1</h3><p>比如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div><div class="line">b = <span class="number">2</span></div><div class="line">c = <span class="number">3</span></div><div class="line"></div><div class="line"><span class="comment"># 可以简化为</span></div><div class="line">a, b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>如果一组不相关的变量进行多重赋值，程序会变的难懂，因此建议<strong>对彼此相关变量进行多重赋值</strong>。</p>
+<p>即使 = 号左右两边列出的数量不相等，Ruby 也不会报错。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a, b, c, d = <span class="number">1</span>, <span class="number">2</span>  </div><div class="line"><span class="comment"># a = 1  b = 2  c = nil  d = nil</span></div></pre></td></tr></table></figure>
+<p>变量部分比较少时，Ruby 会忽略掉该值，不会分配多余的值。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a, b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span></div><div class="line"><span class="comment"># a = 1  b = 2  c = 3  4不会被分配</span></div></pre></td></tr></table></figure>
+<p>变量前加上 * ，表示 Ruby 会将未分配的值封装为数组赋值给该变量</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a, b, *c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></div><div class="line"><span class="comment"># a = 1  b = 2  c = [3, 4, 5]</span></div><div class="line"></div><div class="line">a, *b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></div><div class="line"><span class="comment"># a = 1  b = [2, 3, 4]  c = 5</span></div></pre></td></tr></table></figure>
+<h3 id="4-6-2-置换变量的值"><a href="#4-6-2-置换变量的值" class="headerlink" title="4.6.2 置换变量的值"></a>4.6.2 置换变量的值</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a, b = <span class="number">0</span>, <span class="number">1</span></div><div class="line">tmp = a <span class="comment"># 暂时保存变量a的值</span></div><div class="line">a = b   <span class="comment"># 将变量b的值赋值给a</span></div><div class="line">b = tmp <span class="comment"># 将原本变量a的值赋值给变量b</span></div><div class="line">p a, b  <span class="comment"># =&gt; [1, 0]</span></div></pre></td></tr></table></figure>
+<p>使用多重赋值，只需一行程序就搞定了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a, b = <span class="number">0</span>, <span class="number">1</span></div><div class="line">a, b = b, a <span class="comment"># 置换变量a、b的值</span></div><div class="line">p a, b      <span class="comment"># [1, 0]</span></div></pre></td></tr></table></figure>
+<h3 id="4-6-3-获取数组的元素"><a href="#4-6-3-获取数组的元素" class="headerlink" title="4.6.3 获取数组的元素"></a>4.6.3 获取数组的元素</h3><p>用数组赋值，左边有多个变量时，Ruby 会自动获取数组的元素进行多重赋值。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, <span class="number">2</span>]</div><div class="line">a, b = ary</div><div class="line">p a     <span class="comment"># =&gt; 1</span></div><div class="line">p b     <span class="comment"># =&gt; 2</span></div></pre></td></tr></table></figure>
+<h3 id="4-6-4-获取嵌套数组的元素"><a href="#4-6-4-获取嵌套数组的元素" class="headerlink" title="4.6.4 获取嵌套数组的元素"></a>4.6.4 获取嵌套数组的元素</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>]</div><div class="line">a, b, c = ary</div><div class="line">p a  <span class="comment"># =&gt; 1</span></div><div class="line">p b  <span class="comment"># =&gt; [2, 3]</span></div><div class="line">p c  <span class="comment"># =&gt; 4</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>]</div><div class="line">a, (b1, b2), c = ary  <span class="comment"># 对与数组结构相对应的变量赋值</span></div><div class="line">p a   <span class="comment"># =&gt; 1</span></div><div class="line">p b1  <span class="comment"># =&gt; 2</span></div><div class="line">p b2  <span class="comment"># =&gt; 3</span></div><div class="line">p c   <span class="comment"># =&gt; 4</span></div></pre></td></tr></table></figure>
+<p>只要等号左边的变量的结构与数组的结构一致，即使再复杂的结构，多重赋值都可以轻松对应。</p>
+<p>专栏</p>
+<p>以变量名开头来决定变量的种类，这是 Ruby 中对变量命名时唯一要坚决遵守的规则。</p>
+<p>◎ 不要过多使用省略的名称</p>
+<p>◎ <strong>对于多个单词组合的变量名，使用 _ 隔开各个单词</strong>，或者单词以大写字母开头<br>   Ruby 的变量名和方法名使用前者，类名和模块名使用后者。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ruby/" rel="tag"># ruby</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/ch03-创建命令/" rel="next" title="ch03 创建命令">
+                <i class="fa fa-chevron-left"></i> ch03 创建命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/24/jquery-fileupload-上传/" rel="prev" title="jquery fileupload 上传">
+                jquery fileupload 上传 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-对象"><span class="nav-number">1.</span> <span class="nav-text">4.1 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-类"><span class="nav-number">2.</span> <span class="nav-text">4.2 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-变量"><span class="nav-number">3.</span> <span class="nav-text">4.3 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-常量"><span class="nav-number">4.</span> <span class="nav-text">4.4 常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-保留字"><span class="nav-number">5.</span> <span class="nav-text">4.5 保留字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-多重赋值"><span class="nav-number">6.</span> <span class="nav-text">4.6 多重赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1"><span class="nav-number">6.1.</span> <span class="nav-text">4.6.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-置换变量的值"><span class="nav-number">6.2.</span> <span class="nav-text">4.6.2 置换变量的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-3-获取数组的元素"><span class="nav-number">6.3.</span> <span class="nav-text">4.6.3 获取数组的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-4-获取嵌套数组的元素"><span class="nav-number">6.4.</span> <span class="nav-text">4.6.4 获取嵌套数组的元素</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2016/10/04/ch04-对象、变量和常量/';
+          this.page.identifier = '2016/10/04/ch04-对象、变量和常量/';
+          this.page.title = 'ch04 对象、变量和常量';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

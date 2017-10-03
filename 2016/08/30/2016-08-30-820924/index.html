@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rails," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="f.input 是simple_form_for的使用 这个是普通的下拉： 1&amp;lt;%= f.input :tag_list,collection: @tags %&amp;gt; 下面这个是加了semantic-ui的下拉框（多选）1&amp;lt;%= f.input :tag_list,collection: @tags,label:&quot;问题标签&quot;,input_html: &amp;#123; class: &apos;ui">
+<meta name="keywords" content="rails">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dropdown">
+<meta property="og:url" content="http://yoursite.com/2016/08/30/2016-08-30-820924/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="f.input 是simple_form_for的使用 这个是普通的下拉： 1&amp;lt;%= f.input :tag_list,collection: @tags %&amp;gt; 下面这个是加了semantic-ui的下拉框（多选）1&amp;lt;%= f.input :tag_list,collection: @tags,label:&quot;问题标签&quot;,input_html: &amp;#123; class: &apos;ui">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://user-image.logdown.io/user/18400/blog/17935/post/820924/w487iIPQoinSqW8o27Wj_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.19.20.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/18400/blog/17935/post/820924/vwdVVvtZSgqy3leeksRF_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.32.30.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/18400/blog/17935/post/820924/fvam6v7TnuzGlDYxY2Qg_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.14.49.png">
+<meta property="og:updated_time" content="2017-10-03T09:09:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dropdown">
+<meta name="twitter:description" content="f.input 是simple_form_for的使用 这个是普通的下拉： 1&amp;lt;%= f.input :tag_list,collection: @tags %&amp;gt; 下面这个是加了semantic-ui的下拉框（多选）1&amp;lt;%= f.input :tag_list,collection: @tags,label:&quot;问题标签&quot;,input_html: &amp;#123; class: &apos;ui">
+<meta name="twitter:image" content="http://user-image.logdown.io/user/18400/blog/17935/post/820924/w487iIPQoinSqW8o27Wj_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.19.20.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/30/2016-08-30-820924/"/>
+
+
+
+
+
+  <title>dropdown | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/2016-08-30-820924/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dropdown</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-30T13:22:00+08:00">
+                2016-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/30/2016-08-30-820924/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/30/2016-08-30-820924/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>f.input 是simple_form_for的使用</p>
+<p>这个是普通的下拉：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags %&gt;</div></pre></td></tr></table></figure>
+<p>下面这个是加了semantic-ui的下拉框（多选）<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags,<span class="symbol">label:</span><span class="string">"问题标签"</span>,<span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: '<span class="title">ui</span> <span class="title">fluid</span> <span class="title">search</span> <span class="title">dropdown</span>',<span class="title">multiple</span>: "" &#125; %&gt;</span></div></pre></td></tr></table></figure></p>
+<p>html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"ui fluid search dropdown"</span> <span class="attr">multiple</span>=<span class="string">""</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/w487iIPQoinSqW8o27Wj_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.19.20.png" alt="屏幕快照 2016-08-30 下午1.19.20.png"></p>
+<p>下面这个是带搜索的semantic-ui下拉（多选）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui multiple dropdown"</span> <span class="attr">id</span>=<span class="string">"dropdown"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"filters"</span> <span class="attr">value</span>=<span class="string">"&lt;%=@filters%&gt;"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-users"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span> <span class="attr">style</span>=<span class="string">"color:#adda4d"</span> <span class="attr">id</span>=<span class="string">"invite"</span>&gt;</span>邀请回答<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">unless</span> @<span class="attr">invitated_users.nil</span>? %&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> @<span class="attr">invitated_users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"ui label transition visible"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span> <span class="attr">style</span>=<span class="string">"display: inline-block !important;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">        回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"delete icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui icon search input"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"search icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"搜索你想提问的学长学姐"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"tags icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      学长&amp;学姐</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrolling menu"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> @<span class="attr">users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">          回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/vwdVVvtZSgqy3leeksRF_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.32.30.png" alt="屏幕快照 2016-08-30 下午1.32.30.png"></p>
+<p>这是一个二级下拉<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:author</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:as</span> =&gt; <span class="symbol">:grouped_select</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:collection</span> =&gt; [[<span class="string">'Authors'</span>, [<span class="string">'Jose'</span>, <span class="string">'Carlos'</span>]], [<span class="string">'General'</span>, [<span class="string">'Bob'</span>, <span class="string">'John'</span>]]],</div><div class="line"></div><div class="line"> <span class="symbol">:group_method</span> =&gt; <span class="symbol">:last</span> %&gt;</div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/fvam6v7TnuzGlDYxY2Qg_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.14.49.png" alt="屏幕快照 2016-08-30 下午1.14.49.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rails/" rel="tag"># rails</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/28/2016-08-28-json-view-resolved/" rel="next" title="json在view中解析">
+                <i class="fa fa-chevron-left"></i> json在view中解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/31/2016-08-31-822689/" rel="prev" title="acts-as-taggable-on 生成标签">
+                acts-as-taggable-on 生成标签 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2016/08/30/2016-08-30-820924/';
+          this.page.identifier = '2016/08/30/2016-08-30-820924/';
+          this.page.title = 'dropdown';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

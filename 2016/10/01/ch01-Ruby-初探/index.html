@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ruby," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1.1 ruby命令的执行方法helloruby.rb (Ruby 文件)1print(&quot;Hello,Ruby.\n&quot;) 进入此文件被保存的文件夹目录，在 terminal 中执行 step0. cd rubylearning/ch01 (这里写你自己的文件夹路径)step1. ruby helloruby.rb  1.1.2 irb 命令的执行方法与ruby命令一样，irb命令在控制台执行，">
+<meta name="keywords" content="ruby">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ch01 Ruby 初探">
+<meta property="og:url" content="http://yoursite.com/2016/10/01/ch01-Ruby-初探/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="1.1.1 ruby命令的执行方法helloruby.rb (Ruby 文件)1print(&quot;Hello,Ruby.\n&quot;) 进入此文件被保存的文件夹目录，在 terminal 中执行 step0. cd rubylearning/ch01 (这里写你自己的文件夹路径)step1. ruby helloruby.rb  1.1.2 irb 命令的执行方法与ruby命令一样，irb命令在控制台执行，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8cjqlj7duj31120l6wh8.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8cjyro53gj31060bata9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006y8lVagw1f8ckeuh3fmj30u80ao0tt.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006y8lVagw1f8ckhhmclxj30fm0cimxw.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8cl41qbavj30ty09m0tn.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006y8lVagw1f8cl9sc3pcj30zu05cmy2.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8clgwwa8kj30uk0homzc.jpg">
+<meta property="og:updated_time" content="2017-10-03T08:48:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ch01 Ruby 初探">
+<meta name="twitter:description" content="1.1.1 ruby命令的执行方法helloruby.rb (Ruby 文件)1print(&quot;Hello,Ruby.\n&quot;) 进入此文件被保存的文件夹目录，在 terminal 中执行 step0. cd rubylearning/ch01 (这里写你自己的文件夹路径)step1. ruby helloruby.rb  1.1.2 irb 命令的执行方法与ruby命令一样，irb命令在控制台执行，">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006y8lVagw1f8cjqlj7duj31120l6wh8.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/01/ch01-Ruby-初探/"/>
+
+
+
+
+
+  <title>ch01 Ruby 初探 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/01/ch01-Ruby-初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ch01 Ruby 初探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-01T12:34:36+08:00">
+                2016-10-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/01/ch01-Ruby-初探/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/01/ch01-Ruby-初探/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-1-1-ruby命令的执行方法"><a href="#1-1-1-ruby命令的执行方法" class="headerlink" title="1.1.1 ruby命令的执行方法"></a>1.1.1 ruby命令的执行方法</h2><p>helloruby.rb (Ruby 文件)<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">"Hello,Ruby.\n"</span>)</div></pre></td></tr></table></figure></p>
+<p>进入此文件被保存的文件夹目录，在 terminal 中执行</p>
+<p>step0. cd rubylearning/ch01 (这里写你自己的文件夹路径)<br>step1. ruby helloruby.rb</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8cjqlj7duj31120l6wh8.jpg" alt=""></p>
+<h2 id="1-1-2-irb-命令的执行方法"><a href="#1-1-2-irb-命令的执行方法" class="headerlink" title="1.1.2 irb 命令的执行方法"></a>1.1.2 irb 命令的执行方法</h2><p>与ruby命令一样，irb命令在控制台执行，不过不需要指定程序文件。</p>
+<p>step0. terminal 输入 irb<br>step1. 继续输入 print(“Hello,Ruby.\n”)</p>
+<p>执行结果<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8cjyro53gj31060bata9.jpg" alt=""></p>
+<p>在控制台写的程序可以马上在控制台里执行，这对进行简单的小测试非常方便。但是，这个方法并不适合大程序，这时我们应该考虑使用ruby命令。</p>
+<p>退出 irb : 输入 exit 或 Ctrl+d</p>
+<h2 id="1-2-程序解说"><a href="#1-2-程序解说" class="headerlink" title="1.2 程序解说"></a>1.2 程序解说</h2><p>字符串、数值、时间等各种数据，在Ruby中都是对象。</p>
+<p>print是一个方法。所谓方法，就是对象的行为。<br>print方法的作用就是输出()里的内容。<br>我们在说明print方法时，会说“print方法会把作为参数传递过来的字符串，输出到控制台中”。</p>
+<h2 id="1-3-字符串"><a href="#1-3-字符串" class="headerlink" title="1.3 字符串"></a>1.3 字符串</h2><h3 id="1-3-1"><a href="#1-3-1" class="headerlink" title="1.3.1"></a>1.3.1</h3><p>字符\n是换行符。利用换行符，我们可以用普通的字符达到换行的效果</p>
+<p>除了\n以外，当我们想在字符串里嵌入特殊符号时，也会用到\<br>程序会对字符串里\后的字符做特殊处理。因此，如果字符串里需要包含\，程序要写成\<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">"Hello, \"Ruby\".\n"</span>)</div></pre></td></tr></table></figure></p>
+<p>输出结果为：Hello, “Ruby!”.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">"Hello \\ Ruby!"</span>)</div></pre></td></tr></table></figure>
+<p>输出结果为：Hello \ Ruby!</p>
+<h3 id="1-3-2-‘’-与-“”"><a href="#1-3-2-‘’-与-“”" class="headerlink" title="1.3.2 ‘’ 与 “”"></a>1.3.2 ‘’ 与 “”</h3><p><strong>在单引号里，像\n这样的特殊字符不经过转义，程序会原封不动地直接输出。</strong><br>但也有例外，例如在字符串里想嵌入\与单引号时，还是需要在之前加上\。也就是像这样，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(<span class="string">'Hello, \\ \'Ruby\'.'</span>)</div></pre></td></tr></table></figure>
+<p>输出结果为：Hello, \ ‘Ruby’.</p>
+<h2 id="1-4-方法的调用"><a href="#1-4-方法的调用" class="headerlink" title="1.4 方法的调用"></a>1.4 方法的调用</h2><p>Ruby在调用方法时可以省略(),</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print <span class="string">"Hello, Ruby.\n"</span></div></pre></td></tr></table></figure>
+<p>虽然这种写法可以方便地输出多个字符串，但是如果遇到比较复杂的参数，使用()会更加便于理解。因此，<strong>建议在习惯Ruby的语法之前，不要使用省略()的写法</strong>。</p>
+<h2 id="1-5-puts-方法"><a href="#1-5-puts-方法" class="headerlink" title="1.5 puts 方法"></a>1.5 puts 方法</h2><p>puts方法与print方法稍有区别，puts方法在输出结果的末尾一定会输出换行符。<br>如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">puts <span class="string">"Hello, Ruby."</span></div></pre></td></tr></table></figure>
+<p>不过，当参数为两个字符串时，各字符串末尾都会加上换行符，如</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">puts <span class="string">"Hello, "</span>, <span class="string">"Ruby!"</span></div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ckeuh3fmj30u80ao0tt.jpg" alt=""></p>
+<p>1.6 p方法</p>
+<p>把字符串 “100” 和 100 输出区别开来，如</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ckhhmclxj30fm0cimxw.jpg" alt=""></p>
+<p>使用p方法时，换行符（\n）、制表符（\t）等特殊字符不会转义，会直接输出。<br>（原则上，p方法是提供给编程者使用的。）</p>
+<h2 id="1-7-中文的输出"><a href="#1-7-中文的输出" class="headerlink" title="1.7 中文的输出"></a>1.7 中文的输出</h2><p>魔法注释：(从Ruby 2.0开始，若没指定魔法注释，Ruby会默认使用UTF-8编码方式,因此，在Ruby 2.0中如果希望代码采用UTF-8的编码方式时，可省略魔法注释。)<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># encoding: GBK</span></div></pre></td></tr></table></figure></p>
+<p>以UTF-8编码方式在控制台输出结果，可像下面这样执行命令：</p>
+<blockquote>
+<p>ruby -E UTF-8 脚本文件名 ← 脚本执行<br>irb -E UTF-8 ← irb启动</p>
+</blockquote>
+<h2 id="1-8-数值表示与计算"><a href="#1-8-数值表示与计算" class="headerlink" title="1.8 数值表示与计算"></a>1.8 数值表示与计算</h2><h3 id="1-8-1-数值表示"><a href="#1-8-1-数值表示" class="headerlink" title="1.8.1 数值表示"></a>1.8.1 数值表示</h3><p><strong>Ruby中的字符串是以字符串对象的形式存在的。同样地，数值也是以“数值对象”的形式存在的。</strong></p>
+<p>四则运算：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8cl41qbavj30ty09m0tn.jpg" alt=""></p>
+<h3 id="1-8-2-数学相关的函数"><a href="#1-8-2-数学相关的函数" class="headerlink" title="1.8.2 数学相关的函数"></a>1.8.2 数学相关的函数</h3><p>Ruby中还可以使用数学函数，如平方根、sin和cos等三角函数、指数函数等。使用数学函数时，必须在函数前加上Math.标识。<br>(irb命令后的选项–simple-prompt会简化irb的输出结果。)</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8cl9sc3pcj30zu05cmy2.jpg" alt=""></p>
+<p>这个例子中，其结果值为“9.265358966049024 * 10的-5次幂”，也就是0.00009265358966049024。</p>
+<h2 id="1-9-变量"><a href="#1-9-变量" class="headerlink" title="1.9 变量"></a>1.9 变量</h2><p>变量是程序里不可缺少的元素之一。可以将其理解为给对象贴上的标签。</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8clgwwa8kj30uk0homzc.jpg" alt=""></p>
+<p>变量还可以清晰地表示某个值所代表的含义。因此，为变量起一个容易理解的名称是非常重要的。建议大家平时多加注意，最好使用area、volume等意义明确的单词作为变量名。</p>
+<p>传递给print方法的字符串参数也可以像下面这样写：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print <span class="string">"表面积 = <span class="subst">#&#123;area&#125;</span>\n"</span></div><div class="line"></div><div class="line"><span class="comment"># 或者</span></div><div class="line">puts <span class="string">"表面积 = <span class="subst">#&#123;area&#125;</span>\n"</span></div></pre></td></tr></table></figure></p>
+<p>在字符串里使用#{…}这样的写法，可以把通过计算后得到的值嵌入到字符串中。输出结果里除了可以嵌入变量名，也可以嵌入”表面积 =#{(x<em>y + y</em>z + z<em>x) </em> 2}\n”这样的计算公式，得到的输出结果是一样的。</p>
+<h2 id="1-10-注释"><a href="#1-10-注释" class="headerlink" title="1.10 注释"></a>1.10 注释</h2><p>我们在程序里可以写注释。注释虽然写在程序里面，但程序并不会执行注释的内容，也就是说，注释的内容对程序的执行结果不会产生任何影响。</p>
+<p>Ruby 中用 # 表示（单行）注释的开始。<br>另外，行的开头用 =begin 和 =end 括起来的部分也是注释</p>
+<p>如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">=begin</span></div><div class="line"><span class="comment">《Ruby基础教程（第4版）》示例注释的使用示例</span></div><div class="line"><span class="comment">2006/06/16创建</span></div><div class="line"><span class="comment">2006/07/01追加一部分注释</span></div><div class="line"><span class="comment">2013/04/01第4版更新</span></div><div class="line"><span class="comment">x = 10  # 宽</span></div><div class="line"><span class="comment">y = 20  # 长</span></div><div class="line"><span class="comment">z = 30  # 高</span></div><div class="line"><span class="comment"># 计算表面积和体积</span></div><div class="line"><span class="comment">area = (x*y + y*z + z*x) * 2</span></div><div class="line"><span class="comment">volume = x * y * z</span></div><div class="line"><span class="comment"># 输出</span></div><div class="line"><span class="comment">print "表面积=", area, "\n"</span></div><div class="line"><span class="comment">print "体积=", volume, "\n"</span></div><div class="line"><span class="comment">=end</span></div></pre></td></tr></table></figure></p>
+<h2 id="1-11-控制语句"><a href="#1-11-控制语句" class="headerlink" title="1.11 控制语句"></a>1.11 控制语句</h2><p>控制语句大致可以分成以下几类。</p>
+<ul>
+<li>顺序控制：按照程序的编写顺序，从头到尾执行。   </li>
+<li>条件控制：若某条件成立，则执行〇〇，否则执行××。   </li>
+<li>循环控制：在某条件成立之前，反复执行〇〇。   </li>
+<li>异常控制：发生某种异常时，执行〇〇。</li>
+</ul>
+<h2 id="1-12-条件判断：if-then-end"><a href="#1-12-条件判断：if-then-end" class="headerlink" title="1.12 条件判断：if~then~end"></a>1.12 条件判断：if~then~end</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># (这里的条件一般指能返回 true 或者 false 的表达式)</span></div><div class="line"><span class="comment"># 这里的 then 也可以省略</span></div><div class="line"><span class="keyword">if</span> 条件 <span class="keyword">then</span></div><div class="line">    条件成立时执行的处理</div><div class="line"><span class="keyword">else</span></div><div class="line">    条件不成立时执行的处理</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="1-13-循环"><a href="#1-13-循环" class="headerlink" title="1.13 循环"></a>1.13 循环</h2><h3 id="1-13-1-while语句"><a href="#1-13-1-while语句" class="headerlink" title="1.13.1 while语句"></a>1.13.1 while语句</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># do 可以省略</span></div><div class="line"><span class="keyword">while</span> 循环条件 <span class="keyword">do</span></div><div class="line">    希望循环做的处理</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 按顺序输出从1到10十个数字</span></div><div class="line">i = <span class="number">1</span></div><div class="line"><span class="keyword">while</span> i &lt;= <span class="number">10</span></div><div class="line">    print i, <span class="string">"\n"</span></div><div class="line">    i = i + <span class="number">1</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="1-13-2-times-方法"><a href="#1-13-2-times-方法" class="headerlink" title="1.13.2 times 方法"></a>1.13.2 times 方法</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 循环次数确定，使用 times 会更加简单</span></div><div class="line">循环次数.times <span class="keyword">do</span>   </div><div class="line">    希望循环做的处理</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">100</span>.times <span class="keyword">do</span>  </div><div class="line">    print <span class="string">"All work and no play makes Jack a dull boy.\n"</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>times 方法被称为迭代器 (iterator).迭代器就是指用于执行循环处理的方法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ruby/" rel="tag"># ruby</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/28/2016-09-28-926601/" rel="next" title="vim 初试">
+                <i class="fa fa-chevron-left"></i> vim 初试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/02/ch02-便利的对象/" rel="prev" title="ch02 便利的对象">
+                ch02 便利的对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-1-ruby命令的执行方法"><span class="nav-number">1.</span> <span class="nav-text">1.1.1 ruby命令的执行方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-2-irb-命令的执行方法"><span class="nav-number">2.</span> <span class="nav-text">1.1.2 irb 命令的执行方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-程序解说"><span class="nav-number">3.</span> <span class="nav-text">1.2 程序解说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-字符串"><span class="nav-number">4.</span> <span class="nav-text">1.3 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1"><span class="nav-number">4.1.</span> <span class="nav-text">1.3.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-‘’-与-“”"><span class="nav-number">4.2.</span> <span class="nav-text">1.3.2 ‘’ 与 “”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-方法的调用"><span class="nav-number">5.</span> <span class="nav-text">1.4 方法的调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-puts-方法"><span class="nav-number">6.</span> <span class="nav-text">1.5 puts 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-中文的输出"><span class="nav-number">7.</span> <span class="nav-text">1.7 中文的输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-数值表示与计算"><span class="nav-number">8.</span> <span class="nav-text">1.8 数值表示与计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-1-数值表示"><span class="nav-number">8.1.</span> <span class="nav-text">1.8.1 数值表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-2-数学相关的函数"><span class="nav-number">8.2.</span> <span class="nav-text">1.8.2 数学相关的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-变量"><span class="nav-number">9.</span> <span class="nav-text">1.9 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-注释"><span class="nav-number">10.</span> <span class="nav-text">1.10 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-控制语句"><span class="nav-number">11.</span> <span class="nav-text">1.11 控制语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-条件判断：if-then-end"><span class="nav-number">12.</span> <span class="nav-text">1.12 条件判断：if~then~end</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-循环"><span class="nav-number">13.</span> <span class="nav-text">1.13 循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-1-while语句"><span class="nav-number">13.1.</span> <span class="nav-text">1.13.1 while语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-times-方法"><span class="nav-number">13.2.</span> <span class="nav-text">1.13.2 times 方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2016/10/01/ch01-Ruby-初探/';
+          this.page.identifier = '2016/10/01/ch01-Ruby-初探/';
+          this.page.title = 'ch01 Ruby 初探';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
