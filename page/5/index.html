@@ -232,6 +232,675 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-station-letter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/24/2016-08-24-station-letter/" itemprop="url">站内信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T19:01:00+08:00">
+                2016-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/24/2016-08-24-station-letter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/24/2016-08-24-station-letter/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.创建model</p>
+<pre><code>rails g model notification
+</code></pre><p>  添加 migration</p>
+<pre><code>class CreateNotifications &lt; ActiveRecord::Migration[5.0]
+  def change
+    create_table :notifications do |t|
+      t.integer :recipient_id
+      t.integer :actor_id
+      t.datetime :read_at
+      t.string :action
+      t.integer :notifiable_id
+      t.string :notifiable_type
+
+      t.timestamps
+    end
+  end
+end
+</code></pre><p>rake db:migrate</p>
+<p>补充model</p>
+<pre><code>class Notification &lt; ApplicationRecord
+   belongs_to :recipient, class_name: &quot;User&quot;
+   belongs_to :actor, class_name: &quot;User&quot;
+   belongs_to :notifiable, polymorphic: true
+
+   scope :unread, -&gt; { where(read_at: nil) }
+   scope :recent, -&gt; { order(created_at: :desc).limit(5) }
+ end
+</code></pre><p>2.创建controller</p>
+<pre><code>rails g controller notifications
+
+
+
+class NotificationsController &lt; ApplicationController  
+  before_action :authenticate_user!
+  def index
+    @notifications = Notification.where(recipient: current_user).recent
+  end
+
+  def mark_as_read
+    @notifications = Notification.where(recipient: current_user).unread
+    @notifications.update_all(read_at: Time.zone.now)
+    render json: { success: true }
+  end
+end
+</code></pre><p>3.在notifications.coffee中加入</p>
+<pre><code>class Notifications
+
+  constructor: -&gt;
+
+@notifications = $(&quot;[data-behavior=&apos;notifications&apos;]&quot;)
+
+if @notifications.length &gt; 0
+  @handleSuccess @notifications.data(&quot;notifications&quot;)
+  $(&quot;[data-behavior=&apos;notifications-link&apos;]&quot;).on &quot;click&quot;, @handleClick
+
+  setInterval (=&gt;
+    @getNewNotifications()
+  ), 5000
+
+  getNewNotifications: -&gt;
+$.ajax(
+  url: &quot;/notifications.json&quot;
+  dataType: &quot;JSON&quot;
+  method: &quot;GET&quot;
+  success: @handleSuccess
+)
+
+handleClick: (e) =&gt;
+$.ajax(
+  url: &quot;/notifications/mark_as_read&quot;
+  dataType: &quot;JSON&quot;
+  method: &quot;POST&quot;
+  success: -&gt;
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(0)
+)
+
+handleSuccess: (data) =&gt;
+  items = $.map data, (notification) -&gt;
+    notification.template
+
+  unread_count = 0
+  $.each data, (i, notification) -&gt;
+    if notification.unread
+      unread_count += 1
+
+  if unread_count &gt; 0
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).html(&quot;&lt;span class=&apos;label label-danger&apos;&gt;&quot; + unread_count + &quot;&lt;/span&gt;&quot;)
+  else
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(unread_count)
+  $(&quot;[data-behavior=&apos;notification-items&apos;]&quot;).html(items)
+
+jQuery -&gt;
+
+  new Notifications
+</code></pre><p>4.在notifications.scss中加入</p>
+<pre><code>.unread {
+ border-left: 3px solid red;
+}
+</code></pre><p>5.创建notification_service.rb</p>
+<figure class="highlight plain"><figcaption><span>NotificationService</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class NotificationService</div><div class="line">  # recipient 接收者</div><div class="line">  # actor 发起者</div><div class="line">  # notifiable  哪张表发起的  比如，question要提醒用户，这里就传question</div><div class="line">  def initialize(recipient, actor, notifiable)</div><div class="line">    @recipient = recipient</div><div class="line">    @actor = actor</div><div class="line">    @notifiable = notifiable</div><div class="line">  end</div><div class="line"></div><div class="line">  # 发送信息</div><div class="line">  def send_notification!</div><div class="line">    Notification.create(recipient: @recipient, actor: @actor, action: &quot;notify_message&quot;, notifiable: @notifiable)</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>6.创建app/views/notifications/questions/_notify_message.html.erb<br>如果需要另外一个model也发送<br>创建app/views/notifications/answers/_notify_message.html.erb</p>
+<p>比如,app/views/notifications/questions/_notify_message.html.erb,这里展示消息要呈现的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;panel-body&quot;&gt;</div><div class="line"></div><div class="line">  &lt;%= notification.actor.name %&gt; 邀请您回答他的问题</div><div class="line"></div><div class="line">  &lt;%= link_to(&quot;去回答&quot;,new_question_answer_path(notification.notifiable_id)) %&gt;</div><div class="line"></div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>_notify_message.html.erb 的名字需要和<br>需要和action: “notify_message”一致，看一下notifications的表结构中有action的字段</p>
+<p>questions的目录和要发送的model一致</p>
+<p>7.在需要发送消息的地方调用service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#将会把@question的id和model(&apos;Question&apos;)的名字存入notifications的#notifiable_id和notifiable_type</div><div class="line"></div><div class="line">NotificationService.new(user,current_user,@question).send_notification!</div></pre></td></tr></table></figure>
+<p>或者</p>
+<pre><code># 将会把@answer的id和model的名字(&apos;Answer&apos;)存入notifications的
+# notifiable_id和notifiable_type
+NotificationService.new(@question.user,current_user,@answer).send_notification!
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-802980/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/24/2016-08-24-802980/" itemprop="url">link_to</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T13:03:00+08:00">
+                2016-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/24/2016-08-24-802980/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/24/2016-08-24-802980/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">关注</div><div class="line">  ```&lt;% if !current_user.already_follower?(@user) %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% else %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% end %&gt;</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%=link_to_if(question.answers.count&gt;0, &quot;删除&quot;</div><div class="line">,publish_hidden_account_question_path(question)</div><div class="line">, method: :post, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;,disabled:true) do</div><div class="line">	link_to(&quot;删除&quot;,publish_hidden_account_question_path(question), method: :post</div><div class="line">, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;)</div><div class="line">end %&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="url">semantic-ui引用到rails</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T10:26:00+08:00">
+                2016-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考：<br><a href="https://github.com/doabit/semantic-ui-sass" target="_blank" rel="external">https://github.com/doabit/semantic-ui-sass</a><br><a href="http://semantic-ui.com/" target="_blank" rel="external">http://semantic-ui.com/</a></p>
+<p>1.安装gem<br>    gem ‘semantic-ui-sass’, github: ‘doabit/semantic-ui-sass’<br>  bundle install</p>
+<p>2.引用到项目中<br>    app/assets/stylesheets/application.scss 中加入<br>  <figure class="highlight plain"><figcaption><span>"semantic-ui";```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">app/assets/javascripts/application.js  中加入</div><div class="line">```//= require semantic-ui</div></pre></td></tr></table></figure></p>
+<p>3.去官网找到一些demo，实现效果<br>    <a href="http://semantic-ui.com/introduction/getting-started.html" target="_blank" rel="external">http://semantic-ui.com/introduction/getting-started.html</a></p>
+<p>  比如找到dropdown,下面截图是多选下拉的效果(可以自己点开网页中的按钮试一试)</p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/QcqpMfrT7qwzPPjFMSow_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.32.png" alt="屏幕快照 2016-08-24 上午11.01.32.png"></p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/7eiXvQtR2ODO9Es5R8TH_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.22.png" alt="屏幕快照 2016-08-24 上午11.01.22.png"></p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/6sLlCsnZSAWxP4fdO88g_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.28.png" alt="屏幕快照 2016-08-24 上午11.04.28.png"></p>
+<p>下面这个是启用js效果的示例</p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/pIjlRP5dT9KigC9Dj6uL_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.58.png" alt="屏幕快照 2016-08-24 上午11.04.58.png"></p>
+<p>我是这样写的，在我的页面中加入，这样就把官网的示例引用成功了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(function()&#123;</div><div class="line">  $(&apos;.ui.dropdown&apos;)</div><div class="line">  .dropdown(&#123;</div><div class="line">    allowAdditions: true</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div class=&quot;ui multiple dropdown&quot;&gt;</div><div class="line">  &lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div><div class="line">  &lt;i class=&quot;filter icon&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;span class=&quot;text&quot;&gt;Filter Posts&lt;/span&gt;</div><div class="line">  &lt;div class=&quot;menu&quot;&gt;</div><div class="line">    &lt;div class=&quot;ui icon search input&quot;&gt;</div><div class="line">      &lt;i class=&quot;search icon&quot;&gt;&lt;/i&gt;</div><div class="line">      &lt;input type=&quot;text&quot; placeholder=&quot;Search tags...&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;header&quot;&gt;</div><div class="line">      &lt;i class=&quot;tags icon&quot;&gt;&lt;/i&gt;</div><div class="line">      Tag Label</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;scrolling menu&quot;&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;important&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui red empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Important</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;announcement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui blue empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Announcement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;cannotfix&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui black empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Cannot Fix</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;news&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui purple empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        News</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;enhancement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui orange empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Enhancement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;off-topic&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui yellow empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Off Topic</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;interesting&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui pink empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Interesting</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;discussion&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui green empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Discussion</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>4.把选择的值传入controller<br>注意到有这一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>通过网页右键检查，可以看出添加的value都会以<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">面。那么在controller里面就可以通过params[:filters]接收。</div><div class="line">可以转换成数组</div></pre></td></tr></table></figure></p>
+<pre><code># 这个是字符串
+filters = params[:filters]
+</code></pre><p>  ＃这里是转化成数组<br>  filters_array ＝ filters.split(“,”)</p>
+<h1 id="后面就可以做自己需要做的了"><a href="#后面就可以做自己需要做的了" class="headerlink" title="后面就可以做自己需要做的了"></a>后面就可以做自己需要做的了</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">并且要注意这一行，</div></pre></td></tr></table></figure>
+<p><div class="item" data-value="interesting"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">这里是用data-value里面的值作为选择后放入filters的元素。比如这里是data-value=&quot;interesting&quot;，那么选中它之后</div><div class="line">就会在filters中加入interesting。</div><div class="line"></div><div class="line">5.编辑页面回显</div><div class="line"></div><div class="line">用这种方式可以设置默认值或者是回显的值</div><div class="line">  //$(&apos;.ui.dropdown&apos;).dropdown(&apos;set selected&apos;,[&apos;Role1&apos;,&apos;Role2&apos;]);</div><div class="line">用这个会自动给生成 a 标签，这个和在filters中赋值回显回来的效果一样</div><div class="line">这两种方法显示的内容我不知道如何让它像我新增时那样丰富</div><div class="line">所以没有用这两种，用的下面的这个，当data-value一致时会把自动生成的给覆盖掉</div><div class="line">```&lt;% unless @invitated_users.nil? %&gt;</div><div class="line">    &lt;% @invitated_users.each do |user| %&gt;</div><div class="line">     &lt;a class=&quot;ui label transition visible&quot; data-value=&quot;&lt;%= user.id %&gt;&quot; style=&quot;display: inline-block !important;&quot;&gt;</div><div class="line">        &lt;%= gravatar_tag user.email, :size =&gt; 50, :default =&gt; avatar_url %&gt;</div><div class="line">        &lt;%= user.name %&gt;</div><div class="line">        回答数量：&lt;%= user.answers.count %&gt;</div><div class="line">        &lt;i class=&quot;delete icon&quot;&gt;&lt;/i&gt;</div><div class="line">     &lt;/a&gt;</div><div class="line">    &lt;% end %&gt;</div><div class="line">  &lt;% end %&gt;</div></pre></td></tr></table></figure></div></p>
+<p>这样就回显成功了。</p>
+<p>当取消掉或新增，进入update方法时，需要比较一下，新增的有哪些，取消的有哪些，取消的要从数据库中删掉，新增的再插入数据库。</p>
+<p>我用的是  并集 ＝ 新的集合 | 数据库中老的集合<br>                 需要新插入数据库的集合 ＝ 并集 - 数据库中老的集合<br>         需要删除的集合 ＝ 并集 － 新的集合</p>
+<pre><code>然后分别对新增和删除的集合进行Model运算
+</code></pre><p>暂时这样，应该可以说清楚了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/2016-08-14-heroku-manages-passwords/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/14/2016-08-14-heroku-manages-passwords/" itemprop="url">heroku上管理密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T15:25:00+08:00">
+                2016-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/14/2016-08-14-heroku-manages-passwords/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/14/2016-08-14-heroku-manages-passwords/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装 figaro</p>
+<pre><code>&gt;figaro 是一個方便管理机密信息、密码的gem,并且能一个指令就将机密信息同步到 heroku 上
+step1： 添加gem figaro  到Gemfile文件中
+   bundle install
+   figaro install
+</code></pre><p>  step2： 设定机密信息<br>                  cp config/application.yml<br>       config/application.yml.example<br>          修改 .gitignore, 加入config/application.yml</p>
+<pre><code>原理是把机密信息填入config/application.yml ，通过加入.gitignore，从而不会把此机密文件上传到github公开。
+
+这次上传文件用的是AWS，这里涉及秘钥及信用卡安全，所以，这次是把秘钥藏在这个application.yml文件中，然后通过配置文件，从这个application.yml文件中读取秘钥等信息。
+</code></pre><p>  Step 3: 将设定好的机密信息同步到 heroku<br>       figaro heroku:set -e product<br>       heroku config 可以列出目前所有的設定</p>
+<pre><code>这一步是把我们的隐秘信息告诉heroku，从而把这些机密藏入heroku配置环境中，被隐藏起来。
+</code></pre><p>  Step 4: 重新 git commit &amp; push to heroku<br>                    要再一次 commit &amp; push to heroku 这些设置才会生效</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/2016-08-14-product-user-surveys/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1079,544 +1748,6 @@ end
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/2016-07-30-ruby/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/30/2016-07-30-ruby/" itemprop="url">Ruby</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-30T18:47:00+08:00">
-                2016-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/30/2016-07-30-ruby/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/30/2016-07-30-ruby/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>阅读link_to的文档：<br>1.Look in the source<br>  git clone <a href="http://github.com/rails/rails.git" target="_blank" rel="external">http://github.com/rails/rails.git</a><br>  cd rails<br>  grep -rin ‘def link_to’<br>2.Look at api.rubyonrails.org<br>    搜索link_to<br>3.dash中搜索</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/2016-07-25-css-learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/25/2016-07-25-css-learning/" itemprop="url">CSS自学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T21:33:00+08:00">
-                2016-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/25/2016-07-25-css-learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/25/2016-07-25-css-learning/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.margin 与 padding 的差异<br>    margin：外边距<br>          围绕在元素边框的空白区域是外边距。设置外边距会在元素外创建额外的“空白”。<br>  padding：内边距<br>          CSS padding 属性定义元素边框与元素内容之间的空白区域。</p>
-<p>2.什麼是 box model<br>            CSS 框模型<br>      规定了元素框处理元素内容、内边距、边框 和 外边距 的方式。</p>
-<p>3.為何要使用 em 而非 px 來定義字的大小<br>            em：在 CSS 中，em 是非常有用的单位，因为它可以自动适应用户所使用的字体。<br>      px：像素 (计算机屏幕上的一个点)</p>
-<ol>
-<li>h1 {margin : 10px 0px 15px 5px;}<br>margin-top:                10px<br>margin-right:            0px<br>margin-left:            15px<br>margin-bottom            15px</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/2016-07-25-html-to-learn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/25/2016-07-25-html-to-learn/" itemprop="url">HTML自学</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T21:03:00+08:00">
-                2016-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/25/2016-07-25-html-to-learn/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/25/2016-07-25-html-to-learn/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.div和span的不同：<br>    标签         描述<br>    <div>        定义文档中的分区或节（division/section）。<br>                    它属于块级元素，浏览器会在其前后显示折行<br>            如果与 CSS 一同使用，<div> 元素可用于对大的内容块设置样式属性。</div></div></p>
-<pre><code>&lt;span&gt;    定义 span，用来组合文档中的行内元素。
-                是内联元素，可用作文本的容器
-        当与 CSS 一同使用时，&lt;span&gt; 元素可用于为部分文本设置样式属性
-</code></pre><p>2.class 与 id 的不同<br>            class：classname     规定元素的类名（classname） 类选择器（标签可以共用）<br>      id：id    规定元素的唯一 id    id选择器（一个标签职能一个id）</p>
-<p>3.p 与 br 的不同<br>            p 段落， 浏览器会自动地在段落的前后添加空行。（p是块级元素）<br>      br 换行， 元素是一个空的 HTML 元素。由于关闭标签没有任何意义，因此它没有结束标签。</p>
-<p>4.如何使用 table 排版<br>      使用table和css共同协作排版。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/2016-07-25-heroku/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/25/2016-07-25-heroku/" itemprop="url">Heroku</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T17:29:00+08:00">
-                2016-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/25/2016-07-25-heroku/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/25/2016-07-25-heroku/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>网站部署空间<br>利用git 上传部署<br>git push heroku master<br>优势：部署快速<br>还有：AWS 或 Linode 或 青云</p>
-<p>heroku restart -a jdstore 重启 heroku 项目。</p>
-<p>heroku create –a jdstore 创建特定名称的项目。</p>
-<p>heroku config 查看配置参数。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1667,7 +1798,7 @@ end
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1680,7 +1811,7 @@ end
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

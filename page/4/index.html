@@ -232,6 +232,629 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835899/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835899/" itemprop="url">Helper设计方法举例</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:59:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835899/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835899/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="helper-设计方法举例"><a href="#helper-设计方法举例" class="headerlink" title="helper 设计方法举例"></a>helper 设计方法举例</h2><ol>
+<li>尽量避免太多html code，无论是ruby的还是纯html</li>
+<li>view里面有太多让人难以理解的判断时，装在helper中并语意命名，让view更能理解。<br>如：把</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> current_user &amp;&amp; current_user = @topic.user_id %&gt;</div><div class="line">    <span class="comment">#show shomething</span></div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>改成</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> editable?(current_user) %&gt;</div><div class="line">    <span class="comment">#show shomething</span></div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<h3 id="helper-method-與view-context"><a href="#helper-method-與view-context" class="headerlink" title="helper_method 與view_context"></a>helper_method 與view_context</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find_cart</span></span></div><div class="line">    @cart = Cart.find(session[<span class="symbol">:cart_id</span>])</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view里面不能用find_cart<br>&lt;%= find_cart.items %&gt;</p>
+<p>如果在controller和view都能用这个view。<br>必须要用helper_method声明这是一个controller级的helper。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApplicationController</span></span></div><div class="line">  helper_method <span class="symbol">:current_cart</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">current_cart</span></span></div><div class="line">    cart = Cart.find(session[<span class="symbol">:cart_id</span>])</div><div class="line">    <span class="keyword">return</span> cart</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>这样就能在view里面用current_user</p>
+<p>&lt;%= current_cart.items %&gt;</p>
+<p>在controller里面也能用current_cart.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add_to_cart</span></span></div><div class="line">    current_cart.items &lt;&lt; @product</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>view_context</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    @page_description =  view_context.truncate(@product.desc, <span class="symbol">:lenght</span> =&gt; <span class="number">50</span> )</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835879/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835879/" itemprop="url">Model中好用的小知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:43:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835879/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835879/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Model中好用的小知识"><a href="#Model中好用的小知识" class="headerlink" title="Model中好用的小知识"></a>Model中好用的小知识</h2><h3 id="ids"><a href="#ids" class="headerlink" title="ids"></a>ids</h3><p>在strong params内加入post_ids:[],使用simple_form时只要写上f.association就可以了，传入controller的时候会形成post_ids这个array，rails会根据post_ids帮我们建立关联</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%=  simple_form_for @drink <span class="keyword">do</span> <span class="params">|f|</span> %&gt;</div><div class="line">  &lt;%= f.association <span class="symbol">:materials</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:check_boxes</span> %&gt;&lt;br&gt;</div><div class="line">  &lt;%= f.submit <span class="string">"Submit"</span> %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<h3 id="collect-amp-id"><a href="#collect-amp-id" class="headerlink" title="collect(&amp;:id)"></a>collect(&amp;:id)</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">users = User.all</div><div class="line">users.collect(&amp;<span class="symbol">:id</span>)</div><div class="line">users.collect(&amp;<span class="symbol">:name</span>)</div></pre></td></tr></table></figure>
+<p>这都可以把users中的id或者name都拿出来组成一个array</p>
+<p>比如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">topics = [&#123;<span class="symbol">id:</span><span class="number">1</span>,<span class="symbol">title:</span><span class="string">"topic1"</span>&#125;,&#123;<span class="symbol">id:</span><span class="number">2</span>,<span class="symbol">title:</span><span class="string">"topic2"</span>&#125;]</div><div class="line">topics.collect(&amp;<span class="symbol">:id</span>)</div></pre></td></tr></table></figure>
+<p>执行结果 [1，2］</p>
+<p>把id都变成浮点数</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">topics.collect&#123; <span class="params">|t|</span> t.id.to_f &#125;</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">topics.collect(&amp;<span class="symbol">:id</span>).collect(&amp;<span class="symbol">:to_f</span>)</div></pre></td></tr></table></figure>
+<p>产生结果：[1.0,2.0]</p>
+<h3 id="includes"><a href="#includes" class="headerlink" title="includes"></a>includes</h3><p>不好的写法</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">	<span class="function"><span class="keyword">def</span></span></div><div class="line">		@bards = Board.all</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>然后在view中使用@board.topics,来获得每一个topic，如果有10个topics，这样系统会到数据库中查找10次。</p>
+<p>如果用includes</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">	<span class="function"><span class="keyword">def</span></span></div><div class="line">		@bards = Board.includes(<span class="symbol">:topics</span>).all</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view中写@board.topics,就只会去数据库查找一次，把10个topic一次查出来，然后把抓出来的所有topic和board用board_id相关联。<br>这样做减少了数据库的负担。提到效能。</p>
+<h3 id="counter-cache"><a href="#counter-cache" class="headerlink" title="counter_cache"></a>counter_cache</h3><p>counter_cache是在做关联关系时计算数据量的一个方法。<br>不好的写法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@board.topics.size</div></pre></td></tr></table></figure>
+<p>这代表我们都要算数量的时候都得通过sql去数据库计算topics，也会造成效能问题。<br>所以rails内建了counter_cache方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">    belongs_to <span class="symbol">:board</span>, <span class="symbol">counter_cache:</span> <span class="literal">true</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在Board表中增加字段topics_count.这样以后Board内的topics有增减的时候，rails就会帮我们增减topics_count,这样在写@board.topics.size后，rails就会预设去找topics_count，不用重新生成sql去数据库中查找。</p>
+<p>如果想写成自己定义的字段名称，如count_of_topics，那么可以这样做</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">    belongs_to <span class="symbol">:board</span>, <span class="symbol">counter_cache:</span> <span class="symbol">:count_of_topics</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="STI"><a href="#STI" class="headerlink" title="STI"></a>STI</h3><p>单一表格继承 STI(Single-table inheritance)</p>
+<p>Rails Guide 對此的說明：</p>
+<blockquote>
+<p>a way to add inheritance to your models</p>
+</blockquote>
+<p>让子类继承父类的属性和方法。<br>在父类中加入type，来表示类型</p>
+<p>例：User有分 Native 跟 Foreigner；<br>使用场景：拥有一样的特性，但是行为不同时使用继承。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> &lt; ActiveRecord::Base</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Native</span> &lt; User</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foreigner</span> &lt; User</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">native = Native.create(<span class="symbol">name:</span><span class="string">"foobar"</span>)</div><div class="line">native.type</div><div class="line">得出<span class="string">"Native"</span></div></pre></td></tr></table></figure>
+<h3 id="Polymorphic-Assoiciaion"><a href="#Polymorphic-Assoiciaion" class="headerlink" title="Polymorphic Assoiciaion"></a>Polymorphic Assoiciaion</h3><p>Polymorphic Assoiciaion是rails内让两个不同的Model同时has_many一个model的做法。最常见的就是做留言系统的时候。</p>
+<p>对文章可以留言，对看板留言，但是这些留言所需要的字段都是一样的，没必要建两套。<br>那么，这样的model只需要新增一个Comment model再用Polymorphic Assoiciaion关联就可以了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Comment</span> &lt; ActiveRecord</span></div><div class="line">  belongs_to <span class="symbol">:commentable</span>, <span class="symbol">:polymorphic</span> =&gt; <span class="literal">true</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:commentable</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:commentable</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>Comment里面必须包含两个字段。<br>commentable_id和commentable_type<br>commentable_type记录model名称<br>commentable_id记录该model下的id</p>
+<p>Rails3之後的 migration 可以單獨寫t.references :imageable, polymorphic: true就會自動生成這兩個欄位。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreatePictures</span> &lt; ActiveRecord::Migration</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></div><div class="line">    create_table <span class="symbol">:pictures</span> <span class="keyword">do</span> <span class="params">|t|</span></div><div class="line">      t.string <span class="symbol">:name</span></div><div class="line">      t.references <span class="symbol">:imageable</span>, <span class="symbol">polymorphic:</span> <span class="literal">true</span></div><div class="line">      t.timestamps</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835824/" itemprop="url">view中好用的小知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:28:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835824/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835824/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="view中好用的小知识"><a href="#view中好用的小知识" class="headerlink" title="view中好用的小知识"></a>view中好用的小知识</h2><p>尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。<br>不好的做法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> current_user %&gt;</div><div class="line">    &lt;p&gt;&lt;%= current_user.name %&gt;&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">&lt;% else %&gt;</span></div><div class="line"><span class="regexp">    &lt;p&gt;Not Logined&lt;/p</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>比较好的做法是将if else 改写在partial中，并把current_user.name用helper包起来。这样html code可读性大大提升。</p>
+<h3 id="Helper"><a href="#Helper" class="headerlink" title="Helper"></a>Helper</h3><p>Helper使用情景：</p>
+<ul>
+<li>产生的html code 需要与原始码逻辑混合，但不希望view里面太乱</li>
+<li>需要与rails内建的一些方便的helper交叉使用</li>
+</ul>
+<p>helper的好处：</p>
+<ul>
+<li>Don‘t repeat youeself 代码不重复</li>
+<li>Good Encapsulation 好的封装性</li>
+<li>提供view模版良好的组织</li>
+<li>易于修改代码</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">BoardsHelper</span></span></div><div class="line"><span class="comment"># 回傳board的name，避免在view中做太多判斷</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name</span><span class="params">(board)</span></span></div><div class="line">      <span class="keyword">if</span> board.present?</div><div class="line">        board.name</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="string">"unknown"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 常常重複的區段也可以寫進 helper，統一管理</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name_path</span><span class="params">(board)</span></span></div><div class="line">    link_to(board.name, board_path(board))</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view中可以直接取用如下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= render_board_name_path(@board) %&gt;</div></pre></td></tr></table></figure>
+<h3 id="partial"><a href="#partial" class="headerlink" title="partial"></a>partial</h3><p>partial 就是代码中的一小段，通常使用在html中，让view的code更干净，将重复的区块切成独立的partial，比如首页，footer，表单，等，让任何页面都能用这段partial，而不用重复写一摸一样的code。</p>
+<p>partial使用情景</p>
+<ul>
+<li>long template 如果html超过两页</li>
+<li>highly duplicated html内容高度重复</li>
+<li>independent blocks 可独立作为功能的区块</li>
+</ul>
+<p>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">&lt;% @topics.each <span class="keyword">do</span> <span class="params">|topic|</span> %&gt;</div><div class="line">  &lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">  &lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">  &lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;%= render <span class="string">"topic_list"</span> %&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
+<h4 id="collection-partial"><a href="#collection-partial" class="headerlink" title="collection partial"></a>collection partial</h4><p>上例可以改写<br>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">&lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">&lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;ul&gt;&lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"topic_list"</span>, <span class="symbol">:collection</span> =&gt; @topics, <span class="symbol">:as</span> =&gt; <span class="symbol">:topic</span> %&gt;&lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">...</span></div></pre></td></tr></table></figure>
+<h3 id="partial-amp-helper"><a href="#partial-amp-helper" class="headerlink" title="partial&amp;helper"></a>partial&amp;helper</h3><p>partial 复杂处理大段html code或是之后利用ajax render出来的片段</p>
+<p>helper则负责跟逻辑判断有关的东西</p>
+<p>比如：<br>topics_helper.rb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">TopicsHelper</span></span></div><div class="line"><span class="comment"># 需要邏輯判斷的工作留給helper</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">render_published_topic_name_path</span><span class="params">(topic)</span></span></div><div class="line">    link_to(topic.name, topic_path(topic))  <span class="keyword">if</span> topic.is_published?</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>_topic_info.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># partial只需要負責html的部分</span></div><div class="line">&lt;table&gt;</div><div class="line">  &lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">     &lt;td&gt;Topic name&lt;<span class="regexp">/td&gt;</span></div><div class="line"><span class="regexp">    &lt;/tr</span>&gt;</div><div class="line">  &lt;<span class="regexp">/thead&gt;</span></div><div class="line"><span class="regexp">  &lt;tbody&gt;</span></div><div class="line"><span class="regexp">    &lt;tr&gt;</span></div><div class="line"><span class="regexp">      &lt;td&gt;&lt;%= render_published_topic_name_path(topic) %&gt;&lt;/td</span>&gt;</div><div class="line">    &lt;<span class="regexp">/tr&gt;</span></div><div class="line"><span class="regexp">  &lt;/tbody</span>&gt;</div><div class="line">&lt;table&gt;</div></pre></td></tr></table></figure>
+<h3 id="yiled-in-view"><a href="#yiled-in-view" class="headerlink" title="yiled in view"></a>yiled in view</h3><p>yield就是会被替换成样板的地方，基本上所有的html.erb最后都会显示在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">这样的好处是将网站版型固定。只需要在出现内容的地方用yield引进即可。</div><div class="line"></div><div class="line">application.html.erb</div><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  ...</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    # erb檔案就是被引入這裡</div><div class="line">    &lt;%= yield %&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  #可以指定要yield哪個區塊</div><div class="line">  &lt;%= yield(:javascripts) %&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>还可以用content_for让content替换掉<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%= content_for :javascripts do %&gt;</div><div class="line">    #content here</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="Nested-form"><a href="#Nested-form" class="headerlink" title="Nested form"></a>Nested form</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:specs</span>, <span class="symbol">:dependent</span> =&gt; <span class="symbol">:destroy</span></div><div class="line">  accepts_nested_attributes_for <span class="symbol">:specs</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spec</span> &lt; ActiveRecord</span></div><div class="line">  belongs_to <span class="symbol">:product</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>view/admin/products/_form.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%= simple_form_for [<span class="symbol">:admin</span>, @product] <span class="keyword">do</span> <span class="params">|f|</span>  %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:name</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:description</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:price</span> %&gt;</div><div class="line"></div><div class="line">  &lt;!-- nested form從這裡開始 --&gt;</div><div class="line">  &lt;%= f.simple_fields_for <span class="symbol">:specs</span> <span class="keyword">do</span> <span class="params">|spec|</span> %&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:name</span> %&gt; &lt;!-- spec的name欄位 --&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:detail</span> %&gt; &lt;!-- spec的detail欄位 --&gt;</div><div class="line">  &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">  &lt;!-- nested form結束 --&gt;</div><div class="line"></div><div class="line">  &lt;%= f.button <span class="symbol">:submit</span>, <span class="string">"Submit"</span>, <span class="symbol">:disable_with</span> =&gt; <span class="string">"Submiting..."</span> %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/2016-09-01-827120/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/01/2016-09-01-827120/" itemprop="url">Aws</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-01T11:39:00+08:00">
+                2016-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/01/2016-09-01-827120/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/01/2016-09-01-827120/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>aws 密钥泄漏<br>编辑 .gitignore 文件并不是立即生效的，要看情况。如果你 ignore 的文件没有被追踪（untracked），比如新建的文件，则添加后（git add .gitignore 并 commit 后）可以生效。但如果是已经追踪的文件，需要通过清除缓存来解决<br>直接编辑 .gitignore 是不能忽略文件的，参考这里（泄露了 aws 密钥的惨痛教训）<br><a href="http://stackoverflow.com/questions/11451535/gitignore-not-working" target="_blank" rel="external">http://stackoverflow.com/questions/11451535/gitignore-not-working</a><br>git rm -r –cached .<br>git add .<br>git commit -m “fixed untracked files”</p>
+<p>参考：<a href="http://geophyli-blog.logdown.com/posts/777524-using-aws-service-areas-in-need-of-attention" target="_blank" rel="external">http://geophyli-blog.logdown.com/posts/777524-using-aws-service-areas-in-need-of-attention</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-824509/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1092,675 +1715,6 @@ end
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-station-letter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-station-letter/" itemprop="url">站内信</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T19:01:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-station-letter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-station-letter/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.创建model</p>
-<pre><code>rails g model notification
-</code></pre><p>  添加 migration</p>
-<pre><code>class CreateNotifications &lt; ActiveRecord::Migration[5.0]
-  def change
-    create_table :notifications do |t|
-      t.integer :recipient_id
-      t.integer :actor_id
-      t.datetime :read_at
-      t.string :action
-      t.integer :notifiable_id
-      t.string :notifiable_type
-
-      t.timestamps
-    end
-  end
-end
-</code></pre><p>rake db:migrate</p>
-<p>补充model</p>
-<pre><code>class Notification &lt; ApplicationRecord
-   belongs_to :recipient, class_name: &quot;User&quot;
-   belongs_to :actor, class_name: &quot;User&quot;
-   belongs_to :notifiable, polymorphic: true
-
-   scope :unread, -&gt; { where(read_at: nil) }
-   scope :recent, -&gt; { order(created_at: :desc).limit(5) }
- end
-</code></pre><p>2.创建controller</p>
-<pre><code>rails g controller notifications
-
-
-
-class NotificationsController &lt; ApplicationController  
-  before_action :authenticate_user!
-  def index
-    @notifications = Notification.where(recipient: current_user).recent
-  end
-
-  def mark_as_read
-    @notifications = Notification.where(recipient: current_user).unread
-    @notifications.update_all(read_at: Time.zone.now)
-    render json: { success: true }
-  end
-end
-</code></pre><p>3.在notifications.coffee中加入</p>
-<pre><code>class Notifications
-
-  constructor: -&gt;
-
-@notifications = $(&quot;[data-behavior=&apos;notifications&apos;]&quot;)
-
-if @notifications.length &gt; 0
-  @handleSuccess @notifications.data(&quot;notifications&quot;)
-  $(&quot;[data-behavior=&apos;notifications-link&apos;]&quot;).on &quot;click&quot;, @handleClick
-
-  setInterval (=&gt;
-    @getNewNotifications()
-  ), 5000
-
-  getNewNotifications: -&gt;
-$.ajax(
-  url: &quot;/notifications.json&quot;
-  dataType: &quot;JSON&quot;
-  method: &quot;GET&quot;
-  success: @handleSuccess
-)
-
-handleClick: (e) =&gt;
-$.ajax(
-  url: &quot;/notifications/mark_as_read&quot;
-  dataType: &quot;JSON&quot;
-  method: &quot;POST&quot;
-  success: -&gt;
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(0)
-)
-
-handleSuccess: (data) =&gt;
-  items = $.map data, (notification) -&gt;
-    notification.template
-
-  unread_count = 0
-  $.each data, (i, notification) -&gt;
-    if notification.unread
-      unread_count += 1
-
-  if unread_count &gt; 0
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).html(&quot;&lt;span class=&apos;label label-danger&apos;&gt;&quot; + unread_count + &quot;&lt;/span&gt;&quot;)
-  else
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(unread_count)
-  $(&quot;[data-behavior=&apos;notification-items&apos;]&quot;).html(items)
-
-jQuery -&gt;
-
-  new Notifications
-</code></pre><p>4.在notifications.scss中加入</p>
-<pre><code>.unread {
- border-left: 3px solid red;
-}
-</code></pre><p>5.创建notification_service.rb</p>
-<figure class="highlight plain"><figcaption><span>NotificationService</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class NotificationService</div><div class="line">  # recipient 接收者</div><div class="line">  # actor 发起者</div><div class="line">  # notifiable  哪张表发起的  比如，question要提醒用户，这里就传question</div><div class="line">  def initialize(recipient, actor, notifiable)</div><div class="line">    @recipient = recipient</div><div class="line">    @actor = actor</div><div class="line">    @notifiable = notifiable</div><div class="line">  end</div><div class="line"></div><div class="line">  # 发送信息</div><div class="line">  def send_notification!</div><div class="line">    Notification.create(recipient: @recipient, actor: @actor, action: &quot;notify_message&quot;, notifiable: @notifiable)</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>6.创建app/views/notifications/questions/_notify_message.html.erb<br>如果需要另外一个model也发送<br>创建app/views/notifications/answers/_notify_message.html.erb</p>
-<p>比如,app/views/notifications/questions/_notify_message.html.erb,这里展示消息要呈现的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;panel-body&quot;&gt;</div><div class="line"></div><div class="line">  &lt;%= notification.actor.name %&gt; 邀请您回答他的问题</div><div class="line"></div><div class="line">  &lt;%= link_to(&quot;去回答&quot;,new_question_answer_path(notification.notifiable_id)) %&gt;</div><div class="line"></div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>_notify_message.html.erb 的名字需要和<br>需要和action: “notify_message”一致，看一下notifications的表结构中有action的字段</p>
-<p>questions的目录和要发送的model一致</p>
-<p>7.在需要发送消息的地方调用service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#将会把@question的id和model(&apos;Question&apos;)的名字存入notifications的#notifiable_id和notifiable_type</div><div class="line"></div><div class="line">NotificationService.new(user,current_user,@question).send_notification!</div></pre></td></tr></table></figure>
-<p>或者</p>
-<pre><code># 将会把@answer的id和model的名字(&apos;Answer&apos;)存入notifications的
-# notifiable_id和notifiable_type
-NotificationService.new(@question.user,current_user,@answer).send_notification!
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-802980/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-802980/" itemprop="url">link_to</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T13:03:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-802980/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-802980/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">关注</div><div class="line">  ```&lt;% if !current_user.already_follower?(@user) %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% else %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% end %&gt;</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%=link_to_if(question.answers.count&gt;0, &quot;删除&quot;</div><div class="line">,publish_hidden_account_question_path(question)</div><div class="line">, method: :post, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;,disabled:true) do</div><div class="line">	link_to(&quot;删除&quot;,publish_hidden_account_question_path(question), method: :post</div><div class="line">, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;)</div><div class="line">end %&gt;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="url">semantic-ui引用到rails</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T10:26:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考：<br><a href="https://github.com/doabit/semantic-ui-sass" target="_blank" rel="external">https://github.com/doabit/semantic-ui-sass</a><br><a href="http://semantic-ui.com/" target="_blank" rel="external">http://semantic-ui.com/</a></p>
-<p>1.安装gem<br>    gem ‘semantic-ui-sass’, github: ‘doabit/semantic-ui-sass’<br>  bundle install</p>
-<p>2.引用到项目中<br>    app/assets/stylesheets/application.scss 中加入<br>  <figure class="highlight plain"><figcaption><span>"semantic-ui";```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">app/assets/javascripts/application.js  中加入</div><div class="line">```//= require semantic-ui</div></pre></td></tr></table></figure></p>
-<p>3.去官网找到一些demo，实现效果<br>    <a href="http://semantic-ui.com/introduction/getting-started.html" target="_blank" rel="external">http://semantic-ui.com/introduction/getting-started.html</a></p>
-<p>  比如找到dropdown,下面截图是多选下拉的效果(可以自己点开网页中的按钮试一试)</p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/QcqpMfrT7qwzPPjFMSow_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.32.png" alt="屏幕快照 2016-08-24 上午11.01.32.png"></p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/7eiXvQtR2ODO9Es5R8TH_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.22.png" alt="屏幕快照 2016-08-24 上午11.01.22.png"></p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/6sLlCsnZSAWxP4fdO88g_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.28.png" alt="屏幕快照 2016-08-24 上午11.04.28.png"></p>
-<p>下面这个是启用js效果的示例</p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/pIjlRP5dT9KigC9Dj6uL_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.58.png" alt="屏幕快照 2016-08-24 上午11.04.58.png"></p>
-<p>我是这样写的，在我的页面中加入，这样就把官网的示例引用成功了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(function()&#123;</div><div class="line">  $(&apos;.ui.dropdown&apos;)</div><div class="line">  .dropdown(&#123;</div><div class="line">    allowAdditions: true</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div class=&quot;ui multiple dropdown&quot;&gt;</div><div class="line">  &lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div><div class="line">  &lt;i class=&quot;filter icon&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;span class=&quot;text&quot;&gt;Filter Posts&lt;/span&gt;</div><div class="line">  &lt;div class=&quot;menu&quot;&gt;</div><div class="line">    &lt;div class=&quot;ui icon search input&quot;&gt;</div><div class="line">      &lt;i class=&quot;search icon&quot;&gt;&lt;/i&gt;</div><div class="line">      &lt;input type=&quot;text&quot; placeholder=&quot;Search tags...&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;header&quot;&gt;</div><div class="line">      &lt;i class=&quot;tags icon&quot;&gt;&lt;/i&gt;</div><div class="line">      Tag Label</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;scrolling menu&quot;&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;important&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui red empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Important</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;announcement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui blue empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Announcement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;cannotfix&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui black empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Cannot Fix</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;news&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui purple empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        News</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;enhancement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui orange empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Enhancement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;off-topic&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui yellow empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Off Topic</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;interesting&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui pink empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Interesting</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;discussion&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui green empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Discussion</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>4.把选择的值传入controller<br>注意到有这一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>通过网页右键检查，可以看出添加的value都会以<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">面。那么在controller里面就可以通过params[:filters]接收。</div><div class="line">可以转换成数组</div></pre></td></tr></table></figure></p>
-<pre><code># 这个是字符串
-filters = params[:filters]
-</code></pre><p>  ＃这里是转化成数组<br>  filters_array ＝ filters.split(“,”)</p>
-<h1 id="后面就可以做自己需要做的了"><a href="#后面就可以做自己需要做的了" class="headerlink" title="后面就可以做自己需要做的了"></a>后面就可以做自己需要做的了</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">并且要注意这一行，</div></pre></td></tr></table></figure>
-<p><div class="item" data-value="interesting"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">这里是用data-value里面的值作为选择后放入filters的元素。比如这里是data-value=&quot;interesting&quot;，那么选中它之后</div><div class="line">就会在filters中加入interesting。</div><div class="line"></div><div class="line">5.编辑页面回显</div><div class="line"></div><div class="line">用这种方式可以设置默认值或者是回显的值</div><div class="line">  //$(&apos;.ui.dropdown&apos;).dropdown(&apos;set selected&apos;,[&apos;Role1&apos;,&apos;Role2&apos;]);</div><div class="line">用这个会自动给生成 a 标签，这个和在filters中赋值回显回来的效果一样</div><div class="line">这两种方法显示的内容我不知道如何让它像我新增时那样丰富</div><div class="line">所以没有用这两种，用的下面的这个，当data-value一致时会把自动生成的给覆盖掉</div><div class="line">```&lt;% unless @invitated_users.nil? %&gt;</div><div class="line">    &lt;% @invitated_users.each do |user| %&gt;</div><div class="line">     &lt;a class=&quot;ui label transition visible&quot; data-value=&quot;&lt;%= user.id %&gt;&quot; style=&quot;display: inline-block !important;&quot;&gt;</div><div class="line">        &lt;%= gravatar_tag user.email, :size =&gt; 50, :default =&gt; avatar_url %&gt;</div><div class="line">        &lt;%= user.name %&gt;</div><div class="line">        回答数量：&lt;%= user.answers.count %&gt;</div><div class="line">        &lt;i class=&quot;delete icon&quot;&gt;&lt;/i&gt;</div><div class="line">     &lt;/a&gt;</div><div class="line">    &lt;% end %&gt;</div><div class="line">  &lt;% end %&gt;</div></pre></td></tr></table></figure></div></p>
-<p>这样就回显成功了。</p>
-<p>当取消掉或新增，进入update方法时，需要比较一下，新增的有哪些，取消的有哪些，取消的要从数据库中删掉，新增的再插入数据库。</p>
-<p>我用的是  并集 ＝ 新的集合 | 数据库中老的集合<br>                 需要新插入数据库的集合 ＝ 并集 - 数据库中老的集合<br>         需要删除的集合 ＝ 并集 － 新的集合</p>
-<pre><code>然后分别对新增和删除的集合进行Model运算
-</code></pre><p>暂时这样，应该可以说清楚了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/2016-08-14-heroku-manages-passwords/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/14/2016-08-14-heroku-manages-passwords/" itemprop="url">heroku上管理密码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T15:25:00+08:00">
-                2016-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/14/2016-08-14-heroku-manages-passwords/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/14/2016-08-14-heroku-manages-passwords/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安装 figaro</p>
-<pre><code>&gt;figaro 是一個方便管理机密信息、密码的gem,并且能一个指令就将机密信息同步到 heroku 上
-step1： 添加gem figaro  到Gemfile文件中
-   bundle install
-   figaro install
-</code></pre><p>  step2： 设定机密信息<br>                  cp config/application.yml<br>       config/application.yml.example<br>          修改 .gitignore, 加入config/application.yml</p>
-<pre><code>原理是把机密信息填入config/application.yml ，通过加入.gitignore，从而不会把此机密文件上传到github公开。
-
-这次上传文件用的是AWS，这里涉及秘钥及信用卡安全，所以，这次是把秘钥藏在这个application.yml文件中，然后通过配置文件，从这个application.yml文件中读取秘钥等信息。
-</code></pre><p>  Step 3: 将设定好的机密信息同步到 heroku<br>       figaro heroku:set -e product<br>       heroku config 可以列出目前所有的設定</p>
-<pre><code>这一步是把我们的隐秘信息告诉heroku，从而把这些机密藏入heroku配置环境中，被隐藏起来。
-</code></pre><p>  Step 4: 重新 git commit &amp; push to heroku<br>                    要再一次 commit &amp; push to heroku 这些设置才会生效</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1811,7 +1765,7 @@ step1： 添加gem figaro  到Gemfile文件中
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1824,7 +1778,7 @@ step1： 添加gem figaro  到Gemfile文件中
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
