@@ -232,6 +232,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/03/ch03-创建命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/03/ch03-创建命令/" itemprop="url">ch03 创建命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-03T12:11:05+08:00">
+                2016-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/03/ch03-创建命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/03/ch03-创建命令/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="3-1-命令行的输入数据"><a href="#3-1-命令行的输入数据" class="headerlink" title="3.1 命令行的输入数据"></a>3.1 命令行的输入数据</h2><p>到目前为止，我们写的程序都是向屏幕输出数据。现在我们考虑一下怎么<strong>输入数据</strong>。</p>
+<p>代码示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ets8fdr8j30i00ae3z7.jpg" alt=""></p>
+<p>执行结果：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8etsulbssj314s04edgo.jpg" alt=""></p>
+<p>如图可以看出，执行命令 <code>ruby print_argv.rb 1st 2nd 3rd</code> 中所传递的 <code>1st 2nd 3rd</code> 这三个参数（在命令行指定多个脚本参数时，<strong>各参数之间用空格间隔</strong>），可以用 <code>#{ARGV[0]}</code> 这种方式获取。（<strong>其中 ARGV 是 Ruby 预定义好的数组</strong>）</p>
+<p>使用 ARGV 后，程序需要用到的数据就不必都写在代码中。同时，抽取数据、保存数据等普通的数组操作对于 ARGV 都是适用的。</p>
+<p>代码示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8eu6u1n1fj30lm07k3yx.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8eubw59z5j311e02674w.jpg" alt=""></p>
+<p>把字符串转换为整数，可以使用 <code>to_i</code> 方法。</p>
+<p>代码示例：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8euhagv3bj30ns0gagn4.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8euhmv2p2j310u056754.jpg" alt=""></p>
+<h2 id="3-2-文件的读取"><a href="#3-2-文件的读取" class="headerlink" title="3.2 文件的读取"></a>3.2 文件的读取</h2><p>Ruby 脚本除了<strong>读取命令行传递过来的字符串参数</strong>外，还可以<strong>读取预先写在文件里的数据</strong>。</p>
+<p>Ruby 的源代码中，有一个名为 ChangeLog 的文本文件。文件里面记录了Ruby相关的修改日志。</p>
+<p>备注Ruby的源代码可以从Ruby官网下载。ChangeLog 文件可以在Ruby的github库里找到。<br>• Ruby源码下载地址：<a href="https://www.ruby-lang.org/zh_cn/downloads/" target="_blank" rel="external">https://www.ruby-lang.org/zh_cn/downloads/</a>   • github上的ChangeLog文件地址：<a href="https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog" target="_blank" rel="external">https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog</a></p>
+<h3 id="3-2-1-从文件中读取内容并输出"><a href="#3-2-1-从文件中读取内容并输出" class="headerlink" title="3.2.1 从文件中读取内容并输出"></a>3.2.1 从文件中读取内容并输出</h3><p>读取文件内容的流程：</p>
+<ol>
+<li>打开文件</li>
+<li>读取文件的文本数据</li>
+<li>输出文件的文本数据</li>
+<li>关闭文件</li>
+</ol>
+<p>代码示例：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8eut3b9t4j30i40d6aao.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8euxc4o5uj315g0a6tah.jpg" alt=""></p>
+<p>如果只是读取文件内容，其实直接适用 read 方法会使程序更简单</p>
+<p>代码示例：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew2vki2sj30h409at95.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew43khmvj317m0acwft.jpg" alt=""></p>
+<p>更进一步，如果不使用变量，一行代码就可以到搞定啦。</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ew7a4gdnj30i2056aaa.jpg" alt=""></p>
+<h3 id="3-2-2-从文件中逐行读取内容并输出"><a href="#3-2-2-从文件中逐行读取内容并输出" class="headerlink" title="3.2.2 从文件中逐行读取内容并输出"></a>3.2.2 从文件中逐行读取内容并输出</h3><p>一下子读取全部文件 <strong>耗时，浪费内存</strong>（读取的内容会保存在内存中，遇到大文件，程序会崩溃）</p>
+<p>所以需要 放弃 「 读取文件全部内容 」 ，改为 「 逐行读取并输出 」。</p>
+<p>如图：read 和 each_line 的区别</p>
+<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ewctnnuxj30fq0cv0th.jpg" alt=""></p>
+<p>代码示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewkm47jvj30h20fu3z7.jpg" alt=""></p>
+<h3 id="3-2-3-从文件中读取指定模式的内容并输出"><a href="#3-2-3-从文件中读取指定模式的内容并输出" class="headerlink" title="3.2.3 从文件中读取指定模式的内容并输出"></a>3.2.3 从文件中读取指定模式的内容并输出</h3><p>用 Ruby 实现 grep 命令 （ Unix中有一个 grep 命令 ，grep 命令利用正则表达式搜索文本数据，输出按照指定模式匹配到的行 ）</p>
+<p>代码示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewqny5oyj30k00kgmyc.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewrnozoej319a048ta0.jpg" alt=""></p>
+<p>图中 ，命令 <code>ruby simple_grep.rb filename read_text.rb</code> 的意思就是执行 simple_grep.rb 程序，第一个参数为要匹配的字符串 我这里是 <code>filename</code> ，第二个参数为 要搜索的文本文件 我这里是 <code>read_text.rb</code> ，执行结果，就是这个 <code>read_text.rb</code> 中的两行包含的 <code>filename</code> 数据。</p>
+<h2 id="3-3-方法的定义"><a href="#3-3-方法的定义" class="headerlink" title="3.3 方法的定义"></a>3.3 方法的定义</h2><p>定义方法：</p>
+<p><strong>def 方法名<br>    希望执行的处理<br>  end</strong></p>
+<p>定义好方法后，需要 「 调用 」，Ruby 才知道我们要执行这个方法。</p>
+<p>代码示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex2unkppj30eo096wer.jpg" alt=""></p>
+<p>执行示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex3k1yj2j310602e0te.jpg" alt=""></p>
+<h2 id="3-4-其他文件的引用"><a href="#3-4-其他文件的引用" class="headerlink" title="3.4 其他文件的引用"></a>3.4 其他文件的引用</h2><p><strong>被其他程序引用的程序，成为库（library）。</strong></p>
+<p>Ruby 使用 <code>require</code>方法引用库：</p>
+<p><strong> require 希望使用的库名 </strong></p>
+<p>库名可疑省略后缀 .rb</p>
+<p>如图：库与引用库的程序</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ex936atgj30rf07q0to.jpg" alt=""></p>
+<p>把 simple_grep.rb 作为库供给其他程序使用。</p>
+<p>代码示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkavqpkj30xq0mwju0.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8exm1gwpnj30ts08yab0.jpg" alt=""></p>
+<p>注：库与脚本放在同一文件夹时，需要用 <code>./</code>来明示文件存放在当前目录。</p>
+<p>执行示例：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkq36d7j318y04s3zv.jpg" alt=""></p>
+<p>Ruby 提供了很多标准库，我们可以通过 <code>require</code> 来引用。</p>
+<p>如图：计算出了Ruby的生日——1993年2月24到今天为止的天数:8622</p>
+<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eydmftudj30oo0a6t99.jpg" alt=""></p>
+<p><strong>pp 方法</strong></p>
+<p>除了 p 方法外，Ruby 还提供了一个类似的方法——pp（pretty print）。<br>使用 pp 方法，需要引用 pp 库。</p>
+<p>代码示例：</p>
+<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eyeqyfmhj30la0ge0tp.jpg" alt=""></p>
+<p>示例代码：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ey68flvqj315203ctaf.jpg" alt=""></p>
+<p>我没发现有啥区别。。。但是书上说，pp方法会在输出对象的结果时，会适当的换行以调整输出结果，可以更容易看懂。。。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/02/ch02-便利的对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1791,221 +2000,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/10/2016-09-10-857919/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/10/2016-09-10-857919/" itemprop="url">SEO</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-10T13:51:00+08:00">
-                2016-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/10/2016-09-10-857919/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/10/2016-09-10-857919/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h1><h2 id="SEO-原则"><a href="#SEO-原则" class="headerlink" title="SEO 原则"></a>SEO 原则</h2><ul>
-<li>Search Engine Bot 沒有「眼睛」</li>
-<li>帮网页画重点</li>
-<li>HTM TAG<ul>
-<li>H1大标、H2中标、H3小标</li>
-<li>P文章段落</li>
-<li>strong 强调重点</li>
-<li>image “alt” 取代图片的文字</li>
-</ul>
-</li>
-</ul>
-<h2 id="没有SEO效果的"><a href="#没有SEO效果的" class="headerlink" title="没有SEO效果的"></a>没有SEO效果的</h2><ul>
-<li>div 块级元素</li>
-<li>span 行内元素</li>
-</ul>
-<h2 id="Headline-原則"><a href="#Headline-原則" class="headerlink" title="Headline 原則"></a>Headline 原則</h2><ul>
-<li>H1 一页只能有一个</li>
-<li>H2 一页只能有2-3个。如果有10个，搜索引擎以为你在作弊。</li>
-<li>H3 一页可以有6-10个<br><em><br><em>*所以不要乱用headling元素来装饰</em></em></li>
-</ul>
-<h2 id="Meta"><a href="#Meta" class="headerlink" title="Meta"></a>Meta</h2><ul>
-<li>title 建立独特、准确的网页标题 （不能每页都一样）</li>
-<li>meta description 叙述本页内容 （不能每页都一样，建议在100字以内）</li>
-<li>meta keywords 叙述本页关键字</li>
-</ul>
-<h2 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h2><ol>
-<li>title</li>
-<li>meta description</li>
-<li>h1</li>
-<li>h2</li>
-<li>h3</li>
-<li>strong</li>
-<li>p</li>
-</ol>
-<h2 id="秘诀"><a href="#秘诀" class="headerlink" title="秘诀"></a>秘诀</h2><p>多把关键字放在标题或叙述</p>
-<h2 id="gem-“seo-helper”的使用"><a href="#gem-“seo-helper”的使用" class="headerlink" title="gem “seo_helper”的使用"></a>gem “seo_helper”的使用</h2><p>参考链接：<a href="https://github.com/techbang/seo_helper" target="_blank" rel="external">https://github.com/techbang/seo_helper</a></p>
-<ol>
-<li>加入Gemfile<br>gem “seo_helper”, “~&gt; 1.0.3”</li>
-<li>bundle install</li>
-<li>新建 config/initializers/seo_helper.rb</li>
-</ol>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SeoHelper.configure <span class="keyword">do</span> <span class="params">|config|</span></div><div class="line">     config.skip_blank = <span class="literal">false</span></div><div class="line">     config.site_name = <span class="string">"约霸"</span></div><div class="line">     config.default_page_description = <span class="string">"约霸 海外留学 在线问答 留学咨询 禁止色情"</span></div><div class="line">     <span class="comment">#config.default_page_image = "#&#123;Setting.domain&#125;#&#123;Setting.default_og_url&#125;"</span></div><div class="line">   <span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>4.为了可以一次写入title和description,在app/controllers/application_controller.rb中新增method</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">set_page_title_and_description</span><span class="params">(title, description)</span></span></div><div class="line">    <span class="keyword">unless</span> title.blank?</div><div class="line">      set_page_title title</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">unless</span> description.blank?</div><div class="line">      set_page_description description</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="string">``</span><span class="string">`  </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">5.在action中set_page_title_and_description</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span>ruby</div><div class="line">     <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">			 set_page_title_and_description(“<span class="comment">#&#123;product.title&#125;”,“#&#123;product.descrption&#125;”)</span></div><div class="line">     <span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>6.在layout中引入<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%= render_page_title_tag %&gt;</div><div class="line"> &lt;%= render_page_description_meta_tag %&gt;</div></pre></td></tr></table></figure></p>
-<p>7.注意事项：<br><strong>seo_helper要装1.0.3版的，在view中要把原先自定义的title删掉，如果<code>&lt;%= render_page_title_tag %&gt;</code>在原来的title之下就不会显示set_titles设置的title。而且会生成两个title</strong></p>
-<h2 id="如何改善SEO"><a href="#如何改善SEO" class="headerlink" title="如何改善SEO"></a>如何改善SEO</h2><p><strong>工具</strong></p>
-<ul>
-<li>google webmaster<ul>
-<li>会告诉你哪里扣分</li>
-<li>具体告诉你他怀疑你哪里作弊</li>
-</ul>
-</li>
-</ul>
-<h2 id="产品太多没办法被收录到？"><a href="#产品太多没办法被收录到？" class="headerlink" title="产品太多没办法被收录到？"></a>产品太多没办法被收录到？</h2><p>解法</p>
-<ul>
-<li>/rss</li>
-<li>sitemap.xml.gz</li>
-<li>sitemap generator</li>
-<li>通知google webmaster来爬</li>
-</ul>
-<h2 id="其他影响因素"><a href="#其他影响因素" class="headerlink" title="其他影响因素"></a>其他影响因素</h2><ul>
-<li>无mobile friendly会降分</li>
-<li>社交权重(google plus)</li>
-<li>开启速度</li>
-</ul>
-<h2 id="如何做Mobile-Page？"><a href="#如何做Mobile-Page？" class="headerlink" title="如何做Mobile Page？"></a>如何做Mobile Page？</h2><ul>
-<li>Responsive Web Design</li>
-<li>Bootstrap</li>
-</ul>
-<h3 id="两个页面"><a href="#两个页面" class="headerlink" title="两个页面"></a>两个页面</h3><ul>
-<li>使用CSS缩小</li>
-<li>使用gem判断是不是mobile浏览器，调整html与图片输出<ul>
-<li>gem “browser”<ul>
-<li>brower.device.mobile?</li>
-</ul>
-</li>
-<li>出小图<ul>
-<li>1024kb 400<em>400 =&gt; 256kb 100</em>100</li>
-</ul>
-</li>
-<li>砍html =&gt; sidebar在mobile版面应该被砍掉</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2056,7 +2050,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

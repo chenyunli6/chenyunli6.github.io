@@ -232,6 +232,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/02/2016-08-02-form-for/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/02/2016-08-02-form-for/" itemprop="url">form_for</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T17:57:00+08:00">
+                2016-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/02/2016-08-02-form-for/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/02/2016-08-02-form-for/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.<br>&lt;% form_tag(‘/jobs’), method: “get” %&gt;<br> &lt;%= text_field_tag ‘queryString’ %&gt;<br>&lt;% end %&gt;<br>这一段可以提交queryString到jobs#index中。使用params[:queryString]就能得到传递的参数值。</p>
+<p>2.提交额外的参数到后台<br>  主要看form<br>  如果是simple_form_for @product像這樣的话你里面的input就必须放model有的栏位<br>  但是如果是simple_form_for “” , url:products_path 像这样直接指定要request url的話f.input就看你              要填什么，而不需要和model中的栏位一致<br>  用text_field_tag是在你的simple form有用到model但是又想要送model沒有的栏位过去时用的一种方 法。<br>  text_field_tag传递到后台的是不需要写入strong parameters。如果要写入数据库的话，则必须加入到strong parameters</p>
+<ol>
+<li>&lt;% form_for @post do |f| %&gt;<br> 如果form_for后面需要指定url的话，使用<br>&lt;% form_for,url:post_path,method: :post do |f| %&gt;</li>
+</ol>
+<p>4.呃，去google guide rails ,搜索文档</p>
+<p>5.我自己用表单提交到index遇到的问题</p>
+<p>&lt;%= form_tag(‘/jobs’,id: :form ,method: “get”) do %&gt;<br>  &lt;%= select_tag “order”,raw(‘<option value="">排序</option><option value="wage_lower_bound">薪资下限</option>    <option value="wage_upper_bound">薪资上限</option><option value="created_at">发布时间</option>‘),class: “custom-select” %&gt;</p>
+<p>  &lt;%= submit_tag(value = “search”, class: “btn btn-primary”) %&gt;<br>&lt;% end %&gt;</p>
+<p>这个form会提交到，jobs#index中。</p>
+<p>但是如果把method: “get”改成method: “post”，就会报错<br>原因：form指向的action是/jobs并且是post提交的话，rails会解析成jobs#create，这样的话，就进入了我们不该进入的action，从而会保错。</p>
+<p>解决方法：<br>1.就不要改成post；因为这里是做查询，不会对数据做修改等不安全操作，所以，可以不要改成post。<br>2.可以重新写一个action，比如jobs#serach,把post表单提交的action指向jobs#search<br>3.在routes中加入post ‘/jobs’ =&gt; ‘jobs#index’，明确指定了/jobs的路径所对应的action，这样就不会被默认解析到jobs#create</p>
+<p>6.参考别人的排序<br>排序：<br>&lt;%= simple_form_for “” , url:products_path , method: :get , remote:true , html:{class:”form-inline order-by”, id: ‘sort_form’} do |f| %&gt;<br>  &lt;%= f.input :sort , label:”Sort by : “ , as: :select , collection:Product.order_condition , required:false , include_blank: false , input_html:{id:”sort_submit”} %&gt;<br>&lt;% end %&gt;</p>
+<p>def self.order_condition<br>   [“Default”,”New”, “Sale”,”Price: low to high”,”Price: high to low”]<br>end  </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/2016-07-30-ruby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1235,7 +1379,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
