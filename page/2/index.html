@@ -232,6 +232,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/Caching-with-Rails/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/08/Caching-with-Rails/" itemprop="url">Caching with Rails</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-08T21:00:54+08:00">
+                2017-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/08/Caching-with-Rails/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/08/Caching-with-Rails/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考链接：<br><a href="https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5d" target="_blank" rel="external">https://gist.github.com/xiangzhuyuan/cb1bfb00c5d56583bb5d</a><br><a href="https://ruby-china.org/topics/19389" target="_blank" rel="external">https://ruby-china.org/topics/19389</a><br><a href="https://ruby-china.org/wiki/rails-caching" target="_blank" rel="external">https://ruby-china.org/wiki/rails-caching</a><br><a href="https://www.youtube.com/watch?v=eO8tTPDEB8A&amp;index=4&amp;list=WL" target="_blank" rel="external">https://www.youtube.com/watch?v=eO8tTPDEB8A&amp;index=4&amp;list=WL</a> 等一系列 railscast 视频</p>
+<p>这几个链接对 rails cache 说的很详细，看不懂的话可以先多看看视频，然后再去读一遍文章，这样更能理解一些吧。</p>
+<p><strong>下面是我初步的一些理解以及初步所能掌握的部分，以后有待完善。</strong></p>
+<hr>
+<h2 id="缓存的作用："><a href="#缓存的作用：" class="headerlink" title="缓存的作用："></a>缓存的作用：</h2><p>避免频繁查询数据库，在最短的时间内把真正需要的内容返回给客户端。（cache是提高应用性能重要的一个环节。）</p>
+<h2 id="缓存的使用情境："><a href="#缓存的使用情境：" class="headerlink" title="缓存的使用情境："></a>缓存的使用情境：</h2><p><strong>经常被访问到的页面，并且页面内容不经常改变，且对时效性要求不是十分严格</strong>，或者是，在缓存使用过程中要特别注意真正的内容是否被改变，及时捕捉变化并响应最新的内容。<strong>一定要保持缓存和实际记录的一致性。</strong>不一致的缓存会导致很多不必要的问题。</p>
+<p>如果经常改变内容的页面，可以使用 <code>fresh_when</code>, 这样可以对时效性有更好的控制。如果页面没有敏感信息，可以设置 <code>fresh_when @product, public: true</code> ,这会缓存在一个 public cash。（rack_cache）<br>这两者也可以结合使用。</p>
+<h2 id="需要缓存的地方"><a href="#需要缓存的地方" class="headerlink" title="需要缓存的地方:"></a>需要缓存的地方:</h2><p><strong>静态页面<br>无变化的动态页面<br>动态页面片段<br>应用程序数据</strong></p>
+<h2 id="MemCacheStore"><a href="#MemCacheStore" class="headerlink" title="MemCacheStore"></a>MemCacheStore</h2><p>下面这段是 rails guide 中的说明，由于这个使用较多，就单拿出来记录一下</p>
+<blockquote>
+<p><strong>ActiveSupport::Cache::MemCacheStore</strong></p>
+<p>这种存储方式使用 Danga 开发的 memcached 服务器，为程序提供一个中心化的缓存存储。Rails 默认使用附带安装的 dalli gem 实现这种存储方式。这是目前在生产环境中使用最广泛的缓存存储方式，可以提供单个缓存存储，或者共享的缓存集群，性能高，冗余度低。</p>
+<p>初始化时要指定集群中所有 memcached 服务器的地址。如果没有指定地址，默认运行在本地主机的默认端口上，这对大型网站来说不是个好主意。</p>
+<p>在这种缓存存储中使用 write 和 fetch 方法还可指定两个额外的选项，充分利用 memcached 的特有功能。指定 :raw 选项可以直接把没有序列化的数据传给 memcached 服务器。在这种类型的数据上可以使用 memcached 的原生操作，例如 increment 和 decrement。如果不想让 memcached 覆盖已经存在的记录，可以指定 :unless_exist 选项。</p>
+<p>config.cache_store = :mem_cache_store, “cache-1.example.com”, “cache-2.example.com”</p>
+</blockquote>
+<p><code>gem &#39;dalli&#39; # Rails 默认使用附带安装的 dalli gem 实现这种存储方式</code></p>
+<p>MemCacheStore 中常用的方法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Rails.cache.write(<span class="symbol">:foo</span>, <span class="number">1</span>) <span class="comment"># 写入缓存</span></div><div class="line">Rails.cache.read(<span class="symbol">:foo</span>) <span class="comment"># 从缓存中读取</span></div><div class="line">Rails.cache.read_multi(<span class="symbol">:foo</span>, <span class="symbol">:bar</span>) <span class="comment"># 一次读取多个</span></div><div class="line">Rails.cache.fetch(<span class="symbol">:bar</span>) &#123;sleep <span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment"># 进程sleep 1秒，然后写入2</span></div><div class="line">Rails.cache.fetch(<span class="string">'last_post'</span>) &#123; Post.last &#125;</div><div class="line">Rails.cache.fetch(<span class="string">'time'</span>, <span class="symbol">expires_in:</span> <span class="number">5</span>.seconds) &#123; Time.now &#125; <span class="comment"># 缓存现在的时间，5秒后过期</span></div><div class="line">Rails.cache.stats <span class="comment"># 可以读取 rails 缓存的状态，比如占用了多少字节，等</span></div><div class="line">Rails.cache.delete <span class="comment"># 使某个 key 缓存过期</span></div><div class="line">Rails.cache.exist?</div><div class="line">Rails.cache.increment</div><div class="line">Rails.cache.decrement</div><div class="line">Rails.cache.clear <span class="comment"># 清空缓存</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/21/解决方案/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1591,230 +1740,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/04/ch04-对象、变量和常量/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/04/ch04-对象、变量和常量/" itemprop="url">ch04 对象、变量和常量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-04T13:55:32+08:00">
-                2016-10-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/04/ch04-对象、变量和常量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/04/ch04-对象、变量和常量/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>对象</li>
-<li>类</li>
-<li>变量</li>
-<li>常量</li>
-</ul>
-<h2 id="4-1-对象"><a href="#4-1-对象" class="headerlink" title="4.1 对象"></a>4.1 对象</h2><p>在 Ruby 中，表现数据的基本单位称为对象（object）。</p>
-<ul>
-<li><p>数值对象</p>
-<p>  1、-10、3.1415 等是表示数字的对象，另外还有表示矩阵、复数、素数、公式的对象。</p>
-</li>
-<li><p><strong>字符串对象</strong></p>
-<p>  “你好”、”hello” 等表示文字的对象。</p>
-</li>
-<li><p><strong>数组对象、散列对象</strong></p>
-<p>  表示多个数据的集合的对象。</p>
-</li>
-<li><p><strong>正则表达式对象</strong></p>
-<p>  表示匹配模式的对象。</p>
-</li>
-<li><p><strong>时间对象</strong></p>
-<p>  比如 ”2013年5月30日早上9点“ 等表示时间的对象。</p>
-</li>
-<li><p><strong>文件对象</strong></p>
-<p>  一般我们可以理解为表示文件本身的对象，但确切来说，它是对文件进行读写操作的对象。</p>
-</li>
-<li><p><strong>符号对象</strong></p>
-<p>  表示用于识别方法等名称的标签的对象。</p>
-</li>
-</ul>
-<p>除此之外， Ruby 还有<strong>范围对象（Range）</strong>、<strong>异常对象（Exception）</strong>等。</p>
-<h2 id="4-2-类"><a href="#4-2-类" class="headerlink" title="4.2 类"></a>4.2 类</h2><p>Ruby 的类（class）表示的就是对象的种类。</p>
-<p>对象拥有什么特性，这些都是由类来决定的。</p>
-<p>下图是刚刚介绍过的对象及其所属类的对应关系（这些都是 Ruby 默认提供的）：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8g1wsprktj30mk0bx75q.jpg" alt=""></p>
-<p>「 XX 类的对象 」，我们一般会说成 <strong>「 XX 类的实例（Instance） 」</strong>。</p>
-<p>例如，我们会说 「 字符串对象 <code>foo</code> 是 String 类的实例 」。</p>
-<h2 id="4-3-变量"><a href="#4-3-变量" class="headerlink" title="4.3 变量"></a>4.3 变量</h2><p><strong>变量就像是对象的名片。</strong></p>
-<p>Ruby 中有<strong>四种类型</strong>的变量。</p>
-<ul>
-<li><strong>局部变量</strong>（local variable）    </li>
-<li><strong>全局变量</strong>（global variable）</li>
-<li><strong>实例变量</strong>（instance variable）</li>
-<li><strong>类变量</strong>（class variable）</li>
-</ul>
-<p>变量的<strong>命名方式决定了变量的种类</strong>。</p>
-<ul>
-<li><strong>局部变量<br>  以英文字母或者_开头</strong></li>
-<li><strong>全局变量<br>  以$开头</strong></li>
-<li><strong>实例变量<br>  以@开头</strong></li>
-<li><strong>类变量<br>  以@@开头</strong></li>
-</ul>
-<p>除以上四种类型外，还有名为伪变量（还有一种叫预定义变量，书中没有详细介绍）的特殊变量。<br>伪变量是 Ruby 预先定义好的代表某特定值的特殊变量，因此即使我们在程序里给伪变量赋值，它的值也不会改变。Ruby中，nil、true、false、self等都是伪变量。它们表面上虽然看着像变量，但实际的行为又与变量有差别，因此称为伪变量。</p>
-<p><strong>局部变量与全局变量</strong></p>
-<p>局部变量是指 变量在程序中的有效范围（也称<strong>变量的作用域</strong>）是局部的。</p>
-<p>全局变量，不管变量在程序的哪个部分使用，程序就认为它们是同一个变量。</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8g31t0hwej30fq09kt9w.jpg" alt=""></p>
-<p>局部变量作用范围只在自己所在的代码块中。全局变量作用范围在所有程序中。</p>
-<p><strong>一般并不推荐使用全局变量。全局变量在程序的任何地方都可以修改，因此在规模较大的程序中使用时，会增加程序不必要的复杂度，给阅读程序、修改程序造成意想不到的麻烦。</strong></p>
-<p>首次给局部变量赋值的同时，该局部变量就被初始化了。如果引用了未初始化的局部变量，会抛出异常。</p>
-<p>执行示例：</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8g39g6j61j30zw0aa40s.jpg" alt=""></p>
-<p>实例变量与类变量，第8章会详细说明。</p>
-<h2 id="4-4-常量"><a href="#4-4-常量" class="headerlink" title="4.4 常量"></a>4.4 常量</h2><p>常量的作用和变量一样，是某个对象的 「 名片 」。<strong>与变量不同的是，对已经赋值的常量再进行赋值时，Ruby 会做出警告。</strong></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3e4m9t6j30pg08kq43.jpg" alt=""></p>
-<p>常量以大写英文字母开头。<br>例如 Ruby 的运行版本「 RUBY_VERSION 」、运行平台「 RUBY_PLATFORM 」、命令行参数数组「 RARGV 」等，都是 Ruby 预定义好的常量。</p>
-<h2 id="4-5-保留字"><a href="#4-5-保留字" class="headerlink" title="4.5 保留字"></a>4.5 保留字</h2><p>Ruby 关键字一览表：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8g3lcpnimj30si07rdhe.jpg" alt=""></p>
-<p>这些关键字被称为保留字，如果用做变量名，Ruby 会提示我们语法错误。</p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8g3oko6axj30zw06wt9z.jpg" alt=""></p>
-<h2 id="4-6-多重赋值"><a href="#4-6-多重赋值" class="headerlink" title="4.6 多重赋值"></a>4.6 多重赋值</h2><p>除了「 变量 = 值 」这种给变量赋值的方法，Ruby 中还提供了<strong>只用一个表达式就能给多个变量赋值的简便方法</strong>。</p>
-<h3 id="4-6-1"><a href="#4-6-1" class="headerlink" title="4.6.1"></a>4.6.1</h3><p>比如：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div><div class="line">b = <span class="number">2</span></div><div class="line">c = <span class="number">3</span></div><div class="line"></div><div class="line"><span class="comment"># 可以简化为</span></div><div class="line">a, b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></div></pre></td></tr></table></figure>
-<p>如果一组不相关的变量进行多重赋值，程序会变的难懂，因此建议<strong>对彼此相关变量进行多重赋值</strong>。</p>
-<p>即使 = 号左右两边列出的数量不相等，Ruby 也不会报错。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a, b, c, d = <span class="number">1</span>, <span class="number">2</span>  </div><div class="line"><span class="comment"># a = 1  b = 2  c = nil  d = nil</span></div></pre></td></tr></table></figure>
-<p>变量部分比较少时，Ruby 会忽略掉该值，不会分配多余的值。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a, b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span></div><div class="line"><span class="comment"># a = 1  b = 2  c = 3  4不会被分配</span></div></pre></td></tr></table></figure>
-<p>变量前加上 * ，表示 Ruby 会将未分配的值封装为数组赋值给该变量</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a, b, *c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></div><div class="line"><span class="comment"># a = 1  b = 2  c = [3, 4, 5]</span></div><div class="line"></div><div class="line">a, *b, c = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></div><div class="line"><span class="comment"># a = 1  b = [2, 3, 4]  c = 5</span></div></pre></td></tr></table></figure>
-<h3 id="4-6-2-置换变量的值"><a href="#4-6-2-置换变量的值" class="headerlink" title="4.6.2 置换变量的值"></a>4.6.2 置换变量的值</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a, b = <span class="number">0</span>, <span class="number">1</span></div><div class="line">tmp = a <span class="comment"># 暂时保存变量a的值</span></div><div class="line">a = b   <span class="comment"># 将变量b的值赋值给a</span></div><div class="line">b = tmp <span class="comment"># 将原本变量a的值赋值给变量b</span></div><div class="line">p a, b  <span class="comment"># =&gt; [1, 0]</span></div></pre></td></tr></table></figure>
-<p>使用多重赋值，只需一行程序就搞定了。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a, b = <span class="number">0</span>, <span class="number">1</span></div><div class="line">a, b = b, a <span class="comment"># 置换变量a、b的值</span></div><div class="line">p a, b      <span class="comment"># [1, 0]</span></div></pre></td></tr></table></figure>
-<h3 id="4-6-3-获取数组的元素"><a href="#4-6-3-获取数组的元素" class="headerlink" title="4.6.3 获取数组的元素"></a>4.6.3 获取数组的元素</h3><p>用数组赋值，左边有多个变量时，Ruby 会自动获取数组的元素进行多重赋值。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, <span class="number">2</span>]</div><div class="line">a, b = ary</div><div class="line">p a     <span class="comment"># =&gt; 1</span></div><div class="line">p b     <span class="comment"># =&gt; 2</span></div></pre></td></tr></table></figure>
-<h3 id="4-6-4-获取嵌套数组的元素"><a href="#4-6-4-获取嵌套数组的元素" class="headerlink" title="4.6.4 获取嵌套数组的元素"></a>4.6.4 获取嵌套数组的元素</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>]</div><div class="line">a, b, c = ary</div><div class="line">p a  <span class="comment"># =&gt; 1</span></div><div class="line">p b  <span class="comment"># =&gt; [2, 3]</span></div><div class="line">p c  <span class="comment"># =&gt; 4</span></div></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ary = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>]</div><div class="line">a, (b1, b2), c = ary  <span class="comment"># 对与数组结构相对应的变量赋值</span></div><div class="line">p a   <span class="comment"># =&gt; 1</span></div><div class="line">p b1  <span class="comment"># =&gt; 2</span></div><div class="line">p b2  <span class="comment"># =&gt; 3</span></div><div class="line">p c   <span class="comment"># =&gt; 4</span></div></pre></td></tr></table></figure>
-<p>只要等号左边的变量的结构与数组的结构一致，即使再复杂的结构，多重赋值都可以轻松对应。</p>
-<p>专栏</p>
-<p>以变量名开头来决定变量的种类，这是 Ruby 中对变量命名时唯一要坚决遵守的规则。</p>
-<p>◎ 不要过多使用省略的名称</p>
-<p>◎ <strong>对于多个单词组合的变量名，使用 _ 隔开各个单词</strong>，或者单词以大写字母开头<br>   Ruby 的变量名和方法名使用前者，类名和模块名使用后者。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1865,7 +1790,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
