@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。 /usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
+<meta name="description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。1/usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
 <meta name="keywords" content="rails">
 <meta property="og:type" content="article">
 <meta property="og:title" content="postgresql 安装和使用">
 <meta property="og:url" content="http://yoursite.com/2017/10/24/postgresql-安装和使用/index.html">
 <meta property="og:site_name" content="这里有我的脚丫印😄">
-<meta property="og:description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。 /usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
+<meta property="og:description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。1/usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fktadlg1oqj30yi08yjsn.jpg">
-<meta property="og:updated_time" content="2017-10-24T15:07:24.000Z">
+<meta property="og:updated_time" content="2017-10-24T15:12:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="postgresql 安装和使用">
-<meta name="twitter:description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。 /usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
+<meta name="twitter:description" content="参考：Getting Started with PostgreSQL on Mac OSX Documentation  目录：  安装 Homebrew 安装 Postgres 进入 psql postgres 命令行 创建角色用户 给用户添加权限 创建数据库    安装 Homebrew如果你安装过了，可以跳过这一步。1/usr/bin/ruby -e &amp;quot;$(curl -fsSL h">
 <meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fktadlg1oqj30yi08yjsn.jpg">
 
 
@@ -326,15 +326,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 Homebrew</h2><p>如果你安装过了，可以跳过这一步。</p>
-<p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装过程中，按照要求，输入回车键；如果需要输入电脑系统密码，就输入密码按回车即可。</p>
+<h2 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 Homebrew</h2><p>如果你安装过了，可以跳过这一步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
+<p>安装过程中，按照要求，输入回车键；如果需要输入电脑系统密码，就输入密码按回车即可。</p>
 <h2 id="安装-Postgres"><a href="#安装-Postgres" class="headerlink" title="安装 Postgres"></a>安装 Postgres</h2><p><code>brew install postgresql</code></p>
 <p>安装固定版本，<code>brew install postgresql@9.4</code></p>
 <p>安装好之后，会有一些简单的说明。也告诉了启动方式。</p>
-<p>比如：<code>To have launchd start postgresql@9.4 now and restart at login:
-  brew services start postgresql@9.4
-Or, if you don&#39;t want/need a background service you can just run:
-  pg_ctl -D /usr/local/var/postgresql@9.4 start</code></p>
+<p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">To have launchd start postgresql@9.4 now and restart at login:</div><div class="line">  brew services start postgresql@9.4</div><div class="line">Or, if you don&apos;t want/need a background service you can just run:</div><div class="line">  pg_ctl -D /usr/local/var/postgresql@9.4 start</div></pre></td></tr></table></figure></p>
 <p>执行命令：<code>pg_ctl -D /usr/local/var/postgres start &amp;&amp; brew services start postgresql</code>  </p>
 <p>然后输入：<code>postgres -V</code>，会返回安装的相应的版本。</p>
 <h2 id="配置-Postgres"><a href="#配置-Postgres" class="headerlink" title="配置 Postgres"></a>配置 Postgres</h2><p>命令行输入：<code>psql postgres</code>，（或者 sudo psql postgres）</p>
