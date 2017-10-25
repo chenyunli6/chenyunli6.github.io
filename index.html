@@ -315,7 +315,7 @@
         
           
             <p><em>注意：本文小写的变量都为实例变量，如：<code>employee</code></em></p>
-<h2 id="使用-polymorphic"><a href="#使用-polymorphic" class="headerlink" title="使用 polymorphic"></a>使用 polymorphic</h2><p>场景： <code>Employee</code> 和 <code>Product</code> 都 <code>has_many pictures</code>, 但是又不希望创建两个类似的 <code>pictures</code> 表。也就是我们希望<code>Employee</code> 和 <code>Product</code> 能同时关联上 <code>Picture</code>, 最后能从 <code>pictures</code> 表中各取所需，也能在 <code>Picture</code> 的每个实例对象中获得对应的所属对象。最终结果：</p>
+<h2 id="使用-polymorphic"><a href="#使用-polymorphic" class="headerlink" title="使用 polymorphic"></a>使用 polymorphic</h2><p>场景： <code>Employee</code> 和 <code>Product</code> 都 <code>has_many pictures</code>, 但是又不希望创建两个类似的 <code>pictures</code> 表。也就是我们希望<code>Employee</code> 和 <code>Product</code> 可以同时关联上 <code>Picture</code>, 最后能从 <code>pictures</code> 表中各取所需，也可以在 <code>Picture</code> 的每个实例对象中获得对应的所属对象。最终结果：</p>
 <ul>
 <li>rails 中</li>
 </ul>
