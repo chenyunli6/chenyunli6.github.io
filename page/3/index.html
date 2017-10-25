@@ -232,6 +232,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/jquery-fileupload-上传/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/24/jquery-fileupload-上传/" itemprop="url">jquery fileupload 上传</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-24T22:33:02+08:00">
+                2016-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/24/jquery-fileupload-上传/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/24/jquery-fileupload-上传/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考链接：<a href="https://github.com/carrierwaveuploader/carrierwave" target="_blank" rel="external">https://github.com/carrierwaveuploader/carrierwave</a></p>
+<h2 id="使用-jquery-fileupload-js-上传图片"><a href="#使用-jquery-fileupload-js-上传图片" class="headerlink" title="使用 jquery.fileupload.js 上传图片"></a>使用 <code>jquery.fileupload.js</code> 上传图片</h2><ol>
+<li><code>gem &#39;carrierwave&#39; 和 gem &#39;mini_magick&#39;</code></li>
+<li><code>bundle</code></li>
+<li>执行<code>rails generate uploader image</code> 会生成<code>app/uploaders/image_uploader.rb</code></li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># encoding: utf-8</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageUploader</span> &lt; CarrierWave::Uploader::<span class="title">Base</span></span></div><div class="line"></div><div class="line">  <span class="comment"># Include RMagick or MiniMagick support:</span></div><div class="line">  <span class="comment"># include CarrierWave::RMagick</span></div><div class="line">  <span class="keyword">include</span> CarrierWave::MiniMagick</div><div class="line"></div><div class="line"></div><div class="line">  <span class="comment"># Choose what kind of storage to use for this uploader:</span></div><div class="line">  storage <span class="symbol">:file</span></div><div class="line">  <span class="comment"># storage :fog</span></div><div class="line"></div><div class="line">  <span class="comment"># Override the directory where uploaded files will be stored.</span></div><div class="line">  <span class="comment"># This is a sensible default for uploaders that are meant to be mounted:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">store_dir</span></span></div><div class="line">    <span class="string">"uploads/"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  process <span class="symbol">resize_to_fit:</span> [<span class="number">800</span>, <span class="number">800</span>]</div><div class="line"></div><div class="line">  version <span class="symbol">:small</span> <span class="keyword">do</span></div><div class="line">    process <span class="symbol">resize_to_fit:</span> [<span class="number">200</span>, <span class="number">200</span>]</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<ol>
+<li>在<code>controller</code>中 action 可以使用<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uploader = ImageUploader.new</div><div class="line">uploader.store!(my_file)  </div><div class="line">uploader.url <span class="comment"># =&gt; '/url/to/my_file.png'               # size: 800x600</span></div><div class="line">uploader.thumb.url <span class="comment"># =&gt; '/url/to/thumb_my_file.png'   # size: 200x200</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我的场景是，在页面用jquery uploader 到后面action上传图片，回传image_url 到页面，页面点击保存的时候再保存到相关的数据库表。</p>
+<p>见截图：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImagesController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span></div><div class="line">    uploader = ImageUploader.new</div><div class="line">    uploader.store!(params[<span class="string">'picture-upload'</span>])</div><div class="line"></div><div class="line">    render <span class="symbol">json:</span> &#123;<span class="symbol">image_url:</span> uploader.small.url&#125;</div><div class="line"></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pictureUpload</span>(<span class="params">prize</span>)</span>&#123;</div><div class="line">    $(<span class="string">".picture-upload"</span>).click();</div><div class="line">    $<span class="string">".picture-upload"</span>).fileupload(&#123;</div><div class="line">        type:<span class="string">'POST'</span>,</div><div class="line">        url:<span class="string">'/images'</span>,</div><div class="line">        dataType: <span class="string">'json'</span>,</div><div class="line">        singleFileUploads: <span class="literal">true</span>,</div><div class="line">        maxFileSize: <span class="number">2000000</span>,</div><div class="line">        start: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            $(<span class="string">".progress-upload"</span>).removeClass(<span class="string">'hide'</span>);</div><div class="line">            $(<span class="string">".upload-button i"</span>).addClass(<span class="string">'hide'</span>);</div><div class="line">            $(<span class="string">".upload-button span"</span>).addClass(<span class="string">'hide'</span>);</div><div class="line">        &#125;,</div><div class="line">        progressall: <span class="function"><span class="keyword">function</span>(<span class="params">e, data</span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> progress = <span class="built_in">parseInt</span>(data.loaded/data.total * <span class="number">100</span>, <span class="number">10</span>);</div><div class="line">            $(<span class="string">".progress-upload .bar"</span>).css(<span class="string">'width'</span>,progress + <span class="string">'%'</span>);</div><div class="line">        &#125;,</div><div class="line">        done: <span class="function"><span class="keyword">function</span>(<span class="params">e, data</span>)</span>&#123;</div><div class="line">            $(<span class="string">".edit-button .prize-picture"</span>).attr(<span class="string">'src'</span>,data.result.image_url);</div><div class="line">            $(<span class="string">".upload-button"</span>).remove();</div><div class="line">            $(<span class="string">".edit-button"</span>).removeClass(<span class="string">'hide'</span>);</div><div class="line">        &#125;,</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/04/ch04-对象、变量和常量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1902,187 +2047,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/11/2016-09-11-full-stack-camp-experience-feelings/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/11/2016-09-11-full-stack-camp-experience-feelings/" itemprop="url">全栈营心得感想</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-11T00:09:00+08:00">
-                2016-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/11/2016-09-11-full-stack-camp-experience-feelings/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/11/2016-09-11-full-stack-camp-experience-feelings/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="回想：从得知全栈营到课程结束的心理路程"><a href="#回想：从得知全栈营到课程结束的心理路程" class="headerlink" title="回想：从得知全栈营到课程结束的心理路程"></a>回想：从得知全栈营到课程结束的心理路程</h1><h2 id="得知全栈营"><a href="#得知全栈营" class="headerlink" title="得知全栈营"></a>得知全栈营</h2><p>我是从笑来老师的《你学你的，用不着别人批准》中得知全栈营的，呃，就最后一小段，被我看到了。</p>
-<p><img src="http://ww3.sinaimg.cn/large/7853084cjw1f7or10njk4j2122059q44.jpg" alt=""></p>
-<p>看到这篇文章后，过几天我就辞职了。<br>因为，</p>
-<ul>
-<li>我现在工作状态不太好，两年了一直没有突破</li>
-<li>刚读了《七年就是一辈子》和《你学你的，用不着别人批准》，亢奋中</li>
-<li>可以和笑来老师一起学习？噫！</li>
-<li>一直想突破，想改变</li>
-</ul>
-<p>当把我要去培训的这个事情说给我很多朋友后，他们都觉得我脑子进水了。因为对我们来说，一年也存不下5万。而我需要全部去借。不过也有人支持我，说，去吧，不然你又遗憾了。还有个朋友说，我自己不敢这样折腾，但是我很想看你折腾，然后看看究竟能折腾个什么出来。</p>
-<p>最后，我还是决定报名。其实，等着报名我也是心急火燎的，因为，自从在《你学你的，用不着别人批准》这篇文章中看到过后，李笑来老师的微博、公众号里面根本没有什么动静，我以为就是说说，因为毕竟事起于他在微博上说的一句话，然后被攻击。为此我还专门去新生大学的客服去问。然后让他们一有报名方式公布，赶快打电话给我。（后来真的打给我了，可是这个报名好像不是他们负责，我觉得他们真的是很棒，还给这个客服发了条短信感谢，她也回复说了些鼓励我的话，嗯，心里觉得，自己真是选择对了）</p>
-<p>之后就是去借钱了，甚至想到过信用卡套现；（得想好这个钱怎么凑，这是我这两年的经验，以至于前两天还和老师同学们分享了我的“借钱经验”）<br>最后，因为有一个朋友和老妈的支持，大头都借到了。然后坐等。</p>
-<p>报名消息一公布，我就开始填报名表，填了之后，我的妈呀，又得等一周，才能知道自己会不会被录取。。。（我晕，火急火燎的等着）</p>
-<h2 id="开课前"><a href="#开课前" class="headerlink" title="开课前"></a>开课前</h2><p>是一个周二公布的录取结果，好吧，没有我，我挺难过的（因为我一直积极“准备”着；我也要用这个学来的表情符号表达情感！！！ 相反的XDDDD！！！好么）。<br>周三周四，我赶紧接着去找工作了（之前辞掉，已经两三周没有工作了），周五拿到了offer，正准备去入职。居然戏剧般的情景又出现在了我的生命里。（好吧，现在我都在感谢，那最后没有去上课的人，给我缺下来的名额；也在唏嘘，是不是上天感到了我的真诚）</p>
-<p>戏剧就是居然有人被录取了，但因为个人原因没去，缺3个名额，补录名单有我的名字！好吧，赶紧四处凑钱（虽然之前都已经说好，但是并没有打款到我的账上。）看到以报名时间确定最终录取名单，和只差3个名额。我着实急了一把（马不停蹄借钱）。最终，付费成功。当然也把offer辞掉了。</p>
-<p>报名成功之后被告知有课前任务，我又开始买mac（从不敢瞻仰这么贵的电脑，官网免息分期），购买vpn（从不知道是这样翻墙的），环境配置（从不知道安装用一句命令行就搞定），初级教材，中级教材练习3遍（从不知道原来命令行开发这么爽，做的时候，去查了touch这个命令是什么，好吧，有一回答说：一看就是个小白）。</p>
-<p>把这些准备工作都做好，我熟悉了mac，shell（终端），github的基本操作，部署到heroku，也大概知道ruby的开发流程了。这期间变化已经够大了，从上面括号里面的几个从不就可以看出来 。（心理很得意的XDDDD！！！）</p>
-<p>我记得有一个朋友说，你这一跟着全栈营，逼格不知道提升了多少。（好吧，以前的我白痴和土到不是一般人）</p>
-<h2 id="开课后"><a href="#开课后" class="headerlink" title="开课后"></a>开课后</h2><p>第一天，我貌似9:40到的班级，老师等着班里迟到还没有来的人；后来很少有迟到的，有可能第一天大家探路吧。来到班级，带着花了5万（关键全是借的！），并感觉会改变命运的“赌博”心理来的。因为，我周围的人都觉得我脑子进水了（这么贵的钱 5万，这么短的时间 2个月）。但是，我内心是很坚定的，因为，我相信更好的学习方式和更牛的“教练”，5万会值得，2个月不短。（另外，我喜欢新鲜事物和改变）<br>第一天的感觉还有一个就是，我一个人不认识，但是之前做任务的时候有同学跟我私聊过，然后就开始找，他在哪，呃，找到了一个说过话的人（虽然是slack上），心理好多了。</p>
-<p>其实，一开始我并没有发觉老师教学的价值（可能是我花了我难以承受的钱，希望一瞬间就能赚回来的心理？）和之前我参加的培训很不一样，老师很少讲课，都是实战。但是，我读过老师的文章：</p>
-<p><a href="http://smalltalk.xdite.net/posts/771703-drop-arrogant" target="_blank" rel="external">放下你的無效學習方式</a><br><a href="http://smalltalk.xdite.net/posts/745611-that-golden-channel-of-learning" target="_blank" rel="external">領悟「學習的黃金通道」</a></p>
-<p>而且，我是知道自己并不知道，所以也傲慢不起来。就乖乖听老师的话。因为开课前老师布置的任务都很认真的完成，加上自己有一定的基础，一路上并没有什么曲折。不过我也是亲眼看见了0基础同学们的进步多么巨大。（这个变化，让我惊讶，因为，别的都先不说，怎么0基础这么两周就会开发网站了！呃呃，我真的不敢不承认这价值了。。。）</p>
-<p>并且可以明显看到，认真思考，按照老师的学习方法走的人，进步都很大（这一点不假）。以至于我自己都开始惭愧，因为毕竟我有别的编程语言的经验，我有时感觉自己还不如他们！（这个感觉，持续到课程结束。我怎么可能傲慢，反而都是惭愧；因为我更能感知到这变化，对于从没接触到编程的人来说，有可能不知道老师让他们升级了多少。对，让我有两年java开发经验的人惭愧）</p>
-<p>不过，一开始还有一个我不解的地方，就是老师几乎不怎么讲基础知识，除了每天答疑的那些。很少挑出来基础概念长篇大论的讲，这在之前我培训过的地方是很不一样的。因为他们都是首先讲很多基础理念。从语法，数据类型，变量，条件选择，循环结构等等一步步往后讲。但是，Xdite老师根本一步也没有这样走。我很担心他们基础知识是否扎实。<br>后来，我总结了一下，Xdite老师更希望我们获得的是自学能力，解决问题的能力。什么小知识不会了，就让我们google，还鼓励我们在github上提issue，并在issue下面把查到的、问到的答案或者她最后给解答过的，最后都整理成文字，回复到问题下面，有的还要求写成wiki。她是用让我们主动参与，自己动手的方式去掌握基础知识。（自己查阅，总结并分享给大家）<br>另外，奖励的小机制，也让大家比较踊跃的提问题，写总结。（呃，我们组没有得到最后的最高分，没有拿到奖品。。。哭）</p>
-<p><strong>第四周开始</strong><br>开始产品用户调查，投票选择项目，分为四组，开始实际做一个真实项目。<br>这个方式的开设，我之前是不懂的，现在回想起来，感觉Xdite老师用心良苦吧。因为，只有在实践中才能遇到最真实的问题，同学们自己从无到有做出来一个完整的项目；选择小组长，写用户故事，分配任务，tower上管理项目，协作开发，每天的stand up会议，一切都跟真实工作似的。让我们不止明白什么是网站开发，也明白什么是优质的团队协作。而在真实的“工作”中，我们才明白自己需要会什么，怎么样解决问题，更包括了怎么样达成更好的团队协作。这个方案的神奇效果，真是让我又吃一惊。因为，同样是之前的传统培训没有的，他们那样的培训一开始接触公司真实项目是有些困难和不知所措的。（我就是这样过来的），但现在这样，我相信，大家进入公司之后，会很容易融入团队并快速开始工作。</p>
-<p>当然，只要牵扯到团队协作，总也会遇到些协作上的问题，不过最后总能协调并突破（通过老师协调，同学之前的坦诚交流等）。我想这是提前给我们进入工作彩排了一次，在之后的职场中，我们肯定会吃一堑长一智，更轻松的应对团队关系。</p>
-<p>你不得不承认这个班里的人，都是“聪明”、有自己思想的人。我心里很佩服他们，佩服每一个人的优秀；我们都是一群有目标的人。在这样的环境里待着，你每天都是进步的，每天都是打鸡血般的。<br>如果这样说，我想，不用我形容什么，这氛围中带来的力量就已经够你吃惊了，它给你带来的也许是你无法想象的思想冲击。</p>
-<h2 id="我最大的变化"><a href="#我最大的变化" class="headerlink" title="我最大的变化"></a>我最大的变化</h2><p>上面说的似乎都是关于我对这个课程一步步的认可和思考。<br>下面我说一说对我影响最大的事情。</p>
-<p>首先，我看到了，</p>
-<p><strong>比我有钱，比我优秀的人都比我更努力！</strong></p>
-<p>而且他们更不容易被别的因素干扰。更容易成功。其实，这对于来自农村的我，对于苦难是一笔宝贵财富的理解是更深一层的。<br>如果，苦难让你更坚强，更进步，这苦难真的是一笔财富；<br>如果，苦难让你更悲观，更容易自卑和受挫折，这苦难有可能局限住自己；<br>而且我发现，经常生活在幸福中的孩子，幸福感一直存在。他们眼界更高，他们不受经济约束太多，他们可以用上我觉得很昂贵的工具（mac），他们会为软件付费。<br>（通过他们，我还学到了理财，知道了很多升级认知的课程，很多很多！）</p>
-<p>而我呢？从来不敢瞻仰有一台mac，从来见着付费软件都躲得远远的。<br>因为我穷，我一直躲避任何花钱的事物。这带来的后果是，我有可能会错过很多很多的体验。而且有可能最后成为思维惯性，我“有钱”了，也不敢花钱。也永远不会体验到付费的优质服务和效果。</p>
-<p>另外，之前看过一篇文章：人丑要多读书；里面有个有趣的问题，当你看到比你漂亮N倍，比你气质好，比你有钱，读的书比你多，还比你更努力的人，你怎么想？<br>呜哇哇～，我真是不敢想了。是的，这样的人真的不少！<br>所以，我真的没有任何理由再去逃避，再去伤悲了！</p>
-<p><strong>你眼中的大牛有可能比你想象的还要牛N倍！</strong></p>
-<p>当你尝试去做任何一件他们做成的“小事情”的时候，你就知道这个“小事情”的“简单”程度不像你原来想的那样简单。比如，试试一直坚持写作、写博客。或者试试任何你认为令你赞叹的事情。（如果你真的也能做到，其实你也会被赞叹，哇，大牛！）</p>
-<p>而且，做成功过一件事情，做另外一件事情成功的可能性是更高的！从我看到牛人分享他们的故事中就可以总结到。（Xdite老师的成长曲线，就更不是想象般的速度了，神速！以至于老师自己就说：“不要追赶我，我比一般人更努力，更狠”）</p>
-<p>Xdite老师有时候心情一好，会分享很多有用的人生经验，以至于后来一听见她说话，自己没听到，都感觉错过了什么宝贝似的。而且，她说话永远都是热情洋溢，激情四射，很有感染力。在她身边，我想我是蔫不起来，而是一直亢奋。</p>
-<p><strong>懂的思考的人进步更快</strong></p>
-<p>我看到编程0基础的同学，只要他善于思考，那么他肯定也是特别主动，并且喜欢承担责任的人。这样的同学，我觉得想不进步都难。一开始，他们跟着老师入门的时候，会听老师的先模仿，而且这个方法真的是很必要的，就像Xdite老师说的，模仿是开始学习一样东西最好的一步，因为让你少走很多弯路，并且容易成功，从而不会很快受挫，最后，真的就成功了！等入门了，就开始慢慢深入思考了，主动型的，会思考的人受益就更大了，因为他们自己会找到自己不会的地方，不断思考并找到答案。在项目协作中，也能思考的比较多，不断的补充意见，积极参与，并不断优化产品。我时常想，如果我未来的同事是他们，那一定会超级爽的。因为，如此和谐，项目推进的也很好。</p>
-<p><strong>这两个月的消费</strong></p>
-<p>5万的学费，反正对于我这样的穷屌丝，真是十分的大。<br>14800的mac电脑，vpn一年180，居然我还付费买了软件（Mweb）<br>课程结束后，大多数人都会去参加成都的RubyConf；（机票，住宿）</p>
-<p>好吧，从来没有坐过飞机的我，也买了机票。当付了1000多快的（单程）机票后，我真真的是急哭了，因为我瞬间想到了刚到北京时只吃包子或者饼的时候了（因为包子和饼一两块就能买到，一份盖饭或面条要十几块）；真的是不舍得而且没钱。<br>也许你好奇，为什么5万的学费我花的还是很大方的，毕竟我很积极利索的借钱来到这个班不是？其实，我有一点比较好的，就是投资自己的钱，花下去从不眨眼。比如学习上，之前培训java，贷款最后加利息还了快两万，报尚德机构，我也是花了一万。所以，这次是花在交通上1000块（还只是单程）我怎么可能舍得，你和我平时花费比就知道了，来这个班，中午管饭，我早晚餐加起来10块钱都花不了，晚上有时候就不吃了。平时除了地铁费，几乎不花钱。以前我买了一件贵的衣服，也会心疼好几天，但是只要花在学习上，几乎不会心疼。</p>
-<p>尤其是这次如此超过我消费能力的消费，给我带来的最大的好处，是让我真正明白什么叫做“付费就是捡便宜”。体验了mac的炫酷，一批优秀的软件，让我更加热爱编程，爱上写文章。不夸张的说，我一天不在这上面写点东西，都觉得不舒服了。就算真的没写，也会心里内疚一下，今天没有写点什么。。。（当然肯定不光是工具好用，流畅，就爱上写文章，和Xdite老师让我们写日记写技术博客养成的习惯有很大关系的啦～）<br>我想如果不是这次课程，我得多少年后才能体验上？而且我相信，以后我的消费观念肯定会不一样。而且，这次花钱如滴血的经验，让我以后还有什么事是让我不敢花钱的？</p>
-<p><strong>两个月来的学习氛围和资源</strong></p>
-<p>我想我以后是不可能变成一个不追求进步，安逸于现状，整天处于无聊状态，没思想的人的。</p>
-<p>之前听过一个名人名言，我刚刚去google查了，好好看一下，因为我一直渴望这样的状态：</p>
-<p><em>著名记者怀特·霍布斯说：“成功就是当你醒来，无论身在何处，无论年龄多大，你很快从床上弹起，因为你迫不及待地想去做你爱做的、你深信的、你有才华做的工作。”</em></p>
-<p>虽然，我现在不是成功，但是，我到了那种，早上从床上弹起的状态！<br>因为我迫不及待的要去做我爱做的、我深信的、我有才华做的工作！</p>
-<p>我认为，是受到这里的氛围感染，和我想不到的各种资源把我带入这种状态的。（我一直渴望的状态，可想而知，其实我的心理是多么的嗨皮的～）</p>
-<h2 id="最后的总结"><a href="#最后的总结" class="headerlink" title="最后的总结"></a>最后的总结</h2><p><em>让一个人完全改变了生活状态吧。<br>虽然我还是我，但已经相差甚远；<br>也许我之前也是一个愿意思考和愿意进步的人，但是，来到这里我坚定了这样的目标和生活！</em></p>
-<p><em>就像新生大学公众号每篇文章后面有的那个动态的图显示的内容一样：<br>孤独，烦躁，焦虑，迷茫，自卑（哭脸）（到有了大家）相信我，你并不孤独（笑脸）；<br>这个过程和我有了全栈营的老师和同学是一样的，这就是我最大的转变，最大的收获！</em></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2133,7 +2097,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2146,7 +2110,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

@@ -232,6 +232,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/07/2016-08-07-the-usage-in-render-controller/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/07/2016-08-07-the-usage-in-render-controller/" itemprop="url">render在controller中的用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-07T18:42:00+08:00">
+                2016-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/07/2016-08-07-the-usage-in-render-controller/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/07/2016-08-07-the-usage-in-render-controller/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.相应浏览器<br>render :nothing =&gt; true  空响应到浏览器<br>render :edit （或render :action =&gt; “edit”）  响应edit action，从而返回edit.html.erb页面<br>render ‘products/show’ （或render :template =&gt; ‘products/show’）     响应另一个controller中的action<br>render “/u/apps/warehouse_app/current/app/views/products/show” （或render :file =&gt;<br>  “/u/apps/warehouse_app/current/app/views/products/show”）   响应application以外的views<br>render :inline =&gt;<br>  “&lt;% products.each do |p| %&gt;</p><p>&lt;%= p.name %&gt;</p><p>&lt;% end %&gt;”    没有对应页面的，响应内容给浏览器<br>render :inline =&gt;<br>  “xml.p {‘Horrid coding practice!’}”, :type =&gt; :builder</p>
+<p>render :update do |page|<br>  page.replace_html ‘warning’, “Invalid options supplied”<br>end</p>
+<p>render :text =&gt; “OK”<br>render :json =&gt; @product<br>render :xml =&gt; @product<br>render :js =&gt; “alert(‘Hello Rails’);”<br>render :file =&gt; filename, :content_type =&gt; ‘application/rss’<br>render :layout =&gt; ‘special_layout’<br>render :layout =&gt; false<br>render :status =&gt; 500<br>render :status =&gt; :forbidden<br>render :xml =&gt; photo, :location =&gt; photo_url(photo)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/03/2016-08-03-jdstore/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1545,7 +1678,7 @@ end
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1558,7 +1691,7 @@ end
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
