@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="这里有我的脚丫印😄">
 <meta property="og:description" content="注意：本文小写的变量都为实例变量，如：employee 使用 polymorphic场景： Employee 和 Product 都 has_many pictures, 但是又不希望创建两个类似的 pictures 表。也就是我们希望Employee 和 Product 可以同时关联上 Picture, 最后能从 pictures 表中各取所需，也可以在 Picture 的每个实例对象中获得所属">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-26T08:34:59.000Z">
+<meta property="og:updated_time" content="2017-10-26T09:46:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rails 中 polymorphic 的使用, 以及获取 unscoped 对象属性">
 <meta name="twitter:description" content="注意：本文小写的变量都为实例变量，如：employee 使用 polymorphic场景： Employee 和 Product 都 has_many pictures, 但是又不希望创建两个类似的 pictures 表。也就是我们希望Employee 和 Product 可以同时关联上 Picture, 最后能从 pictures 表中各取所需，也可以在 Picture 的每个实例对象中获得所属">
@@ -320,7 +320,30 @@
 <ul>
 <li>存在表里的是：</li>
 </ul>
-<p>id | name | imageable_id | imageable_type |<br>| — | — | — | — |<br>| 1 | sun | 1 | Product |<br>| 2 | moon | 1 | Employee |</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>imageable_id</th>
+<th>imageable_type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 1</td>
+<td>sun</td>
+<td>1</td>
+<td>Product</td>
+</tr>
+<tr>
+<td> 2</td>
+<td>moon</td>
+<td>1</td>
+<td>Employee</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>示例代码</li>
 </ul>
@@ -381,6 +404,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/26/rspec-测试书写规范/" rel="prev" title="rspec 测试书写规范">
+                rspec 测试书写规范 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -464,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

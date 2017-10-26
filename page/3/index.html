@@ -232,6 +232,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/gem-gaffe-异常页面美化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/24/gem-gaffe-异常页面美化/" itemprop="url">gem 'gaffe' 异常页面美化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-24T22:49:26+08:00">
+                2016-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/24/gem-gaffe-异常页面美化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/24/gem-gaffe-异常页面美化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考链接：<a href="https://github.com/mirego/gaffe" target="_blank" rel="external">https://github.com/mirego/gaffe</a></p>
+<p>step1.  gem ‘gaffe’</p>
+<p>step2.  bundle install</p>
+<p>step3. 在 <code>config/initializers/gaffe.rb</code> 中写入</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># config/initializers/gaffe.rb</span></div><div class="line">Gaffe.configure <span class="keyword">do</span> <span class="params">|config|</span></div><div class="line">  config.errors_controller = <span class="string">'ErrorsController'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Gaffe.enable!</div></pre></td></tr></table></figure>
+<p>step4. 创建<code>ErrorsController</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="keyword">include</span> Gaffe::Errors</div><div class="line"></div><div class="line">  <span class="comment"># Make sure anonymous users can see the page</span></div><div class="line">  skip_before_action <span class="symbol">:authenticate_user!</span></div><div class="line"></div><div class="line">  <span class="comment"># Override 'error' layout</span></div><div class="line">  layout <span class="string">'application'</span></div><div class="line"></div><div class="line">  <span class="comment"># Render the correct template based on the exception “standard” code.</span></div><div class="line">  <span class="comment"># Eg. For a 404 error, the `errors/not_found` template will be rendered.</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    <span class="comment"># Here, the `<span class="doctag">@exception</span>` variable contains the original raised error</span></div><div class="line">    render <span class="string">"errors/<span class="subst">#&#123;@rescue_response&#125;</span>"</span>, <span class="symbol">status:</span> @status_code</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>step5. 创建自己的（也可以用它默认的），目录为<code>views/errors/not_found.erb</code> 这种。如下图是这个gem的文件，我们可以覆盖：</p>
+<p><img src="http://ww3.sinaimg.cn/large/801b780ajw1f93pc5yca4j20oq0p4n0i.jpg" alt=""></p>
+<p>step6. 修改<code>config/environments/development.rb</code>，可以看到报错的页面都会给特定的页面，比如404.erb等，但是在开发或者测试环境还是不要设置，因为错误信息看不到，我们自己不好看错误。(Rails prefers to render its own debug-friendly errors in the development environment, which is totally understandable. However, if you want to test Gaffe’s behavior in development you’ll have to edit the config/environments/development.rb file.)<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Make Rails use `exceptions_app` in development</span></div><div class="line">config.consider_all_requests_local = <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p>测试环境可以这样干：<br><code>config/environments/test.rb</code><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Make Rails use `exceptions_app` in tests</span></div><div class="line">config.consider_all_requests_local = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment"># Render exceptions instead of raising them</span></div><div class="line">config.action_dispatch.show_exceptions = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/jquery-fileupload-上传/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1914,144 +2055,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877837/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/16/2016-09-16-877837/" itemprop="url">simple_form_for 中collection_check_boxes 的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T14:53:00+08:00">
-                2016-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/16/2016-09-16-877837/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/16/2016-09-16-877837/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="collection-check-boxes-的使用"><a href="#collection-check-boxes-的使用" class="headerlink" title="collection_check_boxes 的使用"></a>collection_check_boxes 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.collection_check_boxes <span class="symbol">:tag_list</span>, Tag.all, <span class="symbol">:name</span>,<span class="symbol">:name</span></div><div class="line">, <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span>,<span class="symbol">required:</span> <span class="literal">true</span></div><div class="line">, <span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: "<span class="title">tagsinput</span>"&#125; %&gt;</span></div><div class="line"></div><div class="line">&lt;!-- <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span> 可以实现checkbox纵排显示 --&gt;</div></pre></td></tr></table></figure>
-<p>其中 <figure class="highlight plain"><figcaption><span>:name``` 第一个在simple_form_for的github文档中是:id,因为我这里value和show value都是name，所以，这里就写成这样子了。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">我这里是jquery判断是否选择过一项，如果选择了一项，就跳出循环，否则继续判断，如果一项都没选择，提示用户进行选择。</div><div class="line"></div><div class="line">```js</div><div class="line">var question_tag_list = $(&quot;input[type=&apos;checkbox&apos;]&quot;);</div><div class="line">var checkedSize = 0;</div><div class="line">question_tag_list.each(function()&#123;</div><div class="line"> if ($(this).prop(&quot;checked&quot;)) &#123;</div><div class="line">   checkedSize += 1;</div><div class="line">   return false; //只要勾选了一个，便符合必填，跳出循环，可提升效率</div><div class="line"> &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>遇到的大坑就是，我用 <code>$(this).checked</code>不能返回true或者false，但是googel很多都是说这样可以。后来问了朋友，用 <code>$(&quot;#id&quot;).prop(&quot;checked&quot;)</code>成功了，具体参考 <a href="http://api.jquery.com/prop/" target="_blank" rel="external">http://api.jquery.com/prop/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2097,7 +2105,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
