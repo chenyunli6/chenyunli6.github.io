@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="部署," />
+  <meta name="keywords" content="Learn & Get Everyday," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1.首先先注册一个 Heroku 帐号 打开网站：https://www.heroku.com/注册网站时，注意三点：  Email不能选用国内的邮箱，建议使用gmail邮箱 语言选 Ruby 勾选人机验证  2.安裝Heroku Command Line(Heroku Toolbelt)Heroku 所推出的环境命列工具包。前往 https://toolbelt.heroku.com/依照网站指">
-<meta name="keywords" content="部署">
+<meta name="description" content="注：*args, * 后面是自定义的变量名。如 *names。 这是一个 splat 操作符，它是 ruby 的方法，不是 rails 特有的，根据不同应用场景，它有两种应用方式：  将多个参数打包成一个数组 将数组拆分成一个参数列表   如果在方法定义中使用 splat 操作符，那么这个方法就可以接受任意数量的参数，参数列表会被打包到一个数组中。  12345678910111213141516">
+<meta name="keywords" content="Learn &amp; Get Everyday">
 <meta property="og:type" content="article">
-<meta property="og:title" content="部署 app 到 heroku">
-<meta property="og:url" content="http://yoursite.com/2017/10/06/部署-app-到-heroku/index.html">
+<meta property="og:title" content="*args（`splat` 操作符）">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/args（-splat-操作符）/index.html">
 <meta property="og:site_name" content="这里有我的脚丫印😄">
-<meta property="og:description" content="1.首先先注册一个 Heroku 帐号 打开网站：https://www.heroku.com/注册网站时，注意三点：  Email不能选用国内的邮箱，建议使用gmail邮箱 语言选 Ruby 勾选人机验证  2.安裝Heroku Command Line(Heroku Toolbelt)Heroku 所推出的环境命列工具包。前往 https://toolbelt.heroku.com/依照网站指">
+<meta property="og:description" content="注：*args, * 后面是自定义的变量名。如 *names。 这是一个 splat 操作符，它是 ruby 的方法，不是 rails 特有的，根据不同应用场景，它有两种应用方式：  将多个参数打包成一个数组 将数组拆分成一个参数列表   如果在方法定义中使用 splat 操作符，那么这个方法就可以接受任意数量的参数，参数列表会被打包到一个数组中。  12345678910111213141516">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-06T15:09:21.000Z">
+<meta property="og:updated_time" content="2017-10-27T10:52:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="部署 app 到 heroku">
-<meta name="twitter:description" content="1.首先先注册一个 Heroku 帐号 打开网站：https://www.heroku.com/注册网站时，注意三点：  Email不能选用国内的邮箱，建议使用gmail邮箱 语言选 Ruby 勾选人机验证  2.安裝Heroku Command Line(Heroku Toolbelt)Heroku 所推出的环境命列工具包。前往 https://toolbelt.heroku.com/依照网站指">
+<meta name="twitter:title" content="*args（`splat` 操作符）">
+<meta name="twitter:description" content="注：*args, * 后面是自定义的变量名。如 *names。 这是一个 splat 操作符，它是 ruby 的方法，不是 rails 特有的，根据不同应用场景，它有两种应用方式：  将多个参数打包成一个数组 将数组拆分成一个参数列表   如果在方法定义中使用 splat 操作符，那么这个方法就可以接受任意数量的参数，参数列表会被打包到一个数组中。  12345678910111213141516">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/06/部署-app-到-heroku/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/27/args（-splat-操作符）/"/>
 
 
 
 
 
-  <title>部署 app 到 heroku | 这里有我的脚丫印😄</title>
+  <title>*args（`splat` 操作符） | 这里有我的脚丫印😄</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/部署-app-到-heroku/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/args（-splat-操作符）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">部署 app 到 heroku</h1>
+          <h1 class="post-title" itemprop="name headline">*args（`splat` 操作符）</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T23:08:37+08:00">
-                2017-10-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T18:49:44+08:00">
+                2017-10-27
               </time>
             
 
@@ -281,9 +281,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/06/部署-app-到-heroku/#comments" itemprop="discussionUrl">
+                <a href="/2017/10/27/args（-splat-操作符）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/06/部署-app-到-heroku/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/10/27/args（-splat-操作符）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -311,25 +311,20 @@
       
 
       
-        <p>1.首先先注册一个 Heroku 帐号</p>
-<p>打开网站：<a href="https://www.heroku.com/" target="_blank" rel="external">https://www.heroku.com/</a><br>注册网站时，注意三点：</p>
+        <p>注：<code>*args</code>, <code>*</code> 后面是自定义的变量名。如 <code>*names</code>。</p>
+<p>这是一个 <code>splat</code> 操作符，它是 ruby 的方法，不是 rails 特有的，根据不同应用场景，它有两种应用方式：</p>
 <ul>
-<li>Email不能选用国内的邮箱，建议使用gmail邮箱</li>
-<li>语言选 Ruby</li>
-<li>勾选人机验证</li>
+<li>将多个参数打包成一个数组</li>
+<li>将数组拆分成一个参数列表</li>
 </ul>
-<p>2.安裝Heroku Command Line(Heroku Toolbelt)<br>Heroku 所推出的环境命列工具包。<br>前往 <a href="https://toolbelt.heroku.com/" target="_blank" rel="external">https://toolbelt.heroku.com/</a><br>依照网站指示下载安装。</p>
-<p>检查是否完成安装，可以输入 heroku –version<br>应该会看到heroku 的版本</p>
-<p>3.完成 Heroku 的 SSH-key 的设定<br>先输入 <code>heroku login</code> 确认登入，输入email、密码（密码不会显示，输入完直接按return即可）</p>
-<p>再输入 <code>heroku keys:add</code> 即可</p>
 <ol>
-<li><p>在终端（Terminal）里输入<code>heroku create</code><br> 每输入一次 heroku create 都会生成一个新的 herokuapp ，免费帐号预设上限为5个。超过5个的时候，请手动登入自己的heroku网址删除app。</p>
-</li>
-<li><p>最后再输入 <code>git push heroku master</code></p>
-</li>
-<li>部署成功后，输入 <code>heroku run rake db:migrate</code></li>
-<li>输入 <code>heroku open</code> 可以打开刚刚部署成功的 app 了</li>
+<li>如果在方法定义中使用 <code>splat</code> 操作符，那么这个方法就可以接受任意数量的参数，参数列表会被打包到一个数组中。</li>
 </ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(*args)</span></span></div><div class="line">  args.each_with_index&#123; <span class="params">|arg, i|</span> puts <span class="string">"<span class="subst">#&#123;i+<span class="number">1</span>&#125;</span>. <span class="subst">#&#123;arg&#125;</span>"</span> &#125;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 将参数列表打包成数组</span></div><div class="line">foo(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>)</div><div class="line"><span class="comment"># 1. a   &lt;== this is the output</span></div><div class="line"><span class="comment"># 2. b</span></div><div class="line"><span class="comment"># 3. c</span></div><div class="line"></div><div class="line">foo1(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div><div class="line"></div><div class="line"><span class="comment"># 把前面的参数打包成数组</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo1</span><span class="params">(*other_args, arg1, arg2)</span></span></div><div class="line">  p arg1.inspect       <span class="comment"># =&gt; 4</span></div><div class="line">  p arg2.inspect       <span class="comment"># =&gt; 5</span></div><div class="line">  p other_args.inspect <span class="comment"># =&gt; [1, 2, 3]</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 把剩余的参数打包成数组</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo1</span><span class="params">(arg1, arg2, *other_args)</span></span></div><div class="line">  p arg1.inspect       <span class="comment"># =&gt; 1</span></div><div class="line">  p arg2.inspect       <span class="comment"># =&gt; 2</span></div><div class="line">  p other_args.inspect <span class="comment"># =&gt; [3, 4, 5]</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 把中间的参数打包成数组</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo1</span><span class="params">(arg1, *other_args, arg2)</span></span></div><div class="line">  p arg1.inspect       <span class="comment"># =&gt; 1</span></div><div class="line">  p arg2.inspect       <span class="comment"># =&gt; 5</span></div><div class="line">  p other_args.inspect <span class="comment"># =&gt; [2, 3, 4]</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<ol>
+<li>如果在调用方法的时候，在数组前面加上 <code>*</code>，方法体内，会把数组拆分成参数进行运算和处理。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">(a, b, c)</span></span></div><div class="line">  a + b + c</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 将数组拆分成参数列表</span></div><div class="line">my_array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line">bar(*my_array)</div><div class="line"><span class="comment"># 6</span></div><div class="line"></div><div class="line"><span class="comment"># 将数组拆分成参数列表</span></div><div class="line">foo(*my_array)</div><div class="line"><span class="comment"># 1. 1   &lt;== this is the output</span></div><div class="line"><span class="comment"># 2. 2</span></div><div class="line"><span class="comment"># 3. 3</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -347,7 +342,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/部署/" rel="tag"># 部署</a>
+            <a href="/tags/Learn-Get-Everyday/" rel="tag"># Learn & Get Everyday</a>
           
         </div>
       
@@ -360,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/02/spring-boot-初步学习/" rel="next" title="spring boot 初步学习">
-                <i class="fa fa-chevron-left"></i> spring boot 初步学习
+              <a href="/2017/10/26/Rails-Model-中使用-Enum-枚举/" rel="next" title="Rails Model 中使用 Enum (枚举)">
+                <i class="fa fa-chevron-left"></i> Rails Model 中使用 Enum (枚举)
               </a>
             
           </div>
@@ -369,10 +364,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/06/使用-figaro-管理密码/" rel="prev" title="使用 figaro 管理密码">
-                使用 figaro 管理密码 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,9 +626,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/06/部署-app-到-heroku/';
-          this.page.identifier = '2017/10/06/部署-app-到-heroku/';
-          this.page.title = '部署 app 到 heroku';
+          this.page.url = 'http://yoursite.com/2017/10/27/args（-splat-操作符）/';
+          this.page.identifier = '2017/10/27/args（-splat-操作符）/';
+          this.page.title = '*args（`splat` 操作符）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chenyunli.disqus.com/embed.js';

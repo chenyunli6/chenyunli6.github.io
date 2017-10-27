@@ -232,6 +232,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-824509/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/31/2016-08-31-824509/" itemprop="url">render</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-31T14:48:00+08:00">
+                2016-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/31/2016-08-31-824509/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/31/2016-08-31-824509/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="render-template"><a href="#render-template" class="headerlink" title="render :template"></a>render :template</h3><p>render template 意思是渲染指定的模板，render的特性是不跑controller action，直接将该action下的模板传出来。</p>
+<p><strong>render 特定的模板</strong></p>
+<p>render views/foo/bar.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="string">"foo/bar"</span></div></pre></td></tr></table></figure>
+<p>render 同一個 controller 下的 action 的 view，用 symbol和string都是一樣的：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">:foobar</span></div><div class="line">render <span class="string">"foobar"</span></div></pre></td></tr></table></figure>
+<h3 id="render-layout"><a href="#render-layout" class="headerlink" title="render :layout"></a>render :layout</h3><p>rails 预设的layout是app/view/layouts/application.html.erb这个档案。（如果没有引用特定的layout，就会运用application这个layout）</p>
+<p>controller引用别的layout示例：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdminsController</span> &lt; ApplicationController</span></div><div class="line">  layout <span class="string">"admin"</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><strong>也可以指定某个action要使用特定的layout</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdminsController</span> &lt; ApplicationController</span></div><div class="line">layout <span class="string">"admin"</span>, <span class="symbol">:only</span> =&gt; <span class="symbol">:new</span></div><div class="line">   <span class="comment"># 另外也可以在render的時候就指定要使用哪一個layout</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">      render <span class="symbol">:layout</span> =&gt; <span class="string">"admin"</span></div><div class="line">   <span class="keyword">end</span></div><div class="line"></div><div class="line">   <span class="comment"># 甚至可以指定模板再指定layout</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">index</span></span></div><div class="line">    render <span class="symbol">:template</span> =&gt; <span class="string">"others/weired_topics"</span>, <span class="symbol">layout:</span> <span class="string">"admin"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="render-text"><a href="#render-text" class="headerlink" title="render :text"></a>render :text</h3><p>render 纯文字</p>
+<p>render “嗨，自己的文字自己render”</p>
+<h3 id="render-options"><a href="#render-options" class="headerlink" title="render options"></a>render options</h3><p>rails 接受以下四种render options:</p>
+<p>####:content_type<br>rails 预设会找 text/html 类型的档案（除非我们有:json或:xml的选项）</p>
+<p>但我们也可以借由:content_type设定其他的档案形态。例如:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">file:</span> filename,<span class="symbol">content_type:</span> <span class="string">"application/rss"</span></div></pre></td></tr></table></figure>
+<p>content_type类型可Google MIME搜寻</p>
+<h4 id="layout"><a href="#layout" class="headerlink" title=":layout"></a>:layout</h4><h4 id="location"><a href="#location" class="headerlink" title=":location"></a>:location</h4><p>location header是HTTP通讯协定回应时帮client重新定位的方法，当client丢一个request到server，我们可以丢回location这个header将client导到别的地方。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">xml:</span> photo, <span class="symbol">location:</span> photo_url(photo)</div></pre></td></tr></table></figure>
+<h4 id="status"><a href="#status" class="headerlink" title=":status"></a>:status</h4><p>指定server要丢什么样的http request status给client</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">status:</span> <span class="number">500</span></div><div class="line">render <span class="symbol">status:</span> <span class="symbol">:forbidden</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-822689/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1609,150 +1761,6 @@ step1： 添加gem figaro  到Gemfile文件中
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/2016-08-14-product-user-surveys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/14/2016-08-14-product-user-surveys/" itemprop="url">产品用户调查</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T12:42:00+08:00">
-                2016-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/14/2016-08-14-product-user-surveys/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/14/2016-08-14-product-user-surveys/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>产品服务：私人形象顾问</p>
-<p>简要：根据不同收入水平，综合定位符合用户气质的服饰、发型、妆容等形象设计。<br>            适用于特殊场合或者日常生活。</p>
-<p>产品宗旨：让你更美丽自信。<br>                    不只是明星才能拥有私人形象顾问，变得美美的，你也可以。<br>                    不只是结婚或者什么才需要隆重打造，让平时的日子就各种美妙。<br>       你可以小清新，也可以美丽动人，让自己更好的展现在人前。<br>       拥有自己的品味和风格。</p>
-<p>解决的客户烦恼：<br>    1）.日常生活体现不了自己的品味和风格。<br>      比如：<br>    1.花了大把时间仍买不到自己满意的服装<br>    2.不想花太多的时间在形象上面，却又想变得美美的<br>    3.想换一种风格的<br>    4.不会或不敢化些淡妆和日常保养<br>    2）.特殊场合无法更好的打造个人形象。<br>      比如：<br>    1.想给特殊的日子换一个惊艳的装束，给爱人惊喜。<br>    2.参加某个party，想最好的展现自己的魅力。<br>    3.参加什么会议正确快速租赁适合这个场合的服饰</p>
-<p>运作原理：<br>    1.线上咨询，会有专有的私人形象顾问服务，描述自己的形象方面的烦恼，通过上传个人照片，报告身高体重，或者自己想成为的摸样，通过不断的了解，给予专业的建议。<br>  2.可以线下预约，快速定位符合自己的妆容，服饰和搭配等。<br>  3.如果想培养自己的品味意识等，可以购买中长期服务。<br>     4.提供针对个人的专业化教学培训。关于教会化妆，教会选购服饰，教会日常保养。</p>
-<p>當你在做 OOO時，你最討厭的事情是什麼？ &lt;== 這個OOO是痛點環境<br>當你學會、買到、知道 XXXX 後，你最想要做什麼事？ &lt;== 這個XXXX是 學員所提供的服務<br>當你用了，做了，學會 XXXX，完成了什麼事後。你最想要達成什麼目標？&lt;== 這個XXXX 同上一題的XXXX</p>
-<p>问卷调查：<br>当被这个产品服务的时候：<br> A: 痛点：不能被过度收费；<br>                  不能被过度推销<br>       需要有合适的人量身定做<br>   最讨厌的是：收费过高，搭配的还不如自己搭配的。过度推销。<br>   最想做的是：自己挑衣服很麻烦也很难挑到合适的，想通过这个节省时间，提升形象。<br>   最想达成的目标：服务之后，能被别人称赞自己的品味，每个季度都能收到合适的衣服推荐。</p>
-<p> B：最讨厌的是： 被推销产品<br>      最想做的是：出席特殊场合。快速租赁衣服和适合的形象设计。<br>   最想达成的目标：平时的时候，根据我的收入，提供合理化的服饰搭配意见，以最实惠的价格找到最适合的衣服。<br>   担心的是：如果服务过后，自己不满意能不能退货什么的。</p>
-<p> C：最讨厌的是: 推荐的东西不符合我的收入<br>   最想做的是：知道一些搭配打扮的知识<br>   最想达成的目标：通过平台提升个人品味，愿意花金钱时间在个人形象的提升</p>
-<p> D：最讨厌的是：涉及过多的个人隐私，揭露自己的缺点<br>         最想做的是：获得专业的个人形象咨询服务，了解不同场合应该以怎样的面貌出现。<br>   最想达成的目标：提高个人审美能力，让自己更自信</p>
-<p> E: 不需要类似服务：<br>       知道自己最适合什么。能够花在这上面的钱还不如自己去花在衣服和具体的实物上面。<br>   不足够有钱，不了解自己的人，有可能不能给自己最合适的建议。<br>   这应该适合不喜欢买买买的女人和不会买买买的女人。</p>
-<p> F: 最讨厌的是：价值观不一样，推荐的款式不对口，方案单一。<br>   最想做的是：出席重要场合，给指导意见<br>   最想达成的目标：提升个人形象，节省时间</p>
-<p> G：最讨厌的是：花了钱没效果<br>   最想做的：服务专业<br>   最想达成的目标：出门就能装逼</p>
-<p> H: 最讨厌的是：把自己包装的一塌糊涂<br>   最想做的是：设计包装自己的形象<br>   最想达成的目标：包装到自己满意的效果</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1803,7 +1811,7 @@ step1： 添加gem figaro  到Gemfile文件中
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
