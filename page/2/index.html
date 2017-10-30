@@ -232,6 +232,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/部署-app-到-heroku/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/06/部署-app-到-heroku/" itemprop="url">部署 app 到 heroku</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T23:08:37+08:00">
+                2017-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/06/部署-app-到-heroku/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/06/部署-app-到-heroku/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.首先先注册一个 Heroku 帐号</p>
+<p>打开网站：<a href="https://www.heroku.com/" target="_blank" rel="external">https://www.heroku.com/</a><br>注册网站时，注意三点：</p>
+<ul>
+<li>Email不能选用国内的邮箱，建议使用gmail邮箱</li>
+<li>语言选 Ruby</li>
+<li>勾选人机验证</li>
+</ul>
+<p>2.安裝Heroku Command Line(Heroku Toolbelt)<br>Heroku 所推出的环境命列工具包。<br>前往 <a href="https://toolbelt.heroku.com/" target="_blank" rel="external">https://toolbelt.heroku.com/</a><br>依照网站指示下载安装。</p>
+<p>检查是否完成安装，可以输入 heroku –version<br>应该会看到heroku 的版本</p>
+<p>3.完成 Heroku 的 SSH-key 的设定<br>先输入 <code>heroku login</code> 确认登入，输入email、密码（密码不会显示，输入完直接按return即可）</p>
+<p>再输入 <code>heroku keys:add</code> 即可</p>
+<ol>
+<li><p>在终端（Terminal）里输入<code>heroku create</code><br> 每输入一次 heroku create 都会生成一个新的 herokuapp ，免费帐号预设上限为5个。超过5个的时候，请手动登入自己的heroku网址删除app。</p>
+</li>
+<li><p>最后再输入 <code>git push heroku master</code></p>
+</li>
+<li>部署成功后，输入 <code>heroku run rake db:migrate</code></li>
+<li>输入 <code>heroku open</code> 可以打开刚刚部署成功的 app 了</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/spring-boot-初步学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1566,155 +1715,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/19/1. 怎么查看某个方法的原代码？比如 simple_form_for/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/19/1. 怎么查看某个方法的原代码？比如 simple_form_for/" itemprop="url">问题列表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-19T16:22:04+08:00">
-                2016-12-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/12/19/1. 怎么查看某个方法的原代码？比如 simple_form_for/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/12/19/1. 怎么查看某个方法的原代码？比如 simple_form_for/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>怎么查看某个方法的原代码？比如 simple_form_for<br>答：github 啊，全世界的开源项目都在这里啊。google 搜索 simple_form ，会把这个项目所在的 github 找出来。 git clone 命令能克隆到本地。想怎么看怎么看，但是因为这是 gem，所以目录会和我们写的项目稍微不一样吧。</li>
-</ol>
-<p><img src="http://ww2.sinaimg.cn/large/006tNbRwjw1fa4sevepvtj31kw0x2gtx.jpg" alt=""></p>
-<ol>
-<li>=&gt;   这个符号是什么意思，怎么使用？<br>答：这个是 ruby 中的 hash ，google 搜索 关键词 ruby hash，跟着google出来的内容，把每一行代码在终端里输入试试。在终端输入 irb ，可立即开启 ruby 运行环境。</li>
-</ol>
-<p><img src="http://ww3.sinaimg.cn/large/006tNbRwjw1fa4siq3u5bj30y0082mxu.jpg" alt=""></p>
-<ol>
-<li>custom route 和named route有什么区别？<br>答：custom route 指的是自定义 route 吧，就是自定义路径。<br>除了 rails 自动封装好的那七个之外，我觉得都是自定义。<br>预设的七个 「 new create edit update delete index show 」.<br>之外的都是自定义的吧。比如</li>
-</ol>
-<p><img src="http://ww4.sinaimg.cn/large/006tNbRwjw1fa6z2j9b1lj30os0caacb.jpg" alt=""></p>
-<ol>
-<li><p>params中的数据是怎么得到的？<br>http 请求，也就是 HttpRequest ,在这个里面都会有请求的信息，在控制台上能看到。params 就是通过 request.getParams 这种方法获得的，只不过 rails 给自动获取了，我们通过 params[:id] 直接就能得到 id 的值了。</p>
-</li>
-<li><p>URL和routes 有什么区别？<br>URL 是指链接，routes是指路由。<br>比如：<a href="http://localhost:8081/paper/form_setting/56/edit" target="_blank" rel="external">http://localhost:8081/paper/form_setting/56/edit</a> 这是 url，<br>routes指的是 routes.rb 中那些路由设置吧，你看看这个文件就明白了吧。</p>
-</li>
-</ol>
-<p><img src="http://ww2.sinaimg.cn/large/006tNbRwjw1fa6z8y1axaj30x005a3zy.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1765,7 +1765,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
