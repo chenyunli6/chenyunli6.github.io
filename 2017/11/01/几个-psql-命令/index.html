@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="rails," />
+  <meta name="keywords" content="Learn & Get Everyday," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="集合操作 x = MultiSet.new([1,1,2,2,3,4,5,6])y = MultiSet.new([1,3,5,6]) x - y     =&amp;gt; [2,2,4]                    差集x &amp;amp; y     =&amp;gt; [1,3,5,6]                交集x | y     =&amp;gt;[1,2,3,4,5,6]">
-<meta name="keywords" content="rails">
+<meta name="description" content="$ psql postgres进入psql 命令postgres=# \c testdb; （进入 testdb 数据库 ）testdb-# \d posts; （列出 posts 表结构） 参考：PostgreSQL SQL Syntax and Use PostgreSQL - SELECT Database">
+<meta name="keywords" content="Learn &amp; Get Everyday">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Array">
-<meta property="og:url" content="http://yoursite.com/2016/08/28/2016-08-28-813154/index.html">
+<meta property="og:title" content="几个 psql 命令">
+<meta property="og:url" content="http://yoursite.com/2017/11/01/几个-psql-命令/index.html">
 <meta property="og:site_name" content="这里有我的脚丫印😄">
-<meta property="og:description" content="集合操作 x = MultiSet.new([1,1,2,2,3,4,5,6])y = MultiSet.new([1,3,5,6]) x - y     =&amp;gt; [2,2,4]                    差集x &amp;amp; y     =&amp;gt; [1,3,5,6]                交集x | y     =&amp;gt;[1,2,3,4,5,6]">
+<meta property="og:description" content="$ psql postgres进入psql 命令postgres=# \c testdb; （进入 testdb 数据库 ）testdb-# \d posts; （列出 posts 表结构） 参考：PostgreSQL SQL Syntax and Use PostgreSQL - SELECT Database">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-03T09:08:51.000Z">
+<meta property="og:updated_time" content="2017-11-01T11:15:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Array">
-<meta name="twitter:description" content="集合操作 x = MultiSet.new([1,1,2,2,3,4,5,6])y = MultiSet.new([1,3,5,6]) x - y     =&amp;gt; [2,2,4]                    差集x &amp;amp; y     =&amp;gt; [1,3,5,6]                交集x | y     =&amp;gt;[1,2,3,4,5,6]">
+<meta name="twitter:title" content="几个 psql 命令">
+<meta name="twitter:description" content="$ psql postgres进入psql 命令postgres=# \c testdb; （进入 testdb 数据库 ）testdb-# \d posts; （列出 posts 表结构） 参考：PostgreSQL SQL Syntax and Use PostgreSQL - SELECT Database">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/28/2016-08-28-813154/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/01/几个-psql-命令/"/>
 
 
 
 
 
-  <title>Array | 这里有我的脚丫印😄</title>
+  <title>几个 psql 命令 | 这里有我的脚丫印😄</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/28/2016-08-28-813154/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/几个-psql-命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Array</h1>
+          <h1 class="post-title" itemprop="name headline">几个 psql 命令</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-28T16:41:00+08:00">
-                2016-08-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T19:15:21+08:00">
+                2017-11-01
               </time>
             
 
@@ -281,9 +281,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/08/28/2016-08-28-813154/#comments" itemprop="discussionUrl">
+                <a href="/2017/11/01/几个-psql-命令/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/28/2016-08-28-813154/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/11/01/几个-psql-命令/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -311,13 +311,9 @@
       
 
       
-        <p>集合操作</p>
-<p>x = MultiSet.new([1,1,2,2,3,4,5,6])<br>y = MultiSet.new([1,3,5,6])</p>
-<p>x - y     =&gt; [2,2,4]                    差集<br>x &amp; y     =&gt; [1,3,5,6]                交集<br>x | y     =&gt;[1,2,3,4,5,6]            并集</p>
-<p>a = [1,2,3]<br>a.any?<br>=&gt; true</p>
-<p>a.clear<br>a.any?<br>=&gt; false</p>
-<p>[nil, 1].any?<br>=&gt; true<br>[nil, nil].any?<br>=&gt; false</p>
-<p>a = []<br>=&gt; []<br>a.empty?<br>=&gt; true<br>a = [nil, false]<br>=&gt; [nil, false]<br>a.empty?<br>=&gt; false<br>a = [nil]<br>=&gt; [nil]<br>a.empty?<br>=&gt; false</p>
+        <p><code>$ psql postgres</code><br>进入psql 命令<br><code>postgres=# \c testdb;</code> （进入 testdb 数据库 ）<br><code>testdb-# \d posts;</code> （列出 posts 表结构）</p>
+<p>参考：<br><a href="http://www.informit.com/articles/article.aspx?p=409471&amp;seqNum=5" target="_blank" rel="external">PostgreSQL SQL Syntax and Use</a></p>
+<p><a href="https://www.tutorialspoint.com/postgresql/postgresql_select_database.htm" target="_blank" rel="external">PostgreSQL - SELECT Database</a></p>
 
       
     </div>
@@ -335,7 +331,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/rails/" rel="tag"># rails</a>
+            <a href="/tags/Learn-Get-Everyday/" rel="tag"># Learn & Get Everyday</a>
           
         </div>
       
@@ -348,8 +344,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/27/2016-08-27-model/" rel="next" title="Model">
-                <i class="fa fa-chevron-left"></i> Model
+              <a href="/2017/10/30/对-OpenStruct-和-instance-eval-初步了解/" rel="next" title="对 OpenStruct 和 instance_eval 初步了解">
+                <i class="fa fa-chevron-left"></i> 对 OpenStruct 和 instance_eval 初步了解
               </a>
             
           </div>
@@ -357,10 +353,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/28/2016-08-28-json-view-resolved/" rel="prev" title="json在view中解析">
-                json在view中解析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -623,9 +615,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2016/08/28/2016-08-28-813154/';
-          this.page.identifier = '2016/08/28/2016-08-28-813154/';
-          this.page.title = 'Array';
+          this.page.url = 'http://yoursite.com/2017/11/01/几个-psql-命令/';
+          this.page.identifier = '2017/11/01/几个-psql-命令/';
+          this.page.title = '几个 psql 命令';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chenyunli.disqus.com/embed.js';

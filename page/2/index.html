@@ -232,6 +232,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/使用-figaro-管理密码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/06/使用-figaro-管理密码/" itemprop="url">使用 figaro 管理密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T23:09:36+08:00">
+                2017-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/06/使用-figaro-管理密码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/06/使用-figaro-管理密码/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>安装 figaro<br><code>gem figaro</code> 加到gemfile 中<br><code>bundle install</code><br><code>figaro install</code><br>会自动生成 config/application.yml 文件并自动添加到 .gitignore 档案里</p>
+</li>
+<li><p>设置机密信息<br><code>cp config/application.yml config/application.yml.example</code><br>application.yml 被加入到 .gitignore 中，为了方便协作，把 application.yml 复制一个样例放入 application.yml.example 中</p>
+</li>
+<li><p>figaro 配置到 heroku 环境变量中<br><code>figaro heroku:set -e production</code><br>这会把 config/application.yml 中设置的变量写入 heroku 环境变量中，使用 <code>heroku config</code> 可以列出目前所有的配置</p>
+</li>
+</ol>
+<p>如何在 Heroku 设置环境变数，参考 <a href="https://devcenter.heroku.com/articles/config-vars" target="_blank" rel="external">https://devcenter.heroku.com/articles/config-vars</a></p>
+<p>如何在本地设置环境变数，参考 <a href="http://thejavashop.net/blog/?p=5" target="_blank" rel="external">http://thejavashop.net/blog/?p=5</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/部署-app-到-heroku/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1574,147 +1714,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/25/gem wicked_pdf 的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/25/gem wicked_pdf 的使用/" itemprop="url">gem wicked_pdf 的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-25T21:01:04+08:00">
-                2016-12-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/12/25/gem wicked_pdf 的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/12/25/gem wicked_pdf 的使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考 github 网址：<a href="">https://github.com/mileszs/wicked_pdf</a><br>注：我的是 gem ‘rails’, ‘~&gt; 4.2’，所以github官网上有些配置不需要配置<br>参考链接:<br> <a href="https://reinteractive.com/posts/270-wickedpdf-and-custom-fonts-in-rails" target="_blank" rel="external">https://reinteractive.com/posts/270-wickedpdf-and-custom-fonts-in-rails</a><br> <a href="http://cnedelcu.blogspot.com/2015/04/wkhtmltopdf-chinese-character-support.html" target="_blank" rel="external">http://cnedelcu.blogspot.com/2015/04/wkhtmltopdf-chinese-character-support.html</a><br> <a href="https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html" target="_blank" rel="external">https://blog.ragnarson.com/2014/01/13/generating-pdfs-with-custom-fonts-using-wkhtmltopdf.html</a></p>
-<p>1.添加 gem 到 Gemfile</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'wkhtmltopdf-binary'</span> <span class="comment">#(wicked_pdf 依赖这个 gem)</span></div><div class="line">gem <span class="string">'wicked_pdf'</span></div><div class="line"><span class="string">``</span><span class="string">`  </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">2.终端执行 `</span>rails generate wicked_pdf<span class="string">`,这会生成一个文件 `</span>config/initializers/wicked_pdf.rb<span class="string">`</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">3.在 controller 中加入 format.pdf, 如果没有什么特殊的样式，pdf 和 html 引入的 js 和 css 都是一致的，因为要加入 wicked_pdf 的 tag，所以我区分了两个 layout</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span>rb</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThingsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    respond_to <span class="keyword">do</span> <span class="params">|format|</span></div><div class="line">      format.html <span class="keyword">do</span></div><div class="line">        load_exam_entry</div><div class="line">        render <span class="string">'show'</span>, <span class="symbol">layout:</span> <span class="string">'exams'</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">      format.pdf <span class="keyword">do</span></div><div class="line">        load_exam_entry</div><div class="line">        render <span class="symbol">pdf:</span> <span class="string">"file_name"</span>,<span class="symbol">layout:</span> <span class="string">'exams_pdf'</span>   <span class="comment"># Excluding ".pdf" extension.</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>4.<code>layout: &#39;exams_pdf&#39;</code> 的配置, 修改的地方就是把 <code>&lt;%= stylesheet_link_tag &#39;exams&#39; %&gt;
-  &lt;%= javascript_include_tag &#39;exams&#39; %&gt;</code> 改成 <code>&lt;%= wicked_pdf_stylesheet_link_tag &#39;exams&#39; %&gt;
-  &lt;%= wicked_pdf_javascript_include_tag &#39;exams&#39; %&gt;</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> (@<span class="attr">exam.try</span> <span class="attr">:paper</span>)<span class="attr">.try</span>(<span class="attr">:name</span>) || '考试结束' %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">favicon_link_tag</span>('<span class="attr">favicon.ico</span>') %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">wicked_pdf_stylesheet_link_tag</span> '<span class="attr">exams</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">wicked_pdf_javascript_include_tag</span> '<span class="attr">exams</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span>  <span class="attr">render</span> '<span class="attr">shared</span>/<span class="attr">track</span>/<span class="attr">site_master</span>' %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">csrf_meta_tags</span> %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">yield</span> %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>5.以上四步就可以预览 pdf ；</p>
-<p>6.这里加上 <code>dpi: 72</code> 可以加快生成速度，<code>disposition: &#39;attachment&#39;</code> 这个是作为附件下载，而不是网页预览。</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">pdf:</span> file_name,<span class="symbol">layout:</span> <span class="string">'exams_pdf'</span>, <span class="symbol">encoding:</span> <span class="string">'UTF-8'</span>, <span class="symbol">dpi:</span> <span class="number">72</span>, <span class="symbol">disposition:</span> <span class="string">'attachment'</span></div></pre></td></tr></table></figure>
-<p>7.由于 <code>wkhtmltopdf</code> 是依赖系统的字体生成 pdf ，所以要在服务器上安装相应字体，不然到 uat 或者生产环境，没有字体的话，中文都会显示成小框框。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1765,7 +1764,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

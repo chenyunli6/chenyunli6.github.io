@@ -232,6 +232,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835824/" itemprop="url">view中好用的小知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:28:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835824/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835824/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="view中好用的小知识"><a href="#view中好用的小知识" class="headerlink" title="view中好用的小知识"></a>view中好用的小知识</h2><p>尽量只出现跟前端有关系的东西，不要把判断以及逻辑相关的code放在view。<br>不好的做法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> current_user %&gt;</div><div class="line">    &lt;p&gt;&lt;%= current_user.name %&gt;&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">&lt;% else %&gt;</span></div><div class="line"><span class="regexp">    &lt;p&gt;Not Logined&lt;/p</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>比较好的做法是将if else 改写在partial中，并把current_user.name用helper包起来。这样html code可读性大大提升。</p>
+<h3 id="Helper"><a href="#Helper" class="headerlink" title="Helper"></a>Helper</h3><p>Helper使用情景：</p>
+<ul>
+<li>产生的html code 需要与原始码逻辑混合，但不希望view里面太乱</li>
+<li>需要与rails内建的一些方便的helper交叉使用</li>
+</ul>
+<p>helper的好处：</p>
+<ul>
+<li>Don‘t repeat youeself 代码不重复</li>
+<li>Good Encapsulation 好的封装性</li>
+<li>提供view模版良好的组织</li>
+<li>易于修改代码</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">BoardsHelper</span></span></div><div class="line"><span class="comment"># 回傳board的name，避免在view中做太多判斷</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name</span><span class="params">(board)</span></span></div><div class="line">      <span class="keyword">if</span> board.present?</div><div class="line">        board.name</div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="string">"unknown"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 常常重複的區段也可以寫進 helper，統一管理</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">render_board_name_path</span><span class="params">(board)</span></span></div><div class="line">    link_to(board.name, board_path(board))</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view中可以直接取用如下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= render_board_name_path(@board) %&gt;</div></pre></td></tr></table></figure>
+<h3 id="partial"><a href="#partial" class="headerlink" title="partial"></a>partial</h3><p>partial 就是代码中的一小段，通常使用在html中，让view的code更干净，将重复的区块切成独立的partial，比如首页，footer，表单，等，让任何页面都能用这段partial，而不用重复写一摸一样的code。</p>
+<p>partial使用情景</p>
+<ul>
+<li>long template 如果html超过两页</li>
+<li>highly duplicated html内容高度重复</li>
+<li>independent blocks 可独立作为功能的区块</li>
+</ul>
+<p>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">&lt;% @topics.each <span class="keyword">do</span> <span class="params">|topic|</span> %&gt;</div><div class="line">  &lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">  &lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">  &lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;%= render <span class="string">"topic_list"</span> %&gt;</div><div class="line">...</div></pre></td></tr></table></figure>
+<h4 id="collection-partial"><a href="#collection-partial" class="headerlink" title="collection partial"></a>collection partial</h4><p>上例可以改写<br>_topic_list.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;li&gt;<span class="comment"># &lt;%= topic.id %&gt;&lt;/li&gt;</span></div><div class="line">&lt;li&gt;Topic <span class="symbol">Name:</span> &lt;%= link_to(topic.title, topic_path(topic)) %&gt;&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">&lt;li&gt;Description: &lt;%= topic.content %&gt;&lt;/li</span>&gt;</div></pre></td></tr></table></figure>
+<p>index.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">&lt;ul&gt;&lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"topic_list"</span>, <span class="symbol">:collection</span> =&gt; @topics, <span class="symbol">:as</span> =&gt; <span class="symbol">:topic</span> %&gt;&lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">...</span></div></pre></td></tr></table></figure>
+<h3 id="partial-amp-helper"><a href="#partial-amp-helper" class="headerlink" title="partial&amp;helper"></a>partial&amp;helper</h3><p>partial 复杂处理大段html code或是之后利用ajax render出来的片段</p>
+<p>helper则负责跟逻辑判断有关的东西</p>
+<p>比如：<br>topics_helper.rb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">TopicsHelper</span></span></div><div class="line"><span class="comment"># 需要邏輯判斷的工作留給helper</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">render_published_topic_name_path</span><span class="params">(topic)</span></span></div><div class="line">    link_to(topic.name, topic_path(topic))  <span class="keyword">if</span> topic.is_published?</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>_topic_info.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># partial只需要負責html的部分</span></div><div class="line">&lt;table&gt;</div><div class="line">  &lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">     &lt;td&gt;Topic name&lt;<span class="regexp">/td&gt;</span></div><div class="line"><span class="regexp">    &lt;/tr</span>&gt;</div><div class="line">  &lt;<span class="regexp">/thead&gt;</span></div><div class="line"><span class="regexp">  &lt;tbody&gt;</span></div><div class="line"><span class="regexp">    &lt;tr&gt;</span></div><div class="line"><span class="regexp">      &lt;td&gt;&lt;%= render_published_topic_name_path(topic) %&gt;&lt;/td</span>&gt;</div><div class="line">    &lt;<span class="regexp">/tr&gt;</span></div><div class="line"><span class="regexp">  &lt;/tbody</span>&gt;</div><div class="line">&lt;table&gt;</div></pre></td></tr></table></figure>
+<h3 id="yiled-in-view"><a href="#yiled-in-view" class="headerlink" title="yiled in view"></a>yiled in view</h3><p>yield就是会被替换成样板的地方，基本上所有的html.erb最后都会显示在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">这样的好处是将网站版型固定。只需要在出现内容的地方用yield引进即可。</div><div class="line"></div><div class="line">application.html.erb</div><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  ...</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    # erb檔案就是被引入這裡</div><div class="line">    &lt;%= yield %&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  #可以指定要yield哪個區塊</div><div class="line">  &lt;%= yield(:javascripts) %&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>还可以用content_for让content替换掉<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%= content_for :javascripts do %&gt;</div><div class="line">    #content here</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="Nested-form"><a href="#Nested-form" class="headerlink" title="Nested form"></a>Nested form</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:specs</span>, <span class="symbol">:dependent</span> =&gt; <span class="symbol">:destroy</span></div><div class="line">  accepts_nested_attributes_for <span class="symbol">:specs</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spec</span> &lt; ActiveRecord</span></div><div class="line">  belongs_to <span class="symbol">:product</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>view/admin/products/_form.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%= simple_form_for [<span class="symbol">:admin</span>, @product] <span class="keyword">do</span> <span class="params">|f|</span>  %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:name</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:description</span>, <span class="symbol">:required</span> =&gt; <span class="literal">true</span> %&gt;</div><div class="line">  &lt;%= f.input <span class="symbol">:price</span> %&gt;</div><div class="line"></div><div class="line">  &lt;!-- nested form從這裡開始 --&gt;</div><div class="line">  &lt;%= f.simple_fields_for <span class="symbol">:specs</span> <span class="keyword">do</span> <span class="params">|spec|</span> %&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:name</span> %&gt; &lt;!-- spec的name欄位 --&gt;</div><div class="line">    &lt;%= spec.input <span class="symbol">:detail</span> %&gt; &lt;!-- spec的detail欄位 --&gt;</div><div class="line">  &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">  &lt;!-- nested form結束 --&gt;</div><div class="line"></div><div class="line">  &lt;%= f.button <span class="symbol">:submit</span>, <span class="string">"Submit"</span>, <span class="symbol">:disable_with</span> =&gt; <span class="string">"Submiting..."</span> %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/01/2016-09-01-827120/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1597,160 +1772,6 @@ NotificationService.new(@question.user,current_user,@answer).send_notification!
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="url">semantic-ui引用到rails</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T10:26:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-semantic-ui-references-to-the-rails/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考：<br><a href="https://github.com/doabit/semantic-ui-sass" target="_blank" rel="external">https://github.com/doabit/semantic-ui-sass</a><br><a href="http://semantic-ui.com/" target="_blank" rel="external">http://semantic-ui.com/</a></p>
-<p>1.安装gem<br>    gem ‘semantic-ui-sass’, github: ‘doabit/semantic-ui-sass’<br>  bundle install</p>
-<p>2.引用到项目中<br>    app/assets/stylesheets/application.scss 中加入<br>  <figure class="highlight plain"><figcaption><span>"semantic-ui";```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">app/assets/javascripts/application.js  中加入</div><div class="line">```//= require semantic-ui</div></pre></td></tr></table></figure></p>
-<p>3.去官网找到一些demo，实现效果<br>    <a href="http://semantic-ui.com/introduction/getting-started.html" target="_blank" rel="external">http://semantic-ui.com/introduction/getting-started.html</a></p>
-<p>  比如找到dropdown,下面截图是多选下拉的效果(可以自己点开网页中的按钮试一试)</p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/QcqpMfrT7qwzPPjFMSow_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.32.png" alt="屏幕快照 2016-08-24 上午11.01.32.png"></p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/7eiXvQtR2ODO9Es5R8TH_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.01.22.png" alt="屏幕快照 2016-08-24 上午11.01.22.png"></p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/6sLlCsnZSAWxP4fdO88g_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.28.png" alt="屏幕快照 2016-08-24 上午11.04.28.png"></p>
-<p>下面这个是启用js效果的示例</p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/802251/pIjlRP5dT9KigC9Dj6uL_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-24%20%E4%B8%8A%E5%8D%8811.04.58.png" alt="屏幕快照 2016-08-24 上午11.04.58.png"></p>
-<p>我是这样写的，在我的页面中加入，这样就把官网的示例引用成功了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(function()&#123;</div><div class="line">  $(&apos;.ui.dropdown&apos;)</div><div class="line">  .dropdown(&#123;</div><div class="line">    allowAdditions: true</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div class=&quot;ui multiple dropdown&quot;&gt;</div><div class="line">  &lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div><div class="line">  &lt;i class=&quot;filter icon&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;span class=&quot;text&quot;&gt;Filter Posts&lt;/span&gt;</div><div class="line">  &lt;div class=&quot;menu&quot;&gt;</div><div class="line">    &lt;div class=&quot;ui icon search input&quot;&gt;</div><div class="line">      &lt;i class=&quot;search icon&quot;&gt;&lt;/i&gt;</div><div class="line">      &lt;input type=&quot;text&quot; placeholder=&quot;Search tags...&quot;&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;header&quot;&gt;</div><div class="line">      &lt;i class=&quot;tags icon&quot;&gt;&lt;/i&gt;</div><div class="line">      Tag Label</div><div class="line">    &lt;/div&gt;</div><div class="line">    &lt;div class=&quot;scrolling menu&quot;&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;important&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui red empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Important</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;announcement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui blue empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Announcement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;cannotfix&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui black empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Cannot Fix</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;news&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui purple empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        News</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;enhancement&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui orange empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Enhancement</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;off-topic&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui yellow empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Off Topic</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;interesting&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui pink empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Interesting</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class=&quot;item&quot; data-value=&quot;discussion&quot;&gt;</div><div class="line">        &lt;div class=&quot;ui green empty circular label&quot;&gt;&lt;/div&gt;</div><div class="line">        Discussion</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>4.把选择的值传入controller<br>注意到有这一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;hidden&quot; name=&quot;filters&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>通过网页右键检查，可以看出添加的value都会以<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">面。那么在controller里面就可以通过params[:filters]接收。</div><div class="line">可以转换成数组</div></pre></td></tr></table></figure></p>
-<pre><code># 这个是字符串
-filters = params[:filters]
-</code></pre><p>  ＃这里是转化成数组<br>  filters_array ＝ filters.split(“,”)</p>
-<h1 id="后面就可以做自己需要做的了"><a href="#后面就可以做自己需要做的了" class="headerlink" title="后面就可以做自己需要做的了"></a>后面就可以做自己需要做的了</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">并且要注意这一行，</div></pre></td></tr></table></figure>
-<p><div class="item" data-value="interesting"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">这里是用data-value里面的值作为选择后放入filters的元素。比如这里是data-value=&quot;interesting&quot;，那么选中它之后</div><div class="line">就会在filters中加入interesting。</div><div class="line"></div><div class="line">5.编辑页面回显</div><div class="line"></div><div class="line">用这种方式可以设置默认值或者是回显的值</div><div class="line">  //$(&apos;.ui.dropdown&apos;).dropdown(&apos;set selected&apos;,[&apos;Role1&apos;,&apos;Role2&apos;]);</div><div class="line">用这个会自动给生成 a 标签，这个和在filters中赋值回显回来的效果一样</div><div class="line">这两种方法显示的内容我不知道如何让它像我新增时那样丰富</div><div class="line">所以没有用这两种，用的下面的这个，当data-value一致时会把自动生成的给覆盖掉</div><div class="line">```&lt;% unless @invitated_users.nil? %&gt;</div><div class="line">    &lt;% @invitated_users.each do |user| %&gt;</div><div class="line">     &lt;a class=&quot;ui label transition visible&quot; data-value=&quot;&lt;%= user.id %&gt;&quot; style=&quot;display: inline-block !important;&quot;&gt;</div><div class="line">        &lt;%= gravatar_tag user.email, :size =&gt; 50, :default =&gt; avatar_url %&gt;</div><div class="line">        &lt;%= user.name %&gt;</div><div class="line">        回答数量：&lt;%= user.answers.count %&gt;</div><div class="line">        &lt;i class=&quot;delete icon&quot;&gt;&lt;/i&gt;</div><div class="line">     &lt;/a&gt;</div><div class="line">    &lt;% end %&gt;</div><div class="line">  &lt;% end %&gt;</div></pre></td></tr></table></figure></div></p>
-<p>这样就回显成功了。</p>
-<p>当取消掉或新增，进入update方法时，需要比较一下，新增的有哪些，取消的有哪些，取消的要从数据库中删掉，新增的再插入数据库。</p>
-<p>我用的是  并集 ＝ 新的集合 | 数据库中老的集合<br>                 需要新插入数据库的集合 ＝ 并集 - 数据库中老的集合<br>         需要删除的集合 ＝ 并集 － 新的集合</p>
-<pre><code>然后分别对新增和删除的集合进行Model运算
-</code></pre><p>暂时这样，应该可以说清楚了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1801,7 +1822,7 @@ filters = params[:filters]
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
