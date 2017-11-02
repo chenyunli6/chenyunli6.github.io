@@ -232,6 +232,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/heroku-上-action-mailer-的配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/06/heroku-上-action-mailer-的配置/" itemprop="url">heroku 上 action_mailer 的配置 </a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T23:15:01+08:00">
+                2017-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/06/heroku-上-action-mailer-的配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/06/heroku-上-action-mailer-的配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考 <a href="http://usingname.space/2015/07/25/gmail-smtp-ruby-on-rails-actionmailer-and-you/" target="_blank" rel="external">http://usingname.space/2015/07/25/gmail-smtp-ruby-on-rails-actionmailer-and-you/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">config.action_mailer.default_url_options = &#123; host: &apos;myapp.herokuapp.com&apos; &#125;</div><div class="line">config.action_mailer.delivery_method = :smtp</div><div class="line">config.action_mailer.perform_deliveries = true</div><div class="line">config.action_mailer.raise_delivery_errors = false</div><div class="line">config.action_mailer.default :charset =&gt; &quot;utf-8&quot;</div><div class="line">config.action_mailer.smtp_settings = &#123;</div><div class="line">  address: &quot;smtp.gmail.com&quot;,</div><div class="line">  port: 587,</div><div class="line">  domain: &quot;myapp.herokuapp.com&quot;,</div><div class="line">  authentication: &quot;plain&quot;,</div><div class="line">  enable_starttls_auto: true,</div><div class="line">  user_name: ENV[&quot;GMAIL_USERNAME&quot;],</div><div class="line">  password: ENV[&quot;GMAIL_PASSWORD&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这块我都弄好部署到 heroku 了，但是还是发送不成功， hero 的 log 中可以看到，gmail 有一些安全验证，就算拿到了 gamil 的账户和密码，gmail 也会阻止不安全的应用登录，我修改了gmail的配置，也没有行，所以，我觉得测试到这里就差不多了，我也有点害怕把邮箱搞的不安全了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/使用-figaro-管理密码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1577,143 +1710,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/来小金的第一个年会/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/21/来小金的第一个年会/" itemprop="url">来小金的第一个年会</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-21T01:07:04+08:00">
-                2017-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/21/来小金的第一个年会/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/01/21/来小金的第一个年会/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我是一个爱哭的女孩，不管你是看到我哪一面的人，我都得承认，<strong>我很爱哭</strong>。曾经因为这个都想找个心理医生看看。</p>
-<p>嗯，我写下这第一句话的时候就噙着泪水，因为此刻，我还在为自己来到小金的第一个年会感动着，为自己这三个月以来受到的帮助感动着，为自己来到了棒棒的团队感动着。<strong>我觉得自己生平第一次被一个公司肯定。我以最真实的面貌面试上了这家如此棒的公司，并且享受着在这里的时光。</strong></p>
-<p>从刚面试的时候，方方和alice对我的肯定，给我 pair 的晓峰对我的肯定，以及后来姜姐、家骥、波波、东东，他们对我的帮助，让我的 rails 和解决问题的能力得以进步和提高。大家应该能感受到，对于刚进入公司并且技术很薄弱的我来说，这些肯定和帮助都给了我多大鼓舞和感动。一次次面临具体问题的时候，都是他们在我最着急的时刻给我提示，帮我一起解决问题，我词穷，貌似我说的都表达不出这其中的滋味。每一次解决问题后都能让我兴奋好一阵子。</p>
-<p>小金的每个人都很有特点，我想就像今天春雷他们表演的段子一样，每个人都能挑出来说的岂止是虚构的段子，小金充满欢乐，充满正能量，也让我觉得来到小金很幸运很幸福。<strong>三人行必有我师，我觉得小金的每位员工，都有值得我学习的地方。</strong></p>
-<p>我回北京跟一起培训的同学有聚会过，我觉得他们都很优秀，但是貌似和以前的朋友一样的是少不了对公司的抱怨，<strong>但是我很骄傲，我在饭桌上把小金夸了一遍，我说为什么我在的团队超级棒，根本没有你们说的这些问题？他们或许会羡慕我待的团队吧。幸福ing…</strong></p>
-<p>像题目开头说的，我爱哭，年会大家一起 happy 的时候我想哭，家人团圆的时候我想哭，受到了一点鼓舞我会哭。<strong>或许我就是这样容易受到感动，但是这样似乎也很好，让我感受到很多暖暖的情谊。</strong></p>
-<p>2017，让我和小金一起成长！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1764,7 +1760,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1777,7 +1773,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

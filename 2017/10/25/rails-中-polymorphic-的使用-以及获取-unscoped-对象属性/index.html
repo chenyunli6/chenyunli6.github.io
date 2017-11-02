@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="这里有我的脚丫印😄">
 <meta property="og:description" content="注意：本文小写的变量都为实例变量，如：employee 使用 polymorphic场景： Employee 和 Product 都 has_many pictures, 但是又不希望创建两个类似的 pictures 表。也就是我们希望Employee 和 Product 可以同时关联上 Picture, 最后能从 pictures 表中各取所需，也可以在 Picture 的每个实例对象中获得所属">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-26T09:46:34.000Z">
+<meta property="og:updated_time" content="2017-11-02T11:36:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rails 中 polymorphic 的使用, 以及获取 unscoped 对象属性">
 <meta name="twitter:description" content="注意：本文小写的变量都为实例变量，如：employee 使用 polymorphic场景： Employee 和 Product 都 has_many pictures, 但是又不希望创建两个类似的 pictures 表。也就是我们希望Employee 和 Product 可以同时关联上 Picture, 最后能从 pictures 表中各取所需，也可以在 Picture 的每个实例对象中获得所属">
@@ -360,7 +360,7 @@
 <ol>
 <li>一开始文中写的是 scope ，是写错了，现在改正过来了。</li>
 <li>最好不使用 default_scope</li>
-<li><p>如果非要使用 default_scope 可以用比文中更好一点的解决方法：</p>
+<li><p>如果非要使用 default_scope 可以用比文中更好一点的解决方法：(此方法发现 bug ，暂时还是不使用了，因为我们暂时不牵扯到)</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">belongs_to :imageable, -&gt; &#123; unscope(:where) &#125;, polymorphic: true</div></pre></td></tr></table></figure>
 <p> 文中的方法会导致 includes 无效等问题。</p>
 </li>
@@ -491,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -504,7 +504,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
