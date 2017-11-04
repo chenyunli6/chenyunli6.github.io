@@ -232,6 +232,247 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-station-letter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/24/2016-08-24-station-letter/" itemprop="url">站内信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T19:01:00+08:00">
+                2016-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/24/2016-08-24-station-letter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/24/2016-08-24-station-letter/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.创建model</p>
+<pre><code>rails g model notification
+</code></pre><p>  添加 migration</p>
+<pre><code>class CreateNotifications &lt; ActiveRecord::Migration[5.0]
+  def change
+    create_table :notifications do |t|
+      t.integer :recipient_id
+      t.integer :actor_id
+      t.datetime :read_at
+      t.string :action
+      t.integer :notifiable_id
+      t.string :notifiable_type
+
+      t.timestamps
+    end
+  end
+end
+</code></pre><p>rake db:migrate</p>
+<p>补充model</p>
+<pre><code>class Notification &lt; ApplicationRecord
+   belongs_to :recipient, class_name: &quot;User&quot;
+   belongs_to :actor, class_name: &quot;User&quot;
+   belongs_to :notifiable, polymorphic: true
+
+   scope :unread, -&gt; { where(read_at: nil) }
+   scope :recent, -&gt; { order(created_at: :desc).limit(5) }
+ end
+</code></pre><p>2.创建controller</p>
+<pre><code>rails g controller notifications
+
+
+
+class NotificationsController &lt; ApplicationController  
+  before_action :authenticate_user!
+  def index
+    @notifications = Notification.where(recipient: current_user).recent
+  end
+
+  def mark_as_read
+    @notifications = Notification.where(recipient: current_user).unread
+    @notifications.update_all(read_at: Time.zone.now)
+    render json: { success: true }
+  end
+end
+</code></pre><p>3.在notifications.coffee中加入</p>
+<pre><code>class Notifications
+
+  constructor: -&gt;
+
+@notifications = $(&quot;[data-behavior=&apos;notifications&apos;]&quot;)
+
+if @notifications.length &gt; 0
+  @handleSuccess @notifications.data(&quot;notifications&quot;)
+  $(&quot;[data-behavior=&apos;notifications-link&apos;]&quot;).on &quot;click&quot;, @handleClick
+
+  setInterval (=&gt;
+    @getNewNotifications()
+  ), 5000
+
+  getNewNotifications: -&gt;
+$.ajax(
+  url: &quot;/notifications.json&quot;
+  dataType: &quot;JSON&quot;
+  method: &quot;GET&quot;
+  success: @handleSuccess
+)
+
+handleClick: (e) =&gt;
+$.ajax(
+  url: &quot;/notifications/mark_as_read&quot;
+  dataType: &quot;JSON&quot;
+  method: &quot;POST&quot;
+  success: -&gt;
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(0)
+)
+
+handleSuccess: (data) =&gt;
+  items = $.map data, (notification) -&gt;
+    notification.template
+
+  unread_count = 0
+  $.each data, (i, notification) -&gt;
+    if notification.unread
+      unread_count += 1
+
+  if unread_count &gt; 0
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).html(&quot;&lt;span class=&apos;label label-danger&apos;&gt;&quot; + unread_count + &quot;&lt;/span&gt;&quot;)
+  else
+    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(unread_count)
+  $(&quot;[data-behavior=&apos;notification-items&apos;]&quot;).html(items)
+
+jQuery -&gt;
+
+  new Notifications
+</code></pre><p>4.在notifications.scss中加入</p>
+<pre><code>.unread {
+ border-left: 3px solid red;
+}
+</code></pre><p>5.创建notification_service.rb</p>
+<figure class="highlight plain"><figcaption><span>NotificationService</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class NotificationService</div><div class="line">  # recipient 接收者</div><div class="line">  # actor 发起者</div><div class="line">  # notifiable  哪张表发起的  比如，question要提醒用户，这里就传question</div><div class="line">  def initialize(recipient, actor, notifiable)</div><div class="line">    @recipient = recipient</div><div class="line">    @actor = actor</div><div class="line">    @notifiable = notifiable</div><div class="line">  end</div><div class="line"></div><div class="line">  # 发送信息</div><div class="line">  def send_notification!</div><div class="line">    Notification.create(recipient: @recipient, actor: @actor, action: &quot;notify_message&quot;, notifiable: @notifiable)</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>6.创建app/views/notifications/questions/_notify_message.html.erb<br>如果需要另外一个model也发送<br>创建app/views/notifications/answers/_notify_message.html.erb</p>
+<p>比如,app/views/notifications/questions/_notify_message.html.erb,这里展示消息要呈现的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;panel-body&quot;&gt;</div><div class="line"></div><div class="line">  &lt;%= notification.actor.name %&gt; 邀请您回答他的问题</div><div class="line"></div><div class="line">  &lt;%= link_to(&quot;去回答&quot;,new_question_answer_path(notification.notifiable_id)) %&gt;</div><div class="line"></div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>_notify_message.html.erb 的名字需要和<br>需要和action: “notify_message”一致，看一下notifications的表结构中有action的字段</p>
+<p>questions的目录和要发送的model一致</p>
+<p>7.在需要发送消息的地方调用service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#将会把@question的id和model(&apos;Question&apos;)的名字存入notifications的#notifiable_id和notifiable_type</div><div class="line"></div><div class="line">NotificationService.new(user,current_user,@question).send_notification!</div></pre></td></tr></table></figure>
+<p>或者</p>
+<pre><code># 将会把@answer的id和model的名字(&apos;Answer&apos;)存入notifications的
+# notifiable_id和notifiable_type
+NotificationService.new(@question.user,current_user,@answer).send_notification!
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-802980/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1507,137 +1748,6 @@ end
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/30/2016-07-30-ruby/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/30/2016-07-30-ruby/" itemprop="url">Ruby</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-30T18:47:00+08:00">
-                2016-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/30/2016-07-30-ruby/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/30/2016-07-30-ruby/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>阅读link_to的文档：<br>1.Look in the source<br>  git clone <a href="http://github.com/rails/rails.git" target="_blank" rel="external">http://github.com/rails/rails.git</a><br>  cd rails<br>  grep -rin ‘def link_to’<br>2.Look at api.rubyonrails.org<br>    搜索link_to<br>3.dash中搜索</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1688,7 +1798,7 @@ end
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
