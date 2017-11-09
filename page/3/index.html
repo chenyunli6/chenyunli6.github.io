@@ -232,6 +232,221 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/21/解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/21/解决方案/" itemprop="url">一些技术问题的解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T01:07:04+08:00">
+                2017-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/21/解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/21/解决方案/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="支持别人的网页嵌入自己的服务"><a href="#支持别人的网页嵌入自己的服务" class="headerlink" title="支持别人的网页嵌入自己的服务"></a>支持别人的网页嵌入自己的服务</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options</a></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fcq3qczcx3j310601ugmd.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">before_action :allow_iframe</div><div class="line"></div><div class="line">def allow_iframe</div><div class="line">  response.headers.except! &apos;X-Frame-Options&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<h2 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h2><p>Private Methods</p>
+<p>So you can only call Private methods from the current context of the object, and you can’t call Private methods with a receiver, even if that receiver is self.</p>
+<p>只能在当前实例里面调用，实例自己调用也是不行的，是这样理解么。 class 里面可以调用，instance.api_value就不行了。 self.api_value 也不行。</p>
+<p>Protected Methods</p>
+<p>However, if you call the method with self it will work:</p>
+<p>So the important thing to note here is, you can call Protected methods inside the context of an object of the same type.</p>
+<h2 id="生成-8-位数字码"><a href="#生成-8-位数字码" class="headerlink" title="生成 8 位数字码"></a>生成 8 位数字码</h2><p>rand.to_s[2..9]</p>
+<h2 id="查看ssh-key"><a href="#查看ssh-key" class="headerlink" title="查看ssh key"></a>查看ssh key</h2><p>➜  goldendata-api git:(master) cd ~/.ssh<br>➜  .ssh cat id_rsa.pub<br>ssh-rsa AAAAB3Nz…….</p>
+<h2 id="登录-uat-的数据库"><a href="#登录-uat-的数据库" class="headerlink" title="登录 uat 的数据库"></a>登录 uat 的数据库</h2><p>登录到远程服务器<br>    ssh 地址<br>进入到 项目的 目录：<br>    cd /var/apps/project/<br>进入到 current 目录：<br>    cd current<br>进入到rails console，做表的操作<br>    RAILS_ENV=uat bundle exec rails c</p>
+<h2 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h2><h3 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h3><p>参考： <a href="http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html" target="_blank" rel="external">http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html</a><br>cookie 的校验<br>params 要是 encode 后的<br>在提交成功的页面的 header 中寻找 cookie 和 params<br>下面的 cookie 和 params 从提交成功的页面 network 里面可以看到。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79ly1fd0jhsqo1oj31kw0m87k5.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">siege -c 50 -r 100 -H &apos;Cookie:entry_token=ijMkkH; ...&apos;  &quot;https://uat.jinshuju.net/f/aqo4ek POST utf8=%E2%9C%93&amp;authenticity_token=%2BTnd349r652JPBzfKMzMv4aGljEMx2LP2tTfN29%2BBgVW2p0W7cfDVEUqHa2uuyMD0zOv%2BCc965yGpbwCBk%2FcIQ%3D%3D...&quot;</div></pre></td></tr></table></figure>
+<p>siege -c50 -t60S -H ‘Content-Type: application/json’ ‘<a href="http://domain.com/path/to/json.php" target="_blank" rel="external">http://domain.com/path/to/json.php</a> POST {“ids”: [“1”,”2”,”3”]}’</p>
+<h3 id="ab-apache-test："><a href="#ab-apache-test：" class="headerlink" title="ab apache test："></a>ab apache test：</h3><p>参考 <a href="http://www.ha97.com/4617.html" target="_blank" rel="external">http://www.ha97.com/4617.html</a></p>
+<p>postdata.txt 里面写 encode 后的参数<br>ab -n 4000 -c 2000 -T ‘application/x-www-form-urlencoded’ -p postdata.txt <a href="https://uat.jinshuju.net/f/x6fXZV" target="_blank" rel="external">https://uat.jinshuju.net/f/x6fXZV</a></p>
+<h2 id="bootstrapvalidator"><a href="#bootstrapvalidator" class="headerlink" title="bootstrapvalidator"></a>bootstrapvalidator</h2><p><a href="http://bootstrapvalidator.votintsev.ru/settings/" target="_blank" rel="external">http://bootstrapvalidator.votintsev.ru/settings/</a></p>
+<h2 id="打开本地-redis"><a href="#打开本地-redis" class="headerlink" title="打开本地 redis"></a>打开本地 redis</h2><p>redis-cli</p>
+<h2 id="同事分享"><a href="#同事分享" class="headerlink" title="同事分享"></a>同事分享</h2><p><a href="https://workflowy.com/s/EuhH.J0gNr5G9LD" target="_blank" rel="external">https://workflowy.com/s/EuhH.J0gNr5G9LD</a></p>
+<h2 id="获取-ssh"><a href="#获取-ssh" class="headerlink" title="获取 ssh"></a>获取 ssh</h2><ol>
+<li>~/.ssh</li>
+<li>cat id_rsa.pub</li>
+</ol>
+<h2 id="header-body-footer"><a href="#header-body-footer" class="headerlink" title="header,body,footer"></a>header,body,footer</h2><h2 id="看测试ing-的-error"><a href="#看测试ing-的-error" class="headerlink" title="看测试ing 的 error"></a>看测试ing 的 error</h2><p>ctrl + t</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p> ps -x | grep elastic</p>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><p>删除远端 branch： git push origin –delete 67_exam_score<br>删除本地 branch： git branch -d 67_exam_score<br>把远端分支拉到本地 <code>git checkout --track origin/daves_branch</code></p>
+<h2 id="snipaste"><a href="#snipaste" class="headerlink" title="snipaste"></a>snipaste</h2><p>截图什么的。</p>
+<h2 id="gemset"><a href="#gemset" class="headerlink" title="gemset"></a>gemset</h2><p>查看当前所有的 gemset 和 当前使用的 gem 管理空间</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcly1fdmjl67ghtj30xq0cgdhk.jpg" alt=""></p>
+<p>rvm gemset list</p>
+<p>.ruby-gemset 里面有我这个 项目使用的 gem 管理的 文件夹。<br>ls -al 可以看到有 .ruby-gemset</p>
+<h2 id="点一遍-所有的页面-按钮"><a href="#点一遍-所有的页面-按钮" class="headerlink" title="点一遍 所有的页面 按钮"></a>点一遍 所有的页面 按钮</h2><h2 id="1-to-01"><a href="#1-to-01" class="headerlink" title="1 to 01"></a>1 to 01</h2><p>sprintf ‘%02d’, 1</p>
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p>ps -x | grep elastic</p>
+<p>杀死进程<br>kill -9 390</p>
+<p>启动 es<br>➜  bin ./elasticsearch -d</p>
+<h2 id="mini-test"><a href="#mini-test" class="headerlink" title="mini test"></a>mini test</h2><p>m test/controllers/entries_controller_test.rb:130</p>
+<p>RUN_COVERAGE=false rake</p>
+<h2 id="自定义-bootstrapValidator-验证器"><a href="#自定义-bootstrapValidator-验证器" class="headerlink" title="自定义 bootstrapValidator 验证器"></a>自定义 bootstrapValidator 验证器</h2><p><a href="http://www.itdadao.com/articles/c15a302743p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a302743p0.html</a></p>
+<h2 id="部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"><a href="#部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想" class="headerlink" title="部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"></a>部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想</h2><p>api 部署被覆盖，所以代码没有生效</p>
+<h2 id="撤销-commit"><a href="#撤销-commit" class="headerlink" title="撤销 commit"></a>撤销 commit</h2><p>git reset –hard c9a9eec9c9b39f7522b9098deada053f1cca0e63<br>HEAD is now at c9a9eec Merge branch ‘master’ into dev</p>
+<p>git push -f origin dev</p>
+<h2 id="git-branch-命名有特殊字符，会-push-不上去"><a href="#git-branch-命名有特殊字符，会-push-不上去" class="headerlink" title="git branch 命名有特殊字符，会 push 不上去"></a>git branch 命名有特殊字符，会 push 不上去</h2><p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fectffff1gj313u02sjsm.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecthdc6etj31720dy0wy.jpg" alt=""></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNbRwly1fecthdiqczj315k0ymaif.jpg" alt=""></p>
+<p>通过 git branch -a 可以查看当然的分支及远端分支<br>git checkout 到去掉特殊字符的分支，然后重新 push ，这个可以把当前分支的commit 也一起commit 到新的分支，不用担心漏掉。</p>
+<h2 id="git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧"><a href="#git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧" class="headerlink" title="git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧"></a>git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧</h2><p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecvsdo3daj317e0gs0wf.jpg" alt=""></p>
+<p>所以 现在解决是通过 git rebase –continue 一个一个的把 Next commands to do (2 remaining commands) 搞到 Last commands done (7 commands done) 这样才能把之前 rebase 停止的部分一个个解决掉，每 continue 一次，检查一下 git status看有没有冲突，有冲突解决一下 。（rebase 的时候，如果有 commit 冲突，就会在那个commit 停止，要把后面的一个个 continue 才能 完成这些操作。）</p>
+<h2 id="在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。"><a href="#在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。" class="headerlink" title="在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。"></a>在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。</h2><p>使用 asset_path(“themes/background/#{template[:name]}.png”) 可以拿到加密后的图片，在js中使用</p>
+<h2 id="gitk-可以调取查看git的窗口"><a href="#gitk-可以调取查看git的窗口" class="headerlink" title="gitk 可以调取查看git的窗口"></a>gitk 可以调取查看git的窗口</h2><h2 id="jquery-unshift"><a href="#jquery-unshift" class="headerlink" title="jquery unshift"></a>jquery unshift</h2><p>matchFields.unshift({id: ‘x_field_1’, text: ‘扩展属性’})<br>这个结果返回的是 插入的 index，而不是 matchFields</p>
+<h2 id="gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard"><a href="#gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard" class="headerlink" title="gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard"></a>gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).on <span class="string">'turbolinks:load'</span>, -&gt;</div><div class="line">  <span class="keyword">return</span> unless $(<span class="string">".app-publish-container"</span>).length</div><div class="line">  ZeroClipboard.destroy()</div><div class="line">  $copyCheckinUrlDom = $(<span class="string">"#copy_checkin_url"</span>)</div><div class="line">  <span class="keyword">new</span> ZeroClipboard $copyCheckinUrlDom</div><div class="line">  $copyCheckinUrlDom.on <span class="string">'click'</span>, -&gt; App.View.showFlashNotification(<span class="string">'复制网址成功'</span>)</div></pre></td></tr></table></figure>
+<h2 id="自定义-jquery-validate"><a href="#自定义-jquery-validate" class="headerlink" title="自定义 jquery-validate"></a>自定义 jquery-validate</h2><p>gd-rt-lottery 中有 callback<br>code-verify 中有 自定义验证器</p>
+<h2 id="rails-异步执行"><a href="#rails-异步执行" class="headerlink" title="rails 异步执行"></a>rails 异步执行</h2><p><a href="http://edgeguides.rubyonrails.org/active_job_basics.html" target="_blank" rel="external">http://edgeguides.rubyonrails.org/active_job_basics.html</a></p>
+<h2 id="Zen-Rails-Security-Checklist"><a href="#Zen-Rails-Security-Checklist" class="headerlink" title="Zen Rails Security Checklist"></a>Zen Rails Security Checklist</h2><p><a href="https://github.com/brunofacca/zen-rails-security-checklist" target="_blank" rel="external">https://github.com/brunofacca/zen-rails-security-checklist</a></p>
+<h2 id="考试0秒问题"><a href="#考试0秒问题" class="headerlink" title="考试0秒问题"></a>考试0秒问题</h2><p>这个bug也是解了很久，但是我没有解决掉。<br>但是通过观察，可以发现，在 safari 中第一次打开浏览器是很容易出现 0 秒的。<br>后来定位到问题是 safari 在写跨域请求的时候，如果你之前没有访问过应用的链接，在往应用链接下写 cookie 的时候是不 work 的，在清除 safari 历史记录之后，百分百重现 0 秒。<br>因此，问题找到。解决方案就是，要在考试提交前，访问一次应用的链接。</p>
+<ol>
+<li>第一种想法是自己偷偷在这个应用 controller 中访问，但是是不可行的，safari 记录的貌似是浏览记录。</li>
+<li>增加了考前必读，让用户先从 应用中进入考试的表单，这样提交的时候就可以跨域写 uid 了。</li>
+</ol>
+<h2 id="性能问题总结"><a href="#性能问题总结" class="headerlink" title="性能问题总结"></a>性能问题总结</h2><p>背景：企业版应用授权反应十分慢。<br>初步疑惑：个人版和企业版代码是一样的，为什么企业版就慢了？<br>先是查看代码，是不是代码本身问题，但是记录日志时间相差都很小，可以确定不是代码问题。<br>后来讨论之后，还是觉得部署环境有问题</p>
+<ol>
+<li>排除了一下代码的可能性。</li>
+<li><p>继续跟进，去找企业版，看api处理速度，企业版api也没问题。</p>
+</li>
+<li><p>给出解决方案：在 uat （因为uat也是很慢的）</p>
+<ol>
+<li>写一个很简单的 controller 去访问 curl，看看是不是最简单的代码都慢，如果最简单的都慢，就可以十分肯定不是代码的问题。</li>
+<li>不是代码的问题就是环境的问题，就得配合豪哥看到底是哪块的问题。</li>
+</ol>
+</li>
+<li><p>配合发起请求，在此这过程中本可以锁定问题，但是因为在一个环节理解错了，没有定位出来。<br> 后来豪哥也是想了好几天才又一次执行错误理解的部分，结果证明确实是这里的问题，（这一块也主要想企业版环境和个人版到底有何不同）。<br> 是因为 css 等要先经过 dns 解析还是什么？去掉这块指向就快了。</p>
+</li>
+</ol>
+<p>总结是：固定一些条件，排除可能性。不要一开始认怂。不是代码的问题也要去跟进问题，毕竟问题总是要解决的，不然留给谁？</p>
+<h2 id="让单词别自动分开"><a href="#让单词别自动分开" class="headerlink" title="让单词别自动分开"></a>让单词别自动分开</h2><p>加上样式<br>word-break:break-all</p>
+<h2 id="中间打点"><a href="#中间打点" class="headerlink" title="中间打点"></a>中间打点</h2><p><a href="http://stackoverflow.com/questions/7023545/truncate-string-with-rails" target="_blank" rel="external">http://stackoverflow.com/questions/7023545/truncate-string-with-rails</a></p>
+<h2 id="es-task"><a href="#es-task" class="headerlink" title="es task"></a>es task</h2><p>rake es:form:reindex[20160801,20170901]<br>rake es:entry:reindex_all<br>rake es:contact:reindex_all</p>
+<p>把这几个跑了之后，才能数据同步到es，es的搜索才能正确执行</p>
+<h2 id="backbone-el"><a href="#backbone-el" class="headerlink" title="backbone el"></a>backbone el</h2><p>backbone 的 view 如果指定了 el，就是特定的el，如果没有指定，默认会给一个空的 div 作为 el</p>
+<p>by default, backbone view’s el is set to an empty div. so, this.el and this.$el are always present.</p>
+<h2 id="可以把-多个空格-格式化成一个空格"><a href="#可以把-多个空格-格式化成一个空格" class="headerlink" title="可以把 多个空格 格式化成一个空格"></a>可以把 多个空格 格式化成一个空格</h2><p>‘aa bb  cc’.squish!</p>
+<h2 id="把所有的-替换成-；"><a href="#把所有的-替换成-；" class="headerlink" title="把所有的 ; 替换成 ；"></a>把所有的 ; 替换成 ；</h2><p>$textFieldDom.val().replace(/;/g, ‘；’)</p>
+<h2 id="rails-获取-ip"><a href="#rails-获取-ip" class="headerlink" title="rails 获取 ip"></a>rails 获取 ip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def request_real_ip</div><div class="line">    return @request_real_ip if instance_variable_defined? :@request_real_ip</div><div class="line">    raw_ip = cname_request? ? request.env[&apos;HTTP_X_REAL_IP&apos;] : (request.env[&apos;HTTP_X_FORWARDED_FOR&apos;] || request.remote_ip)</div><div class="line">    @request_real_ip = raw_ip ? raw_ip.split(&apos;,&apos;).first.strip : nil</div><div class="line">  end</div><div class="line"></div><div class="line">  def cname_request?</div><div class="line">    request.env[&apos;HTTP_X_JSJ_FROM&apos;].present?</div><div class="line">  end</div></pre></td></tr></table></figure>
+<h1 id="如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址"><a href="#如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址" class="headerlink" title="如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址"></a>如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址</h1><h1 id="转换-csv-为-xlsx"><a href="#转换-csv-为-xlsx" class="headerlink" title="转换 csv 为 xlsx"></a>转换 csv 为 xlsx</h1><p><a href="https://convertio.co/csv-xlsx/" target="_blank" rel="external">https://convertio.co/csv-xlsx/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/25/最大的差距/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1600,215 +1815,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/03/ch03-创建命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/03/ch03-创建命令/" itemprop="url">ch03 创建命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-03T12:11:05+08:00">
-                2016-10-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/03/ch03-创建命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/03/ch03-创建命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="3-1-命令行的输入数据"><a href="#3-1-命令行的输入数据" class="headerlink" title="3.1 命令行的输入数据"></a>3.1 命令行的输入数据</h2><p>到目前为止，我们写的程序都是向屏幕输出数据。现在我们考虑一下怎么<strong>输入数据</strong>。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ets8fdr8j30i00ae3z7.jpg" alt=""></p>
-<p>执行结果：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8etsulbssj314s04edgo.jpg" alt=""></p>
-<p>如图可以看出，执行命令 <code>ruby print_argv.rb 1st 2nd 3rd</code> 中所传递的 <code>1st 2nd 3rd</code> 这三个参数（在命令行指定多个脚本参数时，<strong>各参数之间用空格间隔</strong>），可以用 <code>#{ARGV[0]}</code> 这种方式获取。（<strong>其中 ARGV 是 Ruby 预定义好的数组</strong>）</p>
-<p>使用 ARGV 后，程序需要用到的数据就不必都写在代码中。同时，抽取数据、保存数据等普通的数组操作对于 ARGV 都是适用的。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8eu6u1n1fj30lm07k3yx.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8eubw59z5j311e02674w.jpg" alt=""></p>
-<p>把字符串转换为整数，可以使用 <code>to_i</code> 方法。</p>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8euhagv3bj30ns0gagn4.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8euhmv2p2j310u056754.jpg" alt=""></p>
-<h2 id="3-2-文件的读取"><a href="#3-2-文件的读取" class="headerlink" title="3.2 文件的读取"></a>3.2 文件的读取</h2><p>Ruby 脚本除了<strong>读取命令行传递过来的字符串参数</strong>外，还可以<strong>读取预先写在文件里的数据</strong>。</p>
-<p>Ruby 的源代码中，有一个名为 ChangeLog 的文本文件。文件里面记录了Ruby相关的修改日志。</p>
-<p>备注Ruby的源代码可以从Ruby官网下载。ChangeLog 文件可以在Ruby的github库里找到。<br>• Ruby源码下载地址：<a href="https://www.ruby-lang.org/zh_cn/downloads/" target="_blank" rel="external">https://www.ruby-lang.org/zh_cn/downloads/</a>   • github上的ChangeLog文件地址：<a href="https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog" target="_blank" rel="external">https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog</a></p>
-<h3 id="3-2-1-从文件中读取内容并输出"><a href="#3-2-1-从文件中读取内容并输出" class="headerlink" title="3.2.1 从文件中读取内容并输出"></a>3.2.1 从文件中读取内容并输出</h3><p>读取文件内容的流程：</p>
-<ol>
-<li>打开文件</li>
-<li>读取文件的文本数据</li>
-<li>输出文件的文本数据</li>
-<li>关闭文件</li>
-</ol>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8eut3b9t4j30i40d6aao.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8euxc4o5uj315g0a6tah.jpg" alt=""></p>
-<p>如果只是读取文件内容，其实直接适用 read 方法会使程序更简单</p>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew2vki2sj30h409at95.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew43khmvj317m0acwft.jpg" alt=""></p>
-<p>更进一步，如果不使用变量，一行代码就可以到搞定啦。</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ew7a4gdnj30i2056aaa.jpg" alt=""></p>
-<h3 id="3-2-2-从文件中逐行读取内容并输出"><a href="#3-2-2-从文件中逐行读取内容并输出" class="headerlink" title="3.2.2 从文件中逐行读取内容并输出"></a>3.2.2 从文件中逐行读取内容并输出</h3><p>一下子读取全部文件 <strong>耗时，浪费内存</strong>（读取的内容会保存在内存中，遇到大文件，程序会崩溃）</p>
-<p>所以需要 放弃 「 读取文件全部内容 」 ，改为 「 逐行读取并输出 」。</p>
-<p>如图：read 和 each_line 的区别</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ewctnnuxj30fq0cv0th.jpg" alt=""></p>
-<p>代码示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewkm47jvj30h20fu3z7.jpg" alt=""></p>
-<h3 id="3-2-3-从文件中读取指定模式的内容并输出"><a href="#3-2-3-从文件中读取指定模式的内容并输出" class="headerlink" title="3.2.3 从文件中读取指定模式的内容并输出"></a>3.2.3 从文件中读取指定模式的内容并输出</h3><p>用 Ruby 实现 grep 命令 （ Unix中有一个 grep 命令 ，grep 命令利用正则表达式搜索文本数据，输出按照指定模式匹配到的行 ）</p>
-<p>代码示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewqny5oyj30k00kgmyc.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewrnozoej319a048ta0.jpg" alt=""></p>
-<p>图中 ，命令 <code>ruby simple_grep.rb filename read_text.rb</code> 的意思就是执行 simple_grep.rb 程序，第一个参数为要匹配的字符串 我这里是 <code>filename</code> ，第二个参数为 要搜索的文本文件 我这里是 <code>read_text.rb</code> ，执行结果，就是这个 <code>read_text.rb</code> 中的两行包含的 <code>filename</code> 数据。</p>
-<h2 id="3-3-方法的定义"><a href="#3-3-方法的定义" class="headerlink" title="3.3 方法的定义"></a>3.3 方法的定义</h2><p>定义方法：</p>
-<p><strong>def 方法名<br>    希望执行的处理<br>  end</strong></p>
-<p>定义好方法后，需要 「 调用 」，Ruby 才知道我们要执行这个方法。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex2unkppj30eo096wer.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex3k1yj2j310602e0te.jpg" alt=""></p>
-<h2 id="3-4-其他文件的引用"><a href="#3-4-其他文件的引用" class="headerlink" title="3.4 其他文件的引用"></a>3.4 其他文件的引用</h2><p><strong>被其他程序引用的程序，成为库（library）。</strong></p>
-<p>Ruby 使用 <code>require</code>方法引用库：</p>
-<p><strong> require 希望使用的库名 </strong></p>
-<p>库名可疑省略后缀 .rb</p>
-<p>如图：库与引用库的程序</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ex936atgj30rf07q0to.jpg" alt=""></p>
-<p>把 simple_grep.rb 作为库供给其他程序使用。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkavqpkj30xq0mwju0.jpg" alt=""></p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8exm1gwpnj30ts08yab0.jpg" alt=""></p>
-<p>注：库与脚本放在同一文件夹时，需要用 <code>./</code>来明示文件存放在当前目录。</p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkq36d7j318y04s3zv.jpg" alt=""></p>
-<p>Ruby 提供了很多标准库，我们可以通过 <code>require</code> 来引用。</p>
-<p>如图：计算出了Ruby的生日——1993年2月24到今天为止的天数:8622</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eydmftudj30oo0a6t99.jpg" alt=""></p>
-<p><strong>pp 方法</strong></p>
-<p>除了 p 方法外，Ruby 还提供了一个类似的方法——pp（pretty print）。<br>使用 pp 方法，需要引用 pp 库。</p>
-<p>代码示例：</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eyeqyfmhj30la0ge0tp.jpg" alt=""></p>
-<p>示例代码：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ey68flvqj315203ctaf.jpg" alt=""></p>
-<p>我没发现有啥区别。。。但是书上说，pp方法会在输出对象的结果时，会适当的换行以调整输出结果，可以更容易看懂。。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1859,7 +1865,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -232,6 +232,232 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/command-line-学习：检阅文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/command-line-学习：检阅文件/" itemprop="url">command-line 学习：检阅文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T12:05:55+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/09/command-line-学习：检阅文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/09/command-line-学习：检阅文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用的电脑为 mac 。</p>
+<p>参考：<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="external">Learn Enough Command Line to Be Dangerous</a></p>
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>用 which 命令可以查看命令行是否支持 curl，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which curl</div><div class="line">/usr/bin/curl</div></pre></td></tr></table></figure>
+<p>如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。<br>curl 安装好，可以下载文件了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl -OL cdn.learnenough.com/sonnets.txt</div><div class="line">$ ls -rtl</div><div class="line">$ !! # 可以出来最近一次使用的命令</div><div class="line">$ !curl # 可以出来最近一次使用 curl 开头的命令</div><div class="line"></div><div class="line"># 还有一个小技巧，可以使用 `ctrl + r`，这个可以进行搜索，输入 `curl` ，便可以查询以 `curl` 开头的命令。</div><div class="line">$ 按住 ctrl 和 R</div><div class="line">(reverse-i-search)`&apos;: curl</div></pre></td></tr></table></figure>
+<h2 id="head-tail"><a href="#head-tail" class="headerlink" title="head tail"></a>head tail</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ head sonnets.txt # 查看 sonnets.txt 文件的前 10 行</div><div class="line">$ tail sonnets.txt # 查看 sonnets.txt 文件的后 10 行</div><div class="line">$ wc sonnets.txt # 查看 sonnets.txt 文件有多少行，多少字，多少字节</div><div class="line">  2620  17670  95635 sonnets.txt`</div><div class="line"># 把 sonnets.txt 的 head 部分放入 sonnets_head.txt，并统计</div><div class="line">sonnets_head.txt  中有多少行，多少字，和多少字节</div><div class="line">$ head sonnets.txt &gt; sonnets_head.txt</div><div class="line">$ wc sonnets_head.txt</div><div class="line">  10   46   294 sonnets_head.txt  </div><div class="line"># 用一行命令也可以搞定</div><div class="line">$ head sonnets.txt | wc</div><div class="line">  10   46   294Â</div><div class="line">```    </div><div class="line"></div><div class="line">## less more</div></pre></td></tr></table></figure>
+<p>$ less sonnets.txt</p>
+<p>这个可以给文件一个导航，然后你可以通过 ↑ ↓，空格键去翻页。按 <code>ctrl + f</code> 可以一下到下个目录，<code>ctrl + b</code> 可以到上一个目录。输入 q 退出。</p>
+<p>还可以 输入 <code>/rose</code> 来搜索 <code>rose</code>，可以按 <code>n</code> 去到下一个匹配的地方, <code>N</code> 去到上一个匹配的地方。</p>
+<p>还有一个 <code>G</code> 去到文件的结尾，<code>1G</code> 去到文件的开头。</p>
+<p><code>less</code> 中的命令，和 <code>man</code> 中的类似，所以会了 <code>less</code> ，<code>man</code> 中的也可以很好的使用了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Command | Description | Example</div><div class="line">--- | --- | ---</div><div class="line">up &amp; down arrow keys | Move up or down one line |</div><div class="line">spacebar | Move forward one page |</div><div class="line">ctrl + f | Move forward one page |</div><div class="line">ctrl + b | Move back one page |</div><div class="line">G | Move to end of file |  </div><div class="line">1G | Move to beginning of file |  </div><div class="line">/&lt;string&gt; | Search file for string | /rose</div><div class="line">n | Move to next search result |</div><div class="line">N | Move to previous search result |  </div><div class="line">q | Quit less |  </div><div class="line"></div><div class="line">## grep</div></pre></td></tr></table></figure></p>
+<p>$ grep rose sonnets.txt # 找出所有存在 rose 的地方</p>
+<p>$ grep rose sonnets.txt | wc # 统计出现 rose 的行数 字数 字节数（大写的 Rose 不能被统计到，grep 大小写敏感）<br>    10   82   419<br>$ grep -i rose sonnets.txt | wc # 不计大小写统计<br>    12      96     508<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">ps 是 process status 的缩写。</div></pre></td></tr></table></figure></p>
+<p>ps -aux<br>$ ps aux<br>$ ps aux | grep spring # 查看 spring 进程<br>    ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46<br>    spring app | sample_app | started 7 hours ago<br>$ kill -15 12241    # 杀死 12241 进程<br>$ pkill -15 -f spring # 杀死所有的 spring 进程<br>$ top # 可查看所有的进程<br>```</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>curl</td>
+<td>Interact with URLs</td>
+<td>$ curl -O example.com</td>
+</tr>
+<tr>
+<td>which</td>
+<td>Locate a program on the path</td>
+<td>$ which curl</td>
+</tr>
+<tr>
+<td>head <file></file></td>
+<td>Display first part of file</td>
+<td>$ head foo</td>
+</tr>
+<tr>
+<td>tail <file></file></td>
+<td>Display last part of file</td>
+<td>$ tail bar</td>
+</tr>
+<tr>
+<td>wc <file></file></td>
+<td>Count lines, words, bytes</td>
+<td>$ wc foo</td>
+</tr>
+<tr>
+<td>cmd1 &#124; cmd2</td>
+<td>Pipe cmd1 to cmd2</td>
+<td>$ head foo &#124; wc</td>
+</tr>
+<tr>
+<td>ping <url></url></td>
+<td>Ping a server URL</td>
+<td>$ ping google.com</td>
+</tr>
+<tr>
+<td>less <file></file></td>
+<td>View file contents interactively</td>
+<td>$ less foo</td>
+</tr>
+<tr>
+<td>grep <string> <file></file></string></td>
+<td>Find string in file</td>
+<td>$ grep foo bar.txt</td>
+</tr>
+<tr>
+<td>grep -i <string> <file></file></string></td>
+<td>Find case-insensitively</td>
+<td>$ grep -i foo bar.txt</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>Show processes</td>
+<td>$ ps aux</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Show processes (sorted)</td>
+<td>$ top</td>
+</tr>
+<tr>
+<td>kill -<level> <pid></pid></level></td>
+<td>Kill a process</td>
+<td>$ kill -15 24601</td>
+</tr>
+<tr>
+<td>pkill -<level> -f <name></name></level></td>
+<td>Kill matching processes</td>
+<td>$ pkill -15 -f spring</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/command-line-学习：操作文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1757,150 +1983,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/" itemprop="url">我把面试题总结到 RubyChina 上带来的反思</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T11:31:44+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/19/我把面试题总结到-RubyChina-上带来的反思/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我去面试了一圈，被问了很多问题。所以回来的时候就回忆问题，罗列出来，精心把答案都找了一遍后，总结成一篇文章，在<a href="https://chenyunli6.github.io/" target="_blank" rel="external">我的博客</a>和<a href="http://www.jianshu.com/u/42a08a270330" target="_blank" rel="external">我的简书</a>上各发了一下，后来想想，RubyChina 上技术氛围更好，也发到那里吧。</p>
-<p>发文章的初衷就是想大家就着面试题一起讨论一起学习一下。没想到这会涉及暴露面试题的<strong>诚信问题</strong>。有不少人回帖说我这样做不好，并且把自己置身于风险之中。</p>
-<p>我因为在 RubyChina 上发帖，觉得每次得到的回馈都不在技术上，就不太敢在上面发帖了，这次信心满满的，把自己用心整理的东西给大家一起参考学习，结果还是落的一鼻子灰，心情却是有点不好受。</p>
-<p>当然，最后反思还是我自己做的不对。我也有辩驳说，“发之前也看到 RubyChina 上有人讨论面试题的帖子，看到大家并没有担忧什么啊”，“这些东西网上一搜一大把啊”。有回复说，<strong>大家都做的事情，并不代表是对的事情</strong>。一想想这也对着呢。所以，我自己或许没有遵循行业的规则（<strong>甚至根本都没意识到这是个问题</strong>）。</p>
-<p>所以，我觉得更多的生活感悟以及自己的学习，还是写到自己的博客上比较好，因为很多东西，在自己的天地里面，就没有那么多的规则束缚，但是同时，也都是跟自己交流的比较多了。我想扩大交流圈，就要符合那个交流圈的规则。很多东西不是自己觉得没问题就没问题了。</p>
-<p>至于，发布面试题到底是不是牵扯到道德问题、诚信问题，我自己的考虑，是觉得，或许这是个公开的秘密，只是不能把他捅破似的。就算大家做的事情不一定都是对的事情，可是很多人做了，那却也不是秘密了，但是作为一个有原则的人，也不能跟着一起去做这个事情。</p>
-<p><strong>下次如果再发帖，文章内容最好不要涉及一些敏感的话题</strong>。</p>
-<p>不只是工作，生活中，或许有不少的公开的秘密和潜规则，都不能捅破，或许经历过一次次碰壁，我会慢慢学好这些规则。只是，真的害怕像有些人所说，阻碍了我更高的发展。不过，希望社会给我犯错的机会，真想低下头来说：“小人无知，请大人恕罪”。不然，犯了这些错之后，除了低头认错，我也不知有什么更好的解决方案了，毕竟，你犯错了，还找理由，不是显得你更“小人”了么？“不知者无罪”也是人家宽宏大量，才对你说的，谁让你不知的呢？（是不是傻）</p>
-<p>昨天，看到一篇阮一峰的网络日志<a href="http://www.ruanyifeng.com/blog/2009/10/why_i_love_programming.html" target="_blank" rel="external">我为什么喜欢编程</a>，里面有一句话，</p>
-<blockquote>
-<p>我们生活的这个国家，是一个禁止自由思考、党决定一切的国家。在这里，如果你想不撒谎、不干坏事、并且被公正地对待，那么可能你只能去编程了。</p>
-</blockquote>
-<p>我一度也这么认为，庆幸自己做了编程，现在想想就算一门心思栽倒在技术的海洋，你也只能是一个技术工吧，除非你牛逼到一定的程度。</p>
-<p>想在社会活下去，就得满足这样那样的规则束缚，随心所欲都还得加个不逾矩，你以为呢？或许这篇说的有些悲观，但是，必须这样来，不然，就会像我一样，做出别人口中<strong>不成熟</strong>的事情。<strong>突然感觉，最悲催的事情就是，做了一个大家觉得有问题的事情，而你自己连这是个问题都没有意识到。</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1951,7 +2033,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
