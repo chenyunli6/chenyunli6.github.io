@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， 12$ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 12345678$">
+<meta name="description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， $ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 $ curl -OL c">
 <meta name="keywords" content="command-line">
 <meta property="og:type" content="article">
 <meta property="og:title" content="command-line 学习：检阅文件">
 <meta property="og:url" content="http://yoursite.com/2017/11/09/command-line-学习：检阅文件/index.html">
 <meta property="og:site_name" content="这里有我的脚丫印😄">
-<meta property="og:description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， 12$ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 12345678$">
+<meta property="og:description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， $ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 $ curl -OL c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-09T04:46:41.000Z">
+<meta property="og:updated_time" content="2017-11-09T04:52:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="command-line 学习：检阅文件">
-<meta name="twitter:description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， 12$ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 12345678$">
+<meta name="twitter:description" content="使用的电脑为 mac 。 参考：Learn Enough Command Line to Be Dangerous 下载文件用 which 命令可以查看命令行是否支持 curl， $ which curl/usr/bin/curl 如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。curl 安装好，可以下载文件了。 $ curl -OL c">
 
 
 
@@ -314,18 +314,84 @@
         <p>使用的电脑为 mac 。</p>
 <p>参考：<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="external">Learn Enough Command Line to Be Dangerous</a></p>
 <h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>用 which 命令可以查看命令行是否支持 curl，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ which curl</div><div class="line">/usr/bin/curl</div></pre></td></tr></table></figure>
+<p><code>$ which curl</code><br><code>/usr/bin/curl</code></p>
 <p>如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。<br>curl 安装好，可以下载文件了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ curl -OL cdn.learnenough.com/sonnets.txt</div><div class="line">$ ls -rtl</div><div class="line">$ !! # 可以出来最近一次使用的命令</div><div class="line">$ !curl # 可以出来最近一次使用 curl 开头的命令</div><div class="line"></div><div class="line"># 还有一个小技巧，可以使用 `ctrl + r`，这个可以进行搜索，输入 `curl` ，便可以查询以 `curl` 开头的命令。</div><div class="line">$ 按住 ctrl 和 R</div><div class="line">(reverse-i-search)`&apos;: curl</div></pre></td></tr></table></figure>
-<h2 id="head-tail"><a href="#head-tail" class="headerlink" title="head tail"></a>head tail</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ head sonnets.txt # 查看 sonnets.txt 文件的前 10 行</div><div class="line">$ tail sonnets.txt # 查看 sonnets.txt 文件的后 10 行</div><div class="line">$ wc sonnets.txt # 查看 sonnets.txt 文件有多少行，多少字，多少字节</div><div class="line">  2620  17670  95635 sonnets.txt`</div><div class="line"># 把 sonnets.txt 的 head 部分放入 sonnets_head.txt，并统计</div><div class="line">sonnets_head.txt  中有多少行，多少字，和多少字节</div><div class="line">$ head sonnets.txt &gt; sonnets_head.txt</div><div class="line">$ wc sonnets_head.txt</div><div class="line">  10   46   294 sonnets_head.txt  </div><div class="line"># 用一行命令也可以搞定</div><div class="line">$ head sonnets.txt | wc</div><div class="line">  10   46   294Â</div><div class="line">```    </div><div class="line"></div><div class="line">## less more</div></pre></td></tr></table></figure>
-<p>$ less sonnets.txt</p>
-<p>这个可以给文件一个导航，然后你可以通过 ↑ ↓，空格键去翻页。按 <code>ctrl + f</code> 可以一下到下个目录，<code>ctrl + b</code> 可以到上一个目录。输入 q 退出。</p>
+<p><code>$ curl -OL cdn.learnenough.com/sonnets.txt</code><br><code>$ ls -rtl</code><br><code>$ !! # 可以出来最近一次使用的命令</code><br><code>$ !curl # 可以出来最近一次使用 curl 开头的命令</code></p>
+<p> 还有一个小技巧，可以使用 <code>ctrl + r</code>，这个可以进行搜索，输入 <code>curl</code> ，便可以查询以 <code>curl</code> 开头的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ 按住 ctrl 和 R</div><div class="line">(reverse-i-search)`&apos;: curl</div></pre></td></tr></table></figure></p>
+<h2 id="head-tail"><a href="#head-tail" class="headerlink" title="head tail"></a>head tail</h2><p><code>$ head sonnets.txt # 查看 sonnets.txt 文件的前 10 行</code><br><code>$ tail sonnets.txt # 查看 sonnets.txt 文件的后 10 行</code><br><code>$ wc sonnets.txt # 查看 sonnets.txt 文件有多少行，多少字，多少字节
+  2620  17670  95635 sonnets.txt</code><br><code># 把 sonnets.txt 的 head 部分放入 sonnets_head.txt，并统计
+sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>$ head sonnets.txt &gt; sonnets_head.txt</code><br><code>$ wc sonnets_head.txt
+  10   46   294 sonnets_head.txt</code><br><code># 用一行命令也可以搞定</code><br><code>$ head sonnets.txt | wc
+  10   46   294Â</code></p>
+<h2 id="less-more"><a href="#less-more" class="headerlink" title="less more"></a>less more</h2><p><code>$ less sonnets.txt</code><br>这个可以给文件一个导航，然后你可以通过 ↑ ↓，空格键去翻页。按 <code>ctrl + f</code> 可以一下到下个目录，<code>ctrl + b</code> 可以到上一个目录。输入 q 退出。</p>
 <p>还可以 输入 <code>/rose</code> 来搜索 <code>rose</code>，可以按 <code>n</code> 去到下一个匹配的地方, <code>N</code> 去到上一个匹配的地方。</p>
-<p>还有一个 <code>G</code> 去到文件的结尾，<code>1G</code> 去到文件的开头。</p>
-<p><code>less</code> 中的命令，和 <code>man</code> 中的类似，所以会了 <code>less</code> ，<code>man</code> 中的也可以很好的使用了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Command | Description | Example</div><div class="line">--- | --- | ---</div><div class="line">up &amp; down arrow keys | Move up or down one line |</div><div class="line">spacebar | Move forward one page |</div><div class="line">ctrl + f | Move forward one page |</div><div class="line">ctrl + b | Move back one page |</div><div class="line">G | Move to end of file |  </div><div class="line">1G | Move to beginning of file |  </div><div class="line">/&lt;string&gt; | Search file for string | /rose</div><div class="line">n | Move to next search result |</div><div class="line">N | Move to previous search result |  </div><div class="line">q | Quit less |  </div><div class="line"></div><div class="line">## grep</div></pre></td></tr></table></figure></p>
-<p>$ grep rose sonnets.txt # 找出所有存在 rose 的地方</p>
-<p>$ grep rose sonnets.txt | wc # 统计出现 rose 的行数 字数 字节数（大写的 Rose 不能被统计到，grep 大小写敏感）<br>    10   82   419<br>$ grep -i rose sonnets.txt | wc # 不计大小写统计<br>    12      96     508<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">ps 是 process status 的缩写。</div></pre></td></tr></table></figure></p>
-<p>ps -aux<br>$ ps aux<br>$ ps aux | grep spring # 查看 spring 进程<br>    ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46<br>    spring app | sample_app | started 7 hours ago<br>$ kill -15 12241    # 杀死 12241 进程<br>$ pkill -15 -f spring # 杀死所有的 spring 进程<br>$ top # 可查看所有的进程<br>```</p>
+<p>还有一个 <code>G</code> 去到文件的结尾，<code>1G</code> 去到文件的开头。<br><code>less</code> 中的命令，和 <code>man</code> 中的类似，所以会了 <code>less</code> ，<code>man</code> 中的也可以很好的使用了。</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>up &amp; down arrow keys</td>
+<td>Move up or down one line</td>
+<td></td>
+</tr>
+<tr>
+<td>spacebar</td>
+<td>Move forward one page</td>
+<td></td>
+</tr>
+<tr>
+<td>ctrl + f</td>
+<td>Move forward one page</td>
+<td></td>
+</tr>
+<tr>
+<td>ctrl + b</td>
+<td>Move back one page</td>
+<td></td>
+</tr>
+<tr>
+<td>G</td>
+<td>Move to end of file</td>
+<td></td>
+</tr>
+<tr>
+<td>1G</td>
+<td>Move to beginning of file</td>
+<td></td>
+</tr>
+<tr>
+<td>/<string></string></td>
+<td>Search file for string</td>
+<td>/rose</td>
+</tr>
+<tr>
+<td>n</td>
+<td>Move to next search result</td>
+<td></td>
+</tr>
+<tr>
+<td>N</td>
+<td>Move to previous search result</td>
+<td></td>
+</tr>
+<tr>
+<td>q</td>
+<td>Quit less</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p><code>$ grep rose sonnets.txt # 找出所有存在 rose 的地方</code></p>
+<p><code>$ grep rose sonnets.txt | wc # 统计出现 rose 的行数 字数 字节数（大写的 Rose 不能被统计到，grep 大小写敏感）</code><br>    10   82   419<br><code>$ grep -i rose sonnets.txt | wc # 不计大小写统计
+    12      96     508</code></p>
+<p>ps 是 process status 的缩写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ps -aux</div><div class="line">$ ps aux</div><div class="line">$ ps aux | grep spring # 查看 spring 进程</div><div class="line">    ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46</div><div class="line">    spring app | sample_app | started 7 hours ago</div><div class="line">$ kill -15 12241    # 杀死 12241 进程</div><div class="line">$ pkill -15 -f spring # 杀死所有的 spring 进程</div><div class="line">$ top # 可查看所有的进程</div></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -447,6 +513,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/11/10/command-line-学习：目录操作/" rel="prev" title="command-line 学习：目录操作">
+                command-line 学习：目录操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -529,7 +599,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -577,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载文件"><span class="nav-number">1.</span> <span class="nav-text">下载文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head-tail"><span class="nav-number">2.</span> <span class="nav-text">head tail</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载文件"><span class="nav-number">1.</span> <span class="nav-text">下载文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head-tail"><span class="nav-number">2.</span> <span class="nav-text">head tail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-more"><span class="nav-number">3.</span> <span class="nav-text">less more</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">4.</span> <span class="nav-text">grep</span></a></li></ol></div>
             
 
           </div>
