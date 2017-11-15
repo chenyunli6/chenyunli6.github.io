@@ -232,6 +232,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/gem 'delayed_job_active_record'/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/02/gem 'delayed_job_active_record'/" itemprop="url">gem 'delayed_job_active_record'</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T20:47:04+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/02/gem 'delayed_job_active_record'/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/02/gem 'delayed_job_active_record'/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>bundle</p>
+<p>rails generate delayed_job:active_record<br>rake db:migrate</p>
+<p>config.active_job.queue_adapter = :delayed_job</p>
+<p>Here is an example of changing job parameters in Rails:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># config/initializers/delayed_job_config.rb</div><div class="line">Delayed::Worker.destroy_failed_jobs = false</div><div class="line">Delayed::Worker.sleep_delay = 60</div><div class="line">Delayed::Worker.max_attempts = 3</div><div class="line">Delayed::Worker.max_run_time = 5.minutes</div><div class="line">Delayed::Worker.read_ahead = 10</div><div class="line">Delayed::Worker.default_queue_name = &apos;default&apos;</div><div class="line">Delayed::Worker.delay_jobs = !Rails.env.test?</div><div class="line">Delayed::Worker.raise_signal_exceptions = :term</div><div class="line">Delayed::Worker.logger = Logger.new(File.join(Rails.root, &apos;log&apos;, &apos;delayed_job.log&apos;))</div></pre></td></tr></table></figure>
+<p>RAILS_ENV=production bin/delayed_job start</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/08/Caching-with-Rails/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1595,151 +1731,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/jquery-fileupload-上传/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/24/jquery-fileupload-上传/" itemprop="url">jquery fileupload 上传</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-24T22:33:02+08:00">
-                2016-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/24/jquery-fileupload-上传/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/24/jquery-fileupload-上传/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考链接：<a href="https://github.com/carrierwaveuploader/carrierwave" target="_blank" rel="external">https://github.com/carrierwaveuploader/carrierwave</a></p>
-<h2 id="使用-jquery-fileupload-js-上传图片"><a href="#使用-jquery-fileupload-js-上传图片" class="headerlink" title="使用 jquery.fileupload.js 上传图片"></a>使用 <code>jquery.fileupload.js</code> 上传图片</h2><ol>
-<li><code>gem &#39;carrierwave&#39; 和 gem &#39;mini_magick&#39;</code></li>
-<li><code>bundle</code></li>
-<li>执行<code>rails generate uploader image</code> 会生成<code>app/uploaders/image_uploader.rb</code></li>
-</ol>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># encoding: utf-8</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageUploader</span> &lt; CarrierWave::Uploader::<span class="title">Base</span></span></div><div class="line"></div><div class="line">  <span class="comment"># Include RMagick or MiniMagick support:</span></div><div class="line">  <span class="comment"># include CarrierWave::RMagick</span></div><div class="line">  <span class="keyword">include</span> CarrierWave::MiniMagick</div><div class="line"></div><div class="line"></div><div class="line">  <span class="comment"># Choose what kind of storage to use for this uploader:</span></div><div class="line">  storage <span class="symbol">:file</span></div><div class="line">  <span class="comment"># storage :fog</span></div><div class="line"></div><div class="line">  <span class="comment"># Override the directory where uploaded files will be stored.</span></div><div class="line">  <span class="comment"># This is a sensible default for uploaders that are meant to be mounted:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">store_dir</span></span></div><div class="line">    <span class="string">"uploads/"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  process <span class="symbol">resize_to_fit:</span> [<span class="number">800</span>, <span class="number">800</span>]</div><div class="line"></div><div class="line">  version <span class="symbol">:small</span> <span class="keyword">do</span></div><div class="line">    process <span class="symbol">resize_to_fit:</span> [<span class="number">200</span>, <span class="number">200</span>]</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<ol>
-<li>在<code>controller</code>中 action 可以使用<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uploader = ImageUploader.new</div><div class="line">uploader.store!(my_file)  </div><div class="line">uploader.url <span class="comment"># =&gt; '/url/to/my_file.png'               # size: 800x600</span></div><div class="line">uploader.thumb.url <span class="comment"># =&gt; '/url/to/thumb_my_file.png'   # size: 200x200</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>我的场景是，在页面用jquery uploader 到后面action上传图片，回传image_url 到页面，页面点击保存的时候再保存到相关的数据库表。</p>
-<p>见截图：</p>
-<figure class="highlight rb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImagesController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span></div><div class="line">    uploader = ImageUploader.new</div><div class="line">    uploader.store!(params[<span class="string">'picture-upload'</span>])</div><div class="line"></div><div class="line">    render <span class="symbol">json:</span> &#123;<span class="symbol">image_url:</span> uploader.small.url&#125;</div><div class="line"></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pictureUpload</span>(<span class="params">prize</span>)</span>&#123;</div><div class="line">    $(<span class="string">".picture-upload"</span>).click();</div><div class="line">    $<span class="string">".picture-upload"</span>).fileupload(&#123;</div><div class="line">        type:<span class="string">'POST'</span>,</div><div class="line">        url:<span class="string">'/images'</span>,</div><div class="line">        dataType: <span class="string">'json'</span>,</div><div class="line">        singleFileUploads: <span class="literal">true</span>,</div><div class="line">        maxFileSize: <span class="number">2000000</span>,</div><div class="line">        start: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            $(<span class="string">".progress-upload"</span>).removeClass(<span class="string">'hide'</span>);</div><div class="line">            $(<span class="string">".upload-button i"</span>).addClass(<span class="string">'hide'</span>);</div><div class="line">            $(<span class="string">".upload-button span"</span>).addClass(<span class="string">'hide'</span>);</div><div class="line">        &#125;,</div><div class="line">        progressall: <span class="function"><span class="keyword">function</span>(<span class="params">e, data</span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> progress = <span class="built_in">parseInt</span>(data.loaded/data.total * <span class="number">100</span>, <span class="number">10</span>);</div><div class="line">            $(<span class="string">".progress-upload .bar"</span>).css(<span class="string">'width'</span>,progress + <span class="string">'%'</span>);</div><div class="line">        &#125;,</div><div class="line">        done: <span class="function"><span class="keyword">function</span>(<span class="params">e, data</span>)</span>&#123;</div><div class="line">            $(<span class="string">".edit-button .prize-picture"</span>).attr(<span class="string">'src'</span>,data.result.image_url);</div><div class="line">            $(<span class="string">".upload-button"</span>).remove();</div><div class="line">            $(<span class="string">".edit-button"</span>).removeClass(<span class="string">'hide'</span>);</div><div class="line">        &#125;,</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1790,7 +1781,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
