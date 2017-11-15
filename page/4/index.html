@@ -232,6 +232,454 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/30/Using-select-reject-collect-inject-and-detect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/30/Using-select-reject-collect-inject-and-detect/" itemprop="url">Using select, reject, collect, inject and detect.</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-30T16:40:42+08:00">
+                2016-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/30/Using-select-reject-collect-inject-and-detect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/30/Using-select-reject-collect-inject-and-detect/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考链接：<br><a href="http://queirozf.com/entries/ruby-map-each-collect-inject-reject-select-quick-reference" target="_blank" rel="external">http://queirozf.com/entries/ruby-map-each-collect-inject-reject-select-quick-reference</a></p>
+<p><a href="http://matthewcarriere.com/2008/06/23/using-select-reject-collect-inject-and-detect/" target="_blank" rel="external">http://matthewcarriere.com/2008/06/23/using-select-reject-collect-inject-and-detect/</a></p>
+<h2 id="for-遍历数组-，并打印出来每一个元素"><a href="#for-遍历数组-，并打印出来每一个元素" class="headerlink" title="for 遍历数组 ，并打印出来每一个元素"></a>for 遍历数组 ，并打印出来每一个元素</h2><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="keyword">for</span> n <span class="keyword">in</span> a</div><div class="line">  puts n</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/72f96cbajw1f9anecw702j20h809c3z2.jpg" alt=""></p>
+<p>这个可以 work，但 not very… Ruby.<br>下面这个才是，ruby 中的 <code>iterator</code> 。</p>
+<h2 id="each-遍历数组-，并打印出来每一个元素"><a href="#each-遍历数组-，并打印出来每一个元素" class="headerlink" title="each 遍历数组 ，并打印出来每一个元素"></a>each 遍历数组 ，并打印出来每一个元素</h2><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a.each <span class="keyword">do</span> <span class="params">|n|</span></div><div class="line">  puts n</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/72f96cbajw1f9anf9hs8oj20g808mmxl.jpg" alt=""></p>
+<h2 id="Building-a-list-of-items-from-the-array-using-select"><a href="#Building-a-list-of-items-from-the-array-using-select" class="headerlink" title="Building a list of items from the array using select"></a><strong>Building a list of items from the array using select</strong></h2><h3 id="select-返回符合条件的-array"><a href="#select-返回符合条件的-array" class="headerlink" title="select , 返回符合条件的 array"></a>select , 返回符合条件的 array</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.select &#123;<span class="params">|n|</span> n &gt; <span class="number">2</span>&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/72f96cbajw1f9angg6yq5j20ma046aad.jpg" alt=""></p>
+<h3 id="reject，返回不符合条件的-array"><a href="#reject，返回不符合条件的-array" class="headerlink" title="reject，返回不符合条件的 array"></a>reject，返回不符合条件的 array</h3><p><strong>reject 当 n&gt;2 为 false 时才会return</strong></p>
+<p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.reject &#123;<span class="params">|n|</span> n &gt; <span class="number">2</span>&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/72f96cbajw1f9anig81y1j20jo04wwew.jpg" alt=""></p>
+<h3 id="collect，返回-运算-后的-array"><a href="#collect，返回-运算-后的-array" class="headerlink" title="collect，返回 运算 后的 array"></a>collect，返回 运算 后的 array</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.collect &#123;<span class="params">|n|</span> n*n&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww3.sinaimg.cn/large/72f96cbajw1f9anjd0q3xj20ku04wt94.jpg" alt=""></p>
+<h2 id="Total-the-items-in-an-array-using-inject"><a href="#Total-the-items-in-an-array-using-inject" class="headerlink" title="Total the items in an array using inject"></a>Total the items in an array using inject</h2><h3 id="inject-，sum-所有元素并返回计算结果"><a href="#inject-，sum-所有元素并返回计算结果" class="headerlink" title="inject ，sum 所有元素并返回计算结果"></a>inject ，sum 所有元素并返回计算结果</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.inject &#123;<span class="params">|acc,n|</span> acc + n&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww2.sinaimg.cn/large/72f96cbajw1f9anki7az0j20kw04w3yy.jpg" alt=""></p>
+<h3 id="inject-with-parameter，带初始参数，从参数开始累计，计算并返回"><a href="#inject-with-parameter，带初始参数，从参数开始累计，计算并返回" class="headerlink" title="inject with parameter，带初始参数，从参数开始累计，计算并返回"></a>inject with parameter，带初始参数，从参数开始累计，计算并返回</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.inject(<span class="number">10</span>) &#123;<span class="params">|acc,n|</span> acc + n&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/72f96cbajw1f9annbo0dgj20k0050t94.jpg" alt=""></p>
+<h3 id="inject-return-an-array"><a href="#inject-return-an-array" class="headerlink" title="inject return an array"></a>inject return an array</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.inject([]) &#123;<span class="params">|acc,n|</span> acc &lt;&lt; n+n&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/72f96cbajw1f9anp5uxiwj20m804yaaj.jpg" alt=""></p>
+<h2 id="Find-an-item-in-the-array-using-detect"><a href="#Find-an-item-in-the-array-using-detect" class="headerlink" title="Find an item in the array using detect"></a>Find an item in the array using detect</h2><h3 id="detect-查找一项"><a href="#detect-查找一项" class="headerlink" title="detect 查找一项"></a>detect 查找一项</h3><p>code:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line">a.detect &#123;<span class="params">|n|</span> n == <span class="number">3</span>&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ww4.sinaimg.cn/large/72f96cbajw1f9aos0zsmfj20h403y3yq.jpg" alt=""></p>
+<p>返回 3，如果没有找到，返回 <code>nil</code> 。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/" itemprop="url">把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T16:42:40+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异"><a href="#把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异" class="headerlink" title="把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)"></a>把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)</h1><ol>
+<li><p>安装 <code>gem &#39;yaml_db&#39;</code><br>照例：<br> <code>Gemfile</code> 中 加入 <code>gem &#39;yaml_db&#39;</code> 并 <code>bundle</code></p>
+</li>
+<li><p>在旧的数据库环境下（ database.yml 连接对应的数据库），运行 <code>rake db:data:dump</code>,会生成文件 <code>db/data.yml</code>。这个里面会把数据导出成数组格式。<br> 如下：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">users:</span></div><div class="line">  <span class="symbol">columns:</span></div><div class="line">  - id</div><div class="line">  - email</div><div class="line">  - nickname</div><div class="line">  - created_at</div><div class="line">  - updated_at</div><div class="line">  <span class="symbol">records:</span></div><div class="line">  - - <span class="number">1</span></div><div class="line">    - a@a.com</div><div class="line">    - <span class="number">1</span></div><div class="line">    - ss</div><div class="line">    - <span class="string">'2016-10-25 11:35:41'</span></div><div class="line">    - <span class="string">'2016-10-25 14:26:11'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 <code>gem &#39;bulk_insert&#39;</code><br> 照例：<br> <code>Gemfile</code> 中 加入 <code>gem &#39;bulk_insert&#39;</code> 并 <code>bundle</code></p>
+</li>
+<li><p>在新的数据库环境下（修改database.yml连接对应的数据库），写 task ，读取data.yml文件，并写入新的数据库。<br> <code>rake -T</code> 可以查看所有 rake 命令，找到自己的 rake 命令 并执行(本例：<code>rake new_db:new_db_load</code>)。</p>
+<p> task 代码：</p>
+<p> 文件目录：<code>lib/tasks/new_db_migration.rake</code></p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">namespace <span class="symbol">:new_db</span> <span class="keyword">do</span></div><div class="line">  desc <span class="string">'migrate old db data to new db'</span></div><div class="line">  task <span class="symbol">:new_db_load</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></div><div class="line"></div><div class="line">    old_db = YAML.load_file(<span class="string">'db/data.yml'</span>)</div><div class="line"></div><div class="line">    User.bulk_insert(<span class="symbol">set_size:</span> <span class="number">100</span>) <span class="keyword">do</span> <span class="params">|worker|</span></div><div class="line">      old_db[<span class="string">'users'</span>][<span class="string">'records'</span>].each <span class="keyword">do</span> <span class="params">|record|</span></div><div class="line">        worker.add(</div><div class="line">            <span class="symbol">id:</span> record[<span class="number">0</span>], <span class="symbol">email:</span> record[<span class="number">1</span>], <span class="symbol">status:</span> (record[<span class="number">2</span>] == <span class="number">1</span>), <span class="symbol">nick_name:</span> record[<span class="number">3</span>], <span class="symbol">created_at:</span> record[<span class="number">4</span>], <span class="symbol">updated_at:</span> record[<span class="number">5</span>]</div><div class="line">        )</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    puts <span class="string">'user finish'</span></div><div class="line"></div><div class="line">    puts <span class="string">'done!'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p> 上面我做的变更是 <code>status</code> ，原来是 0 或者1 ，现在改成 true 或 false ，通过 <code>status: (record[2] == 1)</code> 来符合新的结构。其余的变更都可以类似处理。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/gem-gaffe-异常页面美化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/24/gem-gaffe-异常页面美化/" itemprop="url">gem 'gaffe' 异常页面美化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-24T22:49:26+08:00">
+                2016-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/24/gem-gaffe-异常页面美化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/24/gem-gaffe-异常页面美化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考链接：<a href="https://github.com/mirego/gaffe" target="_blank" rel="external">https://github.com/mirego/gaffe</a></p>
+<p>step1.  gem ‘gaffe’</p>
+<p>step2.  bundle install</p>
+<p>step3. 在 <code>config/initializers/gaffe.rb</code> 中写入</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># config/initializers/gaffe.rb</span></div><div class="line">Gaffe.configure <span class="keyword">do</span> <span class="params">|config|</span></div><div class="line">  config.errors_controller = <span class="string">'ErrorsController'</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Gaffe.enable!</div></pre></td></tr></table></figure>
+<p>step4. 创建<code>ErrorsController</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="keyword">include</span> Gaffe::Errors</div><div class="line"></div><div class="line">  <span class="comment"># Make sure anonymous users can see the page</span></div><div class="line">  skip_before_action <span class="symbol">:authenticate_user!</span></div><div class="line"></div><div class="line">  <span class="comment"># Override 'error' layout</span></div><div class="line">  layout <span class="string">'application'</span></div><div class="line"></div><div class="line">  <span class="comment"># Render the correct template based on the exception “standard” code.</span></div><div class="line">  <span class="comment"># Eg. For a 404 error, the `errors/not_found` template will be rendered.</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    <span class="comment"># Here, the `<span class="doctag">@exception</span>` variable contains the original raised error</span></div><div class="line">    render <span class="string">"errors/<span class="subst">#&#123;@rescue_response&#125;</span>"</span>, <span class="symbol">status:</span> @status_code</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>step5. 创建自己的（也可以用它默认的），目录为<code>views/errors/not_found.erb</code> 这种。如下图是这个gem的文件，我们可以覆盖：</p>
+<p><img src="http://ww3.sinaimg.cn/large/801b780ajw1f93pc5yca4j20oq0p4n0i.jpg" alt=""></p>
+<p>step6. 修改<code>config/environments/development.rb</code>，可以看到报错的页面都会给特定的页面，比如404.erb等，但是在开发或者测试环境还是不要设置，因为错误信息看不到，我们自己不好看错误。(Rails prefers to render its own debug-friendly errors in the development environment, which is totally understandable. However, if you want to test Gaffe’s behavior in development you’ll have to edit the config/environments/development.rb file.)<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Make Rails use `exceptions_app` in development</span></div><div class="line">config.consider_all_requests_local = <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p>测试环境可以这样干：<br><code>config/environments/test.rb</code><br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Make Rails use `exceptions_app` in tests</span></div><div class="line">config.consider_all_requests_local = <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment"># Render exceptions instead of raising them</span></div><div class="line">config.action_dispatch.show_exceptions = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/jquery-fileupload-上传/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1510,548 +1958,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-mac-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/16/2016-09-16-mac-tips/" itemprop="url">Mac Tips</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T23:11:00+08:00">
-                2016-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/16/2016-09-16-mac-tips/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/16/2016-09-16-mac-tips/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mac-Tips"><a href="#Mac-Tips" class="headerlink" title="Mac Tips"></a>Mac Tips</h1><p>分享：<a href="https://pan.baidu.com/s/1bS8NGM" target="_blank" rel="external">https://pan.baidu.com/s/1bS8NGM</a></p>
-<ul>
-<li><p>终端里面直接说英语</p>
-<ul>
-<li>说英语时我们当然希望有标准发音。在Mac中不需要字典，直接在终端里输入say yes，Mac就会说英语了</li>
-<li>（自己试验， say yes 会发出yes的英语，say + 英语单词 可以发出 英语单词的读音）</li>
-</ul>
-</li>
-<li><p>选择文本 (这个你试试，超级棒)</p>
-<ul>
-<li>用command+鼠标，可以选中不同位置的文本内容。</li>
-<li>用option+鼠标，可以对文本进行块选。（如果想对一列字进行删除或添加，可用这个选中后删除或输入文字，可以删除整列文字或在整列文字前添加一个文字）</li>
-</ul>
-</li>
-<li><p>使用键盘快捷键通过 Spotlight 快速搜索。</p>
-<ul>
-<li><p>右箭头键 移到下一个搜索结果</p>
-</li>
-<li><p>下箭头键 移到上一个搜索结果</p>
-</li>
-<li><p>上箭头键 移到下一个类别中的第一个搜索结果</p>
-</li>
-<li><p>Command (⌘)-下箭头键 移到上一个类别中的第一个搜索结果</p>
-</li>
-<li><p>Command (⌘)-上箭头键 显示 Mac 上的搜索结果路径</p>
-</li>
-<li><p>Command (⌘) 打开所选结果</p>
-</li>
-<li><p>Return 键 在 Finder 中查看文件或应用程序</p>
-</li>
-<li><p>Command (⌘)-R 或 Command (⌘)-连按 打开搜索结果已选定的 Finder 窗口</p>
-</li>
-<li><p>Option-Command (⌘)-空格键</p>
-</li>
-<li><p>若要选取不同的快捷键，请打开“Spotlight”偏好设置 — 选取苹果菜单 &gt;“系统偏好设置”，点按“Spotlight”，然后从面板底部的弹出式菜单中选取快捷键。您也可以点按弹出式菜单，然后按下要使用的按键。</p>
-</li>
-</ul>
-</li>
-<li><p>显示桌面</p>
-<ul>
-<li>command + F3</li>
-<li>四指外划<br>（我自己实验了下。<br> 除去小拇指的四指外划，可以实现，但是有时候大拇指没有和其他三指同时，就会变成选中文字了。<br> 除去大拇指的四指外划，也可以间接实现，这样外划可以调出所有正在打开的面板，最上方有几个选项，分别是dashboard，桌面一、桌面二）</li>
-</ul>
-</li>
-<li><p>输入法</p>
-<ul>
-<li>中英文混合输入，输入中文的时候，打开 caps lock 键，可以直接输入英文，关掉又切换回中文</li>
-<li>选词，通过 + - （或左右按键） 符号可以切换字或词，通过［ ］（或上下按键）可以展开选词列表并进行切换</li>
-<li>打开输入法偏好设置，可以设置自动校正模糊音</li>
-<li>用’可以进行手动粉刺，比如fang’an（方案）</li>
-<li>使用shift+6可以输入表情符号 ;-)</li>
-</ul>
-</li>
-<li><p>程序切换</p>
-<ul>
-<li>command + tab 可以切换程序。（个人实验：按住command + tab 然后，不放command，点击tab，直到找到想要到达的程序）</li>
-<li>command + shift + tab 可以进行逆序切换。方法同上</li>
-</ul>
-</li>
-<li><p>截图</p>
-<ul>
-<li>shift+command+3：全屏幕截图；</li>
-<li>shift+command+4：通过鼠标选取截图。</li>
-<li>截取的图片默认存放在桌面上，以时间命名。<br>系统默认截图格式是png，你可以通过如下命令修改截图文件类型，例如：<br>defaults write com.apple.screencapture type -string JPEG</li>
-<li>如果在以上两个截屏动作中加入ctrl键，可以实现直接把图片保存在剪贴板而不是实体文件，这样你可以通过command+v直接把截取的图片内容复制到图像处理软件或Pages、Keynote等文件中。</li>
-</ul>
-</li>
-<li><p>删除文件</p>
-<ul>
-<li>command+delete删除文件，如果想彻底清除，使用shift+command+delete就会自动清空废纸篓。</li>
-</ul>
-</li>
-<li><p>维护你的mac</p>
-<ul>
-<li><p>当你在使用系统时如果发现出现异常，那么就该进行日常维护了。<br>打开磁盘管理，选中你的系统盘，点“击“修复磁盘权限”，对磁盘权限进行检查和修复。完成之后还可以手动执行维护脚本：</p>
-<p>sudo periodic daily<br>sudo periodic weekly<br>sudo periodic monthly</p>
-<p>也可以一次全部执行：<br>sudo periodic daily weekly monthly<br>一般执行完这些操作后，你的Mac就会充满活力，继续上路。这些操作可以定期执行。</p>
-</li>
-</ul>
-</li>
-<li><p>输入pmset noidle，Mac不休眠</p>
-<ul>
-<li>如果你想离开电脑一段时间，又不想让电脑进入睡眠状态，有个简单的命令可以帮助你做到这一点。在终端中输入：pmset noidle，即可。只要该命令一直运行，Mac就不会进入睡眠状态。关掉终端或ctrl+c可以取消该命令。<br>pmset是OS X提供的命令行管理电源的工具，其功能远不止于此。<br>pmset -g，查看当前电源的使用方案<br>sudo pmset -b displaysleep 5，设置电池供电时，显示器5分钟内进入睡眠<br>sudo pmset schedule wake “02/01/13 20:00:00”，设置电脑在2013年2月1日晚8点唤醒电脑<br>感兴趣的可以使用man pmset查看详细信息。</li>
-</ul>
-</li>
-<li><p>强制关闭程序</p>
-<ul>
-<li>总有程序关闭不了，这时候我们就需要：<br>方法一：option+command+esc，调出强制退出应用程序的窗口，选择要退出的进程即可。<br>方法二：打开活动监视器，类似windows的任务管理器一样操作就好了。<br>方法三：命令行下的kill命令，比如想杀掉</li>
-</ul>
-</li>
-<li><p>几个简单的命令</p>
-<ul>
-<li>打开终端程序，输入date会显示当前日期，输入cal会显示日历，输入uptime会显示系统从开机到现在所运行的时间。</li>
-</ul>
-</li>
-<li><p>Spotlight搜索command <em> 键定位 （没实验成功）<br>用Spotlight搜索的时候，搜到文件时，我们有时候会需要打开该文件所在的文件夹，这时候按住command</em>键，点击文件即可打开Finder，并定位到该文件所在文件夹。</p>
-<ul>
-<li>显示隐藏桌面内容快捷键<ul>
-<li>我们经常会在桌面上堆满文件夹和文件，有时候会很方便，有时候会觉得很乱。其实我们可以通过以下命令来决定什么时候显示，什么时候隐藏。<br>chflags hidden ~/Desktop/<em>    //隐藏桌面内容<br>chflags nohidden ~/Desktop/</em>    //显示桌面内容<br>如果觉得输入麻烦，用TextExpander或Alfred设置成snippet即可</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>隐藏程序</p>
-<ul>
-<li>当我们不想在使用当前程序的时候看到其他程序的时候，可以使用快捷键option+command+h，这时除了你正在使用的程序，其他所有的程序都会被隐藏起来，有助于你专心工作。想切换到其他程序时，可以使用command + tab</li>
-</ul>
-</li>
-<li><p>显示隐藏文件</p>
-<ul>
-<li>在终端里输入ls -a，可以显示该目录下的隐藏文件。在Finder中输入shift+command+.可以显示隐藏文件，想恢复原来的设置，再输入一遍shift+command+.即可。</li>
-</ul>
-</li>
-<li><p>快速创建便签</p>
-<ul>
-<li>便笺是我们很常用的功能，可以把一些临时性的文字内容贴到桌面上，大家是如何做的呢？复制文字，打开便笺程序，新建便笺，粘贴文字！Too young too complicated，我们只需要选中文字，然后shift+command+y，就行了。     </li>
-</ul>
-</li>
-<li><p>文件比较<br>1、对于单个文件的比较，一般使用diff或vimdiff就可以了，比如：<br>vimdiff destfile.txt sourcefile.txt<br>vim会非常清晰的显示出文件的不同，还有很多快捷方式帮助你查看和操作文件，这个命令比较适合命令行爱好者。<br>2、对于大批量文件的比较，还是图形化比较工具更合适一些。OS X自带了FileMerge比较工具，可以满足部分需求，但对于中文编码文件或大文件经常会崩溃，很奇怪Apple一直不解决这个问题。<br>3、推荐一款收费软件，VisualDiffer（25元），UI、功能和稳定性都非常不错，实在是居家旅行、代码比较、查找问题的必备利器。</p>
-</li>
-<li><p>mac 通用快捷键</p>
-<ul>
-<li><p>这部分内容之前陆续介绍过，但还是有童靴希望有个汇总，基于二八原则，我把最常用的快捷键罗列一下，对于非开发者，应该够用了</p>
-<p>  Command+Tab    任意情况下切换应用程序-向前循环<br>  Shift+Command+Tab    切换应用程序-向后循环<br>  Command+Delete    把选中的资源移到废纸篓<br>  Shift+Command+Delete    清倒废纸篓（有确认）<br>  Shift+Option+Command+Delete    直接清倒废纸篓<br>  Command+~    同一应用程序多窗口间切换<br>  Command+F    呼出大部分应用程序的查询功能<br>  Command+C/V/X    复制/粘贴/剪切<br>  Command+N    新建应用程序窗口<br>  Command+Q    彻底退出当前应用程序<br>  Command+L    当前程序是浏览器时，可以直接定位到地址栏<br>  Command+”+/-“    放大或缩小字体<br>  Control+Space    呼出Spotlight<br>  Command+Space    切换输入法<br>  对于最后两个快捷键，我个人比较习惯Control+Space切换输入法，所以做了自定义的配置。</p>
-</li>
-</ul>
-<ul>
-<li><p>终端命令open</p>
-<ul>
-<li><p>我们之前介绍过如何在Finder中浏览文件时进入当前目录的shell界面，那个插件叫做Go2Shell。当然我们也会有在shell下打开当前目录的Finder的需求，运行如下命令即可：<br>  open .</p>
-<p>  当然open也可以打开其他目录，比如<br>  open /Users</p>
-<p>  open还可以直接打开文件，打开程序，指定程序打开文件，打开网址等等，例如<br>  open a.txt<br>  open -a Safari<br>  open -a TextMate a.txt<br>  open <a href="http://news.sina.com.cn" target="_blank" rel="external">http://news.sina.com.cn</a></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>mac键盘</p>
-<ul>
-<li>很多人第一次用Mac的键盘是会发现，苹果也太抠门了，退格键没了，PageUP/PageDown/Home/End也没了。别担心，您不是还有delete键和上下左右方向键么？delete相对于退格键，fn+delete可以往前删，fn+上下左右方向键可以实现PageUP/PageDown/Home/End的功能，一个都不能少.  </li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877879/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/16/2016-09-16-877879/" itemprop="url">simple_form_for 中 association 的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T15:20:00+08:00">
-                2016-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/16/2016-09-16-877879/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/16/2016-09-16-877879/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="simple-form-for-中-association-的使用"><a href="#simple-form-for-中-association-的使用" class="headerlink" title="simple_form_for 中 association 的使用"></a>simple_form_for 中 association 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># model</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span> &lt; ApplicationRecord</span></div><div class="line">    has_many <span class="symbol">:invitated_users</span>, <span class="symbol">through:</span> <span class="symbol">:question_invitations</span>, <span class="symbol">source:</span> <span class="symbol">:user</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># html</span></div><div class="line">&lt;%= f.association <span class="symbol">:invitated_users</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:check_boxes</span>, <span class="symbol">label:</span> <span class="literal">false</span>,<span class="symbol">selected:</span> @question.invitated_users %&gt;</div><div class="line"></div><div class="line"><span class="comment"># controller</span></div><div class="line"><span class="comment"># strong params 中加入</span></div><div class="line"></div><div class="line">params.<span class="keyword">require</span>(<span class="symbol">:question</span>).permit(<span class="symbol">:invitated_user_ids=&gt;[]</span> )</div><div class="line"></div><div class="line">即可自动保存关系</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877837/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/16/2016-09-16-877837/" itemprop="url">simple_form_for 中collection_check_boxes 的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T14:53:00+08:00">
-                2016-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/16/2016-09-16-877837/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/16/2016-09-16-877837/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="collection-check-boxes-的使用"><a href="#collection-check-boxes-的使用" class="headerlink" title="collection_check_boxes 的使用"></a>collection_check_boxes 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.collection_check_boxes <span class="symbol">:tag_list</span>, Tag.all, <span class="symbol">:name</span>,<span class="symbol">:name</span></div><div class="line">, <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span>,<span class="symbol">required:</span> <span class="literal">true</span></div><div class="line">, <span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: "<span class="title">tagsinput</span>"&#125; %&gt;</span></div><div class="line"></div><div class="line">&lt;!-- <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span> 可以实现checkbox纵排显示 --&gt;</div></pre></td></tr></table></figure>
-<p>其中 <figure class="highlight plain"><figcaption><span>:name``` 第一个在simple_form_for的github文档中是:id,因为我这里value和show value都是name，所以，这里就写成这样子了。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">我这里是jquery判断是否选择过一项，如果选择了一项，就跳出循环，否则继续判断，如果一项都没选择，提示用户进行选择。</div><div class="line"></div><div class="line">```js</div><div class="line">var question_tag_list = $(&quot;input[type=&apos;checkbox&apos;]&quot;);</div><div class="line">var checkedSize = 0;</div><div class="line">question_tag_list.each(function()&#123;</div><div class="line"> if ($(this).prop(&quot;checked&quot;)) &#123;</div><div class="line">   checkedSize += 1;</div><div class="line">   return false; //只要勾选了一个，便符合必填，跳出循环，可提升效率</div><div class="line"> &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>遇到的大坑就是，我用 <code>$(this).checked</code>不能返回true或者false，但是googel很多都是说这样可以。后来问了朋友，用 <code>$(&quot;#id&quot;).prop(&quot;checked&quot;)</code>成功了，具体参考 <a href="http://api.jquery.com/prop/" target="_blank" rel="external">http://api.jquery.com/prop/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2097,7 +2008,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

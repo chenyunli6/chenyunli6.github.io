@@ -232,6 +232,476 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-824509/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/31/2016-08-31-824509/" itemprop="url">render</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-31T14:48:00+08:00">
+                2016-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/31/2016-08-31-824509/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/31/2016-08-31-824509/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="render-template"><a href="#render-template" class="headerlink" title="render :template"></a>render :template</h3><p>render template 意思是渲染指定的模板，render的特性是不跑controller action，直接将该action下的模板传出来。</p>
+<p><strong>render 特定的模板</strong></p>
+<p>render views/foo/bar.html.erb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="string">"foo/bar"</span></div></pre></td></tr></table></figure>
+<p>render 同一個 controller 下的 action 的 view，用 symbol和string都是一樣的：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">:foobar</span></div><div class="line">render <span class="string">"foobar"</span></div></pre></td></tr></table></figure>
+<h3 id="render-layout"><a href="#render-layout" class="headerlink" title="render :layout"></a>render :layout</h3><p>rails 预设的layout是app/view/layouts/application.html.erb这个档案。（如果没有引用特定的layout，就会运用application这个layout）</p>
+<p>controller引用别的layout示例：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdminsController</span> &lt; ApplicationController</span></div><div class="line">  layout <span class="string">"admin"</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p><strong>也可以指定某个action要使用特定的layout</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AdminsController</span> &lt; ApplicationController</span></div><div class="line">layout <span class="string">"admin"</span>, <span class="symbol">:only</span> =&gt; <span class="symbol">:new</span></div><div class="line">   <span class="comment"># 另外也可以在render的時候就指定要使用哪一個layout</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">      render <span class="symbol">:layout</span> =&gt; <span class="string">"admin"</span></div><div class="line">   <span class="keyword">end</span></div><div class="line"></div><div class="line">   <span class="comment"># 甚至可以指定模板再指定layout</span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">index</span></span></div><div class="line">    render <span class="symbol">:template</span> =&gt; <span class="string">"others/weired_topics"</span>, <span class="symbol">layout:</span> <span class="string">"admin"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="render-text"><a href="#render-text" class="headerlink" title="render :text"></a>render :text</h3><p>render 纯文字</p>
+<p>render “嗨，自己的文字自己render”</p>
+<h3 id="render-options"><a href="#render-options" class="headerlink" title="render options"></a>render options</h3><p>rails 接受以下四种render options:</p>
+<p>####:content_type<br>rails 预设会找 text/html 类型的档案（除非我们有:json或:xml的选项）</p>
+<p>但我们也可以借由:content_type设定其他的档案形态。例如:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">file:</span> filename,<span class="symbol">content_type:</span> <span class="string">"application/rss"</span></div></pre></td></tr></table></figure>
+<p>content_type类型可Google MIME搜寻</p>
+<h4 id="layout"><a href="#layout" class="headerlink" title=":layout"></a>:layout</h4><h4 id="location"><a href="#location" class="headerlink" title=":location"></a>:location</h4><p>location header是HTTP通讯协定回应时帮client重新定位的方法，当client丢一个request到server，我们可以丢回location这个header将client导到别的地方。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">xml:</span> photo, <span class="symbol">location:</span> photo_url(photo)</div></pre></td></tr></table></figure>
+<h4 id="status"><a href="#status" class="headerlink" title=":status"></a>:status</h4><p>指定server要丢什么样的http request status给client</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">render <span class="symbol">status:</span> <span class="number">500</span></div><div class="line">render <span class="symbol">status:</span> <span class="symbol">:forbidden</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-822689/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/31/2016-08-31-822689/" itemprop="url">acts-as-taggable-on 生成标签</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-31T09:53:00+08:00">
+                2016-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/31/2016-08-31-822689/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/31/2016-08-31-822689/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>step1:安装gem</p>
+<p>把下面这句话放入Gemfile中</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'acts-as-taggable-on'</span></div></pre></td></tr></table></figure>
+<p>step2.在终端(terminal)中执行</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bundle install</div><div class="line">rake <span class="symbol">acts_as_taggable_on_engine:</span><span class="symbol">install:</span>migrations</div><div class="line">rake <span class="symbol">db:</span>migrate</div></pre></td></tr></table></figure>
+<p>这会生成tags和taggings这两张表。在schema.rb中可以查看。</p>
+<p>step3.在自己需要加标签的model中加入</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Post</span> &lt; ActiveRecord::Base</span></div><div class="line">  acts_as_taggable_on <span class="symbol">:tags</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在rails console中可以执行看看效果</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">post = Post.create</div><div class="line">post.tag_list = <span class="string">"programming, ruby, rails"</span></div><div class="line">post.tag_list</div></pre></td></tr></table></figure>
+<p>执行结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&apos;programming&apos;, &apos;ruby&apos;, &apos;rails&apos;]</div></pre></td></tr></table></figure>
+<p>新增时tag_list是一个以逗号相隔的string（字符串），在新增tag的时候，只需填入tag的名称，以逗号相隔做成字符串，后面的一系列操作这个gem自动都给你处理了。</p>
+<p>（会通过taggings这个表连接tags和posts的关系，而且仔细看tags的表结构可以看到name: “index_tags_on_name”, unique: true,也就是tags的name字段是唯一的，所以不会重复添加同名的标签）</p>
+<p>step4:post_controller</p>
+<p>在新增post的时候，把tag_list加入Strong Parameters(强校验)</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PostsController</span> &lt; ApplicationController</span></div><div class="line">  ...      </div><div class="line"></div><div class="line">  private</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">post_params</span></span></div><div class="line">  params.<span class="keyword">require</span>(<span class="symbol">:post</span>).permit(<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:tag_list</span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>step5.配置路由</p>
+<p>config/routes.rb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Rails.application.routes.draw <span class="keyword">do</span></div><div class="line">  resources <span class="symbol">:posts</span></div><div class="line">  resources <span class="symbol">:tags</span>, <span class="symbol">only:</span> [<span class="symbol">:index</span>, <span class="symbol">:show</span>]</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>step6. 以下是view，可以参考一下</p>
+<p>app/views/posts/_form.html.erb （在新增post时候加入tag_list即可。如果想做成下拉框select标签时，请注意，强校验不会接受hash类型，并且tag_list也只能是逗号相隔的字符串才行，所以，要在强校验之前，把tag_list处理成相应格式）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">form_for</span> <span class="attr">post</span> <span class="attr">do</span> |<span class="attr">f</span>| %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_field</span> <span class="attr">:title</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_area</span> <span class="attr">:body</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_field</span> <span class="attr">:tag_list</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.submit</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div></pre></td></tr></table></figure>
+<p>app/controllers/tags_controller.rb</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TagsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">index</span></span></div><div class="line">    @tags = ActsAsTaggableOn::Tag.all</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    @tag =  ActsAsTaggableOn::Tag.find(params[<span class="symbol">:id</span>])</div><div class="line">    @posts = Post.tagged_with(@tag.name)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>app/views/acts_as_taggable_on/tags/_tag.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span> <span class="attr">tag.name</span>, <span class="attr">tag_path</span>(<span class="attr">tag</span>) %&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/tags/index.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">tags</span> %&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/tags/show.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">tag.name</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">posts</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/posts/_post.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span> <span class="attr">post.title</span>, <span class="attr">post_path</span>(<span class="attr">post</span>) %&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/posts/index.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Posts<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">posts</span> %&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/posts/index.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">post.title</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">post.content</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> <span class="attr">post.tags</span> %&gt;</span></div></pre></td></tr></table></figure>
+<p>app/views/posts/show.html.erb</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">post.title</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">post.body</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">post.tags</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>补充：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@tags = current_user.tags</div><div class="line">@hot_tags = Tag.where.<span class="keyword">not</span>(<span class="symbol">id:</span>@tags)</div></pre></td></tr></table></figure>
+<p>用这个筛选掉已经关注的的tags（在这个地方纠结，想通过Tag.all-@tags,但是没有成功。有可能是@tags gem做了什么关联，查出来的对象不一致，或者是不能用减做对象的集合操作，有待查证）  </p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#取消标签</span></div><div class="line">  current_user.tag_list.remove(@tag.name)</div><div class="line">  current_user.save</div></pre></td></tr></table></figure>
+<p>新增单个标签</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@tag = Tag.find(params[<span class="symbol">:id</span>])</div><div class="line">current_user.tag_list.add(@tag.name)</div><div class="line">current_user.save</div></pre></td></tr></table></figure>
+<p>新增多个标签，参数是数组形式时</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tag_list = params[<span class="symbol">:tag_list</span>]</div><div class="line"><span class="keyword">if</span> tag_list</div><div class="line">  <span class="comment">#数组要转成逗号相隔的字符串</span></div><div class="line">  tag_list = tag_list.map&#123;<span class="params">|k,v|</span> <span class="string">"<span class="subst">#&#123;k&#125;</span><span class="subst">#&#123;v&#125;</span>"</span>&#125;.join(<span class="string">','</span>)</div><div class="line">  current_user.tag_list = tag_list</div><div class="line">  current_user.save</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/2016-08-30-820924/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/30/2016-08-30-820924/" itemprop="url">dropdown</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-30T13:22:00+08:00">
+                2016-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/30/2016-08-30-820924/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/30/2016-08-30-820924/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>f.input 是simple_form_for的使用</p>
+<p>这个是普通的下拉：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags %&gt;</div></pre></td></tr></table></figure>
+<p>下面这个是加了semantic-ui的下拉框（多选）<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags,<span class="symbol">label:</span><span class="string">"问题标签"</span>,<span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: '<span class="title">ui</span> <span class="title">fluid</span> <span class="title">search</span> <span class="title">dropdown</span>',<span class="title">multiple</span>: "" &#125; %&gt;</span></div></pre></td></tr></table></figure></p>
+<p>html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"ui fluid search dropdown"</span> <span class="attr">multiple</span>=<span class="string">""</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/w487iIPQoinSqW8o27Wj_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.19.20.png" alt="屏幕快照 2016-08-30 下午1.19.20.png"></p>
+<p>下面这个是带搜索的semantic-ui下拉（多选）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui multiple dropdown"</span> <span class="attr">id</span>=<span class="string">"dropdown"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"filters"</span> <span class="attr">value</span>=<span class="string">"&lt;%=@filters%&gt;"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-users"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span> <span class="attr">style</span>=<span class="string">"color:#adda4d"</span> <span class="attr">id</span>=<span class="string">"invite"</span>&gt;</span>邀请回答<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">unless</span> @<span class="attr">invitated_users.nil</span>? %&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> @<span class="attr">invitated_users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"ui label transition visible"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span> <span class="attr">style</span>=<span class="string">"display: inline-block !important;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">        回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"delete icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui icon search input"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"search icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"搜索你想提问的学长学姐"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"tags icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      学长&amp;学姐</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrolling menu"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> @<span class="attr">users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">          回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/vwdVVvtZSgqy3leeksRF_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.32.30.png" alt="屏幕快照 2016-08-30 下午1.32.30.png"></p>
+<p>这是一个二级下拉<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:author</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:as</span> =&gt; <span class="symbol">:grouped_select</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:collection</span> =&gt; [[<span class="string">'Authors'</span>, [<span class="string">'Jose'</span>, <span class="string">'Carlos'</span>]], [<span class="string">'General'</span>, [<span class="string">'Bob'</span>, <span class="string">'John'</span>]]],</div><div class="line"></div><div class="line"> <span class="symbol">:group_method</span> =&gt; <span class="symbol">:last</span> %&gt;</div></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/fvam6v7TnuzGlDYxY2Qg_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.14.49.png" alt="屏幕快照 2016-08-30 下午1.14.49.png"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/28/2016-08-28-json-view-resolved/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1291,428 +1761,11 @@ step1： 添加gem figaro  到Gemfile文件中
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/2016-08-14-product-user-surveys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/14/2016-08-14-product-user-surveys/" itemprop="url">产品用户调查</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T12:42:00+08:00">
-                2016-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/14/2016-08-14-product-user-surveys/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/14/2016-08-14-product-user-surveys/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>产品服务：私人形象顾问</p>
-<p>简要：根据不同收入水平，综合定位符合用户气质的服饰、发型、妆容等形象设计。<br>            适用于特殊场合或者日常生活。</p>
-<p>产品宗旨：让你更美丽自信。<br>                    不只是明星才能拥有私人形象顾问，变得美美的，你也可以。<br>                    不只是结婚或者什么才需要隆重打造，让平时的日子就各种美妙。<br>       你可以小清新，也可以美丽动人，让自己更好的展现在人前。<br>       拥有自己的品味和风格。</p>
-<p>解决的客户烦恼：<br>    1）.日常生活体现不了自己的品味和风格。<br>      比如：<br>    1.花了大把时间仍买不到自己满意的服装<br>    2.不想花太多的时间在形象上面，却又想变得美美的<br>    3.想换一种风格的<br>    4.不会或不敢化些淡妆和日常保养<br>    2）.特殊场合无法更好的打造个人形象。<br>      比如：<br>    1.想给特殊的日子换一个惊艳的装束，给爱人惊喜。<br>    2.参加某个party，想最好的展现自己的魅力。<br>    3.参加什么会议正确快速租赁适合这个场合的服饰</p>
-<p>运作原理：<br>    1.线上咨询，会有专有的私人形象顾问服务，描述自己的形象方面的烦恼，通过上传个人照片，报告身高体重，或者自己想成为的摸样，通过不断的了解，给予专业的建议。<br>  2.可以线下预约，快速定位符合自己的妆容，服饰和搭配等。<br>  3.如果想培养自己的品味意识等，可以购买中长期服务。<br>     4.提供针对个人的专业化教学培训。关于教会化妆，教会选购服饰，教会日常保养。</p>
-<p>當你在做 OOO時，你最討厭的事情是什麼？ &lt;== 這個OOO是痛點環境<br>當你學會、買到、知道 XXXX 後，你最想要做什麼事？ &lt;== 這個XXXX是 學員所提供的服務<br>當你用了，做了，學會 XXXX，完成了什麼事後。你最想要達成什麼目標？&lt;== 這個XXXX 同上一題的XXXX</p>
-<p>问卷调查：<br>当被这个产品服务的时候：<br> A: 痛点：不能被过度收费；<br>                  不能被过度推销<br>       需要有合适的人量身定做<br>   最讨厌的是：收费过高，搭配的还不如自己搭配的。过度推销。<br>   最想做的是：自己挑衣服很麻烦也很难挑到合适的，想通过这个节省时间，提升形象。<br>   最想达成的目标：服务之后，能被别人称赞自己的品味，每个季度都能收到合适的衣服推荐。</p>
-<p> B：最讨厌的是： 被推销产品<br>      最想做的是：出席特殊场合。快速租赁衣服和适合的形象设计。<br>   最想达成的目标：平时的时候，根据我的收入，提供合理化的服饰搭配意见，以最实惠的价格找到最适合的衣服。<br>   担心的是：如果服务过后，自己不满意能不能退货什么的。</p>
-<p> C：最讨厌的是: 推荐的东西不符合我的收入<br>   最想做的是：知道一些搭配打扮的知识<br>   最想达成的目标：通过平台提升个人品味，愿意花金钱时间在个人形象的提升</p>
-<p> D：最讨厌的是：涉及过多的个人隐私，揭露自己的缺点<br>         最想做的是：获得专业的个人形象咨询服务，了解不同场合应该以怎样的面貌出现。<br>   最想达成的目标：提高个人审美能力，让自己更自信</p>
-<p> E: 不需要类似服务：<br>       知道自己最适合什么。能够花在这上面的钱还不如自己去花在衣服和具体的实物上面。<br>   不足够有钱，不了解自己的人，有可能不能给自己最合适的建议。<br>   这应该适合不喜欢买买买的女人和不会买买买的女人。</p>
-<p> F: 最讨厌的是：价值观不一样，推荐的款式不对口，方案单一。<br>   最想做的是：出席重要场合，给指导意见<br>   最想达成的目标：提升个人形象，节省时间</p>
-<p> G：最讨厌的是：花了钱没效果<br>   最想做的：服务专业<br>   最想达成的目标：出门就能装逼</p>
-<p> H: 最讨厌的是：把自己包装的一塌糊涂<br>   最想做的是：设计包装自己的形象<br>   最想达成的目标：包装到自己满意的效果</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/13/2016-08-13-delete-all-vs-destroy-all/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/13/2016-08-13-delete-all-vs-destroy-all/" itemprop="url">delete_all vs destroy_all</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-13T21:12:00+08:00">
-                2016-08-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/13/2016-08-13-delete-all-vs-destroy-all/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/13/2016-08-13-delete-all-vs-destroy-all/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>delete  （删除某一个或多个以id为条件的记录）<br>    Article.delete(4)        (会返回影响记录条数，如1)<br>  Article.delete([5, 6])            (会返回影响记录条数，如0)</p>
-<p>delete_all    （删除带条件的记录）<br>Article.delete_all(“published_at &lt; ‘2011-01-01’”)        （也会返回影响记录条数）</p>
-<p>destroy     （没有返回值）<br>    Article.destroy(1)<br>  Article.destroy([2,3])  </p>
-<p>  a = Article.first<br>    a.destroy  实例级别方法</p>
-<pre><code>Article.destory_all(&quot;published_at &lt; &apos;2011-01-01&apos;&quot;) （删除带条件的记录）
-</code></pre><p>  类级别方法</p>
-<p>Rails 会调用每个子对象的 destroy 方法，再调用父对象的 destroy 方法。会触发 model 中定义的回调（before_remove, after_remove , before_destroy 和 after_destroy）<br>delete方法绕过了一些Active Record的回调（callback）和验证函数，而使用destory则不会，通常我们使用destory方法来确保我们的数据库是一致的，并且不会破坏Model中所包含的业务逻辑。</p>
-<p>在被移除之前，“dependent destroy” 会选择所有受限记录，建立其对象，并调用各自的毁灭方法。此方法允许你移除所有受限数据。但是，当涉及大量数据时，这种方法就不管用了。<br>至于 “dependent delete_all”，它会通过一条 SQL 查询移除自己。它效率很高，但是，在这种情况下，你得自己考虑数据库的完整性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/07/2016-08-07-scope-of-usage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/07/2016-08-07-scope-of-usage/" itemprop="url">scope的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-07T19:10:00+08:00">
-                2016-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/07/2016-08-07-scope-of-usage/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/07/2016-08-07-scope-of-usage/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>scope可以将查询条件整合起来，让程序简洁易懂。并且可以串接使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Event &lt; ActiveRecord::Base</div><div class="line">    scope :open_public, -&gt; &#123; where( :is_public =&gt; true ) &#125;</div><div class="line">    scope :recent_three_days, -&gt; &#123; where([&quot;created_at &gt; ? &quot;, Time.now - 3.days ]) &#125;</div><div class="line">end</div><div class="line"></div><div class="line">调用</div><div class="line">Event.open_public</div><div class="line">Event.open_public.recent_three_days</div></pre></td></tr></table></figure>
-<p>预设的scope<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Event &lt; ActiveRecord::Base</div><div class="line">    default_scope -&gt; &#123; order(&apos;id DESC&apos;) &#125;</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<p>暂时取消预设的scope<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Event.unscoped do</div><div class="line">    Event.all</div><div class="line">    # SELECT * FROM events</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Event &lt; ActiveRecord::Base</div><div class="line">    scope :recent, -&gt;(date) &#123; where(&quot;created_at &gt; ?&quot;, date) &#125;</div><div class="line"></div><div class="line">    # 等同於 scope :recent, lambda&#123; |date| where([&quot;created_at &gt; ? &quot;, date ]) &#125;</div><div class="line">    # 或 scope :recent, Proc.new&#123; |t| where([&quot;created_at &gt; ? &quot;, t ]) &#125;</div><div class="line">end</div><div class="line"></div><div class="line">Event.recent( Time.now - 7.days )</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1758,7 +1811,7 @@ step1： 添加gem figaro  到Gemfile文件中
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

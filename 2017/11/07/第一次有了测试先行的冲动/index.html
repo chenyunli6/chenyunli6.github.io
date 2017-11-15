@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="thinking," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。 写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。 再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学">
+<meta name="keywords" content="thinking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次有了测试先行的冲动">
+<meta property="og:url" content="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。 写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。 再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-15T13:03:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一次有了测试先行的冲动">
+<meta name="twitter:description" content="由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。 写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。 再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/"/>
+
+
+
+
+
+  <title>第一次有了测试先行的冲动 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第一次有了测试先行的冲动</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T09:17:27+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/07/第一次有了测试先行的冲动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/07/第一次有了测试先行的冲动/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。</p>
+<p>写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。</p>
+<p>再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学习的时候老师也有强调，虽然也没怎么学测试怎么写。第一家 rails 公司的技术总监就特别重视测试，也很崇尚 TDD（测试驱动开发，测试先行）。我刚开始十分不习惯，由于几乎没写过测试，对写测试的那套代码也不熟，通过 google 和参考项目中别人写的测试，我每次写测试都费了九牛二虎之力。有一次忘写测试了，还被批了一顿。我那时真的害怕写测试啊。</p>
+<p>后来，技术总监给我推荐了《测试驱动开发》那本书，我也硬着头皮看完了，还看了两遍。读完后，了解了 TDD 的很多好处和一些测试的流程。虽然表面上知道了很多TDD 的好处，但我心里还是很害怕写测试。应了那句话，纸上得来终觉浅。</p>
+<p><strong>这次，我终于第一次有了测试先行的冲动！</strong>因为项目用了些 gem ，修改代码后不重启服务会超级慢。所以每次改完代码都去重启。然而来回重启去测试代码，一旦出错或者有逻辑错误的话，必须再次改代码，再次重启继续测，循环往复，花的时间特别长。所以，我想起来先写测试的好处了。如果我先有了测试，只需要一键就可运行看到结果。</p>
+<p>写测试的时候，最讨厌的是要去构造数据，有些数据结构还比较复杂，另外也一直觉得添加测试代码会拖慢进度，构造完数据，还得去构造场景，尤其是进度一直赶着你的时候，写测试的时间就更觉得是浪费了。但是很多时候的偷懒，却带来了更大的不便，快（不写测试）变成了慢，慢（写测试）变成了快。</p>
+<p>TDD 崇尚的是测试先行，即没写代码呢，就先写测试。好处是，如果先写测试，必然得知道输入是什么，期望输出的是什么。这样就不断促进思考该如何得到这样的输出，即把设计代码也放入了测试前期的准备中。构思差不多了，可以通过写伪代码的形式快速得到期望值。然后再去一步步把伪代码变成真正的代码。运行测试的时候有可能就变红了（出错了）。改好代码，再次运行，有可能就变绿了（运行正常）。觉得代码写的不太好，重构一下，再运行测试校验重构是否正确，如果变红，继续更改代码，直到再次变绿。这个过程就是 TDD 的过程。也是由红到绿再重构，然后再继续循环，直到觉得代码不需重构且都 Green. （Red Green Refactor为一个循环）。</p>
+<p>像我开头说的，我现在是先写代码，通过浏览器测试直到代码正确，最后再去补测试。如果以 TDD 的过程写代码，我就不需要来回重启服务，在浏览器测试代码了，这个节省的时间是大把的，对我这个情境来说更是了。虽然浏览器测试省去了构造数据，模拟场景这些初期写测试不熟的人觉得很麻烦的步骤，但是却也少了测试先行的众多优点。何况写完代码之后一般是必定要写测试的，那提前一步写，其实并没有减慢整体的速度。只不过是写测试手生，被进度赶的慌了神，心里上就觉得写测试耽误时间了。</p>
+<p>第一次有了测试先行的冲动。值得记录一下。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/thinking/" rel="tag"># thinking</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/04/command-line-学习：操作文件/" rel="next" title="command-line 学习：操作文件">
+                <i class="fa fa-chevron-left"></i> command-line 学习：操作文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/09/command-line-学习：检阅文件/" rel="prev" title="command-line 学习：检阅文件">
+                command-line 学习：检阅文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/';
+          this.page.identifier = '2017/11/07/第一次有了测试先行的冲动/';
+          this.page.title = '第一次有了测试先行的冲动';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
