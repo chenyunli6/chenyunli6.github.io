@@ -319,7 +319,7 @@
 <li><code>&lt;%- -%&gt;</code> 有什么作用？</li>
 </ol>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;% @people.each <span class="keyword">do</span> <span class="params">|person|</span> %&gt;</div><div class="line">    &lt;% <span class="keyword">if</span> person.name.present? %&gt;</div><div class="line">        &lt;p&gt;&lt;%= person.name %&gt;&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">    &lt;% end %&gt;</span></div><div class="line"><span class="regexp">&lt;% end %&gt;</span></div></pre></td></tr></table></figure>
-<p>上述的 <code>&lt;% %&gt;</code> 標籤雖然不會輸出HTML內容，但是還是在 <code>HTML</code> 原始碼中換行了，為了避免輸出時多餘的換行，可以改用 <code>&lt;%- -%&gt;</code>。不過實際上並沒有很多人在乎就是了，畢竟這不影響用戶的頁面。</p>
+<p>上述的 <code>&lt;% %&gt;</code> 标签虽然不会输出 <code>HTML</code> 內容，但是还是在 <code>HTML</code> 原始码中换行了，为了避免输出時多余的換行，可以改用 <code>&lt;%- -%&gt;</code>。不过实际上并沒有很多人在乎就是了，毕竟这不影响用户的页面。</p>
 <ol>
 <li>设定 layout</li>
 </ol>
@@ -328,9 +328,9 @@
 <li>Collection</li>
 </ol>
 <p>如果是列表集合，像是 <code>tr</code> 或 <code>li</code> 這类会一直重复的 <code>Template</code> 元素，我们可以使用<code>collection</code> 参数來处理，例如像以下的程式：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;% @people.each <span class="keyword">do</span> <span class="params">|person|</span> %&gt;</div><div class="line">        &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:locals</span> =&gt; &#123; <span class="symbol">:person</span> =&gt; person &#125; %&gt;</div><div class="line">    &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;% @people.each <span class="keyword">do</span> <span class="params">|person|</span> %&gt;</div><div class="line">    &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:locals</span> =&gt; &#123; <span class="symbol">:person</span> =&gt; person &#125; %&gt;</div><div class="line">  &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
 <p>我們可以改写成使用 <code>collection</code> 参数來支援列表集合：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:collection</span> =&gt; @people, <span class="symbol">:as</span> =&gt; <span class="symbol">:person</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:collection</span> =&gt; @people, <span class="symbol">:as</span> =&gt; <span class="symbol">:person</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
 <p>在 <code>_person.html.erb</code> 這個 <code>partial</code> 中，会有有一个额外的索引变量 <code>person_counter</code> 记录编号。</p>
 <p>使用 <code>collection</code> 的好处不只是少打字而已，还有执行效能上的大大改善，<code>Rails</code> 內部会针对这种形式做执行效率最佳化。</p>
 <ol>
