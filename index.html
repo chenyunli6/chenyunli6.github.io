@@ -232,6 +232,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/曾经迷惑的小知识一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/曾经迷惑的小知识一/" itemprop="url">曾经迷惑的小知识一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T22:51:59+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/29/曾经迷惑的小知识一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/29/曾经迷惑的小知识一/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>以下都是参考自：<a href="https://ihower.tw/rails/" target="_blank" rel="external">Ruby on Rails 实战圣经</a>，里面有很多好用的小知识，也是曾经走过的坑，一点点知道的，这里面给整理的很好。已经一字不差的读到 Part 2 第 10 个了，接下来继续。因为都是路上看到，所以，就今天摘了一些我曾经迷惑过的小知识下来。</p>
+<ol>
+<li><code>&lt;%- -%&gt;</code> 有什么作用？</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;% @people.each <span class="keyword">do</span> <span class="params">|person|</span> %&gt;</div><div class="line">    &lt;% <span class="keyword">if</span> person.name.present? %&gt;</div><div class="line">        &lt;p&gt;&lt;%= person.name %&gt;&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">    &lt;% end %&gt;</span></div><div class="line"><span class="regexp">&lt;% end %&gt;</span></div></pre></td></tr></table></figure>
+<p>上述的 <code>&lt;% %&gt;</code> 標籤雖然不會輸出HTML內容，但是還是在 <code>HTML</code> 原始碼中換行了，為了避免輸出時多餘的換行，可以改用 <code>&lt;%- -%&gt;</code>。不過實際上並沒有很多人在乎就是了，畢竟這不影響用戶的頁面。</p>
+<ol>
+<li>设定 layout</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Controller 设定 layout</span></div><div class="line">layout <span class="string">"special"</span>, <span class="symbol">only:</span> <span class="symbol">:index</span></div><div class="line">layout <span class="string">"special"</span>, <span class="symbol">except:</span> [<span class="symbol">:show</span>, <span class="symbol">:edit</span>, <span class="symbol">:new</span>]</div><div class="line"></div><div class="line"><span class="comment"># Action 中设定 layout</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">   @event = Event.find(params[<span class="symbol">:id</span>])</div><div class="line">	render <span class="symbol">layout:</span> <span class="string">"foobar"</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<ol>
+<li>Collection</li>
+</ol>
+<p>如果是列表集合，像是 <code>tr</code> 或 <code>li</code> 這类会一直重复的 <code>Template</code> 元素，我们可以使用<code>collection</code> 参数來处理，例如像以下的程式：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;% @people.each <span class="keyword">do</span> <span class="params">|person|</span> %&gt;</div><div class="line">        &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:locals</span> =&gt; &#123; <span class="symbol">:person</span> =&gt; person &#125; %&gt;</div><div class="line">    &lt;% <span class="keyword">end</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
+<p>我們可以改写成使用 <code>collection</code> 参数來支援列表集合：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;%= render <span class="symbol">:partial</span> =&gt; <span class="string">"person"</span>, <span class="symbol">:collection</span> =&gt; @people, <span class="symbol">:as</span> =&gt; <span class="symbol">:person</span> %&gt;</div><div class="line">&lt;ul&gt;</div></pre></td></tr></table></figure>
+<p>在 <code>_person.html.erb</code> 這個 <code>partial</code> 中，会有有一个额外的索引变量 <code>person_counter</code> 记录编号。</p>
+<p>使用 <code>collection</code> 的好处不只是少打字而已，还有执行效能上的大大改善，<code>Rails</code> 內部会针对这种形式做执行效率最佳化。</p>
+<ol>
+<li>Helper<br>因为 <code>Helper</code> 预设只能在 <code>Template</code> 中使用，如果想在 <code>rails console</code> 中呼叫，必须加上 <code>helper</code>，例如 <code>helper.link_to</code>。另外，虽然机会不多，<strong>如果真的要在Rails Controller或Model程式中呼叫Helper，则可以加上ApplicationController.helpers前置词</strong>。</li>
+</ol>
+<p><strong>Helper是全域的，定义在哪一个档案中没有关系，档案名称也不需要与Controller名称对应。</strong></p>
+<ol>
+<li>静态档案辅助方法<br>使用 <code>Rails</code> 内建的静态档案(Assets)辅助方法有几个好处：</li>
+</ol>
+<p><code>Rails</code> 会合并 <code>Stylesheet</code> 和 <code>JavasSript</code> 档案，可以加速浏览器的下载。<br><code>Rails</code> 会编译 <code>Sass</code> 和 <code>CoffeeScript</code> 等透过 <code>Assets template engine</code> 产生的 <code>Stylesheet</code> 和 <code>JavasSript</code><br><code>Rails</code> 会在静态档案网址中加上时间序号，如果内容有修改则会重新产生。这样的好处是强迫用户的浏览器一定会下载到最新的版本，而不会有浏览器快取到旧版本的问题。<br>变更 <code>Assets host</code> 主机位址时，可以一次搞定，例如上 <code>CDN</code> 时。透过 <code>Helpers</code>，<code>Rails</code> 可以帮所有的 <code>Assets</code> 加上静态档案伺服器网址。<br>几个常用的方法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">javascript_include_tag</div><div class="line">stylesheet_link_tag</div><div class="line">auto_discovery_link_tag</div><div class="line">favicon_link_tag</div><div class="line">image_tag</div><div class="line">video_tag</div><div class="line">audio_tag</div></pre></td></tr></table></figure>
+<ol>
+<li>格式化辅助方法<br><strong>simple_format</strong><br>将<code>\n</code>换行字元换成HTML的<code>&lt;br&gt;</code>标签。在表单输入的<code>&lt;textarea&gt;&lt;/textarea&gt;</code>中，换行其实是<code>\n</code>控制字元，因此输出在网页上时，<code>\n</code>代表的是在HTML原始码中换行，因此我们经常需要将<code>\n</code>再换成<code>&lt;br&gt;</code>标签，这样浏览器看到的画面才有换行的呈现。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%= simple_format(<span class="string">"foo\nbar"</span>) %&gt;</div><div class="line"><span class="comment"># 輸出 "&lt;p&gt;foo\n&lt;br /&gt;bar&lt;/p&gt;"</span></div></pre></td></tr></table></figure>
+<p><strong>truncate 截取前几个字符</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;%= truncate(<span class="string">"Once upon a time in a world far far away"</span>) %&gt;</div><div class="line"><span class="comment"># 輸出 "Once upon a time in a world..."</span></div><div class="line"></div><div class="line">&lt;%= truncate(<span class="string">"Once upon a time in a world far far away"</span>, <span class="symbol">length:</span> <span class="number">17</span>) %&gt;</div><div class="line"><span class="comment"># 輸出 "Once upon a ti..."</span></div></pre></td></tr></table></figure>
+<p><strong>strip_tags</strong><br>移除HTML标签</p>
+<p><strong>strip_links</strong><br>移除HTML超连结标签</p>
+<p><strong>distance_of_time_in_words</strong><br>输出很酷的时间距离，例如</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">distance_of_time_in_words(Time.now, Time.now + <span class="number">60</span>.minutes)</div><div class="line">=&gt; <span class="string">"about 1 hour"</span></div><div class="line">distance_of_time_in_words_to_now</div><div class="line">distance_of_time_in_words_to_now(Time.now - <span class="number">1</span>.second)</div><div class="line">=&gt; <span class="string">"less than a minute"</span></div></pre></td></tr></table></figure>
+<p><strong>time_tag</strong><br>输出HTML5时间标签</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">time_tag(Time.now)</div><div class="line">=&gt; <span class="string">"&lt;time datetime=\"2014-11-03T23:55:11+08:00\"&gt;November 03, 2014 23:55&lt;/time&gt;"</span></div></pre></td></tr></table></figure>
+<p><strong>number_with_delimiter</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">number_with_delimiter(<span class="number">1234567</span>)</div><div class="line">=&gt; <span class="string">"1,234,567"</span></div><div class="line">number_with_precision</div><div class="line">number_with_precision(<span class="number">123.4567</span>, <span class="symbol">precision:</span> <span class="number">2</span>)</div><div class="line">=&gt; <span class="string">"123.46"</span></div></pre></td></tr></table></figure>
+<ol>
+<li>URL辅助方法<br><code>link_to</code> 文字超连结<br>除了学过的 <code>&lt;%= link_to &#39;超連結文字&#39;, xxx_path %&gt;</code> 用法之外，如果超连结文字很多甚至有图片，可以用 <code>block</code> 的方式改写，例如：</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;%= link_to user_path(user) <span class="keyword">do</span> %&gt;</div><div class="line">  &lt;%= image_tag user.avatar.url %&gt; &lt;%= user.display_name %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p><code>mail_to</code> E-mail<br><code>button_to</code> 按钮连结，这个预设会改用POST出去(实际是个只有按钮的表单)。因此如果超连结有用 <code>method: :post</code> 等非GET方法时，建议可以考虑改用 <code>button_to</code>而不是 <code>link_to</code>，这样在JavaScript失效的情况下仍然可以作用，满足网页无障碍的标准。<br><code>current_page?(url)</code> 是否目前是url这个页面，通常是在 <code>layout</code> 上搭配 <code>tab</code> 样式做 <code>active</code> 效果</p>
+<ol>
+<li>表单辅助方法<br><code>select</code><br>使用 <code>select</code> 有一个坑：如果你要加 <code>class</code> 的话，必须这样写 <code>f.select :xxx, {}, :class =&gt; &quot;your-class-name&quot;</code>，多出来的{}是因为这个select API的最后两个参数都是Hash，必须多包一个<code>{}</code>才能让 <code>:class</code> 挤到最后的参数去。</li>
+</ol>
+<p>搭配model用的f.check_box :column_name和check_box_tag :input_name有微妙的差异，前者会多产生一个隐藏的hidden_field :column_name, “0”来表示没有勾选的状态，后者则不会。这是因为如果你没有勾选的话，浏览器就不会送出check_box的资料，因此Rails用了一个隐藏栏位来处理反勾选。</p>
+<ol>
+<li>如何处理 <code>Model</code> 中不存在的属性<br>使用 <code>form_for</code> 时，其中的栏位必须是 <code>Model</code> 有的属性，那如果资料库没有这个栏位呢?这时候你依需要在 <code>Model</code> 程式中加上存取方法，例如：</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ApplicationRecord</span></div><div class="line"></div><div class="line">  <span class="comment">#...</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">custom_field</span></span></div><div class="line">      <span class="comment"># 根據其他屬性的值或條件，來決定這個欄位的值</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">custom_field=</span><span class="params">(value)</span></span></div><div class="line">      <span class="comment"># 根據value，來調整其他屬性的值</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>这样就可以在 <code>form_for</code> 里使用 <code>custom_field</code> 了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%= form_for @event <span class="keyword">do</span> <span class="params">|f|</span> %&gt;</div><div class="line">    &lt;%= f.text_field <span class="symbol">:custom_field</span> %&gt;</div><div class="line">    &lt;%= f.submit %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>记得把 <code>:custom_field</code> 也加到 <code>Strong Parameters</code> 清单里，这样按下送出后，就可以跟着 <code>@event</code> 本来的栏位一起处理了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/一冰箱水果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1995,139 +2183,6 @@ sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/几个-psql-命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/01/几个-psql-命令/" itemprop="url">几个 psql 命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T19:15:21+08:00">
-                2017-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/01/几个-psql-命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/01/几个-psql-命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>$ psql postgres</code> （进入psql 命令）<br><code>postgres=# \c testdb;</code> （进入 testdb 数据库 ）<br><code>testdb-# \d posts;</code> （列出 posts 表结构）</p>
-<p>参考：<br><a href="http://www.informit.com/articles/article.aspx?p=409471&amp;seqNum=5" target="_blank" rel="external">PostgreSQL SQL Syntax and Use</a></p>
-<p><a href="https://www.tutorialspoint.com/postgresql/postgresql_select_database.htm" target="_blank" rel="external">PostgreSQL - SELECT Database</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2178,7 +2233,7 @@ sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2191,7 +2246,7 @@ sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
