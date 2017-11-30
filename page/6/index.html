@@ -232,6 +232,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835879/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835879/" itemprop="url">Model中好用的小知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:43:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835879/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835879/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Model中好用的小知识"><a href="#Model中好用的小知识" class="headerlink" title="Model中好用的小知识"></a>Model中好用的小知识</h2><h3 id="ids"><a href="#ids" class="headerlink" title="ids"></a>ids</h3><p>在strong params内加入post_ids:[],使用simple_form时只要写上f.association就可以了，传入controller的时候会形成post_ids这个array，rails会根据post_ids帮我们建立关联</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;%=  simple_form_for @drink <span class="keyword">do</span> <span class="params">|f|</span> %&gt;</div><div class="line">  &lt;%= f.association <span class="symbol">:materials</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:check_boxes</span> %&gt;&lt;br&gt;</div><div class="line">  &lt;%= f.submit <span class="string">"Submit"</span> %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<h3 id="collect-amp-id"><a href="#collect-amp-id" class="headerlink" title="collect(&amp;:id)"></a>collect(&amp;:id)</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">users = User.all</div><div class="line">users.collect(&amp;<span class="symbol">:id</span>)</div><div class="line">users.collect(&amp;<span class="symbol">:name</span>)</div></pre></td></tr></table></figure>
+<p>这都可以把users中的id或者name都拿出来组成一个array</p>
+<p>比如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">topics = [&#123;<span class="symbol">id:</span><span class="number">1</span>,<span class="symbol">title:</span><span class="string">"topic1"</span>&#125;,&#123;<span class="symbol">id:</span><span class="number">2</span>,<span class="symbol">title:</span><span class="string">"topic2"</span>&#125;]</div><div class="line">topics.collect(&amp;<span class="symbol">:id</span>)</div></pre></td></tr></table></figure>
+<p>执行结果 [1，2］</p>
+<p>把id都变成浮点数</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">topics.collect&#123; <span class="params">|t|</span> t.id.to_f &#125;</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">topics.collect(&amp;<span class="symbol">:id</span>).collect(&amp;<span class="symbol">:to_f</span>)</div></pre></td></tr></table></figure>
+<p>产生结果：[1.0,2.0]</p>
+<h3 id="includes"><a href="#includes" class="headerlink" title="includes"></a>includes</h3><p>不好的写法</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">	<span class="function"><span class="keyword">def</span></span></div><div class="line">		@bards = Board.all</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>然后在view中使用@board.topics,来获得每一个topic，如果有10个topics，这样系统会到数据库中查找10次。</p>
+<p>如果用includes</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">	<span class="function"><span class="keyword">def</span></span></div><div class="line">		@bards = Board.includes(<span class="symbol">:topics</span>).all</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view中写@board.topics,就只会去数据库查找一次，把10个topic一次查出来，然后把抓出来的所有topic和board用board_id相关联。<br>这样做减少了数据库的负担。提到效能。</p>
+<h3 id="counter-cache"><a href="#counter-cache" class="headerlink" title="counter_cache"></a>counter_cache</h3><p>counter_cache是在做关联关系时计算数据量的一个方法。<br>不好的写法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@board.topics.size</div></pre></td></tr></table></figure>
+<p>这代表我们都要算数量的时候都得通过sql去数据库计算topics，也会造成效能问题。<br>所以rails内建了counter_cache方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">    belongs_to <span class="symbol">:board</span>, <span class="symbol">counter_cache:</span> <span class="literal">true</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在Board表中增加字段topics_count.这样以后Board内的topics有增减的时候，rails就会帮我们增减topics_count,这样在写@board.topics.size后，rails就会预设去找topics_count，不用重新生成sql去数据库中查找。</p>
+<p>如果想写成自己定义的字段名称，如count_of_topics，那么可以这样做</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">    belongs_to <span class="symbol">:board</span>, <span class="symbol">counter_cache:</span> <span class="symbol">:count_of_topics</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="STI"><a href="#STI" class="headerlink" title="STI"></a>STI</h3><p>单一表格继承 STI(Single-table inheritance)</p>
+<p>Rails Guide 對此的說明：</p>
+<blockquote>
+<p>a way to add inheritance to your models</p>
+</blockquote>
+<p>让子类继承父类的属性和方法。<br>在父类中加入type，来表示类型</p>
+<p>例：User有分 Native 跟 Foreigner；<br>使用场景：拥有一样的特性，但是行为不同时使用继承。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> &lt; ActiveRecord::Base</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Native</span> &lt; User</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foreigner</span> &lt; User</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">native = Native.create(<span class="symbol">name:</span><span class="string">"foobar"</span>)</div><div class="line">native.type</div><div class="line">得出<span class="string">"Native"</span></div></pre></td></tr></table></figure>
+<h3 id="Polymorphic-Assoiciaion"><a href="#Polymorphic-Assoiciaion" class="headerlink" title="Polymorphic Assoiciaion"></a>Polymorphic Assoiciaion</h3><p>Polymorphic Assoiciaion是rails内让两个不同的Model同时has_many一个model的做法。最常见的就是做留言系统的时候。</p>
+<p>对文章可以留言，对看板留言，但是这些留言所需要的字段都是一样的，没必要建两套。<br>那么，这样的model只需要新增一个Comment model再用Polymorphic Assoiciaion关联就可以了。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Comment</span> &lt; ActiveRecord</span></div><div class="line">  belongs_to <span class="symbol">:commentable</span>, <span class="symbol">:polymorphic</span> =&gt; <span class="literal">true</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:commentable</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Topic</span> &lt; ActiveRecord</span></div><div class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:commentable</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>Comment里面必须包含两个字段。<br>commentable_id和commentable_type<br>commentable_type记录model名称<br>commentable_id记录该model下的id</p>
+<p>Rails3之後的 migration 可以單獨寫t.references :imageable, polymorphic: true就會自動生成這兩個欄位。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreatePictures</span> &lt; ActiveRecord::Migration</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></div><div class="line">    create_table <span class="symbol">:pictures</span> <span class="keyword">do</span> <span class="params">|t|</span></div><div class="line">      t.string <span class="symbol">:name</span></div><div class="line">      t.references <span class="symbol">:imageable</span>, <span class="symbol">polymorphic:</span> <span class="literal">true</span></div><div class="line">      t.timestamps</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835824/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1640,138 +1809,6 @@ NotificationService.new(@question.user,current_user,@answer).send_notification!
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-802980/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-802980/" itemprop="url">link_to</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T13:03:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-802980/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-802980/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">关注</div><div class="line">  ```&lt;% if !current_user.already_follower?(@user) %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% else %&gt;</div><div class="line">  &lt;i class=&quot;fa fa-heart-o&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;% end %&gt;</div><div class="line">&lt;% end %&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ruby</div><div class="line">&lt;%=link_to_if(question.answers.count&gt;0, &quot;删除&quot;</div><div class="line">,publish_hidden_account_question_path(question)</div><div class="line">, method: :post, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;,disabled:true) do</div><div class="line">	link_to(&quot;删除&quot;,publish_hidden_account_question_path(question), method: :post</div><div class="line">, data: &#123; confirm: &apos;Are you sure you want to delete the question?&apos; &#125;</div><div class="line">, class:&quot;btn btn-primary btn-xs&quot;)</div><div class="line">end %&gt;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1822,7 +1859,7 @@ NotificationService.new(@question.user,current_user,@answer).send_notification!
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

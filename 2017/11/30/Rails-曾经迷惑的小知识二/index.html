@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="rails Learn & Get Everyday," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="以下都是参考自：Ruby on Rails 实战圣经，里面有很多好用的小知识，也是曾经走过的坑，一点点知道的，这里面给整理的很好。（因为部署在台湾吧，所以加载很慢，等等就会加载出来网页了） Unobtrusive JavaScriptRails 使用一种叫做 Unobtrusive JavaScript(UJS) 的方式來加载內建的 JavaScript 功能，也就是你在 app/assets/j">
+<meta name="keywords" content="rails Learn &amp; Get Everyday">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails 曾经迷惑的小知识二">
+<meta property="og:url" content="http://yoursite.com/2017/11/30/Rails-曾经迷惑的小知识二/index.html">
+<meta property="og:site_name" content="这里有我的脚丫印😄">
+<meta property="og:description" content="以下都是参考自：Ruby on Rails 实战圣经，里面有很多好用的小知识，也是曾经走过的坑，一点点知道的，这里面给整理的很好。（因为部署在台湾吧，所以加载很慢，等等就会加载出来网页了） Unobtrusive JavaScriptRails 使用一种叫做 Unobtrusive JavaScript(UJS) 的方式來加载內建的 JavaScript 功能，也就是你在 app/assets/j">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-30T11:29:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails 曾经迷惑的小知识二">
+<meta name="twitter:description" content="以下都是参考自：Ruby on Rails 实战圣经，里面有很多好用的小知识，也是曾经走过的坑，一点点知道的，这里面给整理的很好。（因为部署在台湾吧，所以加载很慢，等等就会加载出来网页了） Unobtrusive JavaScriptRails 使用一种叫做 Unobtrusive JavaScript(UJS) 的方式來加载內建的 JavaScript 功能，也就是你在 app/assets/j">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/30/Rails-曾经迷惑的小知识二/"/>
+
+
+
+
+
+  <title>Rails 曾经迷惑的小知识二 | 这里有我的脚丫印😄</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">这里有我的脚丫印😄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程序媛</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/30/Rails-曾经迷惑的小知识二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Rails 曾经迷惑的小知识二</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T19:27:52+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/30/Rails-曾经迷惑的小知识二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/30/Rails-曾经迷惑的小知识二/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下都是参考自：<a href="https://ihower.tw/rails/" target="_blank" rel="external">Ruby on Rails 实战圣经</a>，里面有很多好用的小知识，也是曾经走过的坑，一点点知道的，这里面给整理的很好。（因为部署在台湾吧，所以加载很慢，等等就会加载出来网页了）</p>
+<h2 id="Unobtrusive-JavaScript"><a href="#Unobtrusive-JavaScript" class="headerlink" title="Unobtrusive JavaScript"></a>Unobtrusive JavaScript</h2><p>Rails 使用一种叫做 <code>Unobtrusive JavaScript(UJS)</code> 的方式來加载內建的 JavaScript 功能，也就是你在 <code>app/assets/javascripts/application.js</code> 里面载入的 <code>//= require jquery_ujs</code>，这些功能包括</p>
+<ul>
+<li>让超链接可以用 <code>:method</code> 参数支援非 GET 方法</li>
+<li>用超链接、按钮和表单可以用 <code>remote: true</code> 支援 Ajax</li>
+<li>超链接、按钮和表单可以用 <code>data-confirm</code> 参数可以弹出确认对话框</li>
+<li>送出按钮可以用 <code>data-disable-with</code> 参数在送出表单时暂时关闭按钮避免重复发送</li>
+</ul>
+<p>什么是 <code>Unobtrusive</code> 呢？用个例子來说吧，以下代码会将超链接改成用表单 <code>DELETE</code> 送出，并且用一个提示弹窗来作确认：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">link_to &apos;Remove&apos;, event_path(1), :method =&gt; :delete, :data =&gt; &#123; :confirm =&gt; &quot;Sure?&quot; &#125;</div></pre></td></tr></table></figure>
+<p>在Rails 3以前的版本，会输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a onclick=&quot;if (confirm(&apos;Sure?&apos;)) &#123; var f = document.createElement(&apos;form&apos;); f.style.display = &apos;none&apos;; this.parentNode.appendChild(f); f.method = &apos;POST&apos;; f.action = this.href;var m = document.createElement(&apos;input&apos;); m.setAttribute(&apos;type&apos;, &apos;hidden&apos;); m.setAttribute(&apos;name&apos;, &apos;_method&apos;); m.setAttribute(&apos;value&apos;, &apos;delete&apos;); f.appendChild(m);f.submit(); &#125;;return false;&quot; href=&quot;/events/1&quot;&gt;Remove&lt;/a&gt;</div></pre></td></tr></table></figure>
+<p>在 <code>Rails 3</code> 之后，会输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a rel=&quot;nofollow&quot; data-confirm=&quot;Sure?&quot; data-method=&quot;delete&quot; class=&quot;delete&quot; href=&quot;/events/1&quot;&gt;Remove&lt;/a&gt;</div></pre></td></tr></table></figure>
+<p><code>Unobtrusive</code> 也就是将 <code>JavaScript</code> 程式与HTML完全分开，除了可以让HTML代码干净之外，也可以支援更换不同的 <code>JavaScript Library</code>，例如把 <code>Rails</code> 內建的 <code>jQuery</code> 換成 <code>Protytype.js</code> 或 <code>angular.js</code> 等等。</p>
+<p><strong>在 <code>Layout</code> 中有輸出一段 <code>&lt;%= csrf_meta_tag %&gt;</code> 的作用就是搭配给 <code>UJS</code> 使用的，让 <code>JavaScript</code> 可以拿到 <code>CSRF</code> 安全验证码。</strong></p>
+<h2 id="j-是-escape-javascript-的缩写"><a href="#j-是-escape-javascript-的缩写" class="headerlink" title="j() 是 escape_javascript() 的缩写"></a><code>j()</code> 是 <code>escape_javascript()</code> 的缩写</h2><h2 id="Ajax-的三种使用方式"><a href="#Ajax-的三种使用方式" class="headerlink" title="Ajax 的三种使用方式"></a>Ajax 的三种使用方式</h2><p><code>Ajax</code> 是 <code>Asynchronous JavaScript and XML</code> 的缩写，是一种不需要重新整理页面，通过 <code>JavaScript</code> 来与服务器交换资料、更新网页內容的技术。目的在于改善使用者的操作界面，提升流畅度。它主要是通过浏览器提供的 <code>XMLHttpRequestObject</code> 来达成，不过因为要支援跨浏览器，大多数人們会选择使用 <code>JavaScript Library</code> 来处理 <code>Ajax</code>，例如最流行的 <code>JQuery</code>。</p>
+<p>总体来说，依照 <code>Ajax</code> 使用的格式分类，有三种方式：</p>
+<p>向服务器请求 <code>HTML</code> 片段，然后客户端浏览器上的 <code>JavaScript</code> 再替换掉页面上的元素<br>向服务器请求 <code>JavaScript</code> 程式脚本，然后客户端浏览器执行它<br>向服务器请求 <code>JSON</code> 或 <code>XML</code> 资料格式，然后客户端浏览器的 <code>JavaScript</code> 解析后再动作。</p>
+<p>具体三种方式请参考：<a href="https://ihower.tw/rails/ajax.html" target="_blank" rel="external">Ajax 應用程式</a> 很详细。</p>
+<h2 id="其他实用的方法"><a href="#其他实用的方法" class="headerlink" title="其他实用的方法"></a>其他实用的方法</h2><p><code>pluralize</code> 方法可以帮我们将名词字串转为复数的名词:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"table"</span>.pluralize     <span class="comment"># =&gt; "tables"</span></div><div class="line"><span class="string">"ruby"</span>.pluralize      <span class="comment"># =&gt; "rubies"</span></div><div class="line"><span class="string">"equipment"</span>.pluralize <span class="comment"># =&gt; "equipment"</span></div></pre></td></tr></table></figure>
+<p>而 <code>singularize</code> 方法则是可以帮我们转为单数:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"tables"</span>.singularize    <span class="comment"># =&gt; "table"</span></div><div class="line"><span class="string">"rubies"</span>.singularize    <span class="comment"># =&gt; "ruby"</span></div><div class="line"><span class="string">"equipment"</span>.singularize <span class="comment"># =&gt; "equipment"</span></div></pre></td></tr></table></figure>
+<p><code>camelize</code> 可以帮我们将字串转为驼峰式的字串:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"product"</span>.camelize    <span class="comment"># =&gt; "Product"</span></div><div class="line"><span class="string">"admin_user"</span>.camelize <span class="comment"># =&gt; "AdminUser"</span></div></pre></td></tr></table></figure>
+<p>在 <code>Rails</code> 中也会将路径中 <code>”/”</code> 符号转为 <code>Class</code> 及 <code>Module</code> 中的命名空间符号::</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"backoffice/session"</span>.camelize <span class="comment"># =&gt; "Backoffice::Session"</span></div></pre></td></tr></table></figure>
+<p>而 <code>underscore</code> 则是将原先驼峰式的字串转为路径式的字串:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Product"</span>.underscore   <span class="comment"># =&gt; "product"</span></div><div class="line"><span class="string">"AdminUser"</span>.underscore <span class="comment"># =&gt; "admin_user"</span></div><div class="line"><span class="string">"Backoffice::Session"</span>.underscore <span class="comment"># =&gt; "backoffice/session"</span></div></pre></td></tr></table></figure>
+<p><code>titleize</code> 方法可以将字串标题化，将单字的开头皆转为大写:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"alice in wonderland"</span>.titleize <span class="comment"># =&gt; "Alice In Wonderland"</span></div><div class="line"><span class="string">"fermat's enigma"</span>.titleize     <span class="comment"># =&gt; "Fermat's Enigma"</span></div></pre></td></tr></table></figure>
+<p><code>dasherize</code> 可以将字串中的底线转为横线:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"name"</span>.dasherize         <span class="comment"># =&gt; "name"</span></div><div class="line"><span class="string">"contact_data"</span>.dasherize <span class="comment"># =&gt; "contact-data"</span></div></pre></td></tr></table></figure>
+<p><code>demodulize</code> 可以将整串的 <code>namespace</code> 去除仅留下最后的 <code>Class name</code> 或是 <code>Module name</code> :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Backoffice::UsersController"</span>.demodulize    <span class="comment"># =&gt; "UsersController"</span></div><div class="line"><span class="string">"Admin::Hotel::ReservationUtils"</span>.demodulize <span class="comment"># =&gt; "ReservationUtils"</span></div></pre></td></tr></table></figure>
+<p><code>deconstantize</code> 则是相反的作用，将上层的部分全部找出来:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Backoffice::UsersController"</span>.deconstantize    <span class="comment"># =&gt; "Backoffice"</span></div><div class="line"><span class="string">"Admin::Hotel::ReservationUtils"</span>.deconstantize <span class="comment"># =&gt; "Admin::Hotel"</span></div></pre></td></tr></table></figure>
+<p>必须注意的是这是处理字串，因此若直接仅给予 <code>Class name</code> 或是 <code>Module name</code> 是无法找出上层参照的</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Product"</span>.deconstantize  <span class="comment"># =&gt; ""</span></div></pre></td></tr></table></figure>
+<p><code>parameterize</code> 可以将字串转为适合 <code>url</code> 的方式:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"John Smith"</span>.parameterize <span class="comment"># =&gt; "john-smith"</span></div><div class="line"><span class="string">"Kurt Gödel"</span>.parameterize <span class="comment"># =&gt; "kurt-godel"</span></div></pre></td></tr></table></figure>
+<p><code>tableize</code> 除了会将单数名词转为复数之外，还会将驼峰式的名词改为底线:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"InvoiceLine"</span>.tableize <span class="comment"># =&gt; "invoice_lines"</span></div></pre></td></tr></table></figure>
+<p><code>tableize</code> 的作用其实在于帮助你找出 <code>Model</code> 的资料表名称</p>
+<p><code>classify</code> 则是 <code>tableize</code> 的相反，能够帮你从资料表的名称转为 <code>Model</code> :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"people"</span>.classify        <span class="comment"># =&gt; "Person"</span></div><div class="line"><span class="string">"invoices"</span>.classify      <span class="comment"># =&gt; "Invoice"</span></div><div class="line"><span class="string">"invoice_lines"</span>.classify <span class="comment"># =&gt; "InvoiceLine"</span></div></pre></td></tr></table></figure>
+<p><code>humanize</code> 可以帮你将Model的属性转为较容易阅读的形式:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"name"</span>.humanize           <span class="comment"># =&gt; "Name"</span></div><div class="line"><span class="string">"author_id"</span>.humanize      <span class="comment"># =&gt; "Author"</span></div><div class="line"><span class="string">"comments_count"</span>.humanize <span class="comment"># =&gt; "Comments count"</span></div></pre></td></tr></table></figure>
+<h2 id="扩充-Enumerable"><a href="#扩充-Enumerable" class="headerlink" title="扩充 Enumerable"></a>扩充 Enumerable</h2><p><strong><code>index_by</code></strong><br><code>index_by</code> 可以帮我们将集合元素以指定的栏位做为键值整理成 <code>Hash</code> :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">invoices.index_by(&amp;<span class="symbol">:number</span>)</div><div class="line"><span class="comment"># =&gt; &#123;'2009-032' =&gt; &lt;Invoice ...&gt;, '2009-008' =&gt; &lt;Invoice ...&gt;, ...&#125;</span></div><div class="line">键值通常必须是唯一的，若不是唯一的话将会以最后出现的元素做为判断值。</div></pre></td></tr></table></figure>
+<p><strong><code>many?</code></strong><br><code>many?</code> 是可个好用的方法可以帮助我们快速的判断集合的数量是否大于1:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> pages.many? %&gt;</div><div class="line">  &lt;%= pagination_links %&gt;</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>如果对 <code>many?</code> 传入区块运算时，<code>many?</code> 仅会回传运算结果是true的结果:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@see_more = videos.many? &#123;<span class="params">|video|</span> video.category == params[<span class="symbol">:category</span>]&#125;</div></pre></td></tr></table></figure>
+<h2 id="还有些实用的小方法，抄过来太多了，请查看-ActiveSupport-工具函式库"><a href="#还有些实用的小方法，抄过来太多了，请查看-ActiveSupport-工具函式库" class="headerlink" title="还有些实用的小方法，抄过来太多了，请查看 ActiveSupport - 工具函式库"></a>还有些实用的小方法，抄过来太多了，请查看 <a href="https://ihower.tw/rails/activesupport.html" target="_blank" rel="external">ActiveSupport - 工具函式库</a></h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rails-Learn-Get-Everyday/" rel="tag"># rails Learn & Get Everyday</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/29/Rails-曾经迷惑的小知识一/" rel="next" title="Rails 曾经迷惑的小知识一">
+                <i class="fa fa-chevron-left"></i> Rails 曾经迷惑的小知识一
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">陈云莉 m18301662790@gmail.com</p>
+              <p class="site-description motion-element" itemprop="description">记录一些技术点，留下一些生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unobtrusive-JavaScript"><span class="nav-number">1.</span> <span class="nav-text">Unobtrusive JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#j-是-escape-javascript-的缩写"><span class="nav-number">2.</span> <span class="nav-text">j() 是 escape_javascript() 的缩写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax-的三种使用方式"><span class="nav-number">3.</span> <span class="nav-text">Ajax 的三种使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他实用的方法"><span class="nav-number">4.</span> <span class="nav-text">其他实用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩充-Enumerable"><span class="nav-number">5.</span> <span class="nav-text">扩充 Enumerable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#还有些实用的小方法，抄过来太多了，请查看-ActiveSupport-工具函式库"><span class="nav-number">6.</span> <span class="nav-text">还有些实用的小方法，抄过来太多了，请查看 ActiveSupport - 工具函式库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈云莉 m18301662790@gmail.com</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://chenyunli.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/11/30/Rails-曾经迷惑的小知识二/';
+          this.page.identifier = '2017/11/30/Rails-曾经迷惑的小知识二/';
+          this.page.title = 'Rails 曾经迷惑的小知识二';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chenyunli.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
