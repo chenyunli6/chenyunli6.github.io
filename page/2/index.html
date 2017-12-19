@@ -232,6 +232,376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/第一次有了测试先行的冲动/" itemprop="url">第一次有了测试先行的冲动</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T09:17:27+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/07/第一次有了测试先行的冲动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/07/第一次有了测试先行的冲动/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。</p>
+<p>写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。</p>
+<p>再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学习的时候老师也有强调，虽然也没怎么学测试怎么写。第一家 rails 公司的技术总监就特别重视测试，也很崇尚 TDD（测试驱动开发，测试先行）。我刚开始十分不习惯，由于几乎没写过测试，对写测试的那套代码也不熟，通过 google 和参考项目中别人写的测试，我每次写测试都费了九牛二虎之力。有一次忘写测试了，还被批了一顿。我那时真的害怕写测试啊。</p>
+<p>后来，技术总监给我推荐了《测试驱动开发》那本书，我也硬着头皮看完了，还看了两遍。读完后，了解了 TDD 的很多好处和一些测试的流程。虽然表面上知道了很多TDD 的好处，但我心里还是很害怕写测试。应了那句话，纸上得来终觉浅。</p>
+<p><strong>这次，我终于第一次有了测试先行的冲动！</strong>因为项目用了些 gem ，修改代码后不重启服务会超级慢。所以每次改完代码都去重启。然而来回重启去测试代码，一旦出错或者有逻辑错误的话，必须再次改代码，再次重启继续测，循环往复，花的时间特别长。所以，我想起来先写测试的好处了。如果我先有了测试，只需要一键就可运行看到结果。</p>
+<p>写测试的时候，最讨厌的是要去构造数据，有些数据结构还比较复杂，另外也一直觉得添加测试代码会拖慢进度，构造完数据，还得去构造场景，尤其是进度一直赶着你的时候，写测试的时间就更觉得是浪费了。但是很多时候的偷懒，却带来了更大的不便，快（不写测试）变成了慢，慢（写测试）变成了快。</p>
+<p>TDD 崇尚的是测试先行，即没写代码呢，就先写测试。好处是，如果先写测试，必然得知道输入是什么，期望输出的是什么。这样就不断促进思考该如何得到这样的输出，即把设计代码也放入了测试前期的准备中。构思差不多了，可以通过写伪代码的形式快速得到期望值。然后再去一步步把伪代码变成真正的代码。运行测试的时候有可能就变红了（出错了）。改好代码，再次运行，有可能就变绿了（运行正常）。觉得代码写的不太好，重构一下，再运行测试校验重构是否正确，如果变红，继续更改代码，直到再次变绿。这个过程就是 TDD 的过程。也是由红到绿再重构，然后再继续循环，直到觉得代码不需重构且都 Green. （Red Green Refactor为一个循环）。</p>
+<p>像我开头说的，我现在是先写代码，通过浏览器测试直到代码正确，最后再去补测试。如果以 TDD 的过程写代码，我就不需要来回重启服务，在浏览器测试代码了，这个节省的时间是大把的，对我这个情境来说更是了。虽然浏览器测试省去了构造数据，模拟场景这些初期写测试不熟的人觉得很麻烦的步骤，但是却也少了测试先行的众多优点。何况写完代码之后一般是必定要写测试的，那提前一步写，其实并没有减慢整体的速度。只不过是写测试手生，被进度赶的慌了神，心里上就觉得写测试耽误时间了。</p>
+<p>第一次有了测试先行的冲动。值得记录一下。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/command-line-学习：操作文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/04/command-line-学习：操作文件/" itemprop="url">command-line 学习：操作文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:04:09+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/04/command-line-学习：操作文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/04/command-line-学习：操作文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用的电脑为 mac 。</p>
+<p>参考：<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="external">Learn Enough Command Line to Be Dangerous</a></p>
+<ol>
+<li><p><code>&gt;</code> 和 <code>&gt;&gt;</code> 就算没有编辑器，也是可以把输出的一行字，新创建到一个文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;From fairest creatures we desire increase,&quot; &gt; sonnet_1.txt`</div><div class="line">  # 这句命令就可以创建一个新的文件 sonnet_1.txt 并把 echo 后面的那句话放到这个文件中。</div><div class="line"></div><div class="line">$ cat sonnet_1.txt</div><div class="line">  # 查看 sonnet_1.txt，会把 sonnet_1.txt 中的内容输出。（cat 是 concatenate 的缩写）</div><div class="line"></div><div class="line">$ echo &quot;That thereby beauty&apos;s Rose might never die,&quot; &gt;&gt; sonnet_1.txt</div><div class="line"></div><div class="line">  # 使用 &gt;&gt; 可以把一句话追加到文件中。</div><div class="line"></div><div class="line">$ diff sonnet_1.txt sonnet_1_lower_case.txt</div><div class="line">&lt; That thereby beauty&apos;s Rose might never die,</div><div class="line">---</div><div class="line">&gt; That thereby beauty&apos;s rose might never die,</div><div class="line"></div><div class="line"># 快速比较两个文件的不同。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>ls</strong></p>
+<p>列出当前目录所有的文件和文件夹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ ls foo # 列出这个 foo 下所有的文件和文件夹。</div><div class="line"></div><div class="line">$ touch foo # 可以创建一个空的文件，名字是 foo.</div><div class="line"></div><div class="line">$ cd + 文件名 # 切换到这个文件下面。</div><div class="line"></div><div class="line">$ ls *.txt # 可以列出所有的以 .txt 结尾的文件</div><div class="line"></div><div class="line">$ ls -l *.txt # 可以列出所有以 .txt 结尾的文件，以及更改文件的时间等。时间前面的是这个文件的大小（字节）。</div><div class="line"></div><div class="line">$ ls -rtl # 可以按照修改时间排序，最近的在最后面。这个也可以拆开写 ls -r -t -l</div><div class="line"></div><div class="line">$ echo &quot;*.txt&quot; &gt; .gitignore</div><div class="line">$ cat .gitignore</div><div class="line">*.txt</div><div class="line"></div><div class="line">$ ls # 不会列出隐藏的文件 .gitignore 。</div><div class="line">$ ls -a # 可以列出所有的文件包括隐藏的文件 .gitignore 。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>mv</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;test text&quot; &gt; test</div><div class="line">$ mv test test_file.txt</div><div class="line">$ ls</div><div class="line">test_file.txt</div></pre></td></tr></table></figure>
+<p>重命名 text 文件变成 test_file.txt。</p>
+</li>
+<li><p><strong>cp</strong> copy 复制文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cp test_file.txt second_test.txt</div><div class="line">$ ls</div><div class="line">second_test.txt</div><div class="line">test_file.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>rm</strong> remove 删除文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ rm second_test.txt</div><div class="line">remove second_test.txt? y</div><div class="line">$ ls second_test.txt</div><div class="line">ls: second_test.txt: No such file or directory</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Tab completion</strong> Tab 键自动补全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rm tes⇥ # 输入一半的时候可以按住 tab 键，便会自动补全后面的文件名。</div><div class="line"></div><div class="line">$ rm -f *.txt # 删除所有以 *.txt 结尾的文件。f 为 force 的缩写。</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  翻译好累 😫，结合上面看吧。</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>   &gt;</td>
+<td>Redirect output to filename</td>
+<td>$ echo foo &gt; foo.txt</td>
+</tr>
+<tr>
+<td>   &gt;&gt;</td>
+<td>Append output to filename</td>
+<td>$ echo bar &gt;&gt; foo.txt</td>
+</tr>
+<tr>
+<td>   cat <file></file></td>
+<td>Print contents of file to screen</td>
+<td>$ cat hello.txt  </td>
+</tr>
+<tr>
+<td>   diff <f1> <f2></f2></f1></td>
+<td>Diff files 1 &amp; 2</td>
+<td>$ diff foo.txt bar.txt</td>
+</tr>
+<tr>
+<td>   ls</td>
+<td>List directory or file</td>
+<td>$ ls hello.txt</td>
+</tr>
+<tr>
+<td>   ls -l</td>
+<td>List long form</td>
+<td>$ ls -l hello.txt</td>
+</tr>
+<tr>
+<td>   ls -rtl</td>
+<td>Long by reverse modification time</td>
+<td>$ ls -rtl</td>
+</tr>
+<tr>
+<td>   ls -a</td>
+<td>List all (including hidden)</td>
+<td>$ ls -a</td>
+</tr>
+<tr>
+<td>   touch <file></file></td>
+<td>Create an empty file</td>
+<td>$ touch foo</td>
+</tr>
+<tr>
+<td>   mv <old> <new></new></old></td>
+<td>Rename (move) from old to new</td>
+<td>$ mv foo bar</td>
+</tr>
+<tr>
+<td>   cp <old> <new></new></old></td>
+<td>Copy old to new</td>
+<td>$ cp foo bar</td>
+</tr>
+<tr>
+<td>   rm <file></file></td>
+<td>Remove (delete) file</td>
+<td>$ rm foo</td>
+</tr>
+<tr>
+<td>   rm -f <file></file></td>
+<td>Force-remove file</td>
+<td>$ rm -f bar</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/command-line-学习：基础命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1526,377 +1896,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/" itemprop="url">我把面试题总结到 RubyChina 上带来的反思</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T11:31:44+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/19/我把面试题总结到-RubyChina-上带来的反思/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/19/我把面试题总结到-RubyChina-上带来的反思/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我去面试了一圈，被问了很多问题。所以回来的时候就回忆问题，罗列出来，精心把答案都找了一遍后，总结成一篇文章，在<a href="https://chenyunli6.github.io/" target="_blank" rel="external">我的博客</a>和<a href="http://www.jianshu.com/u/42a08a270330" target="_blank" rel="external">我的简书</a>上各发了一下，后来想想，RubyChina 上技术氛围更好，也发到那里吧。</p>
-<p>发文章的初衷就是想大家就着面试题一起讨论一起学习一下。没想到这会涉及暴露面试题的<strong>诚信问题</strong>。有不少人回帖说我这样做不好，并且把自己置身于风险之中。</p>
-<p>我因为在 RubyChina 上发帖，觉得每次得到的回馈都不在技术上，就不太敢在上面发帖了，这次信心满满的，把自己用心整理的东西给大家一起参考学习，结果还是落的一鼻子灰，心情却是有点不好受。</p>
-<p>当然，最后反思还是我自己做的不对。我也有辩驳说，“发之前也看到 RubyChina 上有人讨论面试题的帖子，看到大家并没有担忧什么啊”，“这些东西网上一搜一大把啊”。有回复说，<strong>大家都做的事情，并不代表是对的事情</strong>。一想想这也对着呢。所以，我自己或许没有遵循行业的规则（<strong>甚至根本都没意识到这是个问题</strong>）。</p>
-<p>所以，我觉得更多的生活感悟以及自己的学习，还是写到自己的博客上比较好，因为很多东西，在自己的天地里面，就没有那么多的规则束缚，但是同时，也都是跟自己交流的比较多了。我想扩大交流圈，就要符合那个交流圈的规则。很多东西不是自己觉得没问题就没问题了。</p>
-<p>至于，发布面试题到底是不是牵扯到道德问题、诚信问题，我自己的考虑，是觉得，或许这是个公开的秘密，只是不能把他捅破似的。就算大家做的事情不一定都是对的事情，可是很多人做了，那却也不是秘密了，但是作为一个有原则的人，也不能跟着一起去做这个事情。</p>
-<p><strong>下次如果再发帖，文章内容最好不要涉及一些敏感的话题</strong>。</p>
-<p>不只是工作，生活中，或许有不少的公开的秘密和潜规则，都不能捅破，或许经历过一次次碰壁，我会慢慢学好这些规则。只是，真的害怕像有些人所说，阻碍了我更高的发展。不过，希望社会给我犯错的机会，真想低下头来说：“小人无知，请大人恕罪”。不然，犯了这些错之后，除了低头认错，我也不知有什么更好的解决方案了，毕竟，你犯错了，还找理由，不是显得你更“小人”了么？“不知者无罪”也是人家宽宏大量，才对你说的，谁让你不知的呢？（是不是傻）</p>
-<p>昨天，看到一篇阮一峰的网络日志<a href="http://www.ruanyifeng.com/blog/2009/10/why_i_love_programming.html" target="_blank" rel="external">我为什么喜欢编程</a>，里面有一句话，</p>
-<blockquote>
-<p>我们生活的这个国家，是一个禁止自由思考、党决定一切的国家。在这里，如果你想不撒谎、不干坏事、并且被公正地对待，那么可能你只能去编程了。</p>
-</blockquote>
-<p>我一度也这么认为，庆幸自己做了编程，现在想想就算一门心思栽倒在技术的海洋，你也只能是一个技术工吧，除非你牛逼到一定的程度。</p>
-<p>想在社会活下去，就得满足这样那样的规则束缚，随心所欲都还得加个不逾矩，你以为呢？或许这篇说的有些悲观，但是，必须这样来，不然，就会像我一样，做出别人口中<strong>不成熟</strong>的事情。<strong>突然感觉，最悲催的事情就是，做了一个大家觉得有问题的事情，而你自己连这是个问题都没有意识到。</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/面试题总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/面试题总结/" itemprop="url">ruby 问题总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T23:19:10+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/17/面试题总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/17/面试题总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>ruby 的命名规则<br> 局部变量：以英文字母或者_开头，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name = <span class="string">"this is a local variable"</span></div></pre></td></tr></table></figure>
-<p> 全局变量：以 <code>$</code> 开头，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$name = <span class="string">"this is a global variable"</span></div></pre></td></tr></table></figure>
-<p> 实例变量：以<code>@</code>开头，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@name = <span class="string">'lily'</span></div></pre></td></tr></table></figure>
-<p> 类变量：以<code>@@</code>开头，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@@name = <span class="string">'lily'</span></div></pre></td></tr></table></figure>
-<p> 常量：全大写字母，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NAME</div></pre></td></tr></table></figure>
-<p> 类名和模块名：以首字母大写，驼峰命名法。如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HelloWorld</div></pre></td></tr></table></figure>
-<p> 方法名：小写用_隔开，如：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sort_by_name</div></pre></td></tr></table></figure>
-</li>
-<li><p>ruby 中 singleton class 和 singleton method 分别是什么</p>
-<p> <strong>Singleton method</strong></p>
-<blockquote>
-<p>A method which belongs to a single object rather than to an entire class and other objects.<br>一个方法只属于一个对象，而不是整个类和其他实例化对象。</p>
-</blockquote>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">firstObj = ClassMethods.new</div><div class="line">secondObj = ClassMethods.new</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">firstObj</span>.<span class="title">singletonMethod</span></span></div><div class="line">  <span class="string">"Hi am a singlton method available only for firstObj"</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">firstObj.singletonMethod <span class="comment"># "Hi am a singlton method available only for firstObj"</span></div><div class="line"></div><div class="line">secondObj.singletonMethod <span class="comment">#undefined method `singletonMethod' for #&lt;ClassMethods:0x32754d8&gt; (NoMethodError)</span></div></pre></td></tr></table></figure>
-<p> So this “singletonMethod” belongs only to the firstObj object and won’t be available for other objects of this class.<br> If you try to make the secondObj.singletonMethod Ruby will inform you that singletonMethod is an undefined method.</p>
-<p> 所以，<code>singletonMethod</code> 只属于 <code>firstObj</code>,不能被这个类的其他实例化对象所调用。如果你想用 <code>secondObj.singletonMethod</code> 调用这个单例方法，ruby 会告诉你 <code>singletonMethod</code> 没有定义</p>
-<p> If you like to find all the singleton methods for a specific object, you can say objectname.singleton_methods<br>In our case<br> 如果你想找到一个特定对象的所有单例方法，你可以用 objectname.singleton_methods 。在我们的例子里面就是：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firstObj.singleton_methods =&gt; [<span class="string">"singletonMethod"</span>]</div><div class="line">secondObj.singleton_methods =&gt; []</div></pre></td></tr></table></figure>
-<p> To avoid throwing undefined method error when you try to access a singleton method with some other object</p>
-<p> 避免调用单例方法<em>**</em>抛出方法未定义的异常：</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> secondObj.singleton_methods.<span class="keyword">include</span>?(<span class="string">"singletonMethod"</span>)</div><div class="line">  secondObj.singletonMethod</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 或</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> secondObj.singleton_methods.<span class="keyword">include</span>?( <span class="symbol">:singletonMethod</span> )</div><div class="line">  secondObj.singletonMethod</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p> <strong>Singleton classes</strong><br> 单例类</p>
-<blockquote>
-<p>A singleton class is a class which defines a single object.<br>单例类就是只有一个实例对象的类。</p>
-</blockquote>
-<p> In our above example we have two objects firstObj and secondObj.<br> We can create a separate class for the secondObj instance and that is called as a singleton class.<br> So as per the definition we created a class for a single object.</p>
-<p> 在我们上面的例子里面，我们有两个对象，firstObj 和 secondObj。我们给 secondObj 实例 创建一个单独的类，这就叫做单例类。<br> 所以按照定义为一个单独的对象我们创建了一个类。</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; secondObj</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method4</span></span></div><div class="line">    p <span class="string">"Hi am a singlton method available only for secondObj"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p> When you see a class definition with the class keyword followed by two less than symbols that is a Singleton class opened for the object.<br> In our ClassMethods class we had something like class &lt;&lt; self which is also a singleton class. In Ruby a class itself is an instance of the Ruby class Let’s try something like this</p>
-<p> 当你看到定义一个类后面跟着 <code>&lt;&lt;</code> 的时候，这就是打开这个对象的单例类。<br> 在我们的 <code>ClassMethods</code> 这个类中，我们有 <code>class &lt;&lt; self</code> ，所以这也是一个单例类。在 ruby 里，一个类本身也是一个 ruby 的类。让我们试试</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ClassMethods.<span class="keyword">class</span> <span class="comment"># Class</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>怎么写一个 module，可以让包含这个 module 的 class 既能使用这个 module 的类方法又能使用这个 module 的实例方法<br> 参考 <a href="http://motion-express.com/blog/include-instance-&amp;-class-methods-from-a-module" target="_blank" rel="external">http://motion-express.com/blog/include-instance-&amp;-class-methods-from-a-module</a></p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">Foo</span></span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">included</span><span class="params">(m)</span></span></div><div class="line">   <span class="function"><span class="keyword">def</span> <span class="title">m</span>.<span class="title">show1</span></span></div><div class="line">     p <span class="string">"hi"</span></div><div class="line">   <span class="keyword">end</span></div><div class="line"> <span class="keyword">end</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">show2</span></span></div><div class="line">   p <span class="string">"hello"</span></div><div class="line"> <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span></span></div><div class="line"> <span class="keyword">include</span> Foo</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Bar.new.show2 <span class="comment">#=&gt; "hello"</span></div><div class="line">Bar.show1 <span class="comment">#=&gt; "hi"</span></div><div class="line"></div><div class="line">Bar.show2 <span class="comment">#=&gt; NoMethodError: undefined method `show2' for Bar:Class</span></div><div class="line">Bar.new.show1 <span class="comment">#=&gt; NoMethodError: undefined method `show1' for #&lt;Bar:0x007fa1fb8c2ce8&gt;</span></div></pre></td></tr></table></figure>
-<p> 或</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">b</span></span></div><div class="line">    puts <span class="string">"method b from module A"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">c</span></span></div><div class="line">    puts <span class="string">"method c from module A"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></div><div class="line">  <span class="keyword">include</span> A</div><div class="line">  extend A</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">B.new.b <span class="comment"># =&gt; "method b from module A"</span></div><div class="line">B.b     <span class="comment"># =&gt; "method b from module A"</span></div><div class="line">B.new.c <span class="comment"># =&gt; "method c from module A"</span></div><div class="line">B.c     <span class="comment"># =&gt; "method c from module A"</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>require load auto_load 以及 require_dependency 的区别<br> require，load用于文件，如.rb等等结尾的文件。<br> include则用于包含一个文件(.rb等结尾的文件)中的模块。<br> require一般情况下用于加载库文件，而load则用于加载配置文件。<br> require加载一次，load可加载多次。</p>
-<p> 详细参考： <a href="https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/%E6%B5%85%E8%B0%88Ruby%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6" target="_blank" rel="external">浅谈Ruby中的类加载机制</a></p>
-<p> <a href="http://suzhen.github.io/blog/2012/12/03/importfile/" target="_blank" rel="external">Require/load/autoload的区别和用法</a></p>
-<p> <a href="https://ruby-china.org/topics/25021" target="_blank" rel="external">ActiveSupport::Autoload 学习</a></p>
-<p><a href="http://ionrails.com/2009/09/19/ruby_require-vs-load-vs-include-vs-extend/" target="_blank" rel="external">Here are the differences between Require, Load, Include and </a></p>
-</li>
-</ol>
-<ol>
-<li><p>描述 object, class, module 的关系是什么，并画图表示。<br>  从继承关系来说，是Class –&gt; Module –&gt; Object，即Object是继承树的顶层，紧接着是Module，然后是Class。<br>  <a href="https://learnrubythehardway.org/book/ex40.html" target="_blank" rel="external">Modules, Classes, and Objects</a></p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Object -&gt; Module -&gt; Class -&gt; MyClass</div><div class="line">另外：</div><div class="line">Object.<span class="keyword">class</span> = Class</div><div class="line">Class.superclass = Module</div></pre></td></tr></table></figure>
-</li>
-<li><p>为什么在 model 中可以调用 validates，自己怎么实现 model 中的 validates，试着实现一下？</p>
-<p> <a href="http://api.rubyonrails.org/classes/ActiveModel/Validations/ClassMethods.html" target="_blank" rel="external">validations</a></p>
-</li>
-<li><p>ruby 中 ? 或者 ! 作为后缀的方法有什么不同？<br> It’s “just sugarcoating” for readability, but they do have common meanings:</p>
-<p> Methods ending in ! perform some permanent or potentially dangerous change; for example:<br> Enumerable#sort returns a sorted version of the object while Enumerable#sort! sorts it in place.<br> In Rails, ActiveRecord::Base#save returns false if saving failed, while ActiveRecord::Base#save! raises an exception.<br> Kernel::exit causes a script to exit, while Kernel::exit! does so immediately, bypassing any exit handlers.<br> Methods ending in ? return a boolean, which makes the code flow even more intuitively like a sentence — if number.zero? reads like “if the number is zero”, but if number.zero just looks weird.</p>
-<p> 在Ruby中，以问号(?)结尾，被用于标示谓词，即返回Boolean值的方法，如Array.empty?(判断数组中元素是否为空)。</p>
-<p> 在Ruby中，以问号(?)结尾，出现在方法名词尾部，表示使用该yyifc是需要多加小心的。<br> 而通常情况下，不带感叹号的方法不带感叹号的方法返调用该方法的一个拷贝，二带感叹号的方法则是一个可变方法，该方法会修改原来的对象，如Array类中的sort和sort!</p>
-</li>
-<li>有没有读过 rails 源码？<br> 只瞅过几眼</li>
-<li>rails 本身是由什么组成的？<br> <a href="https://blackanger.gitbooks.io/tao-of-chef/chapter_5_rails/rails_dir.html" target="_blank" rel="external">Rails组成和项目结构</a></li>
-<li>有没有读过 《ruby 元编程》？<br>没有呢（心里想，回去赶紧买一本拜读一下）</li>
-<li>工作中遇到过哪些挑战和困难，怎么解决的？</li>
-<li>不使用 ActiveJob，sidekiq 单独使用可以不？<br><a href="http://blog.teeceepee.com/blog/2015/10/05/activejob-and-sidekiq-introduction/" target="_blank" rel="external">Active Job 和 Sidekiq 简介</a><br><a href="https://github.com/mperham/sidekiq/wiki/Active-Job" target="_blank" rel="external">Active Job</a><br><a href="http://www.10tiao.com/html/568/201512/401171442/1.html" target="_blank" rel="external">Rails: 使用Active Job来处理异步任务</a></li>
-<li><p>bundler 和 gem 的关系？bundler 是 gem 么？<br><a href="https://blackanger.gitbooks.io/tao-of-chef/chapter_4_chef/bundler.html" target="_blank" rel="external">bundler</a><br><a href="http://mednoter.com/rvm-vs-bundler.html" target="_blank" rel="external">Rvm 与 Bundler 的爱恨情仇</a><br><a href="http://www.cnblogs.com/davenkin/archive/2012/02/13/rvm-ruby-bundler-usage.html" target="_blank" rel="external">RVM,RubyGems和Bundler的日常使用</a></p>
-</li>
-<li><p>passenger, nginx, 还有一个是什么，忘记了，这三个各自干什么的，怎么结合起来一起工作，缺一可以不<br><a href="https://ruby-china.org/topics/25276" target="_blank" rel="external">Ruby 服务器对比</a></p>
-</li>
-<li><p>each 和 map 的区别<br>each: 顺序返回各个元素<br>collect: 把原数组的各个元素顺序返回，并组装新的数组<br>map: 与 collect一样，会创建一个新的数组<br>select: 与collect一样，会创建一个新的数组</p>
-<p><a href="http://lazybios.com/2015/11/let-talk-about-iteration-in-ruby/" target="_blank" rel="external">Ruby: 聊一聊关于集合遍历的各种方法</a><br><a href="https://ohm.sh/2014/02/09/pluck-vs-map-and-select.html" target="_blank" rel="external">Pluck vs. map and select</a></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"> =&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">$ a.each &#123;<span class="params">|n|</span> n*<span class="number">2</span>&#125;</div><div class="line"> =&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">$ a</div><div class="line"> =&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">$ a.map &#123;<span class="params">|n|</span> n*<span class="number">2</span>&#125;</div><div class="line"> =&gt; [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]</div><div class="line">$ a</div><div class="line"> =&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line">$ a.collect &#123;<span class="params">|n|</span> n*<span class="number">2</span>&#125;</div><div class="line"> =&gt; [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>]</div><div class="line">$ a</div><div class="line"> =&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div></pre></td></tr></table></figure>
-</li>
-<li><p>find 和 find_by 的区别<br><a href="http://www.jianshu.com/p/5a3afc102c03" target="_blank" rel="external">rails中find/find_by/where的区别</a></p>
-</li>
-<li><p>解决 N+1 Query 的方法有哪些<br><a href="https://ruby-china.org/topics/32364" target="_blank" rel="external">浅谈 ActiveRecord 的 N + 1 查询问题</a><br><a href="https://ithelp.ithome.com.tw/articles/10161667" target="_blank" rel="external">Rails使用include和join避免N+1 queries</a><br>面试官说了片段缓存，也可以解决查询问题</p>
-</li>
-<li>单表继承<br><a href="https://ruby-china.org/topics/21698" target="_blank" rel="external">Rails 之单表继承 (Single Table Inheritance)</a><br><a href="https://book.a-bitcoin.com/activerecord_utility/inheritance.html" target="_blank" rel="external">Inheritance 单表继承</a><br><a href="http://www.cnblogs.com/arrongao/p/4658280.html" target="_blank" rel="external">ActiveRecord-连接多张表之单表继承</a></li>
-<li><p>rack 是什么<br><a href="https://github.com/JuanitoFatas/Guides/blob/master/guides/edge-translation/rails-on-rack-zh_CN.md" target="_blank" rel="external">Rails on Rack</a></p>
-</li>
-<li><p>安全问题。怎么破 XSS 和 CSRF攻击<br>解法：<br>对于XSS：首先说说什么是XSS（Cross-site scripting），跨站脚本攻击，攻击者在客户端注入可执行代码。<br>对策：<br>过滤恶意输入非常重要，但是转义 Web 应用的输出同样也很重要。<br>过滤恶意输入白名单比黑名单要有效，特别是在需要显示未经过滤的用户输入时（例如前面提到的的搜索表单的例子）。使用 escapeHTML() 方法（或其别名 h() 方法），把 HTML 中的字符 &amp;、”、&lt; 和 &gt; 替换为对应的转义字符 &amp;、”、&lt; 和 &gt;。</p>
-<p>对于CSRF：Cross Site Request Forgery，跨站请求伪造。通俗理解：攻击者盗用当前用户身份，发请当前用户的恶意请求：如邮件，银行转账等。</p>
-<p>对策：首先，根据 W3C 的要求，应该适当地使用 GET 和 POST HTTP 方法。其次，在非 GET 请求中使用安全令牌（security token）可以防止应用受到 CSRF 攻击。    </p>
-</li>
-<li>ActiveSupport::Concern 的工作原理<br>参考 <a href="https://apidock.com/rails/ActiveSupport/Concern" target="_blank" rel="external">ActiveSupport::Concern</a><pre><code>[ActiveSupport::Concern 的工作原理](http://xiewenwei.github.io/blog/2014/01/13/how-activesupport-corncern-work/)
-</code></pre></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzAwNDYwNzU2MQ==&amp;mid=401140712&amp;idx=1&amp;sn=debff87ba4642a040b4b55df455d4b3f&amp;scene=21#wechat_redirect" target="_blank" rel="external">Rails: pluck与select的区别</a>  </li>
-<li><p>yield self 的用法，写个例子</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Builder</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">initialize</span> <span class="title">arguments</span></span></div><div class="line">     <span class="comment"># do somthing by init arguments</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment"># you can use Builder's method in block</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">build</span></span></div><div class="line">    <span class="keyword">yield</span> <span class="keyword">self</span> <span class="keyword">if</span> block_given?</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>scope 的实现原理<br>核心是延迟计算，将where、order、limit子句变为Relation对象，然后在最终调用each/to_a时组装sql</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1947,7 +1946,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -232,6 +232,358 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/21/解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/21/解决方案/" itemprop="url">一些技术问题的解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T01:07:04+08:00">
+                2017-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/21/解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/21/解决方案/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="支持别人的网页嵌入自己的服务"><a href="#支持别人的网页嵌入自己的服务" class="headerlink" title="支持别人的网页嵌入自己的服务"></a>支持别人的网页嵌入自己的服务</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/X-Frame-Options</a></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fcq3qczcx3j310601ugmd.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">before_action :allow_iframe</div><div class="line"></div><div class="line">def allow_iframe</div><div class="line">  response.headers.except! &apos;X-Frame-Options&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<h2 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h2><p>Private Methods</p>
+<p>So you can only call Private methods from the current context of the object, and you can’t call Private methods with a receiver, even if that receiver is self.</p>
+<p>只能在当前实例里面调用，实例自己调用也是不行的，是这样理解么。 class 里面可以调用，instance.api_value就不行了。 self.api_value 也不行。</p>
+<p>Protected Methods</p>
+<p>However, if you call the method with self it will work:</p>
+<p>So the important thing to note here is, you can call Protected methods inside the context of an object of the same type.</p>
+<h2 id="生成-8-位数字码"><a href="#生成-8-位数字码" class="headerlink" title="生成 8 位数字码"></a>生成 8 位数字码</h2><p>rand.to_s[2..9]</p>
+<h2 id="查看ssh-key"><a href="#查看ssh-key" class="headerlink" title="查看ssh key"></a>查看ssh key</h2><p>➜  goldendata-api git:(master) cd ~/.ssh<br>➜  .ssh cat id_rsa.pub<br>ssh-rsa AAAAB3Nz…….</p>
+<h2 id="登录-uat-的数据库"><a href="#登录-uat-的数据库" class="headerlink" title="登录 uat 的数据库"></a>登录 uat 的数据库</h2><p>登录到远程服务器<br>    ssh 地址<br>进入到 项目的 目录：<br>    cd /var/apps/project/<br>进入到 current 目录：<br>    cd current<br>进入到rails console，做表的操作<br>    RAILS_ENV=uat bundle exec rails c</p>
+<h2 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h2><h3 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h3><p>参考： <a href="http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html" target="_blank" rel="external">http://www.cnblogs.com/dw729/archive/2013/04/16/3024338.html</a><br>cookie 的校验<br>params 要是 encode 后的<br>在提交成功的页面的 header 中寻找 cookie 和 params<br>下面的 cookie 和 params 从提交成功的页面 network 里面可以看到。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79ly1fd0jhsqo1oj31kw0m87k5.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">siege -c 50 -r 100 -H &apos;Cookie:entry_token=ijMkkH; ...&apos;  &quot;https://uat.jinshuju.net/f/aqo4ek POST utf8=%E2%9C%93&amp;authenticity_token=%2BTnd349r652JPBzfKMzMv4aGljEMx2LP2tTfN29%2BBgVW2p0W7cfDVEUqHa2uuyMD0zOv%2BCc965yGpbwCBk%2FcIQ%3D%3D...&quot;</div></pre></td></tr></table></figure>
+<p>siege -c50 -t60S -H ‘Content-Type: application/json’ ‘<a href="http://domain.com/path/to/json.php" target="_blank" rel="external">http://domain.com/path/to/json.php</a> POST {“ids”: [“1”,”2”,”3”]}’</p>
+<h3 id="ab-apache-test："><a href="#ab-apache-test：" class="headerlink" title="ab apache test："></a>ab apache test：</h3><p>参考 <a href="http://www.ha97.com/4617.html" target="_blank" rel="external">http://www.ha97.com/4617.html</a></p>
+<p>postdata.txt 里面写 encode 后的参数<br>ab -n 4000 -c 2000 -T ‘application/x-www-form-urlencoded’ -p postdata.txt <a href="https://uat.jinshuju.net/f/x6fXZV" target="_blank" rel="external">https://uat.jinshuju.net/f/x6fXZV</a></p>
+<h2 id="bootstrapvalidator"><a href="#bootstrapvalidator" class="headerlink" title="bootstrapvalidator"></a>bootstrapvalidator</h2><p><a href="http://bootstrapvalidator.votintsev.ru/settings/" target="_blank" rel="external">http://bootstrapvalidator.votintsev.ru/settings/</a></p>
+<h2 id="打开本地-redis"><a href="#打开本地-redis" class="headerlink" title="打开本地 redis"></a>打开本地 redis</h2><p>redis-cli</p>
+<h2 id="同事分享"><a href="#同事分享" class="headerlink" title="同事分享"></a>同事分享</h2><p><a href="https://workflowy.com/s/EuhH.J0gNr5G9LD" target="_blank" rel="external">https://workflowy.com/s/EuhH.J0gNr5G9LD</a></p>
+<h2 id="获取-ssh"><a href="#获取-ssh" class="headerlink" title="获取 ssh"></a>获取 ssh</h2><ol>
+<li>~/.ssh</li>
+<li>cat id_rsa.pub</li>
+</ol>
+<h2 id="header-body-footer"><a href="#header-body-footer" class="headerlink" title="header,body,footer"></a>header,body,footer</h2><h2 id="看测试ing-的-error"><a href="#看测试ing-的-error" class="headerlink" title="看测试ing 的 error"></a>看测试ing 的 error</h2><p>ctrl + t</p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p> ps -x | grep elastic</p>
+<h2 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h2><p>删除远端 branch： git push origin –delete 67_exam_score<br>删除本地 branch： git branch -d 67_exam_score<br>把远端分支拉到本地 <code>git checkout --track origin/daves_branch</code></p>
+<h2 id="snipaste"><a href="#snipaste" class="headerlink" title="snipaste"></a>snipaste</h2><p>截图什么的。</p>
+<h2 id="gemset"><a href="#gemset" class="headerlink" title="gemset"></a>gemset</h2><p>查看当前所有的 gemset 和 当前使用的 gem 管理空间</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcly1fdmjl67ghtj30xq0cgdhk.jpg" alt=""></p>
+<p>rvm gemset list</p>
+<p>.ruby-gemset 里面有我这个 项目使用的 gem 管理的 文件夹。<br>ls -al 可以看到有 .ruby-gemset</p>
+<h2 id="点一遍-所有的页面-按钮"><a href="#点一遍-所有的页面-按钮" class="headerlink" title="点一遍 所有的页面 按钮"></a>点一遍 所有的页面 按钮</h2><h2 id="1-to-01"><a href="#1-to-01" class="headerlink" title="1 to 01"></a>1 to 01</h2><p>sprintf ‘%02d’, 1</p>
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p>ps -x | grep elastic</p>
+<p>杀死进程<br>kill -9 390</p>
+<p>启动 es<br>➜  bin ./elasticsearch -d</p>
+<h2 id="mini-test"><a href="#mini-test" class="headerlink" title="mini test"></a>mini test</h2><p>m test/controllers/entries_controller_test.rb:130</p>
+<p>RUN_COVERAGE=false rake</p>
+<h2 id="自定义-bootstrapValidator-验证器"><a href="#自定义-bootstrapValidator-验证器" class="headerlink" title="自定义 bootstrapValidator 验证器"></a>自定义 bootstrapValidator 验证器</h2><p><a href="http://www.itdadao.com/articles/c15a302743p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a302743p0.html</a></p>
+<h2 id="部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"><a href="#部署后登录错-uat-环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想" class="headerlink" title="部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想"></a>部署后登录错 uat 环境了，所以看到代码一直没变，哎，下次遇到这种问题，要想想</h2><p>api 部署被覆盖，所以代码没有生效</p>
+<h2 id="撤销-commit"><a href="#撤销-commit" class="headerlink" title="撤销 commit"></a>撤销 commit</h2><p>git reset –hard c9a9eec9c9b39f7522b9098deada053f1cca0e63<br>HEAD is now at c9a9eec Merge branch ‘master’ into dev</p>
+<p>git push -f origin dev</p>
+<h2 id="git-branch-命名有特殊字符，会-push-不上去"><a href="#git-branch-命名有特殊字符，会-push-不上去" class="headerlink" title="git branch 命名有特殊字符，会 push 不上去"></a>git branch 命名有特殊字符，会 push 不上去</h2><p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fectffff1gj313u02sjsm.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecthdc6etj31720dy0wy.jpg" alt=""></p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNbRwly1fecthdiqczj315k0ymaif.jpg" alt=""></p>
+<p>通过 git branch -a 可以查看当然的分支及远端分支<br>git checkout 到去掉特殊字符的分支，然后重新 push ，这个可以把当前分支的commit 也一起commit 到新的分支，不用担心漏掉。</p>
+<h2 id="git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧"><a href="#git-status-的时候，有一些没有清除的操作，是之前-rebase-的时候没有操作完全，后面又merge了吧" class="headerlink" title="git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧"></a>git status 的时候，有一些没有清除的操作，是之前 rebase 的时候没有操作完全，后面又merge了吧</h2><p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fecvsdo3daj317e0gs0wf.jpg" alt=""></p>
+<p>所以 现在解决是通过 git rebase –continue 一个一个的把 Next commands to do (2 remaining commands) 搞到 Last commands done (7 commands done) 这样才能把之前 rebase 停止的部分一个个解决掉，每 continue 一次，检查一下 git status看有没有冲突，有冲突解决一下 。（rebase 的时候，如果有 commit 冲突，就会在那个commit 停止，要把后面的一个个 continue 才能 完成这些操作。）</p>
+<h2 id="在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。"><a href="#在本地-image-不加-png-这种文件后缀是不会报错的，但是到了-uat-或者生产环境就会有错。猜想有可能是-assets-pipeline-加密的时候有问题，所以没办法正常使用。" class="headerlink" title="在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。"></a>在本地 image 不加 .png 这种文件后缀是不会报错的，但是到了 uat 或者生产环境就会有错。猜想有可能是 assets pipeline 加密的时候有问题，所以没办法正常使用。</h2><p>使用 asset_path(“themes/background/#{template[:name]}.png”) 可以拿到加密后的图片，在js中使用</p>
+<h2 id="gitk-可以调取查看git的窗口"><a href="#gitk-可以调取查看git的窗口" class="headerlink" title="gitk 可以调取查看git的窗口"></a>gitk 可以调取查看git的窗口</h2><h2 id="jquery-unshift"><a href="#jquery-unshift" class="headerlink" title="jquery unshift"></a>jquery unshift</h2><p>matchFields.unshift({id: ‘x_field_1’, text: ‘扩展属性’})<br>这个结果返回的是 插入的 index，而不是 matchFields</p>
+<h2 id="gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard"><a href="#gem-‘zeroclipboard-rails’-配合-turbolinks-使用的时候注意，要先销毁-ZeroClipboard" class="headerlink" title="gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard"></a>gem ‘zeroclipboard-rails’ 配合 turbolinks 使用的时候注意，要先销毁 ZeroClipboard</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).on <span class="string">'turbolinks:load'</span>, -&gt;</div><div class="line">  <span class="keyword">return</span> unless $(<span class="string">".app-publish-container"</span>).length</div><div class="line">  ZeroClipboard.destroy()</div><div class="line">  $copyCheckinUrlDom = $(<span class="string">"#copy_checkin_url"</span>)</div><div class="line">  <span class="keyword">new</span> ZeroClipboard $copyCheckinUrlDom</div><div class="line">  $copyCheckinUrlDom.on <span class="string">'click'</span>, -&gt; App.View.showFlashNotification(<span class="string">'复制网址成功'</span>)</div></pre></td></tr></table></figure>
+<h2 id="自定义-jquery-validate"><a href="#自定义-jquery-validate" class="headerlink" title="自定义 jquery-validate"></a>自定义 jquery-validate</h2><p>gd-rt-lottery 中有 callback<br>code-verify 中有 自定义验证器</p>
+<h2 id="rails-异步执行"><a href="#rails-异步执行" class="headerlink" title="rails 异步执行"></a>rails 异步执行</h2><p><a href="http://edgeguides.rubyonrails.org/active_job_basics.html" target="_blank" rel="external">http://edgeguides.rubyonrails.org/active_job_basics.html</a></p>
+<h2 id="Zen-Rails-Security-Checklist"><a href="#Zen-Rails-Security-Checklist" class="headerlink" title="Zen Rails Security Checklist"></a>Zen Rails Security Checklist</h2><p><a href="https://github.com/brunofacca/zen-rails-security-checklist" target="_blank" rel="external">https://github.com/brunofacca/zen-rails-security-checklist</a></p>
+<h2 id="考试0秒问题"><a href="#考试0秒问题" class="headerlink" title="考试0秒问题"></a>考试0秒问题</h2><p>这个bug也是解了很久，但是我没有解决掉。<br>但是通过观察，可以发现，在 safari 中第一次打开浏览器是很容易出现 0 秒的。<br>后来定位到问题是 safari 在写跨域请求的时候，如果你之前没有访问过应用的链接，在往应用链接下写 cookie 的时候是不 work 的，在清除 safari 历史记录之后，百分百重现 0 秒。<br>因此，问题找到。解决方案就是，要在考试提交前，访问一次应用的链接。</p>
+<ol>
+<li>第一种想法是自己偷偷在这个应用 controller 中访问，但是是不可行的，safari 记录的貌似是浏览记录。</li>
+<li>增加了考前必读，让用户先从 应用中进入考试的表单，这样提交的时候就可以跨域写 uid 了。</li>
+</ol>
+<h2 id="性能问题总结"><a href="#性能问题总结" class="headerlink" title="性能问题总结"></a>性能问题总结</h2><p>背景：企业版应用授权反应十分慢。<br>初步疑惑：个人版和企业版代码是一样的，为什么企业版就慢了？<br>先是查看代码，是不是代码本身问题，但是记录日志时间相差都很小，可以确定不是代码问题。<br>后来讨论之后，还是觉得部署环境有问题</p>
+<ol>
+<li>排除了一下代码的可能性。</li>
+<li><p>继续跟进，去找企业版，看api处理速度，企业版api也没问题。</p>
+</li>
+<li><p>给出解决方案：在 uat （因为uat也是很慢的）</p>
+<ol>
+<li>写一个很简单的 controller 去访问 curl，看看是不是最简单的代码都慢，如果最简单的都慢，就可以十分肯定不是代码的问题。</li>
+<li>不是代码的问题就是环境的问题，就得配合豪哥看到底是哪块的问题。</li>
+</ol>
+</li>
+<li><p>配合发起请求，在此这过程中本可以锁定问题，但是因为在一个环节理解错了，没有定位出来。<br> 后来豪哥也是想了好几天才又一次执行错误理解的部分，结果证明确实是这里的问题，（这一块也主要想企业版环境和个人版到底有何不同）。<br> 是因为 css 等要先经过 dns 解析还是什么？去掉这块指向就快了。</p>
+</li>
+</ol>
+<p>总结是：固定一些条件，排除可能性。不要一开始认怂。不是代码的问题也要去跟进问题，毕竟问题总是要解决的，不然留给谁？</p>
+<h2 id="让单词别自动分开"><a href="#让单词别自动分开" class="headerlink" title="让单词别自动分开"></a>让单词别自动分开</h2><p>加上样式<br>word-break:break-all</p>
+<h2 id="中间打点"><a href="#中间打点" class="headerlink" title="中间打点"></a>中间打点</h2><p><a href="http://stackoverflow.com/questions/7023545/truncate-string-with-rails" target="_blank" rel="external">http://stackoverflow.com/questions/7023545/truncate-string-with-rails</a></p>
+<h2 id="es-task"><a href="#es-task" class="headerlink" title="es task"></a>es task</h2><p>rake es:form:reindex[20160801,20170901]<br>rake es:entry:reindex_all<br>rake es:contact:reindex_all</p>
+<p>把这几个跑了之后，才能数据同步到es，es的搜索才能正确执行</p>
+<h2 id="backbone-el"><a href="#backbone-el" class="headerlink" title="backbone el"></a>backbone el</h2><p>backbone 的 view 如果指定了 el，就是特定的el，如果没有指定，默认会给一个空的 div 作为 el</p>
+<p>by default, backbone view’s el is set to an empty div. so, this.el and this.$el are always present.</p>
+<h2 id="可以把-多个空格-格式化成一个空格"><a href="#可以把-多个空格-格式化成一个空格" class="headerlink" title="可以把 多个空格 格式化成一个空格"></a>可以把 多个空格 格式化成一个空格</h2><p>‘aa bb  cc’.squish!</p>
+<h2 id="把所有的-替换成-；"><a href="#把所有的-替换成-；" class="headerlink" title="把所有的 ; 替换成 ；"></a>把所有的 ; 替换成 ；</h2><p>$textFieldDom.val().replace(/;/g, ‘；’)</p>
+<h2 id="rails-获取-ip"><a href="#rails-获取-ip" class="headerlink" title="rails 获取 ip"></a>rails 获取 ip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">def request_real_ip</div><div class="line">    return @request_real_ip if instance_variable_defined? :@request_real_ip</div><div class="line">    raw_ip = cname_request? ? request.env[&apos;HTTP_X_REAL_IP&apos;] : (request.env[&apos;HTTP_X_FORWARDED_FOR&apos;] || request.remote_ip)</div><div class="line">    @request_real_ip = raw_ip ? raw_ip.split(&apos;,&apos;).first.strip : nil</div><div class="line">  end</div><div class="line"></div><div class="line">  def cname_request?</div><div class="line">    request.env[&apos;HTTP_X_JSJ_FROM&apos;].present?</div><div class="line">  end</div></pre></td></tr></table></figure>
+<h1 id="如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址"><a href="#如果没有权限建-rep-，那么fork-是-fork-到了自己的公开地址" class="headerlink" title="如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址"></a>如果没有权限建 rep ，那么fork 是 fork 到了自己的公开地址</h1><h1 id="转换-csv-为-xlsx"><a href="#转换-csv-为-xlsx" class="headerlink" title="转换 csv 为 xlsx"></a>转换 csv 为 xlsx</h1><p><a href="https://convertio.co/csv-xlsx/" target="_blank" rel="external">https://convertio.co/csv-xlsx/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/25/最大的差距/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/25/最大的差距/" itemprop="url">最大的差距</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:47:04+08:00">
+                2017-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/25/最大的差距/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/01/25/最大的差距/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>昨天，我本来买的是到台州的高铁，后来老妈跟我说买到杭州，转车回家更方便；然后我想，到杭州的距离更近，那么我能不能把票改签到杭州，结果没有成功，后来我把票退了，又重新买到杭州。结果退票扣了150多块钱，重新买的票比退票返的钱还多了40，前后就亏掉了190块钱。而一开始我就不退的话，中途在杭州直接下车，貌似就不会有这些亏损了吧。所以后来我后悔莫及，打电话给我对象，哭诉我的追悔莫及。后来他还把我说了一顿，你现在还后悔有啥用，亏就亏了呗。</p>
+<p>是的，我当然知道，<strong>现在后悔无非是对注意力更大的亏损</strong>。但是，我还是会这样<strong>情绪化的消费自己宝贵的注意力</strong>。很多时候都是这样，<strong>你懂得一个道理并不能时时的让它鞭策你，很好的运用这个道理</strong>。所以我还是需要不断的去审视自己，去改正自己的行为。</p>
+<p>今天万维钢在得到的文章里提到的泰勒·科文，说他是文化上的亿万富翁，而泰勒·科文本人的收入比美国家庭收入中位数还低（虽然跟我们比那是很高了）。我想到的是，我能不能在金钱和物质上不富有的情况下，让自己的思想水平等精神上变的比较富有？往往我们在讨论一个人应该在精神上更加富有的时候，都是一些在金钱和物质满足不了自己之后才拿出来的说法，貌似在安慰自己似的。我以前也是这样，但是我现在想达到的精神上的富足并不是为了安慰自己，而是我意识到了，<strong>人生最大的差距或许就在精神层面。而物质财富上的差距是可以通过精神上差距的缩小而缩小的。</strong></p>
+<p>有一期罗辑思维的视频里面说的，<strong>文明是副产品</strong>。现在想想，<strong>物质财富也是精神思想上的副产品</strong>。一个有思想、会进取、有能力的人是不会担心物质财富的问题的吧。因为现在的社会我看到的是，你有能力就不怕创造不了财富，社会上到处需要这样的能力。</p>
+<p><strong>我的生活，其实追究到底，物质生活不能提升的最本质的原因，就是自己没有足够创造那些物质生活的能力。</strong>我虽然没有抱怨过社会，但我经常抱怨自己为什么没有这样牛逼的能力？</p>
+<p><strong>如果看到了这一点的话，其实内心应该是更充满希望的。因为能力是可以通过自己的学习、自己的思考、自己的进取去提升的，是的，是有很大的希望的。所以，不管是多绝望多焦虑的情况，我都还是有一个坚定的信仰的，学习是一种信仰！</strong></p>
+<p><strong>我从来没有满足过自己的现状，从而，我就知道，我从来也不能停止进取，停止学习！</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/来小金的第一个年会/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1463,423 +1815,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/03/ch03-创建命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/03/ch03-创建命令/" itemprop="url">ch03 创建命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-03T12:11:05+08:00">
-                2016-10-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/03/ch03-创建命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/03/ch03-创建命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="3-1-命令行的输入数据"><a href="#3-1-命令行的输入数据" class="headerlink" title="3.1 命令行的输入数据"></a>3.1 命令行的输入数据</h2><p>到目前为止，我们写的程序都是向屏幕输出数据。现在我们考虑一下怎么<strong>输入数据</strong>。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ets8fdr8j30i00ae3z7.jpg" alt=""></p>
-<p>执行结果：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8etsulbssj314s04edgo.jpg" alt=""></p>
-<p>如图可以看出，执行命令 <code>ruby print_argv.rb 1st 2nd 3rd</code> 中所传递的 <code>1st 2nd 3rd</code> 这三个参数（在命令行指定多个脚本参数时，<strong>各参数之间用空格间隔</strong>），可以用 <code>#{ARGV[0]}</code> 这种方式获取。（<strong>其中 ARGV 是 Ruby 预定义好的数组</strong>）</p>
-<p>使用 ARGV 后，程序需要用到的数据就不必都写在代码中。同时，抽取数据、保存数据等普通的数组操作对于 ARGV 都是适用的。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8eu6u1n1fj30lm07k3yx.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8eubw59z5j311e02674w.jpg" alt=""></p>
-<p>把字符串转换为整数，可以使用 <code>to_i</code> 方法。</p>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8euhagv3bj30ns0gagn4.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8euhmv2p2j310u056754.jpg" alt=""></p>
-<h2 id="3-2-文件的读取"><a href="#3-2-文件的读取" class="headerlink" title="3.2 文件的读取"></a>3.2 文件的读取</h2><p>Ruby 脚本除了<strong>读取命令行传递过来的字符串参数</strong>外，还可以<strong>读取预先写在文件里的数据</strong>。</p>
-<p>Ruby 的源代码中，有一个名为 ChangeLog 的文本文件。文件里面记录了Ruby相关的修改日志。</p>
-<p>备注Ruby的源代码可以从Ruby官网下载。ChangeLog 文件可以在Ruby的github库里找到。<br>• Ruby源码下载地址：<a href="https://www.ruby-lang.org/zh_cn/downloads/" target="_blank" rel="external">https://www.ruby-lang.org/zh_cn/downloads/</a>   • github上的ChangeLog文件地址：<a href="https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog" target="_blank" rel="external">https://raw.github.com/ruby/ruby/v2_0_0_0/ChangeLog</a></p>
-<h3 id="3-2-1-从文件中读取内容并输出"><a href="#3-2-1-从文件中读取内容并输出" class="headerlink" title="3.2.1 从文件中读取内容并输出"></a>3.2.1 从文件中读取内容并输出</h3><p>读取文件内容的流程：</p>
-<ol>
-<li>打开文件</li>
-<li>读取文件的文本数据</li>
-<li>输出文件的文本数据</li>
-<li>关闭文件</li>
-</ol>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8eut3b9t4j30i40d6aao.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8euxc4o5uj315g0a6tah.jpg" alt=""></p>
-<p>如果只是读取文件内容，其实直接适用 read 方法会使程序更简单</p>
-<p>代码示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew2vki2sj30h409at95.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ew43khmvj317m0acwft.jpg" alt=""></p>
-<p>更进一步，如果不使用变量，一行代码就可以到搞定啦。</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ew7a4gdnj30i2056aaa.jpg" alt=""></p>
-<h3 id="3-2-2-从文件中逐行读取内容并输出"><a href="#3-2-2-从文件中逐行读取内容并输出" class="headerlink" title="3.2.2 从文件中逐行读取内容并输出"></a>3.2.2 从文件中逐行读取内容并输出</h3><p>一下子读取全部文件 <strong>耗时，浪费内存</strong>（读取的内容会保存在内存中，遇到大文件，程序会崩溃）</p>
-<p>所以需要 放弃 「 读取文件全部内容 」 ，改为 「 逐行读取并输出 」。</p>
-<p>如图：read 和 each_line 的区别</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8ewctnnuxj30fq0cv0th.jpg" alt=""></p>
-<p>代码示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewkm47jvj30h20fu3z7.jpg" alt=""></p>
-<h3 id="3-2-3-从文件中读取指定模式的内容并输出"><a href="#3-2-3-从文件中读取指定模式的内容并输出" class="headerlink" title="3.2.3 从文件中读取指定模式的内容并输出"></a>3.2.3 从文件中读取指定模式的内容并输出</h3><p>用 Ruby 实现 grep 命令 （ Unix中有一个 grep 命令 ，grep 命令利用正则表达式搜索文本数据，输出按照指定模式匹配到的行 ）</p>
-<p>代码示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewqny5oyj30k00kgmyc.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ewrnozoej319a048ta0.jpg" alt=""></p>
-<p>图中 ，命令 <code>ruby simple_grep.rb filename read_text.rb</code> 的意思就是执行 simple_grep.rb 程序，第一个参数为要匹配的字符串 我这里是 <code>filename</code> ，第二个参数为 要搜索的文本文件 我这里是 <code>read_text.rb</code> ，执行结果，就是这个 <code>read_text.rb</code> 中的两行包含的 <code>filename</code> 数据。</p>
-<h2 id="3-3-方法的定义"><a href="#3-3-方法的定义" class="headerlink" title="3.3 方法的定义"></a>3.3 方法的定义</h2><p>定义方法：</p>
-<p><strong>def 方法名<br>    希望执行的处理<br>  end</strong></p>
-<p>定义好方法后，需要 「 调用 」，Ruby 才知道我们要执行这个方法。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex2unkppj30eo096wer.jpg" alt=""></p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8ex3k1yj2j310602e0te.jpg" alt=""></p>
-<h2 id="3-4-其他文件的引用"><a href="#3-4-其他文件的引用" class="headerlink" title="3.4 其他文件的引用"></a>3.4 其他文件的引用</h2><p><strong>被其他程序引用的程序，成为库（library）。</strong></p>
-<p>Ruby 使用 <code>require</code>方法引用库：</p>
-<p><strong> require 希望使用的库名 </strong></p>
-<p>库名可疑省略后缀 .rb</p>
-<p>如图：库与引用库的程序</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ex936atgj30rf07q0to.jpg" alt=""></p>
-<p>把 simple_grep.rb 作为库供给其他程序使用。</p>
-<p>代码示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkavqpkj30xq0mwju0.jpg" alt=""></p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8exm1gwpnj30ts08yab0.jpg" alt=""></p>
-<p>注：库与脚本放在同一文件夹时，需要用 <code>./</code>来明示文件存放在当前目录。</p>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8exkq36d7j318y04s3zv.jpg" alt=""></p>
-<p>Ruby 提供了很多标准库，我们可以通过 <code>require</code> 来引用。</p>
-<p>如图：计算出了Ruby的生日——1993年2月24到今天为止的天数:8622</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eydmftudj30oo0a6t99.jpg" alt=""></p>
-<p><strong>pp 方法</strong></p>
-<p>除了 p 方法外，Ruby 还提供了一个类似的方法——pp（pretty print）。<br>使用 pp 方法，需要引用 pp 库。</p>
-<p>代码示例：</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8eyeqyfmhj30la0ge0tp.jpg" alt=""></p>
-<p>示例代码：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8ey68flvqj315203ctaf.jpg" alt=""></p>
-<p>我没发现有啥区别。。。但是书上说，pp方法会在输出对象的结果时，会适当的换行以调整输出结果，可以更容易看懂。。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/02/ch02-便利的对象/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/02/ch02-便利的对象/" itemprop="url">ch02 便利的对象</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-02T11:28:09+08:00">
-                2016-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/10/02/ch02-便利的对象/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/02/ch02-便利的对象/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>不同数据间的组合无法用字符串或数值这样简单的对象来表示，因此我们需要一个可以用以<strong>表示数据集合的数据结构</strong>。</p>
-<p>本章介绍：</p>
-<ol>
-<li><strong>数组</strong>和<strong>散列</strong>这两种新的<strong>数据结构</strong>。</li>
-<li><strong>处理字符串</strong>时常用的<strong>工具</strong>——<strong>正则表达式</strong>。</li>
-</ol>
-<p>「 数组、散列 这样保存对象的对象，我们称为容器。 」</p>
-<h2 id="2-1-数组"><a href="#2-1-数组" class="headerlink" title="2.1 数组"></a>2.1 数组</h2><h3 id="2-1-1-数组的创建"><a href="#2-1-1-数组的创建" class="headerlink" title="2.1.1 数组的创建"></a>2.1.1 数组的创建</h3><p><strong>数组（array）是一个按顺序保存多个对象的对象，它是基本容器之一。</strong><br>我们一般称为数组对象或者Array对象。</p>
-<p>一个简单的数组：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">names = [ <span class="string">"小林"</span>,<span class="string">"林"</span>,<span class="string">"高野"</span>,<span class="string">"森冈"</span> ]</div></pre></td></tr></table></figure>
-<h3 id="2-1-2-数组对象"><a href="#2-1-2-数组对象" class="headerlink" title="2.1.2 数组对象"></a>2.1.2 数组对象</h3><p>空数组对象：(还有其他方式创建数组，之后会继续介绍)</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">names = []</div></pre></td></tr></table></figure>
-<h3 id="2-1-3-从数组中抽取对象"><a href="#2-1-3-从数组中抽取对象" class="headerlink" title="2.1.3 从数组中抽取对象"></a>2.1.3 从数组中抽取对象</h3><p>抽取方法：</p>
-<p>  <strong>数组名[索引]</strong></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">names = [ <span class="string">"小林"</span>,<span class="string">"林"</span>,<span class="string">"高野"</span>,<span class="string">"森冈"</span> ]</div><div class="line">name[<span class="number">0</span>] <span class="comment"># 这种方式可以取出第一个元素</span></div><div class="line">print(<span class="string">"第一个名字为："</span>, names[<span class="number">0</span>],<span class="string">".\n"</span>)  <span class="comment"># 结果为 第一个名字为：小林</span></div></pre></td></tr></table></figure>
-<p>执行示例：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8doim3ywmj30po0ac0u6.jpg" alt=""></p>
-<p><strong>「 数组的索引值是从0开始 」</strong>，并非1. 因此 <code>names[1]</code> 不是数组第一个元素，而是第二个元素。</p>
-<h3 id="2-1-4-将对象保存在数组中"><a href="#2-1-4-将对象保存在数组中" class="headerlink" title="2.1.4 将对象保存在数组中"></a>2.1.4 将对象保存在数组中</h3><p>names[0] = “野尻”</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8dp4an4ipj30p807k3zh.jpg" alt=""></p>
-<p>上图可以看出 数组第一个元素 从 “小林” 变成了 “野尻”。</p>
-<p>如果想添加额外的元素，可以继续添加之后的索引<br>如图：</p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8dp7kretjj30ro0datal.jpg" alt=""></p>
-<h3 id="2-1-5-数组的元素"><a href="#2-1-5-数组的元素" class="headerlink" title="2.1.5 数组的元素"></a>2.1.5 数组的元素</h3><p>任何对象都可以作为数组元素保存到数组中。</p>
-<p>如：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">num = [<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">9</span>]</div><div class="line"></div><div class="line">mixed = [<span class="number">2</span>, <span class="string">"哥"</span>, <span class="number">3</span>, <span class="string">"你"</span>, <span class="number">9</span>]</div></pre></td></tr></table></figure>
-<h3 id="2-1-6-数组的大小"><a href="#2-1-6-数组的大小" class="headerlink" title="2.1.6 数组的大小"></a>2.1.6 数组的大小</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array.size</div></pre></td></tr></table></figure>
-<p>如图：</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8dpbxm3h8j30su05cgmh.jpg" alt=""></p>
-<h3 id="2-1-6-数组的循环"><a href="#2-1-6-数组的循环" class="headerlink" title="2.1.6 数组的循环"></a>2.1.6 数组的循环</h3><p>each 方法的语法如下：</p>
-<p><strong>数组.each do |变量|<br>    希望循环做的处理 (这里称为块 block)<br>end</strong></p>
-<p>（解说：块的开始部分为|变量|，<strong>each方法会把数组元素逐个拿出来</strong>，赋值给指定的 |变量|，那么块里面的方法就可以<strong>通过访问该变量</strong>，实现循环<strong>遍历</strong>数组的操作。）</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8dpij0s5tj30z30ax3zz.jpg" alt=""></p>
-<p>本图是原文中的，更加清晰点。</p>
-<p>每循环一次，就会把当前的数组元素赋值给变量 n ，</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8dpkf4xdrj30w003v0t8.jpg" alt=""></p>
-<h2 id="2-2-散列"><a href="#2-2-散列" class="headerlink" title="2.2 散列"></a>2.2 散列</h2><p><strong>散列（hash）</strong>也是一个程序里常用到的<strong>容器</strong>。<br><strong>散列</strong>是<strong>键值对</strong>（<strong>key-value</strong> pair）的一种<strong>数据结构</strong>。<br>Ruby中，一般以<strong>字符串</strong>或者<strong>符号(Symbol)</strong>作为键(key)，来保存对应的对象(value)。</p>
-<p><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8dpqg7ki1j30o20cadh5.jpg" alt=""></p>
-<h3 id="2-2-1-什么是符号"><a href="#2-2-1-什么是符号" class="headerlink" title="2.2.1 什么是符号"></a>2.2.1 什么是符号</h3><p>如图：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sym = <span class="symbol">:foo</span>  <span class="comment"># 表示符号":foo"</span></div><div class="line">sym2 = <span class="symbol">:<span class="string">"foo"</span></span> <span class="comment"># 意思同上</span></div></pre></td></tr></table></figure>
-<p>符号能实现的功能，大部分字符串也能实现。<br>但是<strong>判断 「 是否相等 」的处理中，使用符号更有效率</strong>。</p>
-<p><strong>符号与字符串可以相互转换</strong>。</p>
-<p><strong>符号使用 <code>to_s</code> 可以 转成为 字符串。<br>字符串使用 <code>to_sym</code> 可以 转换为 符号。</strong></p>
-<h3 id="2-2-2-散列的创建"><a href="#2-2-2-散列的创建" class="headerlink" title="2.2.2 散列的创建"></a>2.2.2 散列的创建</h3><p>使用<strong>{}</strong>创建，使用 <strong>=&gt;</strong> 定义key和value ；</p>
-<p>如：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">address = &#123; <span class="symbol">:name</span> =&gt; <span class="string">"高桥"</span> , <span class="symbol">:pinin</span> =&gt; <span class="string">"gaoqiao"</span>, <span class="symbol">:postal</span> =&gt; <span class="string">"123123"</span> &#125;</div></pre></td></tr></table></figure>
-<p>当键是符号时，可以写成下面这样</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">address = &#123; <span class="symbol">name:</span> <span class="string">"高桥"</span> , <span class="symbol">pinin:</span> <span class="string">"gaoqiao"</span>, <span class="symbol">postal:</span> <span class="string">"123123"</span> &#125;</div></pre></td></tr></table></figure>
-<h3 id="2-2-3-散列的使用"><a href="#2-2-3-散列的使用" class="headerlink" title="2.2.3 散列的使用"></a>2.2.3 散列的使用</h3><p>从散列里取出对象(value):</p>
-<p><strong>散列名[键]</strong></p>
-<p>保存对象时使用的方法：</p>
-<p><strong>散列名[键] = 希望保存的对象</strong></p>
-<p><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8dq6sgy1ej310g0bqgnx.jpg" alt=""></p>
-<h3 id="2-2-4-散列的循环"><a href="#2-2-4-散列的循环" class="headerlink" title="2.2.4 散列的循环"></a>2.2.4 散列的循环</h3><p>散列的 each 语法：</p>
-<p><strong>散列.each do |键变量, 值变量|<br>    希望循环做的处理<br>end</strong></p>
-<p>如图：</p>
-<p><img src="http://ww4.sinaimg.cn/large/006y8lVagw1f8dqa6uztqj310q0ayq4y.jpg" alt=""></p>
-<h2 id="2-3-正则表达式-Regular-expression"><a href="#2-3-正则表达式-Regular-expression" class="headerlink" title="2.3 正则表达式 (Regular expression)"></a>2.3 正则表达式 (Regular expression)</h2><p>使用正则表达式可以非常简单的实现以下功能：</p>
-<ul>
-<li>将字符串与模式(pattern)相匹配</li>
-<li>使用模式分割字符串</li>
-</ul>
-<p><strong>模式与匹配</strong></p>
-<p>正则表达式的语法如下：</p>
-<p><strong>/模式/</strong></p>
-<p>如：<strong><code>/Ruby/</code>  就这样 把希望匹配的内容直接写出来。</strong></p>
-<p>匹配正则表达式与字符串的方法是：</p>
-<p><strong>/模式/ =~ 希望匹配的字符串</strong>  </p>
-<p>若匹配成功，则返回匹配部分的位置。（字符和数组的索引一样，都是从0开始计数。所以字符串的首个字符位置为0）。<br>若匹配失败，则返回 nil。</p>
-<p>如图：<br><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8dqm9htpbj30ie06ajru.jpg" alt=""></p>
-<p><code>/Ruby/i</code> 加个 i 表示不区分大小写。<br>如图：<br><img src="http://ww1.sinaimg.cn/large/006y8lVagw1f8dqqa9vbkj30gc0akmy3.jpg" alt=""></p>
-<p><strong>nil 是什么？</strong></p>
-<p><code>nil</code> 是一个特殊的值，表示对象不存在。<br>像在正则表达式中表示无法匹配成功一样，<strong>方法不能返回有意义的值时就会返回 nil</strong> 。数组或者散列里获取对象时，<strong>若指定不存在的索引或键时，得到的返回值也是 nil</strong>。</p>
-<p>如图：<br><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8dqvd9uudj30fq052aaf.jpg" alt=""></p>
-<p><strong>if 语句 和 while 语句在判断条件时，如果碰到 false 和 nil ，都会认为是 「 假 」，除此以外都认为是 「 真 」</strong>。因此，除了可以使用返回值为 true 或者 false 的方法，<strong>还可以使用 「 返回某个值 」 或者返回 「 nil 」的方法作为判断条件表达式</strong>。</p>
-<p>如图：</p>
-<p><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f8dre28f5tj30os0be74z.jpg" alt=""></p>
-<p>执行示例：<br><img src="http://ww3.sinaimg.cn/large/006y8lVagw1f8dreezomej30zu02u0t5.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1930,7 +1865,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

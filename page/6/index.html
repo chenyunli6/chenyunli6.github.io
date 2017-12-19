@@ -232,6 +232,368 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/10/2016-09-10-857919/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/10/2016-09-10-857919/" itemprop="url">SEO</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-10T13:51:00+08:00">
+                2016-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/10/2016-09-10-857919/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/10/2016-09-10-857919/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h1><h2 id="SEO-原则"><a href="#SEO-原则" class="headerlink" title="SEO 原则"></a>SEO 原则</h2><ul>
+<li>Search Engine Bot 沒有「眼睛」</li>
+<li>帮网页画重点</li>
+<li>HTM TAG<ul>
+<li>H1大标、H2中标、H3小标</li>
+<li>P文章段落</li>
+<li>strong 强调重点</li>
+<li>image “alt” 取代图片的文字</li>
+</ul>
+</li>
+</ul>
+<h2 id="没有SEO效果的"><a href="#没有SEO效果的" class="headerlink" title="没有SEO效果的"></a>没有SEO效果的</h2><ul>
+<li>div 块级元素</li>
+<li>span 行内元素</li>
+</ul>
+<h2 id="Headline-原則"><a href="#Headline-原則" class="headerlink" title="Headline 原則"></a>Headline 原則</h2><ul>
+<li>H1 一页只能有一个</li>
+<li>H2 一页只能有2-3个。如果有10个，搜索引擎以为你在作弊。</li>
+<li>H3 一页可以有6-10个<br><em><br><em>*所以不要乱用headling元素来装饰</em></em></li>
+</ul>
+<h2 id="Meta"><a href="#Meta" class="headerlink" title="Meta"></a>Meta</h2><ul>
+<li>title 建立独特、准确的网页标题 （不能每页都一样）</li>
+<li>meta description 叙述本页内容 （不能每页都一样，建议在100字以内）</li>
+<li>meta keywords 叙述本页关键字</li>
+</ul>
+<h2 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h2><ol>
+<li>title</li>
+<li>meta description</li>
+<li>h1</li>
+<li>h2</li>
+<li>h3</li>
+<li>strong</li>
+<li>p</li>
+</ol>
+<h2 id="秘诀"><a href="#秘诀" class="headerlink" title="秘诀"></a>秘诀</h2><p>多把关键字放在标题或叙述</p>
+<h2 id="gem-“seo-helper”的使用"><a href="#gem-“seo-helper”的使用" class="headerlink" title="gem “seo_helper”的使用"></a>gem “seo_helper”的使用</h2><p>参考链接：<a href="https://github.com/techbang/seo_helper" target="_blank" rel="external">https://github.com/techbang/seo_helper</a></p>
+<ol>
+<li>加入Gemfile<br>gem “seo_helper”, “~&gt; 1.0.3”</li>
+<li>bundle install</li>
+<li>新建 config/initializers/seo_helper.rb</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SeoHelper.configure <span class="keyword">do</span> <span class="params">|config|</span></div><div class="line">     config.skip_blank = <span class="literal">false</span></div><div class="line">     config.site_name = <span class="string">"约霸"</span></div><div class="line">     config.default_page_description = <span class="string">"约霸 海外留学 在线问答 留学咨询 禁止色情"</span></div><div class="line">     <span class="comment">#config.default_page_image = "#&#123;Setting.domain&#125;#&#123;Setting.default_og_url&#125;"</span></div><div class="line">   <span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>4.为了可以一次写入title和description,在app/controllers/application_controller.rb中新增method</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">set_page_title_and_description</span><span class="params">(title, description)</span></span></div><div class="line">    <span class="keyword">unless</span> title.blank?</div><div class="line">      set_page_title title</div><div class="line">    <span class="keyword">end</span></div><div class="line">    <span class="keyword">unless</span> description.blank?</div><div class="line">      set_page_description description</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="string">``</span><span class="string">`  </span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">5.在action中set_page_title_and_description</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">`</span><span class="string">``</span>ruby</div><div class="line">     <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">			 set_page_title_and_description(“<span class="comment">#&#123;product.title&#125;”,“#&#123;product.descrption&#125;”)</span></div><div class="line">     <span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>6.在layout中引入<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%= render_page_title_tag %&gt;</div><div class="line"> &lt;%= render_page_description_meta_tag %&gt;</div></pre></td></tr></table></figure></p>
+<p>7.注意事项：<br><strong>seo_helper要装1.0.3版的，在view中要把原先自定义的title删掉，如果<code>&lt;%= render_page_title_tag %&gt;</code>在原来的title之下就不会显示set_titles设置的title。而且会生成两个title</strong></p>
+<h2 id="如何改善SEO"><a href="#如何改善SEO" class="headerlink" title="如何改善SEO"></a>如何改善SEO</h2><p><strong>工具</strong></p>
+<ul>
+<li>google webmaster<ul>
+<li>会告诉你哪里扣分</li>
+<li>具体告诉你他怀疑你哪里作弊</li>
+</ul>
+</li>
+</ul>
+<h2 id="产品太多没办法被收录到？"><a href="#产品太多没办法被收录到？" class="headerlink" title="产品太多没办法被收录到？"></a>产品太多没办法被收录到？</h2><p>解法</p>
+<ul>
+<li>/rss</li>
+<li>sitemap.xml.gz</li>
+<li>sitemap generator</li>
+<li>通知google webmaster来爬</li>
+</ul>
+<h2 id="其他影响因素"><a href="#其他影响因素" class="headerlink" title="其他影响因素"></a>其他影响因素</h2><ul>
+<li>无mobile friendly会降分</li>
+<li>社交权重(google plus)</li>
+<li>开启速度</li>
+</ul>
+<h2 id="如何做Mobile-Page？"><a href="#如何做Mobile-Page？" class="headerlink" title="如何做Mobile Page？"></a>如何做Mobile Page？</h2><ul>
+<li>Responsive Web Design</li>
+<li>Bootstrap</li>
+</ul>
+<h3 id="两个页面"><a href="#两个页面" class="headerlink" title="两个页面"></a>两个页面</h3><ul>
+<li>使用CSS缩小</li>
+<li>使用gem判断是不是mobile浏览器，调整html与图片输出<ul>
+<li>gem “browser”<ul>
+<li>brower.device.mobile?</li>
+</ul>
+</li>
+<li>出小图<ul>
+<li>1024kb 400<em>400 =&gt; 256kb 100</em>100</li>
+</ul>
+</li>
+<li>砍html =&gt; sidebar在mobile版面应该被砍掉</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835899/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/03/2016-09-03-835899/" itemprop="url">Helper设计方法举例</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-03T17:59:00+08:00">
+                2016-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/03/2016-09-03-835899/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/03/2016-09-03-835899/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="helper-设计方法举例"><a href="#helper-设计方法举例" class="headerlink" title="helper 设计方法举例"></a>helper 设计方法举例</h2><ol>
+<li>尽量避免太多html code，无论是ruby的还是纯html</li>
+<li>view里面有太多让人难以理解的判断时，装在helper中并语意命名，让view更能理解。<br>如：把</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> current_user &amp;&amp; current_user = @topic.user_id %&gt;</div><div class="line">    <span class="comment">#show shomething</span></div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<p>改成</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;% <span class="keyword">if</span> editable?(current_user) %&gt;</div><div class="line">    <span class="comment">#show shomething</span></div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div></pre></td></tr></table></figure>
+<h3 id="helper-method-與view-context"><a href="#helper-method-與view-context" class="headerlink" title="helper_method 與view_context"></a>helper_method 與view_context</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find_cart</span></span></div><div class="line">    @cart = Cart.find(session[<span class="symbol">:cart_id</span>])</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在view里面不能用find_cart<br>&lt;%= find_cart.items %&gt;</p>
+<p>如果在controller和view都能用这个view。<br>必须要用helper_method声明这是一个controller级的helper。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApplicationController</span></span></div><div class="line">  helper_method <span class="symbol">:current_cart</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">current_cart</span></span></div><div class="line">    cart = Cart.find(session[<span class="symbol">:cart_id</span>])</div><div class="line">    <span class="keyword">return</span> cart</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>这样就能在view里面用current_user</p>
+<p>&lt;%= current_cart.items %&gt;</p>
+<p>在controller里面也能用current_cart.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add_to_cart</span></span></div><div class="line">    current_cart.items &lt;&lt; @product</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>view_context</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ProductsController</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    @page_description =  view_context.truncate(@product.desc, <span class="symbol">:lenght</span> =&gt; <span class="number">50</span> )</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/03/2016-09-03-835879/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1433,382 +1795,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/27/2016-08-27-model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/27/2016-08-27-model/" itemprop="url">Model</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-27T11:56:00+08:00">
-                2016-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/27/2016-08-27-model/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/27/2016-08-27-model/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>followees &lt;&lt; followee     加入收藏夹，加入关系<br>followees.delete(followee)        移出收藏夹，删除关系</p>
-<pre><code>def
-  @users = User.all
-end
-</code></pre><p>转换成1,2,3这种字符串<br>params[:question][:tag_list].map{|k,v| “#{k}{v}”}.join(‘,’)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/24/2016-08-24-station-letter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/24/2016-08-24-station-letter/" itemprop="url">站内信</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T19:01:00+08:00">
-                2016-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/24/2016-08-24-station-letter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/24/2016-08-24-station-letter/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.创建model</p>
-<pre><code>rails g model notification
-</code></pre><p>  添加 migration</p>
-<pre><code>class CreateNotifications &lt; ActiveRecord::Migration[5.0]
-  def change
-    create_table :notifications do |t|
-      t.integer :recipient_id
-      t.integer :actor_id
-      t.datetime :read_at
-      t.string :action
-      t.integer :notifiable_id
-      t.string :notifiable_type
-
-      t.timestamps
-    end
-  end
-end
-</code></pre><p>rake db:migrate</p>
-<p>补充model</p>
-<pre><code>class Notification &lt; ApplicationRecord
-   belongs_to :recipient, class_name: &quot;User&quot;
-   belongs_to :actor, class_name: &quot;User&quot;
-   belongs_to :notifiable, polymorphic: true
-
-   scope :unread, -&gt; { where(read_at: nil) }
-   scope :recent, -&gt; { order(created_at: :desc).limit(5) }
- end
-</code></pre><p>2.创建controller</p>
-<pre><code>rails g controller notifications
-
-
-
-class NotificationsController &lt; ApplicationController  
-  before_action :authenticate_user!
-  def index
-    @notifications = Notification.where(recipient: current_user).recent
-  end
-
-  def mark_as_read
-    @notifications = Notification.where(recipient: current_user).unread
-    @notifications.update_all(read_at: Time.zone.now)
-    render json: { success: true }
-  end
-end
-</code></pre><p>3.在notifications.coffee中加入</p>
-<pre><code>class Notifications
-
-  constructor: -&gt;
-
-@notifications = $(&quot;[data-behavior=&apos;notifications&apos;]&quot;)
-
-if @notifications.length &gt; 0
-  @handleSuccess @notifications.data(&quot;notifications&quot;)
-  $(&quot;[data-behavior=&apos;notifications-link&apos;]&quot;).on &quot;click&quot;, @handleClick
-
-  setInterval (=&gt;
-    @getNewNotifications()
-  ), 5000
-
-  getNewNotifications: -&gt;
-$.ajax(
-  url: &quot;/notifications.json&quot;
-  dataType: &quot;JSON&quot;
-  method: &quot;GET&quot;
-  success: @handleSuccess
-)
-
-handleClick: (e) =&gt;
-$.ajax(
-  url: &quot;/notifications/mark_as_read&quot;
-  dataType: &quot;JSON&quot;
-  method: &quot;POST&quot;
-  success: -&gt;
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(0)
-)
-
-handleSuccess: (data) =&gt;
-  items = $.map data, (notification) -&gt;
-    notification.template
-
-  unread_count = 0
-  $.each data, (i, notification) -&gt;
-    if notification.unread
-      unread_count += 1
-
-  if unread_count &gt; 0
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).html(&quot;&lt;span class=&apos;label label-danger&apos;&gt;&quot; + unread_count + &quot;&lt;/span&gt;&quot;)
-  else
-    $(&quot;[data-behavior=&apos;unread-count&apos;]&quot;).text(unread_count)
-  $(&quot;[data-behavior=&apos;notification-items&apos;]&quot;).html(items)
-
-jQuery -&gt;
-
-  new Notifications
-</code></pre><p>4.在notifications.scss中加入</p>
-<pre><code>.unread {
- border-left: 3px solid red;
-}
-</code></pre><p>5.创建notification_service.rb</p>
-<figure class="highlight plain"><figcaption><span>NotificationService</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class NotificationService</div><div class="line">  # recipient 接收者</div><div class="line">  # actor 发起者</div><div class="line">  # notifiable  哪张表发起的  比如，question要提醒用户，这里就传question</div><div class="line">  def initialize(recipient, actor, notifiable)</div><div class="line">    @recipient = recipient</div><div class="line">    @actor = actor</div><div class="line">    @notifiable = notifiable</div><div class="line">  end</div><div class="line"></div><div class="line">  # 发送信息</div><div class="line">  def send_notification!</div><div class="line">    Notification.create(recipient: @recipient, actor: @actor, action: &quot;notify_message&quot;, notifiable: @notifiable)</div><div class="line">  end</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>6.创建app/views/notifications/questions/_notify_message.html.erb<br>如果需要另外一个model也发送<br>创建app/views/notifications/answers/_notify_message.html.erb</p>
-<p>比如,app/views/notifications/questions/_notify_message.html.erb,这里展示消息要呈现的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;panel-body&quot;&gt;</div><div class="line"></div><div class="line">  &lt;%= notification.actor.name %&gt; 邀请您回答他的问题</div><div class="line"></div><div class="line">  &lt;%= link_to(&quot;去回答&quot;,new_question_answer_path(notification.notifiable_id)) %&gt;</div><div class="line"></div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>_notify_message.html.erb 的名字需要和<br>需要和action: “notify_message”一致，看一下notifications的表结构中有action的字段</p>
-<p>questions的目录和要发送的model一致</p>
-<p>7.在需要发送消息的地方调用service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#将会把@question的id和model(&apos;Question&apos;)的名字存入notifications的#notifiable_id和notifiable_type</div><div class="line"></div><div class="line">NotificationService.new(user,current_user,@question).send_notification!</div></pre></td></tr></table></figure>
-<p>或者</p>
-<pre><code># 将会把@answer的id和model的名字(&apos;Answer&apos;)存入notifications的
-# notifiable_id和notifiable_type
-NotificationService.new(@question.user,current_user,@answer).send_notification!
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1859,7 +1845,7 @@ NotificationService.new(@question.user,current_user,@answer).send_notification!
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

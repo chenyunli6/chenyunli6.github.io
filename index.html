@@ -232,6 +232,284 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/19/一段代码的重构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/19/一段代码的重构/" itemprop="url">一段代码的重构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-19T22:02:30+08:00">
+                2017-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/19/一段代码的重构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/19/一段代码的重构/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_encourage_count!</span></span></div><div class="line">  thanks = [[*<span class="number">0</span>..<span class="number">2</span>], [*<span class="number">1</span>..<span class="number">5</span>]]</div><div class="line">  hugs = [[*<span class="number">0</span>..<span class="number">3</span>], [*<span class="number">1</span>..<span class="number">5</span>]]</div><div class="line">  handclaps = [[*<span class="number">0</span>..<span class="number">5</span>], [*<span class="number">2</span>..<span class="number">7</span>]]</div><div class="line">  <span class="keyword">if</span> votes.exists?</div><div class="line">    choiced_thanks = thanks[<span class="number">1</span>]</div><div class="line">    choiced_hugs = hugs[<span class="number">1</span>]</div><div class="line">    choiced_handclaps = handclaps[<span class="number">1</span>]</div><div class="line">  <span class="keyword">else</span></div><div class="line">    choiced_thanks = thanks[<span class="number">0</span>]</div><div class="line">    choiced_hugs = hugs[<span class="number">0</span>]</div><div class="line">    choiced_handclaps = handclaps[<span class="number">0</span>]</div><div class="line">  <span class="keyword">end</span></div><div class="line">  <span class="keyword">self</span>.thanks_count = thanks_count.to_i + choiced_thanks.sample</div><div class="line">  <span class="keyword">self</span>.hugs_count = hugs_count.to_i + choiced_hugs.sample</div><div class="line">  <span class="keyword">self</span>.handclaps_count = handclaps_count.to_i + choiced_handclaps.sample</div><div class="line">  save!</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_encourage_count!</span></span></div><div class="line">  thanks = [[*<span class="number">0</span>..<span class="number">2</span>], [*<span class="number">1</span>..<span class="number">5</span>]]</div><div class="line">  hugs = [[*<span class="number">0</span>..<span class="number">3</span>], [*<span class="number">1</span>..<span class="number">5</span>]]</div><div class="line">  handclaps = [[*<span class="number">0</span>..<span class="number">5</span>], [*<span class="number">2</span>..<span class="number">7</span>]]</div><div class="line">  choiced_thanks = votes.exists? ? thanks[<span class="number">1</span>] : thanks[<span class="number">0</span>]</div><div class="line">  choiced_hugs = votes.exists? ? hugs[<span class="number">1</span>] : hugs[<span class="number">0</span>]</div><div class="line">  choiced_handclaps = votes.exists? ? handclaps[<span class="number">1</span>] : handclaps[<span class="number">0</span>]</div><div class="line">  <span class="keyword">self</span>.thanks_count = thanks_count.to_i + choiced_thanks.sample</div><div class="line">  <span class="keyword">self</span>.hugs_count = hugs_count.to_i + choiced_hugs.sample</div><div class="line">  <span class="keyword">self</span>.handclaps_count = handclaps_count.to_i + choiced_handclaps.sample</div><div class="line">  save!</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h2 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_encourage_count!</span><span class="params">(thanks = [[*<span class="number">0</span>..<span class="number">2</span>], [*<span class="number">1</span>..<span class="number">5</span>]], hugs = [[*<span class="number">0</span>..<span class="number">3</span>], [*<span class="number">1</span>..<span class="number">5</span>]], handclaps = [[*<span class="number">0</span>..<span class="number">5</span>], [*<span class="number">2</span>..<span class="number">7</span>]])</span></span></div><div class="line">  choiced_thanks, choiced_hugs, choiced_handclaps = votes.exists? ? [thanks[<span class="number">1</span>], hugs[<span class="number">1</span>], handclaps[<span class="number">1</span>]] : [thanks[<span class="number">0</span>], hugs[<span class="number">0</span>], handclaps[<span class="number">0</span>]]</div><div class="line">  <span class="keyword">self</span>.thanks_count = thanks_count.to_i + choiced_thanks.sample</div><div class="line">  <span class="keyword">self</span>.hugs_count = hugs_count.to_i + choiced_hugs.sample</div><div class="line">  <span class="keyword">self</span>.handclaps_count = handclaps_count.to_i + choiced_handclaps.sample</div><div class="line">  save!</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/01/关于读书，我想说的/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/01/关于读书，我想说的/" itemprop="url">关于读书，我想说的</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T18:49:19+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/01/关于读书，我想说的/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/12/01/关于读书，我想说的/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>从小听到大，几乎所有的人都知道<strong>读书是好的，读书是长知识的，读书是有用的。</strong></p>
+<p><strong>可是，很多人读不下去。</strong></p>
+<p><strong>如果你能把长篇大论的文章，甚至是一本书都能读完，你该内心自豪了，因为好多人表示读不下去。</strong></p>
+<p>我写的文章，发给我妈妈看，妈妈说，她看不懂。其实我是不相信这句看不懂的，因为我写的文章哪有什么多大的学问呢？</p>
+<p><strong>很多人，不读书，因为看不下去。</strong></p>
+<p>我是这两年才开始陆续买书，去年的双十一，买过好几百块钱的书，因为半价，然而，到现在也没读几本。</p>
+<p><strong>我经常问自己，以前不读书，可以拿小时候家里穷从没买过课外书为由，现在拿什么理由不读书呢？</strong>所以，现在我有空就会记得读点书。</p>
+<p>但是，开始的时候，建议还是选择自己想了解的感兴趣的书读，因为，别人说的经典，自己一开始或许没有这个水平去读，或许根本毫无兴趣，自然读不下去。我去年双十一买的那么多经典，买回来了又怎样，读不下去啊。</p>
+<p>另外，就算自己想读的，但是硬着头皮还是没读下去的，先放着吧，如果你真想读完，又难以坚持，那就大致浏览一下，有个印象吧。我听罗胖推荐的《必然》，看他做了十几篇读书笔记，觉得这书该读一读啊，然而读了很久，最终还是没有读完，我就暂时放下了。</p>
+<p><strong>我觉得这种放下，不是放弃。你可以继续寻找自己真正能读下去的书，然后慢慢来。等到量上去了，自己就会建立读书的信心了，而且，读的多了，慢慢读不懂的也就有机会读懂了。</strong></p>
+<p>一开始，你可以搜索一下，自己曾经听过的书，或者找自己感兴趣的图书分类，可以先不买实体书，用阅读软件就挺好；在地铁上在任何想看的时候，可以随时拿出来看。如果你有经常读书的朋友，你也可以让他帮你推荐几本，但是别人推荐的你不一定喜欢看，没关系，慢慢找就好了。我觉得微信读书就挺好的，和你的微信好友有关联，你可以查看他们的书架，看看他们都读些什么。</p>
+<p><strong>我最近在微信读书阅读了几本了，自己很开心。因为我终于开启了我的读书旅程。</strong><br>在这个旅程中，我慢慢体会到了读书的乐趣，且能扩大点知识面。<strong>但当涉猎，见往事耳。</strong>以前课本学的文章，我常常回忆，这让我知道我该做点什么。</p>
+<blockquote>
+<p>初，权谓吕蒙曰：“卿今当涂掌事，不可不学！”蒙辞以军中多务。权 曰：“孤岂欲卿治经为博士邪（语气词，通“耶”）!但当涉猎，见往事耳。 卿言多务，孰若孤？孤常读书，自以为大有所益。”蒙乃始就学。及鲁(lù）肃过寻阳，与蒙论议，大惊曰：“卿今者才略，非复吴下阿蒙！”蒙曰：“士别三日，即更刮目相待，大兄何见事之晚乎！”肃遂(suì多音字）拜蒙母，结友而别。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/30/Rails-曾经迷惑的小知识二/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1723,376 +2001,6 @@ sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/07/第一次有了测试先行的冲动/" itemprop="url">第一次有了测试先行的冲动</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T09:17:27+08:00">
-                2017-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/07/第一次有了测试先行的冲动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/07/第一次有了测试先行的冲动/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由 不写测试 到 补测试 再到 第一次有了测试先行的冲动。</p>
-<p>写 java 的时候，在第一家公司都是给银行开发系统，都有专门的框架，只需要让我们补 service 层，也有一堆专门的测试人员，我们是不写测试的。后来去另一个创业的小公司，居然我的水平也是担当了开发主力。每天都是不断写代码，也不知测试为何物。</p>
-<p>再后来，转学 rails 了。rails 虽然国内使用的很少，可是一般都要求写测试。而且我们学习的时候老师也有强调，虽然也没怎么学测试怎么写。第一家 rails 公司的技术总监就特别重视测试，也很崇尚 TDD（测试驱动开发，测试先行）。我刚开始十分不习惯，由于几乎没写过测试，对写测试的那套代码也不熟，通过 google 和参考项目中别人写的测试，我每次写测试都费了九牛二虎之力。有一次忘写测试了，还被批了一顿。我那时真的害怕写测试啊。</p>
-<p>后来，技术总监给我推荐了《测试驱动开发》那本书，我也硬着头皮看完了，还看了两遍。读完后，了解了 TDD 的很多好处和一些测试的流程。虽然表面上知道了很多TDD 的好处，但我心里还是很害怕写测试。应了那句话，纸上得来终觉浅。</p>
-<p><strong>这次，我终于第一次有了测试先行的冲动！</strong>因为项目用了些 gem ，修改代码后不重启服务会超级慢。所以每次改完代码都去重启。然而来回重启去测试代码，一旦出错或者有逻辑错误的话，必须再次改代码，再次重启继续测，循环往复，花的时间特别长。所以，我想起来先写测试的好处了。如果我先有了测试，只需要一键就可运行看到结果。</p>
-<p>写测试的时候，最讨厌的是要去构造数据，有些数据结构还比较复杂，另外也一直觉得添加测试代码会拖慢进度，构造完数据，还得去构造场景，尤其是进度一直赶着你的时候，写测试的时间就更觉得是浪费了。但是很多时候的偷懒，却带来了更大的不便，快（不写测试）变成了慢，慢（写测试）变成了快。</p>
-<p>TDD 崇尚的是测试先行，即没写代码呢，就先写测试。好处是，如果先写测试，必然得知道输入是什么，期望输出的是什么。这样就不断促进思考该如何得到这样的输出，即把设计代码也放入了测试前期的准备中。构思差不多了，可以通过写伪代码的形式快速得到期望值。然后再去一步步把伪代码变成真正的代码。运行测试的时候有可能就变红了（出错了）。改好代码，再次运行，有可能就变绿了（运行正常）。觉得代码写的不太好，重构一下，再运行测试校验重构是否正确，如果变红，继续更改代码，直到再次变绿。这个过程就是 TDD 的过程。也是由红到绿再重构，然后再继续循环，直到觉得代码不需重构且都 Green. （Red Green Refactor为一个循环）。</p>
-<p>像我开头说的，我现在是先写代码，通过浏览器测试直到代码正确，最后再去补测试。如果以 TDD 的过程写代码，我就不需要来回重启服务，在浏览器测试代码了，这个节省的时间是大把的，对我这个情境来说更是了。虽然浏览器测试省去了构造数据，模拟场景这些初期写测试不熟的人觉得很麻烦的步骤，但是却也少了测试先行的众多优点。何况写完代码之后一般是必定要写测试的，那提前一步写，其实并没有减慢整体的速度。只不过是写测试手生，被进度赶的慌了神，心里上就觉得写测试耽误时间了。</p>
-<p>第一次有了测试先行的冲动。值得记录一下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/command-line-学习：操作文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/04/command-line-学习：操作文件/" itemprop="url">command-line 学习：操作文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T21:04:09+08:00">
-                2017-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/04/command-line-学习：操作文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/11/04/command-line-学习：操作文件/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用的电脑为 mac 。</p>
-<p>参考：<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="external">Learn Enough Command Line to Be Dangerous</a></p>
-<ol>
-<li><p><code>&gt;</code> 和 <code>&gt;&gt;</code> 就算没有编辑器，也是可以把输出的一行字，新创建到一个文件中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;From fairest creatures we desire increase,&quot; &gt; sonnet_1.txt`</div><div class="line">  # 这句命令就可以创建一个新的文件 sonnet_1.txt 并把 echo 后面的那句话放到这个文件中。</div><div class="line"></div><div class="line">$ cat sonnet_1.txt</div><div class="line">  # 查看 sonnet_1.txt，会把 sonnet_1.txt 中的内容输出。（cat 是 concatenate 的缩写）</div><div class="line"></div><div class="line">$ echo &quot;That thereby beauty&apos;s Rose might never die,&quot; &gt;&gt; sonnet_1.txt</div><div class="line"></div><div class="line">  # 使用 &gt;&gt; 可以把一句话追加到文件中。</div><div class="line"></div><div class="line">$ diff sonnet_1.txt sonnet_1_lower_case.txt</div><div class="line">&lt; That thereby beauty&apos;s Rose might never die,</div><div class="line">---</div><div class="line">&gt; That thereby beauty&apos;s rose might never die,</div><div class="line"></div><div class="line"># 快速比较两个文件的不同。</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>ls</strong></p>
-<p>列出当前目录所有的文件和文件夹。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ ls foo # 列出这个 foo 下所有的文件和文件夹。</div><div class="line"></div><div class="line">$ touch foo # 可以创建一个空的文件，名字是 foo.</div><div class="line"></div><div class="line">$ cd + 文件名 # 切换到这个文件下面。</div><div class="line"></div><div class="line">$ ls *.txt # 可以列出所有的以 .txt 结尾的文件</div><div class="line"></div><div class="line">$ ls -l *.txt # 可以列出所有以 .txt 结尾的文件，以及更改文件的时间等。时间前面的是这个文件的大小（字节）。</div><div class="line"></div><div class="line">$ ls -rtl # 可以按照修改时间排序，最近的在最后面。这个也可以拆开写 ls -r -t -l</div><div class="line"></div><div class="line">$ echo &quot;*.txt&quot; &gt; .gitignore</div><div class="line">$ cat .gitignore</div><div class="line">*.txt</div><div class="line"></div><div class="line">$ ls # 不会列出隐藏的文件 .gitignore 。</div><div class="line">$ ls -a # 可以列出所有的文件包括隐藏的文件 .gitignore 。</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>mv</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ echo &quot;test text&quot; &gt; test</div><div class="line">$ mv test test_file.txt</div><div class="line">$ ls</div><div class="line">test_file.txt</div></pre></td></tr></table></figure>
-<p>重命名 text 文件变成 test_file.txt。</p>
-</li>
-<li><p><strong>cp</strong> copy 复制文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cp test_file.txt second_test.txt</div><div class="line">$ ls</div><div class="line">second_test.txt</div><div class="line">test_file.txt</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>rm</strong> remove 删除文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ rm second_test.txt</div><div class="line">remove second_test.txt? y</div><div class="line">$ ls second_test.txt</div><div class="line">ls: second_test.txt: No such file or directory</div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Tab completion</strong> Tab 键自动补全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rm tes⇥ # 输入一半的时候可以按住 tab 键，便会自动补全后面的文件名。</div><div class="line"></div><div class="line">$ rm -f *.txt # 删除所有以 *.txt 结尾的文件。f 为 force 的缩写。</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  翻译好累 😫，结合上面看吧。</p>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>   &gt;</td>
-<td>Redirect output to filename</td>
-<td>$ echo foo &gt; foo.txt</td>
-</tr>
-<tr>
-<td>   &gt;&gt;</td>
-<td>Append output to filename</td>
-<td>$ echo bar &gt;&gt; foo.txt</td>
-</tr>
-<tr>
-<td>   cat <file></file></td>
-<td>Print contents of file to screen</td>
-<td>$ cat hello.txt  </td>
-</tr>
-<tr>
-<td>   diff <f1> <f2></f2></f1></td>
-<td>Diff files 1 &amp; 2</td>
-<td>$ diff foo.txt bar.txt</td>
-</tr>
-<tr>
-<td>   ls</td>
-<td>List directory or file</td>
-<td>$ ls hello.txt</td>
-</tr>
-<tr>
-<td>   ls -l</td>
-<td>List long form</td>
-<td>$ ls -l hello.txt</td>
-</tr>
-<tr>
-<td>   ls -rtl</td>
-<td>Long by reverse modification time</td>
-<td>$ ls -rtl</td>
-</tr>
-<tr>
-<td>   ls -a</td>
-<td>List all (including hidden)</td>
-<td>$ ls -a</td>
-</tr>
-<tr>
-<td>   touch <file></file></td>
-<td>Create an empty file</td>
-<td>$ touch foo</td>
-</tr>
-<tr>
-<td>   mv <old> <new></new></old></td>
-<td>Rename (move) from old to new</td>
-<td>$ mv foo bar</td>
-</tr>
-<tr>
-<td>   cp <old> <new></new></old></td>
-<td>Copy old to new</td>
-<td>$ cp foo bar</td>
-</tr>
-<tr>
-<td>   rm <file></file></td>
-<td>Remove (delete) file</td>
-<td>$ rm foo</td>
-</tr>
-<tr>
-<td>   rm -f <file></file></td>
-<td>Force-remove file</td>
-<td>$ rm -f bar</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2143,7 +2051,7 @@ sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
