@@ -232,6 +232,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/03/2016-08-03-jdstore/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/03/2016-08-03-jdstore/" itemprop="url">jdstore</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-03T11:01:00+08:00">
+                2016-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/03/2016-08-03-jdstore/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/03/2016-08-03-jdstore/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.fork 项目<br>步骤：<br>    fork进入自己的git，然后</p>
+<p>  git clone git@github.com:XXXXX/job-listing.git  （clone 到本地）<br>  cd job-listing<br>  cp config/database.yml.example config/database.yml  （复制 database.yml.example）<br>  bundle check ; bundle install  (检查gem，安装gem）<br>  git checkout -b version-1        （git checkout version-1）<br>  rails s  （跑起來）</p>
+<p>  (新建专案)<br>   rm -rf suggestotron<br>   rails new suggestotron<br>   cd suggestotron<br>   git init<br>   git status<br>   git add .   （git add foo.txt 把名叫 foo.txt 的檔案加進追蹤修訂。<br>                  git add . (“git add dot”) 把所有新檔案和改過的檔案加進追蹤修訂，但「保留」你刪掉的檔案。<br>                  git add -A 全部加進追蹤修訂，包括刪掉的檔案。）<br>   git commit -m “Added all the things”<br>                           -m “Added all the things 這個捷徑讓你可以直接寫下 commit message。你可以省略之，這樣子 git                          會打開一個編輯器請你填寫詳細的 commit message。<br>   rails generate scaffold topic title:string description:text<br>   rake db:migrate<br>   rails server<br>               generate scaffold 告訴 Rails 去建立一堆檔案讓 topics 可以動。<br>        topic 是告訴 rails 新的 Model 的名字是什麼。<br>        title:string 是說 topics 有標題（title），它是一個字串（String）。<br>        description:text 是說 topics 有內文（description），它是一段文字（Text）。（「字串」跟「文字」的差別？基本上「文字」是用來儲存可能會很長的字串。）</p>
+<p>2.套上bootstrap<br>    gem “bootstrap-sass”<br>  bundle install        (注意：修改完 Gemfile 都要執行 bundle install）<br>  mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss<br>  (將 application.css 更名為 application.scss)<br>  application.scss中<br>  @import “bootstrap-sprockets”;<br>    @import “bootstrap”;</p>
+<p>  mkdir app/views/common<br>  touch app/views/common/_navbar.html.erb<br>  touch app/views/common/_footer.html.erb<br>  修改全域 HTML 樣式 application.html.erb引入nav和footer</p>
+<p>  rails g controller welcome<br>  touch app/views/welcome/index.html.erb<br>  config/routes.rb<br>      root ‘welcome#index’</p>
+<pre><code>app/assets/javascripts/application.js
+  //= require bootstrap/alert
+</code></pre><p>  touch app/views/common/_flashes.html.erb<br>      &lt;% if flash.any? %&gt;<br>    &lt;% user_facing_flashes.each do |key, value| %&gt;<br>      <div class="alert alert-dismissable alert-<%= flash_class(key) %>"><br>        <button class="close" data-dismiss="alert">×</button><br>        &lt;%= value %&gt;<br>      </div><br>    &lt;% end %&gt;<br>    &lt;% end %&gt;</p>
+<p>touch app/helpers/flashes_helper.rb<br>  module FlashesHelper<br>    FLASH_CLASSES = { alert: “danger”, notice: “success”, warning: “warning”}.freeze</p>
+<pre><code>def flash_class(key)
+  FLASH_CLASSES.fetch key.to_sym, key
+end
+
+def user_facing_flashes
+  flash.to_hash.slice &quot;alert&quot;, &quot;notice&quot;,&quot;warning&quot;
+end
+</code></pre><p>  end</p>
+<p>  &lt;%= render “common/flashes” %&gt;</p>
+<p>3.安装登入系统<br>    gem “devise”<br>  bundle install<br>  rails g devise:install<br>    rails g devise user<br>    rake db:migrate</p>
+<p>4.安装SimpleForm<br>    gem “simple_form”<br>  bundle install<br>  rails generate simple_form:install –bootstrap<br>      安裝 simple_form for bootstrap 的設定<br>        這個指令會產生兩個檔案<br>        config/initializers/simple_form.rb<br>        config/initializers/simple_form_bootstrap.rb （這個是 Bootstrap 表單的「佈景」</p>
+<p>5.rails g controller admin::products<br>    rails g model product title:string description:text quantity:integer price:float<br>    rake db:migrate</p>
+<p>  去做CRUD</p>
+<p>6.增加is_admin<br>    rails g migration add_is_admin_to_user<br>  add_column :users, :is_admin, :boolean, default: false<br>  rake db:migrate<br>  def admin?<br>    is_admin<br>  end</p>
+<p>7.上传压缩图<br>    gem “carrierwave”<br>  gem “mini_magick”<br>  bundle install</p>
+<p>  rails g migration add_image_to_product<br>  add_column :products,:image,:string<br>  rake db:migrate<br>  rails g uploader ImageUploader</p>
+<p>  在uploader中<br>      include CarrierWave::MiniMagick<br>      rocess resize_to_fit:[800,800]</p>
+<pre><code>version :thumb do
+  process resize_to_fill:[200,200]
+end
+
+version :medium do
+  process resize_to_fill:[400,400]
+end
+</code></pre><p> 在Product中<br>     mount_uploader :image,ImageUploader</p>
+<p>在rails console中删除表<br>ActiveRecord::Migration.drop_table(:table_name)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/02/2016-08-02-form-for/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1379,7 +1545,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1392,7 +1558,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

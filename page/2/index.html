@@ -232,6 +232,298 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/command-line-学习：检阅文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/command-line-学习：检阅文件/" itemprop="url">command-line 学习：检阅文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T12:05:55+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/09/command-line-学习：检阅文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/09/command-line-学习：检阅文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用的电脑为 mac 。</p>
+<p>参考：<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="external">Learn Enough Command Line to Be Dangerous</a></p>
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>用 which 命令可以查看命令行是否支持 curl，</p>
+<p><code>$ which curl</code><br><code>/usr/bin/curl</code></p>
+<p>如果输出结果是空的，说明不支持，得安装。可以自行 google 关键词 install curl 进行安装。<br>curl 安装好，可以下载文件了。</p>
+<p><code>$ curl -OL cdn.learnenough.com/sonnets.txt</code><br><code>$ ls -rtl</code><br><code>$ !! # 可以出来最近一次使用的命令</code><br><code>$ !curl # 可以出来最近一次使用 curl 开头的命令</code></p>
+<p> 还有一个小技巧，可以使用 <code>ctrl + r</code>，这个可以进行搜索，输入 <code>curl</code> ，便可以查询以 <code>curl</code> 开头的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ 按住 ctrl 和 R</div><div class="line">(reverse-i-search)`&apos;: curl</div></pre></td></tr></table></figure></p>
+<h2 id="head-tail"><a href="#head-tail" class="headerlink" title="head tail"></a>head tail</h2><p><code>$ head sonnets.txt # 查看 sonnets.txt 文件的前 10 行</code><br><code>$ tail sonnets.txt # 查看 sonnets.txt 文件的后 10 行</code><br><code>$ wc sonnets.txt # 查看 sonnets.txt 文件有多少行，多少字，多少字节
+  2620  17670  95635 sonnets.txt</code><br><code># 把 sonnets.txt 的 head 部分放入 sonnets_head.txt，并统计
+sonnets_head.txt  中有多少行，多少字，和多少字节</code><br><code>$ head sonnets.txt &gt; sonnets_head.txt</code><br><code>$ wc sonnets_head.txt
+  10   46   294 sonnets_head.txt</code><br><code># 用一行命令也可以搞定</code><br><code>$ head sonnets.txt | wc
+  10   46   294Â</code></p>
+<h2 id="less-more"><a href="#less-more" class="headerlink" title="less more"></a>less more</h2><p><code>$ less sonnets.txt</code><br>这个可以给文件一个导航，然后你可以通过 ↑ ↓，空格键去翻页。按 <code>ctrl + f</code> 可以一下到下个目录，<code>ctrl + b</code> 可以到上一个目录。输入 q 退出。</p>
+<p>还可以 输入 <code>/rose</code> 来搜索 <code>rose</code>，可以按 <code>n</code> 去到下一个匹配的地方, <code>N</code> 去到上一个匹配的地方。</p>
+<p>还有一个 <code>G</code> 去到文件的结尾，<code>1G</code> 去到文件的开头。<br><code>less</code> 中的命令，和 <code>man</code> 中的类似，所以会了 <code>less</code> ，<code>man</code> 中的也可以很好的使用了。</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>up &amp; down arrow keys</td>
+<td>Move up or down one line</td>
+<td></td>
+</tr>
+<tr>
+<td>spacebar</td>
+<td>Move forward one page</td>
+<td></td>
+</tr>
+<tr>
+<td>ctrl + f</td>
+<td>Move forward one page</td>
+<td></td>
+</tr>
+<tr>
+<td>ctrl + b</td>
+<td>Move back one page</td>
+<td></td>
+</tr>
+<tr>
+<td>G</td>
+<td>Move to end of file</td>
+<td></td>
+</tr>
+<tr>
+<td>1G</td>
+<td>Move to beginning of file</td>
+<td></td>
+</tr>
+<tr>
+<td>/<string></string></td>
+<td>Search file for string</td>
+<td>/rose</td>
+</tr>
+<tr>
+<td>n</td>
+<td>Move to next search result</td>
+<td></td>
+</tr>
+<tr>
+<td>N</td>
+<td>Move to previous search result</td>
+<td></td>
+</tr>
+<tr>
+<td>q</td>
+<td>Quit less</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p><code>$ grep rose sonnets.txt # 找出所有存在 rose 的地方</code></p>
+<p><code>$ grep rose sonnets.txt | wc # 统计出现 rose 的行数 字数 字节数（大写的 Rose 不能被统计到，grep 大小写敏感）</code><br>    10   82   419<br><code>$ grep -i rose sonnets.txt | wc # 不计大小写统计
+    12      96     508</code></p>
+<p>ps 是 process status 的缩写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ps -aux</div><div class="line">$ ps aux</div><div class="line">$ ps aux | grep spring # 查看 spring 进程</div><div class="line">    ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46</div><div class="line">    spring app | sample_app | started 7 hours ago</div><div class="line">$ kill -15 12241    # 杀死 12241 进程</div><div class="line">$ pkill -15 -f spring # 杀死所有的 spring 进程</div><div class="line">$ top # 可查看所有的进程</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>curl</td>
+<td>Interact with URLs</td>
+<td>$ curl -O example.com</td>
+</tr>
+<tr>
+<td>which</td>
+<td>Locate a program on the path</td>
+<td>$ which curl</td>
+</tr>
+<tr>
+<td>head <file></file></td>
+<td>Display first part of file</td>
+<td>$ head foo</td>
+</tr>
+<tr>
+<td>tail <file></file></td>
+<td>Display last part of file</td>
+<td>$ tail bar</td>
+</tr>
+<tr>
+<td>wc <file></file></td>
+<td>Count lines, words, bytes</td>
+<td>$ wc foo</td>
+</tr>
+<tr>
+<td>cmd1 &#124; cmd2</td>
+<td>Pipe cmd1 to cmd2</td>
+<td>$ head foo &#124; wc</td>
+</tr>
+<tr>
+<td>ping <url></url></td>
+<td>Ping a server URL</td>
+<td>$ ping google.com</td>
+</tr>
+<tr>
+<td>less <file></file></td>
+<td>View file contents interactively</td>
+<td>$ less foo</td>
+</tr>
+<tr>
+<td>grep <string> <file></file></string></td>
+<td>Find string in file</td>
+<td>$ grep foo bar.txt</td>
+</tr>
+<tr>
+<td>grep -i <string> <file></file></string></td>
+<td>Find case-insensitively</td>
+<td>$ grep -i foo bar.txt</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>Show processes</td>
+<td>$ ps aux</td>
+</tr>
+<tr>
+<td>top</td>
+<td>Show processes (sorted)</td>
+<td>$ top</td>
+</tr>
+<tr>
+<td>kill -<level> <pid></pid></level></td>
+<td>Kill a process</td>
+<td>$ kill -15 24601</td>
+</tr>
+<tr>
+<td>pkill -<level> -f <name></name></level></td>
+<td>Kill matching processes</td>
+<td>$ pkill -15 -f spring</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/第一次有了测试先行的冲动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1731,171 +2023,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/postgresql-安装和使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/24/postgresql-安装和使用/" itemprop="url">postgresql 安装和使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-24T23:00:57+08:00">
-                2017-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/24/postgresql-安装和使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/24/postgresql-安装和使用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考：<br><a href="https://www.codementor.io/devops/tutorial/getting-started-postgresql-server-mac-osx" target="_blank" rel="external">Getting Started with PostgreSQL on Mac OSX</a></p>
-<p><a href="https://www.postgresql.org/docs/9.5/static/manage-ag-createdb.html" target="_blank" rel="external">Documentation </a></p>
-<p>目录：</p>
-<ul>
-<li>安装 Homebrew</li>
-<li>安装 Postgres</li>
-<li>进入 psql postgres 命令行<ul>
-<li>创建角色用户</li>
-<li>给用户添加权限</li>
-<li>创建数据库</li>
-</ul>
-</li>
-</ul>
-<h2 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 Homebrew</h2><p>如果你安装过了，可以跳过这一步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<p>安装过程中，按照要求，输入回车键；如果需要输入电脑系统密码，就输入密码按回车即可。</p>
-<h2 id="安装-Postgres"><a href="#安装-Postgres" class="headerlink" title="安装 Postgres"></a>安装 Postgres</h2><p><code>brew install postgresql</code></p>
-<p>安装固定版本，<code>brew install postgresql@9.4</code></p>
-<p>安装好之后，会有一些简单的说明。也告诉了启动方式。</p>
-<p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">To have launchd start postgresql@9.4 now and restart at login:</div><div class="line">  brew services start postgresql@9.4</div><div class="line">Or, if you don&apos;t want/need a background service you can just run:</div><div class="line">  pg_ctl -D /usr/local/var/postgresql@9.4 start</div></pre></td></tr></table></figure></p>
-<p>执行命令：<code>pg_ctl -D /usr/local/var/postgres start &amp;&amp; brew services start postgresql</code>  </p>
-<p>然后输入：<code>postgres -V</code>，会返回安装的相应的版本。</p>
-<h2 id="配置-Postgres"><a href="#配置-Postgres" class="headerlink" title="配置 Postgres"></a>配置 Postgres</h2><p>命令行输入：<code>psql postgres</code>，（或者 sudo psql postgres）</p>
-<p>（如果刚安装好，输入此命令，提示说没有这个命令，可以重启电脑试试）</p>
-<p>进入 psql 命令行, <code>postgres=#</code> 开头</p>
-<p>输入：postgres=# \du</p>
-<p>可以看到：<br><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fktadlg1oqj30yi08yjsn.jpg" alt=""></p>
-<p>创建一个角色用户：</p>
-<p><code>postgres=# CREATE ROLE patrick WITH LOGIN PASSWORD &#39;Getting started&#39;;</code></p>
-<p>再次输入 <code>\du</code></p>
-<p>会发现上图中多了一个 <code>patrick</code>，</p>
-<p>修改角色的权限：</p>
-<p><code>postgres=# ALTER ROLE patrick CREATEDB;</code></p>
-<p>再输入 <code>\du</code>，会看到 <code>patrick</code> 多了个权限。</p>
-<p>如果我们想给角色 <code>Superuser</code> 权限，可以修改为 <code>postgres=# ALTER ROLE patrick Superuser;</code></p>
-<p>创建数据库 <code>CREATE DATABASE databasename;</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1946,7 +2073,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1959,7 +2086,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
