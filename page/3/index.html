@@ -232,6 +232,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/rails-中-polymorphic-的使用-以及获取-unscoped-对象属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/rails-中-polymorphic-的使用-以及获取-unscoped-对象属性/" itemprop="url">rails 中 polymorphic 的使用, 以及获取 unscoped 对象属性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T20:31:50+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/25/rails-中-polymorphic-的使用-以及获取-unscoped-对象属性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/25/rails-中-polymorphic-的使用-以及获取-unscoped-对象属性/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>注意：本文小写的变量都为实例变量，如：<code>employee</code></em></p>
+<h2 id="使用-polymorphic"><a href="#使用-polymorphic" class="headerlink" title="使用 polymorphic"></a>使用 polymorphic</h2><p>场景： <code>Employee</code> 和 <code>Product</code> 都 <code>has_many pictures</code>, 但是又不希望创建两个类似的 <code>pictures</code> 表。也就是我们希望<code>Employee</code> 和 <code>Product</code> 可以同时关联上 <code>Picture</code>, 最后能从 <code>pictures</code> 表中各取所需，也可以在 <code>Picture</code> 的每个实例对象中获得所属对象。最终结果：</p>
+<ul>
+<li>rails 中</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">employee.pictures</div><div class="line">product.pictures</div><div class="line">picture.imageable <span class="comment"># 是一个具体的 employee 或者 product 对象</span></div></pre></td></tr></table></figure>
+<ul>
+<li>存在表里的是：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>imageable_id</th>
+<th>imageable_type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 1</td>
+<td>sun</td>
+<td>1</td>
+<td>Product</td>
+</tr>
+<tr>
+<td> 2</td>
+<td>moon</td>
+<td>1</td>
+<td>Employee</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>示例代码</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Picture</span> &lt; ApplicationRecord</span></div><div class="line">  belongs_to <span class="symbol">:imageable</span>, <span class="symbol">polymorphic:</span> <span class="literal">true</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> &lt; ApplicationRecord</span></div><div class="line">  has_many <span class="symbol">:pictures</span>, <span class="symbol">as:</span> <span class="symbol">:imageable</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> &lt; ApplicationRecord</span></div><div class="line">  has_many <span class="symbol">:pictures</span>, <span class="symbol">as:</span> <span class="symbol">:imageable</span></div><div class="line">  default_scope &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreatePictures</span> &lt; ActiveRecord::Migration[5.0]</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">change</span></span></div><div class="line">    create_table <span class="symbol">:pictures</span> <span class="keyword">do</span> <span class="params">|t|</span></div><div class="line">      t.string  <span class="symbol">:name</span></div><div class="line">      t.integer <span class="symbol">:imageable_id</span></div><div class="line">      t.string  <span class="symbol">:imageable_type</span></div><div class="line">      t.timestamps</div><div class="line">    <span class="keyword">end</span></div><div class="line">    add_index <span class="symbol">:pictures</span>, [<span class="symbol">:imageable_type</span>, <span class="symbol">:imageable_id</span>]</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<ul>
+<li>注意事项</li>
+</ul>
+<p><code>model</code> 中的 <code>imageable</code> 需要与表中的 <code>imageable_id</code> 和 <code>imageable_type</code> 对应，如果你的是 <code>object_id</code> 和 <code>object_type</code>，那么 <code>model</code> 中应该是 <code>belongs_to :object, polymorphic: true</code></p>
+<h2 id="覆盖-Picture-中的-imageable"><a href="#覆盖-Picture-中的-imageable" class="headerlink" title="覆盖 Picture 中的 imageable"></a>覆盖 Picture 中的 imageable</h2><p>上述代码中，<code>Product</code> 有 <code>scope</code>，当你用 <code>picture.imageable</code> 的时候，会把 scope 也带上，有可能你需要的是所有的 imageable ，而不是 scope 下的，这个时候可以通过覆盖掉 imageable 这个方法来解决。</p>
+<p>比如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Picture</span> &lt; ApplicationRecord</span></div><div class="line">  belongs_to <span class="symbol">:imageable</span>, <span class="symbol">polymorphic:</span> <span class="literal">true</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">imageable</span></span></div><div class="line">    @imageable <span class="params">||</span>= imageable_type.constantize.unscoped.find_by_id imageable_id</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>这里面通过 <code>imageable_type</code> 获取类名，<code>constantize</code> 把字符串的类名转化为对象，再调用 <code>unscoped</code> 方法，最后通过 <code>imageable_id</code> 找到具体的 <code>imageable</code> 对象。定义 <code>@imageable</code> 是为了一次请求中不多次查询<code>imageable</code>，因为 <code>rails</code> 会缓存。</p>
+<h2 id="根据-RubyChina-上的反馈做出调整"><a href="#根据-RubyChina-上的反馈做出调整" class="headerlink" title="根据 RubyChina 上的反馈做出调整"></a>根据 RubyChina 上的反馈做出调整</h2><p>参考：<a href="https://ruby-china.org/topics/34429" target="_blank" rel="external">https://ruby-china.org/topics/34429</a></p>
+<ol>
+<li>一开始文中写的是 scope ，是写错了，现在改正过来了。</li>
+<li>最好不使用 default_scope</li>
+<li><p>如果非要使用 default_scope 可以用比文中更好一点的解决方法：(此方法发现 bug ，暂时还是不使用了，因为我们暂时不牵扯到)</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">belongs_to :imageable, -&gt; &#123; unscope(:where) &#125;, polymorphic: true</div></pre></td></tr></table></figure>
+<p> 文中的方法会导致 includes 无效等问题。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/24/postgresql-安装和使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1609,142 +1793,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/gem 'delayed_job_active_record'/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/02/gem 'delayed_job_active_record'/" itemprop="url">gem 'delayed_job_active_record'</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T20:47:04+08:00">
-                2017-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/02/gem 'delayed_job_active_record'/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/02/gem 'delayed_job_active_record'/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>bundle</p>
-<p>rails generate delayed_job:active_record<br>rake db:migrate</p>
-<p>config.active_job.queue_adapter = :delayed_job</p>
-<p>Here is an example of changing job parameters in Rails:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># config/initializers/delayed_job_config.rb</div><div class="line">Delayed::Worker.destroy_failed_jobs = false</div><div class="line">Delayed::Worker.sleep_delay = 60</div><div class="line">Delayed::Worker.max_attempts = 3</div><div class="line">Delayed::Worker.max_run_time = 5.minutes</div><div class="line">Delayed::Worker.read_ahead = 10</div><div class="line">Delayed::Worker.default_queue_name = &apos;default&apos;</div><div class="line">Delayed::Worker.delay_jobs = !Rails.env.test?</div><div class="line">Delayed::Worker.raise_signal_exceptions = :term</div><div class="line">Delayed::Worker.logger = Logger.new(File.join(Rails.root, &apos;log&apos;, &apos;delayed_job.log&apos;))</div></pre></td></tr></table></figure>
-<p>RAILS_ENV=production bin/delayed_job start</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1843,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
