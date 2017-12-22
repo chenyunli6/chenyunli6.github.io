@@ -232,6 +232,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877837/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/16/2016-09-16-877837/" itemprop="url">simple_form_for 中collection_check_boxes 的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T14:53:00+08:00">
+                2016-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/16/2016-09-16-877837/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/16/2016-09-16-877837/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="collection-check-boxes-的使用"><a href="#collection-check-boxes-的使用" class="headerlink" title="collection_check_boxes 的使用"></a>collection_check_boxes 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.collection_check_boxes <span class="symbol">:tag_list</span>, Tag.all, <span class="symbol">:name</span>,<span class="symbol">:name</span></div><div class="line">, <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span>,<span class="symbol">required:</span> <span class="literal">true</span></div><div class="line">, <span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: "<span class="title">tagsinput</span>"&#125; %&gt;</span></div><div class="line"></div><div class="line">&lt;!-- <span class="symbol">:item_wrapper_class</span> =&gt; <span class="string">'checkbox'</span> 可以实现checkbox纵排显示 --&gt;</div></pre></td></tr></table></figure>
+<p>其中 <figure class="highlight plain"><figcaption><span>:name``` 第一个在simple_form_for的github文档中是:id,因为我这里value和show value都是name，所以，这里就写成这样子了。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">我这里是jquery判断是否选择过一项，如果选择了一项，就跳出循环，否则继续判断，如果一项都没选择，提示用户进行选择。</div><div class="line"></div><div class="line">```js</div><div class="line">var question_tag_list = $(&quot;input[type=&apos;checkbox&apos;]&quot;);</div><div class="line">var checkedSize = 0;</div><div class="line">question_tag_list.each(function()&#123;</div><div class="line"> if ($(this).prop(&quot;checked&quot;)) &#123;</div><div class="line">   checkedSize += 1;</div><div class="line">   return false; //只要勾选了一个，便符合必填，跳出循环，可提升效率</div><div class="line"> &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>遇到的大坑就是，我用 <code>$(this).checked</code>不能返回true或者false，但是googel很多都是说这样可以。后来问了朋友，用 <code>$(&quot;#id&quot;).prop(&quot;checked&quot;)</code>成功了，具体参考 <a href="http://api.jquery.com/prop/" target="_blank" rel="external">http://api.jquery.com/prop/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/11/2016-09-11-full-stack-camp-experience-feelings/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1708,152 +1841,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/30/2016-08-30-820924/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/30/2016-08-30-820924/" itemprop="url">dropdown</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-30T13:22:00+08:00">
-                2016-08-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/30/2016-08-30-820924/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/30/2016-08-30-820924/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>f.input 是simple_form_for的使用</p>
-<p>这个是普通的下拉：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags %&gt;</div></pre></td></tr></table></figure>
-<p>下面这个是加了semantic-ui的下拉框（多选）<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:tag_list</span>,<span class="symbol">collection:</span> @tags,<span class="symbol">label:</span><span class="string">"问题标签"</span>,<span class="symbol">input_html:</span> &#123; <span class="class"><span class="keyword">class</span>: '<span class="title">ui</span> <span class="title">fluid</span> <span class="title">search</span> <span class="title">dropdown</span>',<span class="title">multiple</span>: "" &#125; %&gt;</span></div></pre></td></tr></table></figure></p>
-<p>html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"ui fluid search dropdown"</span> <span class="attr">multiple</span>=<span class="string">""</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>State<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/w487iIPQoinSqW8o27Wj_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.19.20.png" alt="屏幕快照 2016-08-30 下午1.19.20.png"></p>
-<p>下面这个是带搜索的semantic-ui下拉（多选）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui multiple dropdown"</span> <span class="attr">id</span>=<span class="string">"dropdown"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"filters"</span> <span class="attr">value</span>=<span class="string">"&lt;%=@filters%&gt;"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-users"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span> <span class="attr">style</span>=<span class="string">"color:#adda4d"</span> <span class="attr">id</span>=<span class="string">"invite"</span>&gt;</span>邀请回答<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">unless</span> @<span class="attr">invitated_users.nil</span>? %&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> @<span class="attr">invitated_users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"ui label transition visible"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span> <span class="attr">style</span>=<span class="string">"display: inline-block !important;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">        回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"delete icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ui icon search input"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"search icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"搜索你想提问的学长学姐"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"tags icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      学长&amp;学姐</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrolling menu"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> @<span class="attr">users.each</span> <span class="attr">do</span> |<span class="attr">user</span>| %&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">data-value</span>=<span class="string">"&lt;%= user.id %&gt;"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">gravatar_tag</span> <span class="attr">user.email</span>, <span class="attr">:size</span> =&gt;</span> 50, :default =&gt; avatar_url %&gt;</div><div class="line">          <span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span></div><div class="line">          回答数量：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.answers.count</span> %&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>效果图：</p>
-<p><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/vwdVVvtZSgqy3leeksRF_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.32.30.png" alt="屏幕快照 2016-08-30 下午1.32.30.png"></p>
-<p>这是一个二级下拉<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;%= f.input <span class="symbol">:author</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:as</span> =&gt; <span class="symbol">:grouped_select</span>,</div><div class="line"></div><div class="line"> <span class="symbol">:collection</span> =&gt; [[<span class="string">'Authors'</span>, [<span class="string">'Jose'</span>, <span class="string">'Carlos'</span>]], [<span class="string">'General'</span>, [<span class="string">'Bob'</span>, <span class="string">'John'</span>]]],</div><div class="line"></div><div class="line"> <span class="symbol">:group_method</span> =&gt; <span class="symbol">:last</span> %&gt;</div></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="http://user-image.logdown.io/user/18400/blog/17935/post/820924/fvam6v7TnuzGlDYxY2Qg_%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-30%20%E4%B8%8B%E5%8D%881.14.49.png" alt="屏幕快照 2016-08-30 下午1.14.49.png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1899,7 +1891,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
