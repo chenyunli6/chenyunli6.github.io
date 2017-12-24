@@ -232,6 +232,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/" itemprop="url">把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T16:42:40+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/10/25/把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异"><a href="#把旧的数据库中的数据-load-到新数据库-新数据库表字段有差异" class="headerlink" title="把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)"></a>把旧的数据库中的数据 load 到新数据库(新数据库表字段有差异)</h1><ol>
+<li><p>安装 <code>gem &#39;yaml_db&#39;</code><br>照例：<br> <code>Gemfile</code> 中 加入 <code>gem &#39;yaml_db&#39;</code> 并 <code>bundle</code></p>
+</li>
+<li><p>在旧的数据库环境下（ database.yml 连接对应的数据库），运行 <code>rake db:data:dump</code>,会生成文件 <code>db/data.yml</code>。这个里面会把数据导出成数组格式。<br> 如下：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">users:</span></div><div class="line">  <span class="symbol">columns:</span></div><div class="line">  - id</div><div class="line">  - email</div><div class="line">  - nickname</div><div class="line">  - created_at</div><div class="line">  - updated_at</div><div class="line">  <span class="symbol">records:</span></div><div class="line">  - - <span class="number">1</span></div><div class="line">    - a@a.com</div><div class="line">    - <span class="number">1</span></div><div class="line">    - ss</div><div class="line">    - <span class="string">'2016-10-25 11:35:41'</span></div><div class="line">    - <span class="string">'2016-10-25 14:26:11'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 <code>gem &#39;bulk_insert&#39;</code><br> 照例：<br> <code>Gemfile</code> 中 加入 <code>gem &#39;bulk_insert&#39;</code> 并 <code>bundle</code></p>
+</li>
+<li><p>在新的数据库环境下（修改database.yml连接对应的数据库），写 task ，读取data.yml文件，并写入新的数据库。<br> <code>rake -T</code> 可以查看所有 rake 命令，找到自己的 rake 命令 并执行(本例：<code>rake new_db:new_db_load</code>)。</p>
+<p> task 代码：</p>
+<p> 文件目录：<code>lib/tasks/new_db_migration.rake</code></p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">namespace <span class="symbol">:new_db</span> <span class="keyword">do</span></div><div class="line">  desc <span class="string">'migrate old db data to new db'</span></div><div class="line">  task <span class="symbol">:new_db_load</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></div><div class="line"></div><div class="line">    old_db = YAML.load_file(<span class="string">'db/data.yml'</span>)</div><div class="line"></div><div class="line">    User.bulk_insert(<span class="symbol">set_size:</span> <span class="number">100</span>) <span class="keyword">do</span> <span class="params">|worker|</span></div><div class="line">      old_db[<span class="string">'users'</span>][<span class="string">'records'</span>].each <span class="keyword">do</span> <span class="params">|record|</span></div><div class="line">        worker.add(</div><div class="line">            <span class="symbol">id:</span> record[<span class="number">0</span>], <span class="symbol">email:</span> record[<span class="number">1</span>], <span class="symbol">status:</span> (record[<span class="number">2</span>] == <span class="number">1</span>), <span class="symbol">nick_name:</span> record[<span class="number">3</span>], <span class="symbol">created_at:</span> record[<span class="number">4</span>], <span class="symbol">updated_at:</span> record[<span class="number">5</span>]</div><div class="line">        )</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    puts <span class="string">'user finish'</span></div><div class="line"></div><div class="line">    puts <span class="string">'done!'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p> 上面我做的变更是 <code>status</code> ，原来是 0 或者1 ，现在改成 true 或 false ，通过 <code>status: (record[2] == 1)</code> 来符合新的结构。其余的变更都可以类似处理。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/24/gem-gaffe-异常页面美化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1924,137 +2069,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877879/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/16/2016-09-16-877879/" itemprop="url">simple_form_for 中 association 的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T15:20:00+08:00">
-                2016-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/09/16/2016-09-16-877879/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/09/16/2016-09-16-877879/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="simple-form-for-中-association-的使用"><a href="#simple-form-for-中-association-的使用" class="headerlink" title="simple_form_for 中 association 的使用"></a>simple_form_for 中 association 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># model</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span> &lt; ApplicationRecord</span></div><div class="line">    has_many <span class="symbol">:invitated_users</span>, <span class="symbol">through:</span> <span class="symbol">:question_invitations</span>, <span class="symbol">source:</span> <span class="symbol">:user</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># html</span></div><div class="line">&lt;%= f.association <span class="symbol">:invitated_users</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:check_boxes</span>, <span class="symbol">label:</span> <span class="literal">false</span>,<span class="symbol">selected:</span> @question.invitated_users %&gt;</div><div class="line"></div><div class="line"><span class="comment"># controller</span></div><div class="line"><span class="comment"># strong params 中加入</span></div><div class="line"></div><div class="line">params.<span class="keyword">require</span>(<span class="symbol">:question</span>).permit(<span class="symbol">:invitated_user_ids=&gt;[]</span> )</div><div class="line"></div><div class="line">即可自动保存关系</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2105,7 +2119,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

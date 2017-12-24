@@ -232,6 +232,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/13/2016-08-13-delete-all-vs-destroy-all/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/13/2016-08-13-delete-all-vs-destroy-all/" itemprop="url">delete_all vs destroy_all</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-13T21:12:00+08:00">
+                2016-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/13/2016-08-13-delete-all-vs-destroy-all/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/08/13/2016-08-13-delete-all-vs-destroy-all/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>delete  （删除某一个或多个以id为条件的记录）<br>    Article.delete(4)        (会返回影响记录条数，如1)<br>  Article.delete([5, 6])            (会返回影响记录条数，如0)</p>
+<p>delete_all    （删除带条件的记录）<br>Article.delete_all(“published_at &lt; ‘2011-01-01’”)        （也会返回影响记录条数）</p>
+<p>destroy     （没有返回值）<br>    Article.destroy(1)<br>  Article.destroy([2,3])  </p>
+<p>  a = Article.first<br>    a.destroy  实例级别方法</p>
+<pre><code>Article.destory_all(&quot;published_at &lt; &apos;2011-01-01&apos;&quot;) （删除带条件的记录）
+</code></pre><p>  类级别方法</p>
+<p>Rails 会调用每个子对象的 destroy 方法，再调用父对象的 destroy 方法。会触发 model 中定义的回调（before_remove, after_remove , before_destroy 和 after_destroy）<br>delete方法绕过了一些Active Record的回调（callback）和验证函数，而使用destory则不会，通常我们使用destory方法来确保我们的数据库是一致的，并且不会破坏Model中所包含的业务逻辑。</p>
+<p>在被移除之前，“dependent destroy” 会选择所有受限记录，建立其对象，并调用各自的毁灭方法。此方法允许你移除所有受限数据。但是，当涉及大量数据时，这种方法就不管用了。<br>至于 “dependent delete_all”，它会通过一条 SQL 查询移除自己。它效率很高，但是，在这种情况下，你得自己考虑数据库的完整性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/07/2016-08-07-scope-of-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1476,154 +1614,6 @@ end
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/19/2016-07-19-git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/19/2016-07-19-git/" itemprop="url">git</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T16:22:00+08:00">
-                2016-07-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/07/19/2016-07-19-git/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/07/19/2016-07-19-git/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>学习链接：<br>Git Cheat Sheet 中文版<br><a href="http://mp.weixin.qq.com/s?__biz=MzIzNjQyMzc0Mw==&amp;mid=2247483708&amp;idx=1&amp;sn=9296671981ce336bf67e3f13d9713880#rd" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzIzNjQyMzc0Mw==&amp;mid=2247483708&amp;idx=1&amp;sn=9296671981ce336bf67e3f13d9713880#rd</a></p>
-<p><a href="https://backlogtool.com/git-guide/tw/stepup/stepup2_1.html" target="_blank" rel="external">https://backlogtool.com/git-guide/tw/stepup/stepup2_1.html</a></p>
-<p>mkdir tutorial     建立文件夹 tutorial<br>cd tutorial         进入tutorial文件夹<br>git init                Initialized empty Git repository in /Users/eguchi/Desktop/tutorial/.git/<br>            把该目录变成一个被git掌握的目录<br>git add README 把某档案加入git的控制<br>git add . 把当前目录加入git的控制<br>git add myfile.txt<br>            註冊檔案或目錄到索引<br>git commit -m “first commit”<br>            把已经加入控制的档案，正式记录到这次变更。<br>git status<br>            顯示修改檔案清單<br>      加上 -s 參數，僅會顯示已修改的檔案名稱。<br>            如果在 -s 後再加上 -b 參數，則會顯示分支的名稱。<br>git remote add origin git://github.com/xxx.git<br>            把远端的原始来源设为github端点<br>git push origin master<br>            本地的主分支叫master<br>      远端的端点叫origin<br>git push -u origin master<br>            以后预设都是推到origin master，所以以后可以直接git push</p>
-<p>git pull<br>            拉下远端变更<br>git diff<br>            查看修改檔案的差異<br>      僅使用 “diff” 命令時，會顯示工作目錄和索引的差異。<br>            加上 –cached 參數，會顯示索引與 HEAD 的差異。<br>            如果指定特定的HEAD 或提交，則可以顯示工作目錄和指定HEAD/提交之間的差異。<br>git log<br>            僅使用“log” 將顯示分支的提交列表。<br>            如果要查看特定檔案的提交記錄，請指定檔案名稱。<br>git show <commit><br>            請使用show命令，show命令的參數可以指定log命令參閱的提交與HEAD。<br>git mv <oldfilename> <newfilename><br>            修改/移動一個檔案/目錄的名稱<br>git rm <file><br>            刪除檔案<br>git clean<br>            加上 -n 參數，可以查看將被刪除的檔案。<br>            若添加 -f 參數則會立即刪除檔案。</file></newfilename></oldfilename></commit></p>
-<pre><code>在預設情況下 .gitignore 檔案中所列之檔案/目錄並不在刪除範圍內。不過如果加上-x 參數， .gitignore 檔案中             的檔案/目錄也會從工作目錄中刪除。
-</code></pre><p>git checkout – <file><br>            還原在工作目錄已更改的檔案<br>      比如 git checkout – app/views/account/questions/show.html.erb<br>              这是取消本地app/views/account/questions/show.html.erb的修改，还原到git当前的状态<br>          git checkout – *<br>          这是取消本地所有文件的更改<br>git reset HEAD – <file><br>            刪除已註冊到索引的檔案<br>git add -u<br>            只註冊已提交過的檔案到索引</file></file></p>
-<p>git branch issue1        建立 issue1 分支<br>git branch                    显示分支列表<br>git checkout issue1 切换到issue1分支<br>git checkout -b issue1    同时建立issue1分支并切换到issue1分支</p>
-<p>合并并提交到master<br>    git checkout master        切换到master<br>  git merge issue1            fast-forward快转合并</p>
-<p>  git merge issue2            如果issue1和issue2冲突了，修改之后再进行提交<br>                                              non fast-forward合并</p>
-<p>git reset –hard HEAD~        取消刚刚的合并<br>git checkout issue3                切换到issue3<br>git rebase master<br>    发生冲突，修改后<br>git add myfile.txt<br>git rebase –continue        继续rebase操作            rebase –abort    中途要停止 rebase 的操作<br>git checkout master<br>git merge issue3</p>
-<p>git branch -d issue1        删除issue1</p>
-<p>pull    ＝ fetch + merge</p>
-<p>push</p>
-<p>git tag apple            建立标签apple<br>git tag                        显示tag标签列表<br>git log –decorate        显示包含标签资料的历史记录<br>git tag -am “連猴子都能懂的Git” banana        建立banana标签<br>git tag -n            显示表情列表和注解<br>git tag -d <tagname>    删除标签</tagname></p>
-<p>修改最近的提交<br>欲修改同一個分支最近的提交內容或註解，您可以在提交命令時加上 –amend 參數執行。<br>主要使用的場合<br>增加最近提交時漏掉的檔案<br>修改最近的提交的內容或註解</p>
-<p>git reset –hard ORIG_HEAD<br>在reset之前的提交可以參照ORIG_HEAD。 Reset錯誤的時候，在ORIG_HEAD上reset 就可以還原到reset前的狀態。</p>
-<p>git rebase -i HEAD~~        合并过去的提交</p>
-<p>删除.git<br>rm -rf .git</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1674,7 +1664,7 @@ end
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

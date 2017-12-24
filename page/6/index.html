@@ -232,6 +232,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877879/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="这里有我的脚丫印😄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/16/2016-09-16-877879/" itemprop="url">simple_form_for 中 association 的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-16T15:20:00+08:00">
+                2016-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/16/2016-09-16-877879/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/16/2016-09-16-877879/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="simple-form-for-中-association-的使用"><a href="#simple-form-for-中-association-的使用" class="headerlink" title="simple_form_for 中 association 的使用"></a>simple_form_for 中 association 的使用</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># model</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span> &lt; ApplicationRecord</span></div><div class="line">    has_many <span class="symbol">:invitated_users</span>, <span class="symbol">through:</span> <span class="symbol">:question_invitations</span>, <span class="symbol">source:</span> <span class="symbol">:user</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># html</span></div><div class="line">&lt;%= f.association <span class="symbol">:invitated_users</span>, <span class="symbol">:as</span> =&gt; <span class="symbol">:check_boxes</span>, <span class="symbol">label:</span> <span class="literal">false</span>,<span class="symbol">selected:</span> @question.invitated_users %&gt;</div><div class="line"></div><div class="line"><span class="comment"># controller</span></div><div class="line"><span class="comment"># strong params 中加入</span></div><div class="line"></div><div class="line">params.<span class="keyword">require</span>(<span class="symbol">:question</span>).permit(<span class="symbol">:invitated_user_ids=&gt;[]</span> )</div><div class="line"></div><div class="line">即可自动保存关系</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/16/2016-09-16-877837/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1664,183 +1795,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/31/2016-08-31-822689/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="陈云莉 m18301662790@gmail.com">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="这里有我的脚丫印😄">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/31/2016-08-31-822689/" itemprop="url">acts-as-taggable-on 生成标签</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-31T09:53:00+08:00">
-                2016-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/31/2016-08-31-822689/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/08/31/2016-08-31-822689/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>step1:安装gem</p>
-<p>把下面这句话放入Gemfile中</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem <span class="string">'acts-as-taggable-on'</span></div></pre></td></tr></table></figure>
-<p>step2.在终端(terminal)中执行</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bundle install</div><div class="line">rake <span class="symbol">acts_as_taggable_on_engine:</span><span class="symbol">install:</span>migrations</div><div class="line">rake <span class="symbol">db:</span>migrate</div></pre></td></tr></table></figure>
-<p>这会生成tags和taggings这两张表。在schema.rb中可以查看。</p>
-<p>step3.在自己需要加标签的model中加入</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Post</span> &lt; ActiveRecord::Base</span></div><div class="line">  acts_as_taggable_on <span class="symbol">:tags</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>在rails console中可以执行看看效果</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">post = Post.create</div><div class="line">post.tag_list = <span class="string">"programming, ruby, rails"</span></div><div class="line">post.tag_list</div></pre></td></tr></table></figure>
-<p>执行结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&apos;programming&apos;, &apos;ruby&apos;, &apos;rails&apos;]</div></pre></td></tr></table></figure>
-<p>新增时tag_list是一个以逗号相隔的string（字符串），在新增tag的时候，只需填入tag的名称，以逗号相隔做成字符串，后面的一系列操作这个gem自动都给你处理了。</p>
-<p>（会通过taggings这个表连接tags和posts的关系，而且仔细看tags的表结构可以看到name: “index_tags_on_name”, unique: true,也就是tags的name字段是唯一的，所以不会重复添加同名的标签）</p>
-<p>step4:post_controller</p>
-<p>在新增post的时候，把tag_list加入Strong Parameters(强校验)</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PostsController</span> &lt; ApplicationController</span></div><div class="line">  ...      </div><div class="line"></div><div class="line">  private</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">post_params</span></span></div><div class="line">  params.<span class="keyword">require</span>(<span class="symbol">:post</span>).permit(<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:tag_list</span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>step5.配置路由</p>
-<p>config/routes.rb</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Rails.application.routes.draw <span class="keyword">do</span></div><div class="line">  resources <span class="symbol">:posts</span></div><div class="line">  resources <span class="symbol">:tags</span>, <span class="symbol">only:</span> [<span class="symbol">:index</span>, <span class="symbol">:show</span>]</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>step6. 以下是view，可以参考一下</p>
-<p>app/views/posts/_form.html.erb （在新增post时候加入tag_list即可。如果想做成下拉框select标签时，请注意，强校验不会接受hash类型，并且tag_list也只能是逗号相隔的字符串才行，所以，要在强校验之前，把tag_list处理成相应格式）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">form_for</span> <span class="attr">post</span> <span class="attr">do</span> |<span class="attr">f</span>| %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_field</span> <span class="attr">:title</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_area</span> <span class="attr">:body</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.text_field</span> <span class="attr">:tag_list</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">f.submit</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">end</span> %&gt;</span></div></pre></td></tr></table></figure>
-<p>app/controllers/tags_controller.rb</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TagsController</span> &lt; ApplicationController</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">index</span></span></div><div class="line">    @tags = ActsAsTaggableOn::Tag.all</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">show</span></span></div><div class="line">    @tag =  ActsAsTaggableOn::Tag.find(params[<span class="symbol">:id</span>])</div><div class="line">    @posts = Post.tagged_with(@tag.name)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>app/views/acts_as_taggable_on/tags/_tag.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span> <span class="attr">tag.name</span>, <span class="attr">tag_path</span>(<span class="attr">tag</span>) %&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/tags/index.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">tags</span> %&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/tags/show.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">tag.name</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">posts</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/posts/_post.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span> <span class="attr">post.title</span>, <span class="attr">post_path</span>(<span class="attr">post</span>) %&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/posts/index.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Posts<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">posts</span> %&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/posts/index.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">post.title</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">post.content</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> <span class="attr">post.tags</span> %&gt;</span></div></pre></td></tr></table></figure>
-<p>app/views/posts/show.html.erb</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">post.title</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> @<span class="attr">post.body</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">render</span> @<span class="attr">post.tags</span> %&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>补充：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@tags = current_user.tags</div><div class="line">@hot_tags = Tag.where.<span class="keyword">not</span>(<span class="symbol">id:</span>@tags)</div></pre></td></tr></table></figure>
-<p>用这个筛选掉已经关注的的tags（在这个地方纠结，想通过Tag.all-@tags,但是没有成功。有可能是@tags gem做了什么关联，查出来的对象不一致，或者是不能用减做对象的集合操作，有待查证）  </p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#取消标签</span></div><div class="line">  current_user.tag_list.remove(@tag.name)</div><div class="line">  current_user.save</div></pre></td></tr></table></figure>
-<p>新增单个标签</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@tag = Tag.find(params[<span class="symbol">:id</span>])</div><div class="line">current_user.tag_list.add(@tag.name)</div><div class="line">current_user.save</div></pre></td></tr></table></figure>
-<p>新增多个标签，参数是数组形式时</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tag_list = params[<span class="symbol">:tag_list</span>]</div><div class="line"><span class="keyword">if</span> tag_list</div><div class="line">  <span class="comment">#数组要转成逗号相隔的字符串</span></div><div class="line">  tag_list = tag_list.map&#123;<span class="params">|k,v|</span> <span class="string">"<span class="subst">#&#123;k&#125;</span><span class="subst">#&#123;v&#125;</span>"</span>&#125;.join(<span class="string">','</span>)</div><div class="line">  current_user.tag_list = tag_list</div><div class="line">  current_user.save</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1891,7 +1845,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
